@@ -1,0 +1,121 @@
+<div id="{{ROOT_ID}}">
+  <style>
+    #{{ROOT_ID}} {
+      display: grid;
+      gap: 12px;
+    }
+
+    #{{ROOT_ID}} form {
+      display: grid;
+      gap: 12px;
+    }
+
+    #{{ROOT_ID}} .quick-parameter-fields {
+      display: grid;
+      padding-inline: 4px;
+    }
+
+    #{{ROOT_ID}} .quick-parameter-row {
+      display: grid;
+      grid-template-columns: minmax(120px, 180px) minmax(0, 1fr);
+      align-items: center;
+      gap: 16px;
+      margin: 0;
+      padding: 12px 0;
+      border: 0;
+    }
+
+    #{{ROOT_ID}} .quick-parameter-row + .quick-parameter-row {
+      border-top: 1px solid var(--border);
+    }
+
+    #{{ROOT_ID}} .quick-parameter-label {
+      margin: 0;
+      color: var(--card-foreground);
+      font-weight: var(--font-weight-medium);
+    }
+
+    #{{ROOT_ID}} .quick-parameter-control {
+      min-width: 0;
+    }
+
+    #{{ROOT_ID}} .quick-parameter-range {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: 12px;
+    }
+
+    #{{ROOT_ID}} .quick-parameter-range output {
+      min-width: 3ch;
+      color: var(--card-foreground);
+      font-variant-numeric: tabular-nums;
+    }
+
+    @media (max-width: 520px) {
+      #{{ROOT_ID}} .quick-parameter-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+      }
+    }
+  </style>
+
+  <form id="{{ROOT_ID}}-form">
+    <div class="card" role="group" aria-label="{{QUESTION}}">
+      <div class="quick-parameter-fields">
+{{FIELDS_HTML}}
+      </div>
+    </div>
+
+    <div class="viz-controls">
+      <button class="btn btn-primary" type="submit">继续</button>
+    </div>
+  </form>
+
+  <script>
+    (() => {
+      const root = document.getElementById('{{ROOT_ID}}');
+      const form = root.querySelector('#{{ROOT_ID}}-form');
+      const config = {{CONFIG_JSON}};
+
+      root.querySelectorAll('input[type="range"]').forEach((input) => {
+        const output = root.querySelector(`#${input.id}-output`);
+        const update = () => {
+          output.value = `${input.value}${input.dataset.unit || ''}`;
+          output.textContent = output.value;
+        };
+        input.addEventListener('input', update);
+        update();
+      });
+
+      const displayValue = (field) => {
+        if (field.type === 'checkbox' || field.type === 'switch') {
+          return form.elements.namedItem(field.name).checked ? '是' : '否';
+        }
+        if (field.type === 'radio') {
+          const selected = form.querySelector(`input[name="${CSS.escape(field.name)}"]:checked`);
+          return selected?.dataset.label || '未选择';
+        }
+        if (field.type === 'select') {
+          const select = form.elements.namedItem(field.name);
+          return select.selectedOptions[0]?.dataset.label || '未选择';
+        }
+        const control = form.elements.namedItem(field.name);
+        const value = String(control.value).trim();
+        if (!value) return '未填写';
+        return field.type === 'range' ? `${value}${field.unit || ''}` : value;
+      };
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const parameters = config.fields
+          .map((field) => `${field.label}：${displayValue(field)}`)
+          .join('；');
+        const prompt = config.followUpPrompt.replace('{parameters}', parameters);
+        if (window.openai?.sendFollowUpMessage) {
+          await window.openai.sendFollowUpMessage({ prompt });
+        }
+      });
+    })();
+  </script>
+</div>

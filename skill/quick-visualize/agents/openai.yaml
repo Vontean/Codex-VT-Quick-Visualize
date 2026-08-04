@@ -1,0 +1,4 @@
+interface:
+  display_name: "Quick Visualize"
+  short_description: "Render preset chat interactions through Visualize"
+  default_prompt: "Use $quick-visualize to route this interaction to a preset template and render it through Visualize."

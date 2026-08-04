@@ -1,0 +1,99 @@
+<div id="{{ROOT_ID}}">
+  <style>
+    #{{ROOT_ID}},
+    #{{ROOT_ID}} form {
+      display: grid;
+      gap: 12px;
+    }
+
+    #{{ROOT_ID}} .quick-comparison-fieldset {
+      min-width: 0;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    #{{ROOT_ID}} .quick-comparison-grid {
+      align-items: stretch;
+    }
+
+    #{{ROOT_ID}} .quick-comparison-option {
+      display: grid;
+      align-content: start;
+      gap: 12px;
+      min-width: 0;
+      cursor: var(--cursor-interaction, pointer);
+    }
+
+    #{{ROOT_ID}} .quick-comparison-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 12px;
+    }
+
+    #{{ROOT_ID}} .quick-comparison-title,
+    #{{ROOT_ID}} .quick-comparison-summary {
+      margin: 0;
+      color: var(--card-foreground);
+    }
+
+    #{{ROOT_ID}} .quick-comparison-title,
+    #{{ROOT_ID}} .quick-comparison-dimension-value {
+      font-weight: var(--font-weight-medium);
+    }
+
+    #{{ROOT_ID}} .quick-comparison-dimensions {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding-inline-start: 20px;
+      color: var(--card-foreground);
+    }
+
+    #{{ROOT_ID}} .quick-comparison-dimension + .quick-comparison-dimension {
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    #{{ROOT_ID}} .quick-comparison-dimension-label,
+    #{{ROOT_ID}} .quick-comparison-dimension-value {
+      display: block;
+    }
+
+    #{{ROOT_ID}} .quick-comparison-dimension-value {
+      margin-top: 4px;
+    }
+  </style>
+
+  <form id="{{ROOT_ID}}-form">
+    <fieldset class="quick-comparison-fieldset">
+      <legend class="sr-only">{{QUESTION}}</legend>
+      <div class="viz-grid quick-comparison-grid" role="radiogroup">
+{{PLANS_HTML}}
+      </div>
+    </fieldset>
+
+    <div class="viz-controls">
+      <button class="btn btn-primary" type="submit">继续</button>
+    </div>
+  </form>
+
+  <script>
+    (() => {
+      const root = document.getElementById('{{ROOT_ID}}');
+      const form = root.querySelector('#{{ROOT_ID}}-form');
+      const config = {{CONFIG_JSON}};
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const selected = form.querySelector('input[name="comparison-plan"]:checked');
+        if (!selected) return;
+        const prompt = config.followUpPrompt.replace('{selected}', selected.dataset.label);
+        if (window.openai?.sendFollowUpMessage) {
+          await window.openai.sendFollowUpMessage({ prompt });
+        }
+      });
+    })();
+  </script>
+</div>

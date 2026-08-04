@@ -1,0 +1,134 @@
+<div id="{{ROOT_ID}}">
+  <style>
+    #{{ROOT_ID}} {
+      display: grid;
+      gap: 12px;
+    }
+
+    #{{ROOT_ID}} .quick-rank-list {
+      display: grid;
+      padding-inline: 4px;
+    }
+
+    #{{ROOT_ID}} .quick-rank-item {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      cursor: var(--cursor-interaction, grab);
+      user-select: none;
+    }
+
+    #{{ROOT_ID}} .quick-rank-item + .quick-rank-item {
+      border-top: 1px solid var(--border);
+    }
+
+    #{{ROOT_ID}} .quick-rank-item.is-dragging {
+      opacity: 0.55;
+      cursor: grabbing;
+    }
+
+    #{{ROOT_ID}} .quick-rank-label {
+      min-width: 0;
+      overflow: hidden;
+      color: var(--card-foreground);
+      font-weight: var(--font-weight-medium);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  </style>
+
+  <div class="card" role="group" aria-label="{{QUESTION}}">
+    <p class="sr-only" id="{{ROOT_ID}}-instructions">拖动列表项调整顺序；使用键盘时，聚焦拖动手柄并按上或下方向键移动。</p>
+    <div class="quick-rank-list" id="{{ROOT_ID}}-list" role="list" aria-describedby="{{ROOT_ID}}-instructions">
+{{ITEMS_HTML}}
+    </div>
+  </div>
+
+  <div class="viz-controls">
+    <button class="btn btn-primary" id="{{ROOT_ID}}-continue" type="button">继续</button>
+    <span class="sr-only" id="{{ROOT_ID}}-status" role="status" aria-live="polite"></span>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.getElementById('{{ROOT_ID}}');
+      const list = root.querySelector('#{{ROOT_ID}}-list');
+      const continueButton = root.querySelector('#{{ROOT_ID}}-continue');
+      const status = root.querySelector('#{{ROOT_ID}}-status');
+      const config = {{CONFIG_JSON}};
+      let draggedItem = null;
+
+      const items = () => Array.from(list.querySelectorAll('.quick-rank-item'));
+      const orderedLabels = () => items().map((item) => item.dataset.label);
+
+      const announcePosition = (item) => {
+        const orderedItems = items();
+        const position = orderedItems.indexOf(item) + 1;
+        status.textContent = `${item.dataset.label} 已移动到第 ${position} 位，共 ${orderedItems.length} 项。`;
+      };
+
+      const moveByKeyboard = (item, direction) => {
+        const sibling = direction < 0 ? item.previousElementSibling : item.nextElementSibling;
+        if (!sibling) return;
+        if (direction < 0) {
+          list.insertBefore(item, sibling);
+        } else {
+          list.insertBefore(sibling, item);
+        }
+        item.querySelector('.quick-rank-handle')?.focus();
+        announcePosition(item);
+      };
+
+      list.addEventListener('keydown', (event) => {
+        const handle = event.target.closest('.quick-rank-handle');
+        if (!handle || (event.key !== 'ArrowUp' && event.key !== 'ArrowDown')) return;
+        event.preventDefault();
+        moveByKeyboard(handle.closest('.quick-rank-item'), event.key === 'ArrowUp' ? -1 : 1);
+      });
+
+      list.addEventListener('dragstart', (event) => {
+        const item = event.target.closest('.quick-rank-item');
+        if (!item) return;
+        draggedItem = item;
+        item.classList.add('is-dragging');
+        if (event.dataTransfer) {
+          event.dataTransfer.effectAllowed = 'move';
+          event.dataTransfer.setData('text/plain', item.dataset.value);
+        }
+      });
+
+      list.addEventListener('dragover', (event) => {
+        if (!draggedItem) return;
+        event.preventDefault();
+        const target = event.target.closest('.quick-rank-item');
+        if (!target || target === draggedItem) return;
+        const bounds = target.getBoundingClientRect();
+        const insertAfter = event.clientY > bounds.top + bounds.height / 2;
+        list.insertBefore(draggedItem, insertAfter ? target.nextElementSibling : target);
+      });
+
+      list.addEventListener('drop', (event) => {
+        if (!draggedItem) return;
+        event.preventDefault();
+        announcePosition(draggedItem);
+      });
+
+      list.addEventListener('dragend', () => {
+        draggedItem?.classList.remove('is-dragging');
+        draggedItem = null;
+      });
+
+      continueButton.addEventListener('click', async () => {
+        const ordered = orderedLabels()
+          .map((label, index) => `${index + 1}. ${label}`)
+          .join('；');
+        const prompt = config.followUpPrompt.replace('{ordered}', ordered);
+        if (window.openai?.sendFollowUpMessage) {
+          await window.openai.sendFollowUpMessage({ prompt });
+        }
+      });
+    })();
+  </script>
+</div>
