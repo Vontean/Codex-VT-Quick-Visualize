@@ -1,0 +1,546 @@
+<div class="quick-radar-chart" id="{{ROOT_ID}}" role="figure" aria-labelledby="{{ROOT_ID}}-title" aria-describedby="{{ROOT_ID}}-summary">
+  <style>
+    #{{ROOT_ID}} {
+      position: relative;
+      display: grid;
+      gap: 8px;
+      width: 100%;
+      color: var(--foreground);
+    }
+
+    #{{ROOT_ID}} .quick-radar-title {
+      margin: 0;
+      color: var(--foreground);
+      font-weight: 500;
+    }
+
+    #{{ROOT_ID}} .quick-radar-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 16px;
+    }
+
+    #{{ROOT_ID}} .quick-radar-legend[hidden] {
+      display: none;
+    }
+
+    #{{ROOT_ID}} .quick-radar-legend-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0;
+      padding: 2px 0;
+      color: var(--foreground);
+      font: inherit;
+      background: transparent;
+      border: 0;
+      cursor: var(--cursor-interaction, pointer);
+    }
+
+    #{{ROOT_ID}} .quick-radar-legend-button.is-dimmed {
+      color: var(--muted-foreground);
+      opacity: 0.55;
+    }
+
+    #{{ROOT_ID}} .quick-radar-swatch {
+      width: 10px;
+      height: 10px;
+      flex: 0 0 auto;
+      background: currentColor;
+    }
+
+    #{{ROOT_ID}} .quick-radar-swatch[data-shape="circle"] {
+      border-radius: 50%;
+    }
+
+    #{{ROOT_ID}} .quick-radar-swatch[data-shape="diamond"] {
+      transform: rotate(45deg) scale(0.78);
+    }
+
+    #{{ROOT_ID}} .quick-radar-swatch[data-shape="triangle"] {
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    }
+
+    #{{ROOT_ID}} .quick-radar-plot {
+      position: relative;
+      min-width: 0;
+    }
+
+    #{{ROOT_ID}} .quick-radar-svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    #{{ROOT_ID}} .quick-radar-grid,
+    #{{ROOT_ID}} .quick-radar-axis {
+      fill: transparent;
+      stroke: var(--border);
+      vector-effect: non-scaling-stroke;
+    }
+
+    #{{ROOT_ID}} .quick-radar-grid {
+      stroke-opacity: 0.72;
+    }
+
+    #{{ROOT_ID}} .quick-radar-axis {
+      stroke-opacity: 0.58;
+    }
+
+    #{{ROOT_ID}} .quick-radar-axis-label,
+    #{{ROOT_ID}} .quick-radar-scale-label {
+      fill: var(--foreground);
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    #{{ROOT_ID}} .quick-radar-scale-label {
+      fill: var(--muted-foreground);
+    }
+
+    #{{ROOT_ID}} .quick-radar-series-polygon,
+    #{{ROOT_ID}} .quick-radar-marker {
+      transition: fill-opacity 160ms ease, stroke-opacity 160ms ease, opacity 160ms ease, stroke-width 160ms ease;
+      vector-effect: non-scaling-stroke;
+    }
+
+    #{{ROOT_ID}} .quick-radar-series-polygon {
+      fill: currentColor;
+      stroke: currentColor;
+      stroke-linejoin: round;
+    }
+
+    #{{ROOT_ID}} .quick-radar-marker {
+      fill: currentColor;
+      stroke: var(--background);
+      stroke-width: 1.5;
+    }
+
+    #{{ROOT_ID}} .quick-radar-hit {
+      fill: transparent;
+      cursor: crosshair;
+    }
+
+    #{{ROOT_ID}} .quick-radar-tooltip {
+      position: absolute;
+      z-index: 2;
+      display: grid;
+      gap: 6px;
+      max-width: min(260px, calc(100% - 16px));
+      padding: 8px 10px;
+      color: var(--popover-foreground);
+      background: var(--popover);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 6px 18px color-mix(in srgb, var(--foreground) 14%, transparent);
+      pointer-events: none;
+    }
+
+    #{{ROOT_ID}} .quick-radar-tooltip[hidden] {
+      display: none;
+    }
+
+    #{{ROOT_ID}} .quick-radar-tooltip-dimension {
+      color: var(--popover-foreground);
+      font-weight: 500;
+    }
+
+    #{{ROOT_ID}} .quick-radar-tooltip-rows {
+      display: grid;
+      gap: 4px;
+    }
+
+    #{{ROOT_ID}} .quick-radar-tooltip-row {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+    }
+
+    #{{ROOT_ID}} .quick-radar-tooltip-row.is-active .quick-radar-tooltip-name,
+    #{{ROOT_ID}} .quick-radar-tooltip-row.is-active .quick-radar-tooltip-value {
+      color: var(--popover-foreground);
+      font-weight: 500;
+    }
+
+    #{{ROOT_ID}} .quick-radar-tooltip-name {
+      color: var(--muted-foreground);
+    }
+
+    #{{ROOT_ID}} .quick-radar-tooltip-value {
+      color: var(--popover-foreground);
+      font-variant-numeric: tabular-nums;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #{{ROOT_ID}} .quick-radar-series-polygon,
+      #{{ROOT_ID}} .quick-radar-marker {
+        transition: none;
+      }
+    }
+  </style>
+
+  <h3 class="quick-radar-title" id="{{ROOT_ID}}-title">{{TITLE}}</h3>
+  <p class="sr-only" id="{{ROOT_ID}}-summary">{{SUMMARY}}</p>
+  <div class="quick-radar-legend" id="{{ROOT_ID}}-legend" aria-label="数据系列"></div>
+
+  <div class="quick-radar-plot" id="{{ROOT_ID}}-plot">
+    <svg class="quick-radar-svg" id="{{ROOT_ID}}-svg" role="img" aria-labelledby="{{ROOT_ID}}-svg-title {{ROOT_ID}}-svg-desc">
+      <title id="{{ROOT_ID}}-svg-title">{{TITLE}}</title>
+      <desc id="{{ROOT_ID}}-svg-desc">{{SUMMARY}}</desc>
+    </svg>
+  </div>
+
+  <div class="quick-radar-tooltip" id="{{ROOT_ID}}-tooltip" role="tooltip" hidden>
+    <span class="quick-radar-tooltip-dimension"></span>
+    <div class="quick-radar-tooltip-rows"></div>
+  </div>
+
+  <script>
+    (() => {
+      const SVG_NS = 'http://www.w3.org/2000/svg';
+      const root = document.getElementById('{{ROOT_ID}}');
+      const plot = root.querySelector('#{{ROOT_ID}}-plot');
+      const svg = root.querySelector('#{{ROOT_ID}}-svg');
+      const legend = root.querySelector('#{{ROOT_ID}}-legend');
+      const tooltip = root.querySelector('#{{ROOT_ID}}-tooltip');
+      const tooltipDimension = tooltip.querySelector('.quick-radar-tooltip-dimension');
+      const tooltipRows = tooltip.querySelector('.quick-radar-tooltip-rows');
+      const config = {{CONFIG_JSON}};
+      const shapes = ['circle', 'square', 'diamond', 'triangle'];
+      const numberFormat = new Intl.NumberFormat(undefined, {
+        minimumFractionDigits: config.decimals,
+        maximumFractionDigits: config.decimals,
+      });
+      const valueText = (value) => `${config.valuePrefix}${numberFormat.format(value)}${config.valueSuffix}`;
+      const colorFor = (index) => `var(--viz-series-${index + 1})`;
+      let focusedIndex = null;
+      let hoveredIndex = null;
+      let pointLocations = [];
+      let seriesGroups = [];
+
+      const createSvg = (name, attributes = {}) => {
+        const element = document.createElementNS(SVG_NS, name);
+        Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
+        return element;
+      };
+
+      const activeIndex = () => hoveredIndex ?? focusedIndex;
+
+      const updateLegend = () => {
+        const active = activeIndex();
+        legend.querySelectorAll('button').forEach((button) => {
+          const index = Number(button.dataset.seriesIndex);
+          button.setAttribute('aria-pressed', String(focusedIndex === index));
+          button.classList.toggle('is-dimmed', active !== null && active !== index);
+        });
+      };
+
+      const updateSeries = () => {
+        const active = activeIndex();
+        seriesGroups.forEach((entry, index) => {
+          const isActive = active === index;
+          const isDimmed = active !== null && !isActive;
+          entry.polygon.setAttribute('fill-opacity', isActive ? '0.24' : isDimmed ? '0.025' : '0.1');
+          entry.polygon.setAttribute('stroke-opacity', isDimmed ? '0.24' : '1');
+          entry.polygon.setAttribute('stroke-width', isActive ? '2.8' : isDimmed ? '1' : '1.8');
+          entry.markers.forEach((marker) => {
+            marker.setAttribute('opacity', isDimmed ? '0.24' : isActive ? '1' : '0.78');
+            marker.setAttribute('stroke-width', isActive ? '2' : '1.5');
+          });
+        });
+        if (active !== null && seriesGroups[active]) {
+          seriesGroups[active].layer.append(seriesGroups[active].group);
+        }
+        updateLegend();
+      };
+
+      const setHover = (index) => {
+        if (hoveredIndex === index) return;
+        hoveredIndex = index;
+        updateSeries();
+      };
+
+      const clearHover = () => {
+        if (hoveredIndex === null) return;
+        hoveredIndex = null;
+        updateSeries();
+      };
+
+      if (config.series.length <= 1) {
+        legend.hidden = true;
+      } else {
+        config.series.forEach((series, index) => {
+          const button = document.createElement('button');
+          button.className = 'quick-radar-legend-button';
+          button.type = 'button';
+          button.dataset.seriesIndex = String(index);
+          button.setAttribute('aria-pressed', 'false');
+          button.setAttribute('title', `点击聚焦 ${series.name}`);
+
+          const swatch = document.createElement('span');
+          swatch.className = 'quick-radar-swatch';
+          swatch.dataset.shape = shapes[index];
+          swatch.style.color = colorFor(index);
+          swatch.setAttribute('aria-hidden', 'true');
+          const label = document.createElement('span');
+          label.textContent = series.name;
+          button.append(swatch, label);
+
+          button.addEventListener('mouseenter', () => setHover(index));
+          button.addEventListener('mouseleave', clearHover);
+          button.addEventListener('focus', () => setHover(index));
+          button.addEventListener('blur', clearHover);
+          button.addEventListener('click', () => {
+            focusedIndex = focusedIndex === index ? null : index;
+            hoveredIndex = null;
+            updateSeries();
+          });
+          legend.append(button);
+        });
+      }
+
+      const markerPath = (shape, radius) => {
+        if (shape === 'circle') {
+          return `M ${-radius},0 A ${radius},${radius} 0 1,0 ${radius},0 A ${radius},${radius} 0 1,0 ${-radius},0`;
+        }
+        if (shape === 'diamond') {
+          return `M 0,${-radius * 1.25} L ${radius},0 L 0,${radius * 1.25} L ${-radius},0 Z`;
+        }
+        if (shape === 'triangle') {
+          return `M 0,${-radius * 1.2} L ${radius * 1.05},${radius} L ${-radius * 1.05},${radius} Z`;
+        }
+        return `M ${-radius},${-radius} L ${radius},${-radius} L ${radius},${radius} L ${-radius},${radius} Z`;
+      };
+
+      const splitLabel = (label, narrow) => {
+        const characters = Array.from(label);
+        const chunkSize = narrow ? 4 : 9;
+        const lines = [];
+        for (let index = 0; index < characters.length; index += chunkSize) {
+          lines.push(characters.slice(index, index + chunkSize).join(''));
+        }
+        return lines;
+      };
+
+      const polygonPoints = (cx, cy, radius, ratio = 1) => config.dimensions.map((_, index) => {
+        const angle = -Math.PI / 2 + index * Math.PI * 2 / config.dimensions.length;
+        return [cx + Math.cos(angle) * radius * ratio, cy + Math.sin(angle) * radius * ratio];
+      });
+
+      const pointsAttribute = (points) => points.map(([x, y]) => `${x},${y}`).join(' ');
+
+      const showTooltip = (event, dimensionIndex, nearestSeriesIndex) => {
+        tooltipDimension.textContent = config.dimensions[dimensionIndex];
+        tooltipRows.replaceChildren();
+        config.series.forEach((series, index) => {
+          const row = document.createElement('div');
+          row.className = 'quick-radar-tooltip-row';
+          row.classList.toggle('is-active', index === nearestSeriesIndex);
+          const swatch = document.createElement('span');
+          swatch.className = 'quick-radar-swatch';
+          swatch.dataset.shape = shapes[index];
+          swatch.style.color = colorFor(index);
+          swatch.setAttribute('aria-hidden', 'true');
+          const name = document.createElement('span');
+          name.className = 'quick-radar-tooltip-name';
+          name.textContent = series.name;
+          const value = document.createElement('span');
+          value.className = 'quick-radar-tooltip-value';
+          value.textContent = valueText(series.values[dimensionIndex]);
+          row.append(swatch, name, value);
+          tooltipRows.append(row);
+        });
+        tooltip.hidden = false;
+
+        const rootBounds = root.getBoundingClientRect();
+        const plotBounds = plot.getBoundingClientRect();
+        const tooltipBounds = tooltip.getBoundingClientRect();
+        const pointerX = event.clientX - rootBounds.left;
+        const pointerY = event.clientY - rootBounds.top;
+        if (rootBounds.width < 480) {
+          const maximumLeft = Math.max(8, rootBounds.width - tooltipBounds.width - 8);
+          tooltip.style.left = `${pointerX > rootBounds.width / 2 ? 8 : maximumLeft}px`;
+          const plotTop = plotBounds.top - rootBounds.top;
+          const plotBottom = plotTop + plotBounds.height;
+          const top = pointerY > plotTop + plotBounds.height / 2
+            ? plotTop + 8
+            : plotBottom - tooltipBounds.height - 8;
+          tooltip.style.top = `${Math.max(plotTop + 8, top)}px`;
+          return;
+        }
+        const proposedLeft = pointerX > rootBounds.width / 2
+          ? pointerX - tooltipBounds.width - 14
+          : pointerX + 14;
+        const maximumLeft = Math.max(8, rootBounds.width - tooltipBounds.width - 8);
+        tooltip.style.left = `${Math.min(maximumLeft, Math.max(8, proposedLeft))}px`;
+        const proposedTop = pointerY - tooltipBounds.height / 2;
+        const maximumTop = Math.max(8, rootBounds.height - tooltipBounds.height - 8);
+        tooltip.style.top = `${Math.min(maximumTop, Math.max(8, proposedTop))}px`;
+      };
+
+      const hideTooltip = () => {
+        tooltip.hidden = true;
+        clearHover();
+      };
+
+      const draw = () => {
+        const width = Math.max(1, Math.round(plot.getBoundingClientRect().width));
+        if (width <= 1) return;
+        const narrow = width < 480;
+        const denseNarrow = narrow && (
+          config.dimensions.length > 6
+          || config.dimensions.some((dimension) => Array.from(dimension).length > 4)
+        );
+        const height = narrow ? 370 : 430;
+        const cx = width / 2;
+        const cy = height / 2 + (narrow ? 8 : 12);
+        const radius = Math.min(174, width * (denseNarrow ? 0.29 : 0.34), height * 0.39);
+        svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+        svg.replaceChildren();
+
+        const title = createSvg('title', { id: '{{ROOT_ID}}-svg-title' });
+        title.textContent = config.title;
+        const description = createSvg('desc', { id: '{{ROOT_ID}}-svg-desc' });
+        description.textContent = config.summary;
+        svg.append(title, description);
+
+        const gridLayer = createSvg('g');
+        [0.25, 0.5, 0.75, 1].forEach((ratio) => {
+          gridLayer.append(createSvg('polygon', {
+            class: 'quick-radar-grid',
+            points: pointsAttribute(polygonPoints(cx, cy, radius, ratio)),
+          }));
+          const scaleLabel = createSvg('text', {
+            class: 'quick-radar-scale-label',
+            x: String(cx + 5),
+            y: String(cy - radius * ratio + 13),
+          });
+          scaleLabel.textContent = numberFormat.format(config.maxValue * ratio);
+          gridLayer.append(scaleLabel);
+        });
+
+        polygonPoints(cx, cy, radius).forEach(([x, y]) => {
+          gridLayer.append(createSvg('line', {
+            class: 'quick-radar-axis',
+            x1: String(cx),
+            y1: String(cy),
+            x2: String(x),
+            y2: String(y),
+          }));
+        });
+        svg.append(gridLayer);
+
+        const seriesLayer = createSvg('g');
+        seriesGroups = [];
+        pointLocations = [];
+        config.series.forEach((series, seriesIndex) => {
+          const group = createSvg('g', { style: `color:${colorFor(seriesIndex)}` });
+          const points = series.values.map((value, dimensionIndex) => {
+            const angle = -Math.PI / 2 + dimensionIndex * Math.PI * 2 / config.dimensions.length;
+            const distance = radius * value / config.maxValue;
+            return {
+              x: cx + Math.cos(angle) * distance,
+              y: cy + Math.sin(angle) * distance,
+              seriesIndex,
+              dimensionIndex,
+            };
+          });
+          const polygon = createSvg('polygon', {
+            class: 'quick-radar-series-polygon',
+            points: pointsAttribute(points.map(({ x, y }) => [x, y])),
+          });
+          group.append(polygon);
+          const markers = points.map((point) => {
+            const marker = createSvg('path', {
+              class: 'quick-radar-marker',
+              d: markerPath(shapes[seriesIndex], 3.6),
+              transform: `translate(${point.x} ${point.y})`,
+            });
+            group.append(marker);
+            pointLocations.push(point);
+            return marker;
+          });
+          seriesLayer.append(group);
+          seriesGroups.push({ group, polygon, markers, layer: seriesLayer });
+        });
+        svg.append(seriesLayer);
+
+        const labelLayer = createSvg('g');
+        config.dimensions.forEach((dimension, index) => {
+          const angle = -Math.PI / 2 + index * Math.PI * 2 / config.dimensions.length;
+          const directionX = Math.cos(angle);
+          const directionY = Math.sin(angle);
+          const labelDistance = radius + (denseNarrow ? 12 : narrow ? 18 : 24);
+          const x = Math.min(width - 4, Math.max(4, cx + directionX * labelDistance));
+          const y = cy + directionY * labelDistance;
+          const text = createSvg('text', {
+            class: 'quick-radar-axis-label',
+            x: String(x),
+            y: String(y),
+            'text-anchor': directionX > 0.28 ? 'start' : directionX < -0.28 ? 'end' : 'middle',
+          });
+          const lines = splitLabel(dimension, narrow);
+          const firstLineOffset = directionY > 0.45
+            ? 12
+            : directionY < -0.45
+              ? -5 - (lines.length - 1) * 14
+              : 4 - (lines.length - 1) * 7;
+          lines.forEach((line, lineIndex) => {
+            const tspan = createSvg('tspan', {
+              x: String(x),
+              dy: lineIndex === 0 ? String(firstLineOffset) : '14',
+            });
+            tspan.textContent = line;
+            text.append(tspan);
+          });
+          labelLayer.append(text);
+        });
+        svg.append(labelLayer);
+
+        const hit = createSvg('rect', {
+          class: 'quick-radar-hit',
+          x: '0',
+          y: '0',
+          width: String(width),
+          height: String(height),
+          'data-chart-hit': '',
+        });
+        svg.append(hit);
+        updateSeries();
+      };
+
+      svg.addEventListener('pointermove', (event) => {
+        if (!pointLocations.length) return;
+        const bounds = svg.getBoundingClientRect();
+        const scaleX = svg.viewBox.baseVal.width / bounds.width;
+        const scaleY = svg.viewBox.baseVal.height / bounds.height;
+        const pointerX = (event.clientX - bounds.left) * scaleX;
+        const pointerY = (event.clientY - bounds.top) * scaleY;
+        let nearest = null;
+        let nearestDistance = Infinity;
+        pointLocations.forEach((point) => {
+          const distance = Math.hypot(point.x - pointerX, point.y - pointerY);
+          if (distance < nearestDistance) {
+            nearest = point;
+            nearestDistance = distance;
+          }
+        });
+        const hitRadius = Math.max(18, 28 * scaleX);
+        if (!nearest || nearestDistance > hitRadius) {
+          hideTooltip();
+          return;
+        }
+        setHover(nearest.seriesIndex);
+        showTooltip(event, nearest.dimensionIndex, nearest.seriesIndex);
+      });
+      svg.addEventListener('pointerleave', hideTooltip);
+
+      const resizeObserver = new ResizeObserver(draw);
+      resizeObserver.observe(plot);
+      draw();
+    })();
+  </script>
+</div>

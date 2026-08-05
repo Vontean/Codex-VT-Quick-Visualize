@@ -1,4 +1,4 @@
 interface:
   display_name: "Quick Visualize"
-  short_description: "Render preset chat interactions through Visualize"
-  default_prompt: "Use $quick-visualize to route this interaction to a preset template and render it through Visualize."
+  short_description: "Render preset interactions and simple charts"
+  default_prompt: "Use $quick-visualize to render this request with a matching preset or fall back to general Visualize."

@@ -1,6 +1,6 @@
 # Parameter Form series specification
 
-Use this series for 1-12 independent settings. Every field type is a composable unit: use it alone, repeat it with unique names, or mix it with other field types in any order. If one field changes the visibility, options, validation, or meaning of another field, use the general Visualize skill instead.
+Use this series for 1-12 independent settings. Use general Visualize if one field changes another field's visibility, options, validation, or meaning.
 
 ```json
 {

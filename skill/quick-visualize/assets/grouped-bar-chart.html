@@ -1,0 +1,401 @@
+<div class="quick-grouped-bar-chart" id="{{ROOT_ID}}" role="figure" aria-labelledby="{{ROOT_ID}}-title" aria-describedby="{{ROOT_ID}}-summary">
+  <style>
+    #{{ROOT_ID}} {
+      position: relative;
+      display: grid;
+      gap: 8px;
+      width: 100%;
+      color: var(--foreground);
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-title {
+      margin: 0;
+      color: var(--foreground);
+      font-weight: 500;
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 16px;
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-legend-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0;
+      padding: 2px 0;
+      color: var(--foreground);
+      font: inherit;
+      background: transparent;
+      border: 0;
+      cursor: var(--cursor-interaction, pointer);
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-legend-button[aria-pressed="false"] {
+      color: var(--muted-foreground);
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-swatch {
+      width: 10px;
+      height: 10px;
+      flex: 0 0 auto;
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-legend-button[aria-pressed="false"] .quick-grouped-bar-swatch {
+      opacity: 0.35;
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-plot {
+      position: relative;
+      min-width: 0;
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-frame,
+    #{{ROOT_ID}} .quick-grouped-bar-axis path,
+    #{{ROOT_ID}} .quick-grouped-bar-axis line {
+      stroke: var(--border);
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-frame {
+      fill: transparent;
+      stroke-width: 1;
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-grid line {
+      stroke: var(--border);
+      stroke-opacity: 0.55;
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-grid path {
+      display: none;
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-axis text,
+    #{{ROOT_ID}} .quick-grouped-bar-axis-title {
+      fill: var(--foreground);
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-mark {
+      shape-rendering: geometricPrecision;
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-hover-guide {
+      fill: color-mix(in srgb, var(--foreground) 5%, transparent);
+      stroke: var(--foreground);
+      stroke-opacity: 0.25;
+      pointer-events: none;
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-hit {
+      fill: transparent;
+      cursor: crosshair;
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-tooltip {
+      position: absolute;
+      z-index: 2;
+      display: grid;
+      gap: 6px;
+      max-width: min(260px, calc(100% - 16px));
+      padding: 8px 10px;
+      color: var(--popover-foreground);
+      background: var(--popover);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 6px 18px color-mix(in srgb, var(--foreground) 14%, transparent);
+      pointer-events: none;
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-tooltip[hidden] {
+      display: none;
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-tooltip-category {
+      color: var(--popover-foreground);
+      font-weight: 500;
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-tooltip-rows {
+      display: grid;
+      gap: 4px;
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-tooltip-row {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-tooltip-name {
+      color: var(--muted-foreground);
+    }
+
+    #{{ROOT_ID}} .quick-grouped-bar-tooltip-value {
+      color: var(--popover-foreground);
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+
+  <h3 class="quick-grouped-bar-title" id="{{ROOT_ID}}-title">{{TITLE}}</h3>
+  <p class="sr-only" id="{{ROOT_ID}}-summary">{{SUMMARY}}</p>
+  <div class="quick-grouped-bar-legend" id="{{ROOT_ID}}-legend" aria-label="数据系列"></div>
+
+  <div class="quick-grouped-bar-plot" id="{{ROOT_ID}}-plot">
+    <svg class="quick-grouped-bar-svg" id="{{ROOT_ID}}-svg" role="img" aria-labelledby="{{ROOT_ID}}-svg-title {{ROOT_ID}}-svg-desc">
+      <title id="{{ROOT_ID}}-svg-title">{{TITLE}}</title>
+      <desc id="{{ROOT_ID}}-svg-desc">{{SUMMARY}}</desc>
+    </svg>
+  </div>
+
+  <div class="quick-grouped-bar-tooltip" id="{{ROOT_ID}}-tooltip" role="tooltip" hidden>
+    <span class="quick-grouped-bar-tooltip-category"></span>
+    <div class="quick-grouped-bar-tooltip-rows"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script>
+    (() => {
+      const root = document.getElementById('{{ROOT_ID}}');
+      const plot = root.querySelector('#{{ROOT_ID}}-plot');
+      const legend = root.querySelector('#{{ROOT_ID}}-legend');
+      const svg = d3.select(root.querySelector('#{{ROOT_ID}}-svg'));
+      const tooltip = root.querySelector('#{{ROOT_ID}}-tooltip');
+      const tooltipCategory = tooltip.querySelector('.quick-grouped-bar-tooltip-category');
+      const tooltipRows = tooltip.querySelector('.quick-grouped-bar-tooltip-rows');
+      const config = {{CONFIG_JSON}};
+      const activeSeries = new Set(config.series.map((series) => series.name));
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const numberFormat = new Intl.NumberFormat(undefined, {
+        minimumFractionDigits: config.decimals,
+        maximumFractionDigits: config.decimals,
+      });
+      const compactNumberFormat = new Intl.NumberFormat(undefined, {
+        notation: 'compact',
+        maximumFractionDigits: 1,
+      });
+      const valueText = (value) => `${config.valuePrefix}${numberFormat.format(value)}${config.valueSuffix}`;
+      const axisValueText = (value) => {
+        const formatted = Math.abs(value) >= 10000
+          ? compactNumberFormat.format(value)
+          : numberFormat.format(value);
+        return `${config.valuePrefix}${formatted}${config.valueSuffix}`;
+      };
+      const colorFor = (index) => `var(--viz-series-${index + 1})`;
+
+      const visibleSeries = () => config.series
+        .map((series, index) => ({ ...series, index }))
+        .filter((series) => activeSeries.has(series.name));
+
+      const updateLegend = () => {
+        legend.querySelectorAll('button').forEach((button) => {
+          button.setAttribute('aria-pressed', String(activeSeries.has(button.dataset.series)));
+        });
+      };
+
+      config.series.forEach((series, index) => {
+        const button = document.createElement('button');
+        button.className = 'quick-grouped-bar-legend-button';
+        button.type = 'button';
+        button.dataset.series = series.name;
+        button.setAttribute('aria-pressed', 'true');
+
+        const swatch = document.createElement('span');
+        swatch.className = 'quick-grouped-bar-swatch';
+        swatch.style.background = colorFor(index);
+        swatch.setAttribute('aria-hidden', 'true');
+        const label = document.createElement('span');
+        label.textContent = series.name;
+        button.append(swatch, label);
+        button.addEventListener('click', () => {
+          if (activeSeries.has(series.name)) {
+            if (activeSeries.size === 1) return;
+            activeSeries.delete(series.name);
+          } else {
+            activeSeries.add(series.name);
+          }
+          updateLegend();
+          draw(true);
+        });
+        legend.append(button);
+      });
+
+      const hideHover = () => {
+        tooltip.hidden = true;
+        svg.selectAll('[data-chart-hover-guide]').attr('visibility', 'hidden');
+      };
+
+      const showTooltip = (event, category, seriesItems, guide) => {
+        tooltipCategory.textContent = category;
+        tooltipRows.replaceChildren();
+        seriesItems.forEach((series) => {
+          const row = document.createElement('div');
+          row.className = 'quick-grouped-bar-tooltip-row';
+          const swatch = document.createElement('span');
+          swatch.className = 'quick-grouped-bar-swatch';
+          swatch.style.background = colorFor(series.index);
+          swatch.setAttribute('aria-hidden', 'true');
+          const name = document.createElement('span');
+          name.className = 'quick-grouped-bar-tooltip-name';
+          name.textContent = series.name;
+          const value = document.createElement('span');
+          value.className = 'quick-grouped-bar-tooltip-value';
+          value.textContent = valueText(series.value);
+          row.append(swatch, name, value);
+          tooltipRows.append(row);
+        });
+        tooltip.hidden = false;
+        guide.attr('visibility', 'visible');
+
+        const rootBounds = root.getBoundingClientRect();
+        const tooltipBounds = tooltip.getBoundingClientRect();
+        const preferredLeft = event.clientX - rootBounds.left - tooltipBounds.width / 2;
+        const maximumLeft = Math.max(8, rootBounds.width - tooltipBounds.width - 8);
+        tooltip.style.left = `${Math.min(maximumLeft, Math.max(8, preferredLeft))}px`;
+        const pointerY = event.clientY - rootBounds.top;
+        const above = pointerY - tooltipBounds.height - 12;
+        tooltip.style.top = `${above >= 8 ? above : pointerY + 12}px`;
+      };
+
+      const draw = (animate = false) => {
+        const width = Math.max(1, Math.round(plot.getBoundingClientRect().width));
+        if (width <= 1) return;
+        const height = width < 480 ? 300 : Math.min(360, Math.max(320, Math.round(width * 0.5)));
+        const margin = { top: 12, right: 18, bottom: 62, left: width < 420 ? 66 : 76 };
+        const innerWidth = Math.max(1, width - margin.left - margin.right);
+        const innerHeight = Math.max(1, height - margin.top - margin.bottom);
+        const shown = visibleSeries();
+        const maximum = d3.max(shown, (series) => d3.max(series.values)) || 0;
+        const yCeiling = maximum === 0 ? 1 : maximum * 1.12;
+
+        svg.attr('viewBox', `0 0 ${width} ${height}`);
+        svg.selectAll('g.quick-grouped-bar-drawing').remove();
+
+        const xCategory = d3.scaleBand()
+          .domain(config.categories)
+          .range([margin.left, margin.left + innerWidth])
+          .padding(0.2);
+        const xSeries = d3.scaleBand()
+          .domain(shown.map((series) => series.name))
+          .range([0, xCategory.bandwidth()])
+          .padding(0.1);
+        const y = d3.scaleLinear()
+          .domain([0, yCeiling])
+          .nice()
+          .range([margin.top + innerHeight, margin.top]);
+        const drawing = svg.append('g').attr('class', 'quick-grouped-bar-drawing');
+        const yTicks = width < 420 ? 4 : 5;
+
+        drawing.append('g')
+          .attr('class', 'quick-grouped-bar-grid')
+          .attr('transform', `translate(${margin.left},0)`)
+          .call(d3.axisLeft(y).ticks(yTicks).tickSize(-innerWidth).tickFormat(''));
+        drawing.append('rect')
+          .attr('class', 'quick-grouped-bar-frame')
+          .attr('data-chart-frame', '')
+          .attr('x', margin.left)
+          .attr('y', margin.top)
+          .attr('width', innerWidth)
+          .attr('height', innerHeight);
+
+        const categories = config.categories.map((category, categoryIndex) => ({
+          category,
+          categoryIndex,
+          series: shown.map((series) => ({
+            ...series,
+            value: series.values[categoryIndex],
+          })),
+        }));
+        const groups = drawing.selectAll('g.quick-grouped-bar-category')
+          .data(categories)
+          .join('g')
+          .attr('class', 'quick-grouped-bar-category');
+
+        const bars = groups.selectAll('rect.quick-grouped-bar-mark')
+          .data((group) => group.series)
+          .join('rect')
+          .attr('class', 'quick-grouped-bar-mark');
+
+        bars
+          .attr('x', function(series) {
+            const group = d3.select(this.parentNode).datum();
+            return xCategory(group.category) + xSeries(series.name);
+          })
+          .attr('width', xSeries.bandwidth())
+          .attr('fill', (series) => colorFor(series.index))
+          .attr('rx', 2)
+          .attr('y', animate && !reducedMotion ? y(0) : (series) => y(series.value))
+          .attr('height', animate && !reducedMotion ? 0 : (series) => Math.max(0, y(0) - y(series.value)));
+
+        if (animate && !reducedMotion) {
+          bars.transition()
+            .duration(180)
+            .attr('y', (series) => y(series.value))
+            .attr('height', (series) => Math.max(0, y(0) - y(series.value)));
+        }
+
+        drawing.append('g')
+          .attr('class', 'quick-grouped-bar-axis')
+          .attr('transform', `translate(0,${margin.top + innerHeight})`)
+          .call(d3.axisBottom(xCategory).tickSizeOuter(0));
+        drawing.append('g')
+          .attr('class', 'quick-grouped-bar-axis')
+          .attr('transform', `translate(${margin.left},0)`)
+          .call(d3.axisLeft(y).ticks(yTicks).tickFormat(axisValueText));
+        drawing.append('text')
+          .attr('class', 'quick-grouped-bar-axis-title')
+          .attr('data-axis', 'x')
+          .attr('x', margin.left + innerWidth / 2)
+          .attr('y', height - 8)
+          .attr('text-anchor', 'middle')
+          .text(config.xAxisLabel);
+        drawing.append('text')
+          .attr('class', 'quick-grouped-bar-axis-title')
+          .attr('data-axis', 'y')
+          .attr('transform', `translate(14,${margin.top + innerHeight / 2}) rotate(-90)`)
+          .attr('text-anchor', 'middle')
+          .text(config.yAxisLabel);
+
+        groups.each(function(group) {
+          const categoryX = xCategory(group.category);
+          const guide = drawing.append('rect')
+            .attr('class', 'quick-grouped-bar-hover-guide')
+            .attr('data-chart-hover-guide', '')
+            .attr('x', categoryX)
+            .attr('y', margin.top)
+            .attr('width', xCategory.bandwidth())
+            .attr('height', innerHeight)
+            .attr('visibility', 'hidden');
+          drawing.append('rect')
+            .attr('class', 'quick-grouped-bar-hit')
+            .attr('data-chart-hit', '')
+            .attr('x', categoryX)
+            .attr('y', margin.top)
+            .attr('width', xCategory.bandwidth())
+            .attr('height', innerHeight)
+            .on('pointerenter pointermove', (event) => showTooltip(event, group.category, group.series, guide))
+            .on('pointerleave', hideHover);
+        });
+        hideHover();
+      };
+
+      const resizeObserver = new ResizeObserver(() => draw(false));
+      resizeObserver.observe(plot);
+      updateLegend();
+      draw(false);
+    })();
+  </script>
+</div>

@@ -1,0 +1,373 @@
+<div class="quick-line-chart" id="{{ROOT_ID}}" role="figure" aria-labelledby="{{ROOT_ID}}-title" aria-describedby="{{ROOT_ID}}-summary">
+  <style>
+    #{{ROOT_ID}} {
+      position: relative;
+      display: grid;
+      gap: 8px;
+      width: 100%;
+      color: var(--foreground);
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-title {
+      margin: 0;
+      color: var(--foreground);
+      font-weight: 500;
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-plot {
+      position: relative;
+      min-width: 0;
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-frame,
+    #{{ROOT_ID}} .quick-line-chart-axis path,
+    #{{ROOT_ID}} .quick-line-chart-axis line {
+      stroke: var(--border);
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-frame {
+      fill: transparent;
+      stroke-width: 1;
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-grid line {
+      stroke: var(--border);
+      stroke-opacity: 0.55;
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-grid path {
+      display: none;
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-axis text,
+    #{{ROOT_ID}} .quick-line-chart-axis-title {
+      fill: var(--foreground);
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-area {
+      pointer-events: none;
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-line {
+      fill: none;
+      stroke: var(--viz-series-1);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      pointer-events: none;
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-point {
+      fill: var(--background);
+      stroke: var(--viz-series-1);
+      stroke-width: 2;
+      pointer-events: none;
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-hover-guide {
+      stroke: var(--foreground);
+      stroke-width: 1;
+      stroke-opacity: 0.45;
+      pointer-events: none;
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-hover-marker {
+      fill: var(--viz-series-1);
+      stroke: var(--background);
+      stroke-width: 3;
+      pointer-events: none;
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-hit {
+      fill: transparent;
+      cursor: crosshair;
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-tooltip {
+      position: absolute;
+      z-index: 2;
+      display: grid;
+      gap: 3px;
+      max-width: min(240px, calc(100% - 16px));
+      padding: 8px 10px;
+      color: var(--popover-foreground);
+      background: var(--popover);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 6px 18px color-mix(in srgb, var(--foreground) 14%, transparent);
+      pointer-events: none;
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-tooltip[hidden] {
+      display: none;
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-tooltip-date,
+    #{{ROOT_ID}} .quick-line-chart-tooltip-description {
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-tooltip-date {
+      color: var(--muted-foreground);
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-tooltip-value {
+      color: var(--popover-foreground);
+      font-weight: 500;
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-tooltip-description {
+      color: var(--popover-foreground);
+    }
+
+    #{{ROOT_ID}} .quick-line-chart-tooltip-description[hidden] {
+      display: none;
+    }
+  </style>
+
+  <h3 class="quick-line-chart-title" id="{{ROOT_ID}}-title">{{TITLE}}</h3>
+  <p class="sr-only" id="{{ROOT_ID}}-summary">{{SUMMARY}}</p>
+
+  <div class="quick-line-chart-plot" id="{{ROOT_ID}}-plot">
+    <svg class="quick-line-chart-svg" id="{{ROOT_ID}}-svg" role="img" aria-labelledby="{{ROOT_ID}}-svg-title {{ROOT_ID}}-svg-desc">
+      <title id="{{ROOT_ID}}-svg-title">{{TITLE}}</title>
+      <desc id="{{ROOT_ID}}-svg-desc">{{SUMMARY}}</desc>
+    </svg>
+  </div>
+
+  <div class="quick-line-chart-tooltip" id="{{ROOT_ID}}-tooltip" role="tooltip" hidden>
+    <span class="quick-line-chart-tooltip-date"></span>
+    <span class="quick-line-chart-tooltip-value"></span>
+    <span class="quick-line-chart-tooltip-description" hidden></span>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script>
+    (() => {
+      const root = document.getElementById('{{ROOT_ID}}');
+      const plot = root.querySelector('#{{ROOT_ID}}-plot');
+      const svg = d3.select(root.querySelector('#{{ROOT_ID}}-svg'));
+      const tooltip = root.querySelector('#{{ROOT_ID}}-tooltip');
+      const tooltipDate = tooltip.querySelector('.quick-line-chart-tooltip-date');
+      const tooltipValue = tooltip.querySelector('.quick-line-chart-tooltip-value');
+      const tooltipDescription = tooltip.querySelector('.quick-line-chart-tooltip-description');
+      const config = {{CONFIG_JSON}};
+      const parseDate = d3.timeParse('%Y-%m-%d');
+      const dateFormat = new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric' });
+      const fullDateFormat = new Intl.DateTimeFormat(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+      const numberFormat = new Intl.NumberFormat(undefined, {
+        minimumFractionDigits: config.decimals,
+        maximumFractionDigits: config.decimals,
+      });
+      const compactNumberFormat = new Intl.NumberFormat(undefined, {
+        notation: 'compact',
+        maximumFractionDigits: 1,
+      });
+      const points = config.points.map((point) => ({
+        ...point,
+        parsedDate: parseDate(point.date),
+      }));
+      const bisectDate = d3.bisector((point) => point.parsedDate).center;
+      const valueText = (value) => `${config.valuePrefix}${numberFormat.format(value)}${config.valueSuffix}`;
+      const axisValueText = (value) => {
+        const formatted = Math.abs(value) >= 10000
+          ? compactNumberFormat.format(value)
+          : numberFormat.format(value);
+        return `${config.valuePrefix}${formatted}${config.valueSuffix}`;
+      };
+
+      const hideHover = () => {
+        tooltip.hidden = true;
+        svg.selectAll('[data-chart-hover-guide], [data-chart-hover-marker]').attr('visibility', 'hidden');
+      };
+
+      const draw = () => {
+        const width = Math.max(1, Math.round(plot.getBoundingClientRect().width));
+        if (width <= 1) return;
+        const height = width < 480 ? 280 : Math.min(340, Math.max(300, Math.round(width * 0.48)));
+        const margin = { top: 16, right: 18, bottom: 58, left: width < 420 ? 66 : 76 };
+        const innerWidth = Math.max(1, width - margin.left - margin.right);
+        const innerHeight = Math.max(1, height - margin.top - margin.bottom);
+        const gradientId = '{{ROOT_ID}}-gradient';
+
+        svg.attr('viewBox', `0 0 ${width} ${height}`);
+        svg.selectAll('g.quick-line-chart-drawing, defs.quick-line-chart-defs').remove();
+
+        const x = d3.scaleTime()
+          .domain(d3.extent(points, (point) => point.parsedDate))
+          .range([margin.left, margin.left + innerWidth]);
+        const maximum = d3.max(points, (point) => point.value) || 0;
+        const yCeiling = maximum === 0 ? 1 : maximum * 1.12;
+        const y = d3.scaleLinear()
+          .domain([0, yCeiling])
+          .nice()
+          .range([margin.top + innerHeight, margin.top]);
+        const curve = d3.curveMonotoneX;
+
+        const defs = svg.insert('defs', ':first-child').attr('class', 'quick-line-chart-defs');
+        const gradient = defs.append('linearGradient')
+          .attr('id', gradientId)
+          .attr('x1', '0')
+          .attr('x2', '0')
+          .attr('y1', '0')
+          .attr('y2', '1');
+        gradient.append('stop')
+          .attr('offset', '0%')
+          .attr('stop-color', 'var(--viz-series-1)')
+          .attr('stop-opacity', 0.3);
+        gradient.append('stop')
+          .attr('offset', '100%')
+          .attr('stop-color', 'var(--viz-series-1)')
+          .attr('stop-opacity', 0.02);
+
+        const drawing = svg.append('g').attr('class', 'quick-line-chart-drawing');
+        const yTicks = width < 420 ? 4 : 5;
+        drawing.append('g')
+          .attr('class', 'quick-line-chart-grid')
+          .attr('transform', `translate(${margin.left},0)`)
+          .call(
+            d3.axisLeft(y)
+              .ticks(yTicks)
+              .tickSize(-innerWidth)
+              .tickFormat('')
+          );
+
+        drawing.append('rect')
+          .attr('class', 'quick-line-chart-frame')
+          .attr('data-chart-frame', '')
+          .attr('x', margin.left)
+          .attr('y', margin.top)
+          .attr('width', innerWidth)
+          .attr('height', innerHeight);
+
+        const area = d3.area()
+          .x((point) => x(point.parsedDate))
+          .y0(y(0))
+          .y1((point) => y(point.value))
+          .curve(curve);
+        const line = d3.line()
+          .x((point) => x(point.parsedDate))
+          .y((point) => y(point.value))
+          .curve(curve);
+
+        drawing.append('path')
+          .datum(points)
+          .attr('class', 'quick-line-chart-area')
+          .attr('fill', `url(#${gradientId})`)
+          .attr('d', area);
+        drawing.append('path')
+          .datum(points)
+          .attr('class', 'quick-line-chart-line')
+          .attr('d', line);
+        drawing.selectAll('circle.quick-line-chart-point')
+          .data(points)
+          .join('circle')
+          .attr('class', 'quick-line-chart-point')
+          .attr('cx', (point) => x(point.parsedDate))
+          .attr('cy', (point) => y(point.value))
+          .attr('r', width < 420 ? 2.25 : 2.75);
+
+        const xAxis = drawing.append('g')
+          .attr('class', 'quick-line-chart-axis')
+          .attr('transform', `translate(0,${margin.top + innerHeight})`)
+          .call(
+            d3.axisBottom(x)
+              .ticks(width < 480 ? 4 : 6)
+              .tickFormat((date) => dateFormat.format(date))
+          );
+        xAxis.selectAll('text').attr('dy', '0.9em');
+
+        drawing.append('g')
+          .attr('class', 'quick-line-chart-axis')
+          .attr('transform', `translate(${margin.left},0)`)
+          .call(d3.axisLeft(y).ticks(yTicks).tickFormat(axisValueText));
+
+        drawing.append('text')
+          .attr('class', 'quick-line-chart-axis-title')
+          .attr('data-axis', 'x')
+          .attr('x', margin.left + innerWidth / 2)
+          .attr('y', height - 8)
+          .attr('text-anchor', 'middle')
+          .text(config.xAxisLabel);
+        drawing.append('text')
+          .attr('class', 'quick-line-chart-axis-title')
+          .attr('data-axis', 'y')
+          .attr('transform', `translate(14,${margin.top + innerHeight / 2}) rotate(-90)`)
+          .attr('text-anchor', 'middle')
+          .text(config.yAxisLabel);
+
+        const guide = drawing.append('line')
+          .attr('class', 'quick-line-chart-hover-guide')
+          .attr('data-chart-hover-guide', '')
+          .attr('y1', margin.top)
+          .attr('y2', margin.top + innerHeight)
+          .attr('visibility', 'hidden');
+        const marker = drawing.append('circle')
+          .attr('class', 'quick-line-chart-hover-marker')
+          .attr('data-chart-hover-marker', '')
+          .attr('r', 5)
+          .attr('visibility', 'hidden');
+        const overlay = drawing.append('rect')
+          .attr('class', 'quick-line-chart-hit')
+          .attr('data-chart-hit', '')
+          .attr('data-chart-hover-overlay', 'nearest-point')
+          .attr('x', margin.left)
+          .attr('y', margin.top)
+          .attr('width', innerWidth)
+          .attr('height', innerHeight);
+
+        const showHover = (event) => {
+          const [pointerX] = d3.pointer(event, overlay.node());
+          const selectedIndex = Math.max(0, Math.min(points.length - 1, bisectDate(points, x.invert(pointerX))));
+          const selected = points[selectedIndex];
+          const pointX = x(selected.parsedDate);
+          const pointY = y(selected.value);
+          guide
+            .attr('x1', pointX)
+            .attr('x2', pointX)
+            .attr('visibility', 'visible');
+          marker
+            .attr('cx', pointX)
+            .attr('cy', pointY)
+            .attr('visibility', 'visible');
+
+          tooltipDate.textContent = fullDateFormat.format(selected.parsedDate);
+          tooltipValue.textContent = valueText(selected.value);
+          tooltipDescription.textContent = selected.description;
+          tooltipDescription.hidden = !selected.description;
+          tooltip.hidden = false;
+
+          const rootBounds = root.getBoundingClientRect();
+          const plotBounds = plot.getBoundingClientRect();
+          const tooltipBounds = tooltip.getBoundingClientRect();
+          const localX = plotBounds.left - rootBounds.left + pointX;
+          const localY = plotBounds.top - rootBounds.top + pointY;
+          const preferredLeft = localX - tooltipBounds.width / 2;
+          const maximumLeft = Math.max(8, rootBounds.width - tooltipBounds.width - 8);
+          tooltip.style.left = `${Math.min(maximumLeft, Math.max(8, preferredLeft))}px`;
+          const above = localY - tooltipBounds.height - 12;
+          tooltip.style.top = `${above >= 8 ? above : localY + 12}px`;
+        };
+
+        overlay
+          .on('pointerenter pointermove', showHover)
+          .on('pointerleave', hideHover);
+        hideHover();
+      };
+
+      const resizeObserver = new ResizeObserver(draw);
+      resizeObserver.observe(plot);
+      draw();
+    })();
+  </script>
+</div>

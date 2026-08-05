@@ -124,6 +124,8 @@ def render(spec: dict[str, Any], output_path: Path) -> str:
         config = {"followUpPrompt": ""}
     else:
         follow_up_prompt = require_text(follow_up_prompt, "follow_up_prompt")
+        if "{selected}" not in follow_up_prompt:
+            raise ValueError("follow_up_prompt must contain {selected}")
         submit_block = (
             '  <div class="viz-controls">\n'
             f'    <button class="btn btn-primary" id="{root_id}-submit" type="button">继续</button>\n'

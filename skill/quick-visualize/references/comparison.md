@@ -1,6 +1,6 @@
 # Comparison specification
 
-Use this template when the user must choose exactly one of 2-4 plans by comparing the same 2-8 dimensions. Keep dimension labels and ordering identical across plans so differences remain directly scannable.
+Use this template to choose exactly one of 2-4 plans compared across the same 2-8 dimensions.
 
 ```json
 {
