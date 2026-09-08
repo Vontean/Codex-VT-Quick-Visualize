@@ -63,7 +63,8 @@ Use this series for 1-12 independent settings. Use general Visualize if one fiel
       "unit": "/10"
     }
   ],
-  "follow_up_prompt": "Use these parameters: {parameters}. Continue."
+  "follow_up_prompt": "Use these parameters: {parameters}. Continue.",
+  "follow_up_title": "Confirm parameters"
 }
 ```
 
@@ -77,3 +78,4 @@ Use this series for 1-12 independent settings. Use general Visualize if one fiel
 - `switch` and `checkbox` accept `checked`, `control_label`, and `required`.
 - `range` accepts numeric `min`, `max`, `step`, and `value`, plus an optional `unit`.
 - `follow_up_prompt` is required and must contain `{parameters}`. The renderer replaces it with a semicolon-separated summary of the current visible values.
+- `follow_up_title` is an optional 1-250 character string shown as the confirmation-dialog heading after the user selects 继续. Prefer a short imperative title such as "Confirm parameters".

@@ -20,7 +20,8 @@ Use `multi-select-simple` for concise labels and `multi-select-complete` when ev
     }
   ],
   "selected": ["First choice"],
-  "follow_up_prompt": "The user selected: {selected}. Continue from these choices."
+  "follow_up_prompt": "The user selected: {selected}. Continue from these choices.",
+  "follow_up_title": "Confirm selection"
 }
 ```
 
@@ -31,3 +32,4 @@ Use `multi-select-simple` for concise labels and `multi-select-complete` when ev
 - `selected` may contain option labels or values and supplements per-option `selected` flags.
 - Omit `follow_up_prompt` to render selection only, without `继续`.
 - When present, `follow_up_prompt` must contain `{selected}`; the renderer replaces it with the current comma-separated labels.
+- `follow_up_title` is an optional 1-250 character string shown as the confirmation-dialog heading after the user selects 继续. It is ignored when `follow_up_prompt` is omitted.

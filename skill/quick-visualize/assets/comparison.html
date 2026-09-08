@@ -91,7 +91,9 @@
         if (!selected) return;
         const prompt = config.followUpPrompt.replace('{selected}', selected.dataset.label);
         if (window.openai?.sendFollowUpMessage) {
-          await window.openai.sendFollowUpMessage({ prompt });
+          const payload = { prompt };
+          if (config.followUpTitle) payload.title = config.followUpTitle;
+          await window.openai.sendFollowUpMessage(payload);
         }
       });
     })();

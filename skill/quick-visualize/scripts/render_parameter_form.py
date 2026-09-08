@@ -136,6 +136,17 @@ def safe_json(value: Any) -> str:
     )
 
 
+def normalize_follow_up_title(spec: dict[str, Any]) -> str | None:
+    # 确认对话框标题；缺省时模板不传 title 字段
+    title = spec.get("follow_up_title")
+    if title is None:
+        return None
+    title = require_text(title, "follow_up_title")
+    if len(title) > 250:
+        raise ValueError("follow_up_title must be at most 250 characters")
+    return title
+
+
 def render_field(root_id: str, field: dict[str, Any], index: int) -> str:
     field_id = f"{root_id}-field-{index + 1}"
     label = html.escape(field["label"])
@@ -240,6 +251,7 @@ def render(spec: dict[str, Any], output_path: Path) -> str:
     follow_up_prompt = require_text(spec.get("follow_up_prompt"), "follow_up_prompt")
     if "{parameters}" not in follow_up_prompt:
         raise ValueError("follow_up_prompt must contain {parameters}")
+    follow_up_title = normalize_follow_up_title(spec)
     fields = normalize_fields(spec)
     digest_source = json.dumps(spec, ensure_ascii=False, sort_keys=True) + str(output_path)
     root_id = "quick-parameter-form-" + hashlib.sha256(digest_source.encode()).hexdigest()[:10]
@@ -260,7 +272,11 @@ def render(spec: dict[str, Any], output_path: Path) -> str:
             render_field(root_id, field, index) for index, field in enumerate(fields)
         ),
         "{{CONFIG_JSON}}": safe_json(
-            {"followUpPrompt": follow_up_prompt, "fields": config_fields}
+            {
+                "followUpPrompt": follow_up_prompt,
+                "followUpTitle": follow_up_title,
+                "fields": config_fields,
+            }
         ),
     }
 

@@ -51,11 +51,23 @@ def safe_json(value: Any) -> str:
     )
 
 
+def normalize_follow_up_title(spec: dict[str, Any]) -> str | None:
+    # 确认对话框标题；缺省时模板不传 title 字段
+    title = spec.get("follow_up_title")
+    if title is None:
+        return None
+    title = require_text(title, "follow_up_title")
+    if len(title) > 250:
+        raise ValueError("follow_up_title must be at most 250 characters")
+    return title
+
+
 def render(spec: dict[str, Any], output_path: Path) -> str:
     question = require_text(spec.get("question"), "question")
     follow_up_prompt = require_text(spec.get("follow_up_prompt"), "follow_up_prompt")
     if "{ordered}" not in follow_up_prompt:
         raise ValueError("follow_up_prompt must contain {ordered}")
+    follow_up_title = normalize_follow_up_title(spec)
     items = normalize_items(spec)
     digest_source = json.dumps(spec, ensure_ascii=False, sort_keys=True) + str(output_path)
     root_id = "quick-ranker-" + hashlib.sha256(digest_source.encode()).hexdigest()[:10]
@@ -80,7 +92,9 @@ def render(spec: dict[str, Any], output_path: Path) -> str:
         "{{ROOT_ID}}": root_id,
         "{{QUESTION}}": html.escape(question, quote=True),
         "{{ITEMS_HTML}}": "\n".join(item_lines),
-        "{{CONFIG_JSON}}": safe_json({"followUpPrompt": follow_up_prompt}),
+        "{{CONFIG_JSON}}": safe_json(
+            {"followUpPrompt": follow_up_prompt, "followUpTitle": follow_up_title}
+        ),
     }
 
     fragment = TEMPLATE_PATH.read_text(encoding="utf-8")

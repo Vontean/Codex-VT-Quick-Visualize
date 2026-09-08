@@ -121,11 +121,13 @@ cp -R Codex-VT-Quick-Visualize/skill/quick-visualize ~/.codex/skills/
 
 ## Composer handoff
 
-模板中的 `继续` 会调用：
+模板中的 `继续` 会调用 Visualize 插件当前的确认契约：
 
 ```js
-await window.openai.sendFollowUpMessage({ prompt })
+await window.openai.sendFollowUpMessage({ prompt, title })
 ```
+
+`title` 是确认对话框的短标题（1–250 字符），来自 spec 的可选 `follow_up_title` 字段；spec 未提供时模板省略该字段。
 
 当前 Codex Desktop 的行为是把生成结果放进输入框，等待用户检查和手动发送；它不会绕过用户直接发送消息。技能刻意保留这个确认步骤，也不会尝试从 visualization sandbox 操作父级输入框。
 
@@ -185,6 +187,7 @@ python3 skill/quick-visualize/scripts/render_comparison.py \
 - HTML 中没有未替换的 `{{...}}` token。
 - JavaScript 可以解析，主要交互能更新选择、顺序或图表状态。
 - 最终消息先输出必要的普通 Markdown，再单独输出 Visualize content reference；直接使用 renderer 在当次任务中返回的实际输出路径，不拼接或写死开发机目录。
+- content reference 是包含私有区边界字符（U+E200 / U+E202 / U+E201）的客户端 token，不是纯文本；手写或复制时丢失这三个不可见字符会让客户端把整行当作字面文本渲染。以当前安装的 Visualize SKILL.md 中的原始 token 为准。
 
 ## 有意保留的边界
 

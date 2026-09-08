@@ -79,6 +79,17 @@ def safe_json(value: Any) -> str:
     )
 
 
+def normalize_follow_up_title(spec: dict[str, Any]) -> str | None:
+    # 确认对话框标题；缺省时模板不传 title 字段
+    title = spec.get("follow_up_title")
+    if title is None:
+        return None
+    title = require_text(title, "follow_up_title")
+    if len(title) > 250:
+        raise ValueError("follow_up_title must be at most 250 characters")
+    return title
+
+
 def render(spec: dict[str, Any], output_path: Path) -> str:
     question = require_text(spec.get("question"), "question")
     variant = spec.get("variant", "multi-select-simple")
@@ -126,12 +137,13 @@ def render(spec: dict[str, Any], output_path: Path) -> str:
         follow_up_prompt = require_text(follow_up_prompt, "follow_up_prompt")
         if "{selected}" not in follow_up_prompt:
             raise ValueError("follow_up_prompt must contain {selected}")
+        follow_up_title = normalize_follow_up_title(spec)
         submit_block = (
             '  <div class="viz-controls">\n'
             f'    <button class="btn btn-primary" id="{root_id}-submit" type="button">继续</button>\n'
             "  </div>"
         )
-        config = {"followUpPrompt": follow_up_prompt}
+        config = {"followUpPrompt": follow_up_prompt, "followUpTitle": follow_up_title}
 
     replacements = {
         "{{ROOT_ID}}": root_id,

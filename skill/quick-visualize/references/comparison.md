@@ -28,7 +28,8 @@ Use this template to choose exactly one of 2-4 plans compared across the same 2-
     }
   ],
   "selected": "pro",
-  "follow_up_prompt": "I choose {selected}. Continue with this plan."
+  "follow_up_prompt": "I choose {selected}. Continue with this plan.",
+  "follow_up_title": "Confirm plan"
 }
 ```
 
@@ -37,3 +38,4 @@ Use this template to choose exactly one of 2-4 plans compared across the same 2-
 - Every plan must contain the same dimension labels in the same order. Values may differ.
 - `selected` may match a plan title or value. Omit it to require a fresh choice.
 - `follow_up_prompt` must contain `{selected}`; the renderer replaces it with the selected plan title.
+- `follow_up_title` is an optional 1-250 character string shown as the confirmation-dialog heading after the user selects 继续. Prefer a short imperative title such as "Confirm plan".

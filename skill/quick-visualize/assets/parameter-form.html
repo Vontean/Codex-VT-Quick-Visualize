@@ -113,7 +113,9 @@
           .join('；');
         const prompt = config.followUpPrompt.replace('{parameters}', parameters);
         if (window.openai?.sendFollowUpMessage) {
-          await window.openai.sendFollowUpMessage({ prompt });
+          const payload = { prompt };
+          if (config.followUpTitle) payload.title = config.followUpTitle;
+          await window.openai.sendFollowUpMessage(payload);
         }
       });
     })();
