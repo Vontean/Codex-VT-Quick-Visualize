@@ -1,66 +1,40 @@
 ---
 name: quick-visualize
-description: Render preset multi-selects, rankings, independent parameter forms, same-dimension comparisons, and simple Line, Grouped Bar, Donut, or Radar Charts through Visualize. Use only when a bundled specification preserves the full data and interaction model; route 1-3 simple mutually exclusive choices to request_user_input and unmatched requests to general Visualize.
+description: Render preset multi-selects, rankings, parameter forms, plan comparisons, and line, grouped bar, donut or radar charts in conversation. Use when a preset covers the full data and interaction model.
 ---
 
 # Quick Visualize
 
-Pair this skill with the installed and enabled `visualize@openai-bundled` plugin. The bundled templates and renderers create Visualize-compatible HTML fragments; Visualize supplies the thread-scoped surface and inline message contract.
+Requires the enabled `visualize@openai-bundled` plugin, Python 3 and Node.js on PATH.
 
-## Route
+## Select
 
-Choose exactly one path before writing a spec:
+Read only the matching specification. If none fits, use general Visualize.
 
-- Use `request_user_input` for 1-3 simple, mutually exclusive choices when the tool is available.
-- Use `multi-select-simple` for 2-20 concise, non-exclusive options.
-- Use `multi-select-complete` for 2-20 non-exclusive options that each need supporting text.
-- Use `ranker` when the user must order 2-20 one-line items.
-- Use the `parameter-form` series for 1-12 independent fields.
-- Use `comparison` when the user must choose one of 2-4 plans described by the same 2-8 dimensions.
-- Use `line-chart` for one simple, non-negative measure changing over 2-90 dated observations.
-- Use `grouped-bar-chart` for 2-3 series measured across the same 2-6 categories on one non-negative scale.
-- Use `donut-chart` for 2-6 categories whose non-negative values form one whole.
-- Use `radar-chart` for 1-4 objects measured across the same 3-8 dimensions on one shared non-negative scale.
-- Use the general Visualize skill when no bundled specification can carry the complete requested data and interaction model.
+| Type | Scope | Specification |
+| --- | --- | --- |
+| `multi-select-simple` / `multi-select-complete` | 2–20 non-exclusive choices; complete adds supporting text | [Multi Select](references/multi-select.md) |
+| `ranker` | Order 2–20 one-line items | [Ranker](references/ranker.md) |
+| `parameter-form` | 1–12 independent fields | [Parameter Form](references/parameter-form.md) |
+| `comparison` | Choose among 2–4 plans across the same 2–8 dimensions | [Comparison](references/comparison.md) |
+| `line-chart` | One non-negative measure, 2–90 dates | [Line Chart](references/line-chart.md) |
+| `grouped-bar-chart` | 2–3 series, 2–6 shared categories, non-negative scale | [Grouped Bar Chart](references/grouped-bar-chart.md) |
+| `donut-chart` | 2–6 non-negative parts, positive total | [Donut Chart](references/donut-chart.md) |
+| `radar-chart` | 1–4 objects, 3–8 shared dimensions, non-negative scale | [Radar Chart](references/radar-chart.md) |
 
-## Render
+## Execute
 
-1. Load the installed Visualize skill and follow its inline HTML output contract. Finish when the current thread's visualization directory and content-reference format are known.
-2. Read only the reference selected during routing, then use its paired renderer:
+1. Write a UTF-8 JSON spec in a task-owned location.
+2. Run `python3 <skill-dir>/scripts/render.py <type> <spec.json> <output-directory>/<title>.html`. Prefer the current thread's writable visualization directory; otherwise use task-owned `work/`. Never use system temp or Library.
+3. On `ok: true`, emit the returned `reference` unchanged on its own line in the final answer. Do not read the HTML or load the full Visualize skill for a preset. The runner validates data, placeholders, element references, JavaScript syntax and size before writing.
+4. On `ok: false`, fix the reported spec error or inspect only the relevant source around the reported line, then rerun. Template defects require a source fix; do not customize template markup for a single question. Browser checks are for template changes or suspected interaction/layout defects, not every invocation.
 
-   | Route | Reference | Renderer |
-   | --- | --- | --- |
-   | `multi-select-simple`, `multi-select-complete` | [Multi Select](references/multi-select.md) | `scripts/render_multi_select.py` |
-   | `ranker` | [Ranker](references/ranker.md) | `scripts/render_ranker.py` |
-   | `parameter-form` | [Parameter Form](references/parameter-form.md) | `scripts/render_parameter_form.py` |
-   | `comparison` | [Comparison](references/comparison.md) | `scripts/render_comparison.py` |
-   | `line-chart` | [Line Chart](references/line-chart.md) | `scripts/render_line_chart.py` |
-   | `grouped-bar-chart` | [Grouped Bar Chart](references/grouped-bar-chart.md) | `scripts/render_grouped_bar_chart.py` |
-   | `donut-chart` | [Donut Chart](references/donut-chart.md) | `scripts/render_donut_chart.py` |
-   | `radar-chart` | [Radar Chart](references/radar-chart.md) | `scripts/render_radar_chart.py` |
+The reference contains U+E200 / U+E202 / U+E201:
 
-3. Write a UTF-8 JSON spec in the task's `work/` directory or another safe task-owned location. Finish when every required value and interaction is explicit and valid under the selected reference.
-4. Resolve this skill directory and run `python3 <renderer> <spec.json> <output-directory>/<title>.html`. The output directory is the thread-scoped visualization directory when it appears in the writable roots; otherwise use the task's supplied `work/` directory or an output directory under the authorized working directory. Never save fragments to system temp or Library. Finish when the renderer exits successfully and returns the requested fragment path.
-5. Read the fragment once. Finish when it matches the spec, contains no unresolved `{{...}}` token, and its JavaScript parses.
-6. Put any necessary question or explanation in normal Markdown, then emit the Visualize content reference with the renderer's exact output path on its own line. The reference is a client token wrapped in invisible private-use boundary characters, not plain Markdown. Its exact shape is U+E200, then the literal text `visualize`, then U+E202, then the JSON object, then U+E201:
+```text
+visualize{"path":"<absolute-path>/<title>.html"}
+```
 
-   ```text
-   visualize{"path":"<absolute-path>/<title>.html"}
-   ```
+Add concise explanation outside the visual when needed. Never replace the reference with a Markdown link. Use the returned absolute executor path.
 
-   The wide variant is:
-
-   ```text
-   visualize{"path":"<absolute-path>/<title>.html","mode":"wide"}
-   ```
-
-   Resolve the absolute executor-side path from the current task environment; never hard-code a developer-machine directory or use a relative path. The JSON object may include `"title"` when useful. Add `"mode":"wide"` only for a full-screen desktop app mockup or when several compact chart panels must stay side by side to remain readable. Never add a Markdown link to the reference, and never announce it as an artifact, attachment, or download. Before sending, verify the emitted token actually contains U+E200, U+E202, and U+E201; a token missing them renders as literal text instead of a visualization. Finish when the reference points to the fragment generated in this invocation.
-
-Never author or patch template markup for question-specific content. Change only the JSON spec; fall back to general Visualize when the preset cannot express the request.
-
-## Composer handoff
-
-- Render `继续` and call `await window.openai.sendFollowUpMessage({ prompt, title })`. Include `title` as the concise confirmation-dialog heading (1-250 characters) whenever the spec provides `follow_up_title`; omit the field when it is absent. Multi-select may omit the action by omitting `follow_up_prompt`, while Ranker, Parameter Form, and Comparison always include it.
-- Keep Line Chart, Grouped Bar Chart, Donut Chart, and Radar Chart hover and inspection local to the visualization; they have no composer handoff.
-- Treat the result as a composer handoff: Codex Desktop places the prompt in the input box for user review and manual sending. Never describe it as immediate sending.
-- Do not use raw MCP Apps `ui/message`; it produces the same composer handoff. Never access or automate the parent composer from the visualization sandbox.
+`Confirm` places the chosen values in the composer for user review and manual sending. Chart interactions stay local.

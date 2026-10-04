@@ -1,4 +1,4 @@
-# Quick Visualize routing
+# 可视化与提问路由
 
-- 1–3 个简单且互斥的选择优先使用 `request_user_input`；完整数据和交互能由 `$quick-visualize` 任一现有 spec 承载时使用对应模板，否则使用通用 `Visualize`。
-- `$quick-visualize` 按“识别模板 → 写 JSON spec → renderer 写入线程 visualization 目录 → 读取校验 → Markdown 说明 + Visualize content reference 呈现”执行；`继续` 只把结果写入输入框，由用户确认发送。
+- 流程、关系、比较或数据适合用图说明时，主动在消息流中呈现，优先 `$quick-visualize`；预设无法覆盖时，静态图用原生 Mermaid（默认外观），动态交互用 `@Visualize`。简单事实用文字。
+- 1–3 个简单、互斥的选择优先使用可用的 `request_user_input`；多选、排序、表单或带维度的方案比较使用 `$quick-visualize`。

@@ -30,6 +30,6 @@ Use `multi-select-simple` for concise labels and `multi-select-complete` when ev
 - A string option uses the same label and value. An object option may set `label`, `supporting_text`, `value`, and `selected`.
 - `multi-select-complete` requires `supporting_text` for every option.
 - `selected` may contain option labels or values and supplements per-option `selected` flags.
-- Omit `follow_up_prompt` to render selection only, without `继续`.
+- Omit `follow_up_prompt` to render selection only, without `Confirm`.
 - When present, `follow_up_prompt` must contain `{selected}`; the renderer replaces it with the current comma-separated labels.
-- `follow_up_title` is an optional 1-250 character string shown as the confirmation-dialog heading after the user selects 继续. It is ignored when `follow_up_prompt` is omitted.
+- `follow_up_title` is an optional 1-250 character string shown as the confirmation-dialog heading after the user selects Confirm. It is ignored when `follow_up_prompt` is omitted.

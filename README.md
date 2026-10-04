@@ -32,19 +32,15 @@
 
 ```mermaid
 flowchart LR
-    A["识别用户决策需求"] --> B{"选择交互路径"}
-    B -->|"1–3 个简单互斥选项"| C["request_user_input"]
-    B -->|"完整数据命中现有 spec"| D["Quick Visualize"]
-    B -->|"没有 spec 能完整承载"| E["通用 Visualize"]
-    D --> F["写入 JSON spec"]
-    F --> G["调用模板 renderer"]
-    G --> H["写入线程 visualization 目录"]
-    H --> I["读取并校验 HTML fragment"]
-    I --> J["Markdown 说明 + Visualize content reference"]
-    J -->|"选择、排序、表单或对比"| K["用户交互并点击继续"]
-    K --> L["结果进入 Codex 输入框"]
-    L --> M["用户确认后发送"]
-    J -->|"Chart"| N["本地 hover、筛选或聚焦"]
+    A["AGENTS.md 选择工具"] --> B["按需读取模板规格"]
+    B --> C["写 JSON spec"]
+    C --> D["统一 runner 渲染与检查"]
+    D --> E{"检查通过？"}
+    E -->|"是"| F["返回简短结果和展示引用"]
+    E -->|"否"| G["返回阶段、错误与位置"]
+    G --> H["Agent 修正后重试"]
+    H --> D
+    F --> I["消息流展示与本地交互"]
 ```
 
 完整的模型执行步骤写在 [SKILL.md](skill/quick-visualize/SKILL.md)。各模板的 JSON schema 位于 [`references/`](skill/quick-visualize/references/)。
@@ -64,10 +60,11 @@ enabled = true
 
 ### 2. Python 3
 
-模板 renderer 使用 Python 标准库，不需要额外的 pip 或 npm 依赖。
+模板 renderer 使用 Python 标准库；统一 runner 还需要 PATH 中的 Node.js，通过 `node --check` 检查 JavaScript。无需 pip 或 npm 包。
 
 ```bash
 python3 --version
+node --version
 ```
 
 ### 3. 推荐：在 Default mode 开启 `request_user_input`
@@ -121,7 +118,7 @@ cp -R Codex-VT-Quick-Visualize/skill/quick-visualize ~/.codex/skills/
 
 ## Composer handoff
 
-模板中的 `继续` 会调用 Visualize 插件当前的确认契约：
+模板中的 `Confirm` 会调用 Visualize 插件当前的确认契约：
 
 ```js
 await window.openai.sendFollowUpMessage({ prompt, title })
@@ -132,6 +129,14 @@ await window.openai.sendFollowUpMessage({ prompt, title })
 当前 Codex Desktop 的行为是把生成结果放进输入框，等待用户检查和手动发送；它不会绕过用户直接发送消息。技能刻意保留这个确认步骤，也不会尝试从 visualization sandbox 操作父级输入框。
 
 四种 Chart 只提供本地 hover、图例筛选或聚焦，不调用 composer handoff。
+
+## 跟随宿主主题色
+
+模板沿用 Visualize 的语义 token 和基础控件样式，不另外复制或覆盖宿主主题。
+
+当前 App 的运行时桥把 `--app-color-text-accent` 映射为 `--primary` 和 `--viz-series-1`。这是按主题与对比度调整的文字强调色，可能比用户选择的基础色更深或更浅。原始 `--codex-base-accent` 尚未包含在传入沙箱的 `visualizationStyleVariables` 中；精确匹配基础色需要修改宿主桥接，模板不能读取父页面 CSS。
+
+模拟主题测试只能验证颜色应用，不能证明真实宿主已传入用户选择的基础色。消息流验收应核对实际传入值及计算样式。
 
 ## 仓库结构
 
@@ -176,18 +181,20 @@ python3 -m py_compile skill/quick-visualize/scripts/*.py
 渲染一个 spec：
 
 ```bash
-python3 skill/quick-visualize/scripts/render_comparison.py \
+python3 skill/quick-visualize/scripts/render.py comparison \
   /path/to/spec.json \
   /path/to/thread-visualization-directory/comparison.html
 ```
 
-生成后应检查：
+统一入口在写入前检查数据规格、未替换占位符、重复或缺失的元素引用、JavaScript 语法和文件大小。正常返回 `ok: true`、实际路径、检查项目与可直接复制的 `reference`；agent 无需读取生成 HTML，也无需为固定预设加载完整 Visualize 技能。异常返回 `ok: false`、阶段、错误消息和可用的行号，退出码非零；已有输出不会被覆盖，不能沿用旧文件展示。外部脚本加载和真实布局、交互需在模板开发或疑似故障时用浏览器验收。
 
-- 问题、标签、维度、默认状态和顺序与 spec 一致。
-- HTML 中没有未替换的 `{{...}}` token。
-- JavaScript 可以解析，主要交互能更新选择、顺序或图表状态。
-- 最终消息先输出必要的普通 Markdown，再单独输出 Visualize content reference；直接使用 renderer 在当次任务中返回的实际输出路径，不拼接或写死开发机目录。
-- content reference 是包含私有区边界字符（U+E200 / U+E202 / U+E201）的客户端 token，不是纯文本；手写或复制时丢失这三个不可见字符会让客户端把整行当作字面文本渲染。以当前安装的 Visualize SKILL.md 中的原始 token 为准。
+旧的单模板 renderer 保留作为底层生成器和兼容入口，不执行统一检查；技能调用统一使用 `scripts/render.py`。
+
+运行回归检查：
+
+```bash
+python3 -m unittest discover -s tests -v
+```
 
 ## 有意保留的边界
 
@@ -195,7 +202,7 @@ python3 skill/quick-visualize/scripts/render_comparison.py \
 - 不把超出任一现有 spec 承载能力的数据或交互强行塞进模板。
 - 不自动发送用户消息。
 - 不自动安装或修改 Visualize 插件。
-- 不自动修改用户的 `config.toml` 或 `AGENTS.md`。
+- 技能调用不修改用户的 `config.toml` 或 `AGENTS.md`；路由规则由用户级或项目级 `AGENTS.md` 维护。
 
 ## License
 

@@ -140,7 +140,7 @@ def render(spec: dict[str, Any], output_path: Path) -> str:
         follow_up_title = normalize_follow_up_title(spec)
         submit_block = (
             '  <div class="viz-controls">\n'
-            f'    <button class="btn btn-primary" id="{root_id}-submit" type="button">继续</button>\n'
+            f'    <button class="btn btn-primary" id="{root_id}-submit" type="button">Confirm</button>\n'
             "  </div>"
         )
         config = {"followUpPrompt": follow_up_prompt, "followUpTitle": follow_up_title}
