@@ -22,4 +22,6 @@ Use this template for 2-6 categories whose non-negative values form one whole. T
 - An item may include a short `description`. Omit it to keep the hover bubble to label, value, and percentage only.
 - `value_prefix` and `value_suffix` are optional strings used for hover values.
 - `decimals` accepts an integer from 0 to 2 and defaults to `0`.
-- The default center shows the largest category and its percentage. Hover temporarily switches the center to the active category and restores the default on pointer leave.
+- The center shows the total. Hover temporarily shows the active category and percentage; leaving restores the total.
+- Up to 4 categories with every share at least 8%, short labels (up to 12 characters), and at least 420px available width use direct labels; otherwise use a centered bottom legend.
+- Labels fade in during the ring reveal. Returning to view replays motion; reduced motion shows the final state. No click pinning.

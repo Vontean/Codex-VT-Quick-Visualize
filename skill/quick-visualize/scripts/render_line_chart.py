@@ -110,6 +110,7 @@ def render(spec: dict[str, Any], output_path: Path) -> str:
     replacements = {
         "{{ROOT_ID}}": root_id,
         "{{TITLE}}": html.escape(title),
+        "{{X_AXIS_LABEL}}": html.escape(x_axis_label),
         "{{SUMMARY}}": html.escape(summary),
         "{{CONFIG_JSON}}": safe_json(
             {
@@ -127,7 +128,7 @@ def render(spec: dict[str, Any], output_path: Path) -> str:
     fragment = TEMPLATE_PATH.read_text(encoding="utf-8")
     for token, replacement in replacements.items():
         fragment = fragment.replace(token, replacement)
-    if "{{" in fragment or "}}" in fragment:
+    if "{{" in fragment:
         raise ValueError("unresolved template token remains")
     return fragment
 

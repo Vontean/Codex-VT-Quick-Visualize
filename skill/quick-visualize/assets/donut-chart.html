@@ -1,336 +1,82 @@
-<div class="quick-donut-chart" id="{{ROOT_ID}}" role="figure" aria-labelledby="{{ROOT_ID}}-title" aria-describedby="{{ROOT_ID}}-summary">
-  <style>
-    #{{ROOT_ID}} {
-      position: relative;
-      display: grid;
-      gap: 8px;
-      width: 100%;
-      color: var(--foreground);
-    }
-
-    #{{ROOT_ID}} .quick-donut-title {
-      margin: 0;
-      color: var(--foreground);
-      font-weight: 500;
-    }
-
-    #{{ROOT_ID}} .quick-donut-layout {
-      display: grid;
-      grid-template-columns: minmax(240px, 1fr) minmax(180px, 0.72fr);
-      align-items: center;
-      gap: 12px 24px;
-    }
-
-    #{{ROOT_ID}} .quick-donut-plot {
-      position: relative;
-      min-width: 0;
-    }
-
-    #{{ROOT_ID}} .quick-donut-svg {
-      display: block;
-      width: 100%;
-      height: auto;
-      overflow: visible;
-    }
-
-    #{{ROOT_ID}} .quick-donut-slice {
-      stroke: var(--background);
-      stroke-width: 2;
-      cursor: crosshair;
-    }
-
-    #{{ROOT_ID}} .quick-donut-center {
-      position: absolute;
-      display: grid;
-      place-items: center;
-      gap: 2px;
-      text-align: center;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-    }
-
-    #{{ROOT_ID}} .quick-donut-center-kicker,
-    #{{ROOT_ID}} .quick-donut-center-percent {
-      color: var(--muted-foreground);
-      font-size: 12px;
-      font-weight: 400;
-    }
-
-    #{{ROOT_ID}} .quick-donut-center-label {
-      max-width: 100%;
-      overflow-wrap: anywhere;
-      color: var(--foreground);
-      font-weight: 500;
-    }
-
-    #{{ROOT_ID}} .quick-donut-center-percent {
-      color: var(--foreground);
-      font-weight: 500;
-    }
-
-    #{{ROOT_ID}} .quick-donut-legend {
-      display: grid;
-      gap: 8px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    #{{ROOT_ID}} .quick-donut-legend-item {
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 8px;
-      min-width: 0;
-    }
-
-    #{{ROOT_ID}} .quick-donut-swatch {
-      width: 10px;
-      height: 10px;
-      flex: 0 0 auto;
-    }
-
-    #{{ROOT_ID}} .quick-donut-legend-label {
-      min-width: 0;
-      overflow: hidden;
-      color: var(--foreground);
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    #{{ROOT_ID}} .quick-donut-legend-percent {
-      color: var(--muted-foreground);
-      font-variant-numeric: tabular-nums;
-    }
-
-    #{{ROOT_ID}} .quick-donut-tooltip {
-      position: absolute;
-      z-index: 2;
-      display: grid;
-      gap: 3px;
-      max-width: min(240px, calc(100% - 16px));
-      padding: 8px 10px;
-      color: var(--popover-foreground);
-      background: var(--popover);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      box-shadow: 0 6px 18px color-mix(in srgb, var(--foreground) 14%, transparent);
-      pointer-events: none;
-    }
-
-    #{{ROOT_ID}} .quick-donut-tooltip[hidden],
-    #{{ROOT_ID}} .quick-donut-tooltip-description[hidden] {
-      display: none;
-    }
-
-    #{{ROOT_ID}} .quick-donut-tooltip-label,
-    #{{ROOT_ID}} .quick-donut-tooltip-value {
-      color: var(--popover-foreground);
-      font-weight: 500;
-    }
-
-    #{{ROOT_ID}} .quick-donut-tooltip-description {
-      color: var(--muted-foreground);
-      font-size: 12px;
-      font-weight: 400;
-    }
-
-    @media (max-width: 520px) {
-      #{{ROOT_ID}} .quick-donut-layout {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 8px;
-      }
-
-      #{{ROOT_ID}} .quick-donut-legend {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-  </style>
-
-  <h3 class="quick-donut-title" id="{{ROOT_ID}}-title">{{TITLE}}</h3>
-  <p class="sr-only" id="{{ROOT_ID}}-summary">{{SUMMARY}}</p>
-
-  <div class="quick-donut-layout">
-    <div class="quick-donut-plot" id="{{ROOT_ID}}-plot">
-      <svg class="quick-donut-svg" id="{{ROOT_ID}}-svg" role="img" aria-labelledby="{{ROOT_ID}}-svg-title {{ROOT_ID}}-svg-desc">
-        <title id="{{ROOT_ID}}-svg-title">{{TITLE}}</title>
-        <desc id="{{ROOT_ID}}-svg-desc">{{SUMMARY}}</desc>
-      </svg>
-      <div class="quick-donut-center" id="{{ROOT_ID}}-center" aria-hidden="true">
-        <span class="quick-donut-center-kicker"></span>
-        <span class="quick-donut-center-label"></span>
-        <span class="quick-donut-center-percent"></span>
-      </div>
-    </div>
-    <ul class="quick-donut-legend" id="{{ROOT_ID}}-legend" aria-label="类别占比"></ul>
-  </div>
-
-  <div class="quick-donut-tooltip" id="{{ROOT_ID}}-tooltip" role="tooltip" hidden>
-    <span class="quick-donut-tooltip-label"></span>
-    <span class="quick-donut-tooltip-value"></span>
-    <span class="quick-donut-tooltip-description" hidden></span>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
-  <script>
-    (() => {
-      const root = document.getElementById('{{ROOT_ID}}');
-      const plot = root.querySelector('#{{ROOT_ID}}-plot');
-      const svg = d3.select(root.querySelector('#{{ROOT_ID}}-svg'));
-      const center = root.querySelector('#{{ROOT_ID}}-center');
-      const centerKicker = center.querySelector('.quick-donut-center-kicker');
-      const centerLabel = center.querySelector('.quick-donut-center-label');
-      const centerPercent = center.querySelector('.quick-donut-center-percent');
-      const legend = root.querySelector('#{{ROOT_ID}}-legend');
-      const tooltip = root.querySelector('#{{ROOT_ID}}-tooltip');
-      const tooltipLabel = tooltip.querySelector('.quick-donut-tooltip-label');
-      const tooltipValue = tooltip.querySelector('.quick-donut-tooltip-value');
-      const tooltipDescription = tooltip.querySelector('.quick-donut-tooltip-description');
-      const config = {{CONFIG_JSON}};
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const total = d3.sum(config.items, (item) => item.value);
-      const items = config.items.map((item, index) => ({
-        ...item,
-        index,
-        percentage: item.value / total * 100,
-      }));
-      const largest = d3.greatest(items, (item) => item.value);
-      const numberFormat = new Intl.NumberFormat(undefined, {
-        minimumFractionDigits: config.decimals,
-        maximumFractionDigits: config.decimals,
-      });
-      const percentFormat = new Intl.NumberFormat(undefined, {
-        maximumFractionDigits: 1,
-      });
-      const valueText = (value) => `${config.valuePrefix}${numberFormat.format(value)}${config.valueSuffix}`;
-      const percentageText = (value) => `${percentFormat.format(value)}%`;
-      const colorFor = (index) => `var(--viz-series-${index + 1})`;
-
-      const setCenter = (item, isDefault) => {
-        centerKicker.textContent = isDefault ? '占比最高' : '当前占比';
-        centerLabel.textContent = item.label;
-        centerPercent.textContent = percentageText(item.percentage);
-      };
-
-      items.forEach((item) => {
-        const legendItem = document.createElement('li');
-        legendItem.className = 'quick-donut-legend-item';
-        const swatch = document.createElement('span');
-        swatch.className = 'quick-donut-swatch';
-        swatch.style.background = colorFor(item.index);
-        swatch.setAttribute('aria-hidden', 'true');
-        const label = document.createElement('span');
-        label.className = 'quick-donut-legend-label';
-        label.textContent = item.label;
-        const percentage = document.createElement('span');
-        percentage.className = 'quick-donut-legend-percent';
-        percentage.textContent = percentageText(item.percentage);
-        legendItem.append(swatch, label, percentage);
-        legend.append(legendItem);
-      });
-
-      const hideTooltip = () => {
-        tooltip.hidden = true;
-      };
-
-      const positionTooltip = () => {
-        const rootBounds = root.getBoundingClientRect();
-        const plotBounds = plot.getBoundingClientRect();
-        const tooltipBounds = tooltip.getBoundingClientRect();
-        const maximumLeft = Math.max(8, rootBounds.width - tooltipBounds.width - 8);
-        if (rootBounds.width <= 520) {
-          const plotRight = plotBounds.right - rootBounds.left;
-          tooltip.style.left = `${Math.min(maximumLeft, Math.max(8, plotRight - tooltipBounds.width - 8))}px`;
-          tooltip.style.top = `${Math.max(8, plotBounds.top - rootBounds.top + 8)}px`;
-          return;
-        }
-        const plotRight = plotBounds.right - rootBounds.left;
-        tooltip.style.left = `${Math.min(maximumLeft, Math.max(8, plotRight + 8))}px`;
-        tooltip.style.top = `${Math.max(8, plotBounds.top - rootBounds.top + (plotBounds.height - tooltipBounds.height) / 2)}px`;
-      };
-
-      const showTooltip = (event, item) => {
-        tooltipLabel.textContent = item.label;
-        tooltipValue.textContent = `${valueText(item.value)} · ${percentageText(item.percentage)}`;
-        tooltipDescription.textContent = item.description;
-        tooltipDescription.hidden = !item.description;
-        tooltip.hidden = false;
-        positionTooltip();
-      };
-
-      const draw = () => {
-        const width = Math.max(1, Math.round(plot.getBoundingClientRect().width));
-        if (width <= 1) return;
-        const height = width < 420 ? 280 : 320;
-        const centerX = width / 2;
-        const centerY = height / 2;
-        const outerRadius = Math.max(72, Math.min(width, height) / 2 - 18);
-        const innerRadius = outerRadius * 0.62;
-        const arc = d3.arc()
-          .innerRadius(innerRadius)
-          .outerRadius(outerRadius)
-          .cornerRadius(4);
-        const hoverArc = d3.arc()
-          .innerRadius(innerRadius)
-          .outerRadius(outerRadius + 5)
-          .cornerRadius(4);
-        const pie = d3.pie()
-          .sort(null)
-          .value((item) => item.value)
-          .padAngle(0.012);
-
-        svg.attr('viewBox', `0 0 ${width} ${height}`);
-        svg.selectAll('g.quick-donut-drawing').remove();
-        center.style.left = `${centerX}px`;
-        center.style.top = `${centerY}px`;
-        center.style.width = `${innerRadius * 1.5}px`;
-
-        const drawing = svg.append('g')
-          .attr('class', 'quick-donut-drawing')
-          .attr('transform', `translate(${centerX},${centerY})`);
-        drawing.selectAll('path.quick-donut-slice')
-          .data(pie(items))
-          .join('path')
-          .attr('class', 'quick-donut-slice')
-          .attr('data-chart-hit', '')
-          .attr('fill', (datum) => colorFor(datum.data.index))
-          .attr('d', arc)
-          .each(function(datum) {
-            d3.select(this).append('title').text(
-              `${datum.data.label}：${valueText(datum.data.value)}，${percentageText(datum.data.percentage)}`
-            );
-          })
-          .on('pointerenter', function(event, datum) {
-            setCenter(datum.data, false);
-            showTooltip(event, datum.data);
-            const slice = d3.select(this);
-            if (reducedMotion) {
-              slice.attr('d', hoverArc);
-            } else {
-              slice.interrupt().transition().duration(140).attr('d', hoverArc);
-            }
-          })
-          .on('pointermove', function(event, datum) {
-            showTooltip(event, datum.data);
-          })
-          .on('pointerleave', function() {
-            setCenter(largest, true);
-            hideTooltip();
-            const slice = d3.select(this);
-            if (reducedMotion) {
-              slice.attr('d', arc);
-            } else {
-              slice.interrupt().transition().duration(140).attr('d', arc);
-            }
-          });
-
-        setCenter(largest, true);
-        hideTooltip();
-      };
-
-      const resizeObserver = new ResizeObserver(draw);
-      resizeObserver.observe(plot);
-      draw();
-    })();
-  </script>
+<div id="{{ROOT_ID}}" role="figure" aria-labelledby="{{ROOT_ID}}-title">
+<style>
+#{{ROOT_ID}}{position:relative;padding-top:32px;width:100%;color:var(--foreground);--ring-enter:1000}
+#{{ROOT_ID}} h3{margin:0 90px 32px 0;font-weight:500}
+#{{ROOT_ID}} .plot{position:relative}
+#{{ROOT_ID}} .direct-label{position:absolute;transform:translate(-50%,-50%);background:transparent;border:0;padding:5px;color:var(--foreground);font:inherit;font-size:14px;text-align:center;white-space:nowrap;cursor:var(--cursor-interaction,pointer)}
+#{{ROOT_ID}} .direct-label span{display:block;margin-top:4px;color:var(--muted-foreground);font-size:13px;font-variant-numeric:tabular-nums}
+#{{ROOT_ID}} .legend[hidden]{display:none}
+#{{ROOT_ID}} .chart{width:100%;display:block}
+#{{ROOT_ID}} .center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;width:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+#{{ROOT_ID}} .center-value{line-height:1;white-space:nowrap;font-size:calc(var(--font-size-base,14px)*2.3);font-weight:500;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+#{{ROOT_ID}} .center-label{line-height:1.4;font-size:12px;color:var(--muted-foreground)}
+#{{ROOT_ID}} .legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;margin-top:20px}
+#{{ROOT_ID}} .legend button{font:inherit;font-size:12px;color:var(--foreground);background:transparent;border:0;border-radius:0;display:inline-flex;align-items:center;gap:7px;padding:4px 0;cursor:var(--cursor-interaction,pointer)}
+#{{ROOT_ID}} .swatch{width:9px;height:9px;border-radius:2px;display:inline-block;flex-shrink:0}
+#{{ROOT_ID}} .percent{color:var(--muted-foreground);font-variant-numeric:tabular-nums}
+#{{ROOT_ID}} .slice{transition:opacity 160ms ease;cursor:var(--cursor-interaction,pointer)}
+#{{ROOT_ID}} .bubble{position:absolute;z-index:2;width:176px;max-width:calc(100% - 16px);padding:12px 14px;box-sizing:border-box;background:var(--popover);color:var(--popover-foreground);border:1px solid var(--border);border-radius:12px;box-shadow:0 4px 16px color-mix(in srgb,var(--foreground) 10%,transparent);pointer-events:none;font-size:12px}
+#{{ROOT_ID}} .bubble[hidden]{display:none}
+#{{ROOT_ID}} .bubble-title{font-weight:500;margin-bottom:10px}
+#{{ROOT_ID}} .bubble-row{display:flex;align-items:center;gap:8px;font-variant-numeric:tabular-nums}
+#{{ROOT_ID}} .bubble-percent{margin-left:auto;color:var(--muted-foreground)}
+@media(prefers-reduced-motion:reduce){#{{ROOT_ID}} .slice{transition:none}}
+@media(pointer:coarse){#{{ROOT_ID}} .legend button{min-height:44px}}
+</style>
+<h3 id="{{ROOT_ID}}-title">{{TITLE}}</h3>
+<div class="plot"><svg class="chart" role="img" aria-label="{{SUMMARY}}"></svg><div class="center" aria-hidden="true"><span class="center-value"></span><span class="center-label"></span></div></div>
+<div class="legend" aria-label="来源及占比"></div>
+<div class="bubble" role="tooltip" hidden><div class="bubble-title"></div><div class="bubble-row"><span class="swatch"></span><span class="bubble-value"></span><span class="bubble-percent"></span></div><div class="description text-small" style="margin-top:8px" hidden></div></div>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script>
+(()=>{
+const root=document.getElementById('{{ROOT_ID}}'),plot=root.querySelector('.plot'),svg=d3.select(root.querySelector('.chart')),legend=root.querySelector('.legend'),bubble=root.querySelector('.bubble');
+const config={{CONFIG_JSON}};
+const numberFormat=new Intl.NumberFormat(undefined,{minimumFractionDigits:config.decimals,maximumFractionDigits:config.decimals});const formatValue=v=>config.valuePrefix+numberFormat.format(v)+config.valueSuffix;
+const data=config.items;
+const total=d3.sum(data,d=>d.value),color=i=>`var(--viz-series-${i+1})`,pct=i=>`${Number((data[i].value/total*100).toFixed(1))}%`;
+const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');let layout=null,entered=false,lastWidth=0;
+let direct=false;const eligibleDirect=data.length<=4&&d3.min(data,d=>d.value/total)>=.08&&data.every(d=>d.label.length<=12);
+function clear(){svg.selectAll('.slice').attr('opacity',1);root.querySelectorAll('.legend button,.direct-label').forEach(b=>b.style.opacity=1);root.querySelector('.center-value').textContent=config.valuePrefix+numberFormat.format(total);root.querySelector('.center-label').textContent='总计'+(config.valueSuffix.trim()?' · '+config.valueSuffix.trim():'');bubble.hidden=true;}
+function show(i){if(!layout)return;svg.selectAll('.slice').attr('opacity',(_,j)=>j===i?1:.25);root.querySelectorAll('.legend button,.direct-label').forEach((b,j)=>b.style.opacity=j===i?1:.55);root.querySelector('.center-value').textContent=pct(i);root.querySelector('.center-label').textContent=data[i].label;
+root.querySelector('.bubble-title').textContent=data[i].label;const description=root.querySelector('.description');description.textContent=data[i].description||'';description.hidden=!data[i].description;root.querySelector('.bubble-value').textContent=formatValue(data[i].value);root.querySelector('.bubble-percent').textContent=pct(i);root.querySelector('.bubble .swatch').style.background=color(i);bubble.hidden=false;
+const d=layout.arcs[i],angle=(d.startAngle+d.endAngle)/2,px=layout.cx+Math.sin(angle)*layout.radius,py=layout.cy-Math.cos(angle)*layout.radius;
+const rb=root.getBoundingClientRect(),pb=plot.getBoundingClientRect(),bw=bubble.offsetWidth,bh=bubble.offsetHeight;
+bubble.style.left=Math.max(8,Math.min(rb.width-bw-8,px>=layout.cx?px+14:px-bw-14))+'px';bubble.style.top=Math.max(pb.top-rb.top+8,Math.min(pb.top-rb.top+py-bh/2,pb.bottom-rb.top-bh-8))+'px';}
+data.forEach((d,i)=>{const b=document.createElement('button');b.type='button';b.innerHTML=`<span class="swatch" style="background:${color(i)}" aria-hidden="true"></span><span class="name"></span><span class="percent"></span>`;b.querySelector('.name').textContent=d.label;b.querySelector('.percent').textContent=pct(i);b.addEventListener('pointerenter',()=>show(i));b.addEventListener('pointerleave',clear);b.addEventListener('focus',()=>show(i));b.addEventListener('blur',clear);legend.append(b);});
+function draw(animate=false){const width=Math.round(plot.getBoundingClientRect().width);if(width<1)return;lastWidth=width;direct=eligibleDirect&&width>=420;const height=direct?340:280,cx=width/2,cy=height/2,radius=direct?Math.min(104,width/2-50):Math.min(118,width/2-16),inner=radius*.75;
+const arcs=d3.pie().sort(null).padAngle(.025).value(d=>d.value)(data),arc=d3.arc().innerRadius(inner).outerRadius(radius).cornerRadius(3);layout={width,cx,cy,radius,arcs};
+svg.selectAll('*').interrupt();svg.selectAll('*').remove();svg.attr('viewBox',`0 0 ${width} ${height}`);const g=svg.append('g').attr('transform',`translate(${cx},${cy})`);
+const slices=g.selectAll('.slice').data(arcs).join('path').attr('class','slice').attr('fill',(_,i)=>color(i)).attr('d',arc).on('pointerenter pointermove',(_,d)=>show(d.index)).on('pointerleave pointercancel',clear).on('pointerup',e=>{if(e.pointerType==='touch')clear();});
+plot.querySelectorAll('.direct-label').forEach(e=>{e.getAnimations().forEach(a=>a.cancel());e.remove();});legend.hidden=direct;
+if(direct){arcs.forEach((d,i)=>{const a=(d.startAngle+d.endAngle)/2,side=Math.sin(a)>0?1:-1,narrow=width<460;
+const peers=arcs.filter(q=>(Math.sin((q.startAngle+q.endAngle)/2)>0?1:-1)===side).sort((p,q)=>Math.cos((q.startAngle+q.endAngle)/2)-Math.cos((p.startAngle+p.endAngle)/2));const rank=peers.indexOf(d);
+const x=narrow?cx+(i<2?1:-1)*width*.28:cx+Math.sin(a)*(radius+64),y=narrow?(i===0||i===3?32:height-32):cy-Math.cos(a)*(radius+48);
+const b=document.createElement('button');b.type='button';b.className='direct-label';b.style.left=x+'px';b.style.top=y+'px';b.append(document.createTextNode(data[i].label));const percent=document.createElement('span');percent.textContent=pct(i);b.append(percent);b.onpointerenter=()=>show(i);b.onpointerleave=clear;b.onfocus=()=>show(i);b.onblur=clear;plot.append(b);
+if(animate&&!reduced.matches){
+// 沿用 Lieflat 的交叠淡入节奏，按当前圆环时长等比例加速。
+const delay=325+i*50;
+b.animate([{opacity:0},{opacity:1}],{delay,duration:450,easing:'ease',fill:'backwards'});
+}
+const px=cx+Math.sin(a)*(radius+7),py=cy-Math.cos(a)*(radius+7);
+});}
+if(animate&&!reduced.matches){
+// 细分遮罩只控制显现节奏，不改变实际数据分段。
+const id=root.id+'-reveal',mask=svg.append('defs').append('mask').attr('id',id).attr('maskUnits','userSpaceOnUse').attr('x',-radius-2).attr('y',-radius-2).attr('width',radius*2+4).attr('height',radius*2+4);
+const segments=d3.range(120),unit=Math.PI*2/120;
+const reveal=d3.arc().innerRadius(inner-2);
+const cells=mask.selectAll('path').data(segments).join('path').attr('fill','white').attr('d',i=>reveal.outerRadius(inner-2)({startAngle:i*unit-.002,endAngle:(i+1)*unit+.002}));
+g.attr('mask',`url(#${id})`);
+cells.transition().delay(i=>i*5).duration(450).ease(d3.easeCubicOut).attrTween('d',i=>t=>reveal.outerRadius(inner-2+(radius-inner+4)*t)({startAngle:i*unit-.002,endAngle:(i+1)*unit+.002}));
+g.transition().delay(1050).on('end',()=>{g.attr('mask',null);mask.remove();});
+}clear();}
+root.addEventListener('pointerleave',clear);root.addEventListener('keydown',e=>{if(e.key==='Escape')clear();});window.addEventListener('blur',clear);
+draw();if(!reduced.matches)svg.attr('visibility','hidden');let inView=false,armed=true;
+function replayIfReady(){if(inView&&armed&&!document.hidden){armed=false;entered=true;svg.attr('visibility','visible');draw(true);}}
+const observer=new IntersectionObserver(es=>{const e=es[0];if(!e.isIntersecting){inView=false;armed=true;}else if(e.intersectionRatio>=.2){inView=true;replayIfReady();}},{threshold:[0,.2]});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)armed=true;else replayIfReady();});
+window.addEventListener('pageshow',e=>{if(e.persisted){armed=true;replayIfReady();}});observer.observe(root);
+new ResizeObserver(()=>{if(Math.round(plot.getBoundingClientRect().width)!==lastWidth)draw();}).observe(plot);
+})();
+</script>
 </div>

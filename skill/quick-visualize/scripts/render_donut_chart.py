@@ -122,7 +122,7 @@ def render(spec: dict[str, Any], output_path: Path) -> str:
     fragment = TEMPLATE_PATH.read_text(encoding="utf-8")
     for token, replacement in replacements.items():
         fragment = fragment.replace(token, replacement)
-    if "{{" in fragment or "}}" in fragment:
+    if "{{" in fragment:
         raise ValueError("unresolved template token remains")
     return fragment
 

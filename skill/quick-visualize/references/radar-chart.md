@@ -24,5 +24,7 @@ Use this template for 1-4 objects measured across the same 3-8 dimensions on one
 - `max_value` must be a finite positive number and defaults to `100`. Every dimension uses this same scale.
 - `value_prefix` and `value_suffix` are optional strings used for hover values.
 - `decimals` accepts an integer from 0 to 2 and defaults to `0`.
-- With multiple series, hover a legend item or point to focus it temporarily. Click a legend item to lock focus; click it again to restore all series.
-- Hover a data point to compare every series on that dimension in one bubble.
+- Hover a legend item to focus that object temporarily; no click locking.
+- Hover an axis to compare all objects on that dimension. Hover a point, polygon edge, or polygon interior to inspect one object's full profile. Points take precedence over axes; overlaps use the nearest outline.
+- One tooltip stays near the pointer and chooses nearby positions with less polygon overlap. Object identity appears only in its heading; dimension comparisons retain one marker per object.
+- Numeric grid labels are hidden. Vertices expand from the center with constant stroke/marker sizes, replaying on return to view; reduced motion disables entry animation.

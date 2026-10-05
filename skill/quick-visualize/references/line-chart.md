@@ -24,4 +24,5 @@ Use this template for one non-negative measure across 2-90 unique dates, with an
 - Input points may be unordered; the renderer sorts them chronologically.
 - `value_prefix` and `value_suffix` are optional strings used for axis values and hover details.
 - `decimals` accepts an integer from 0 to 2 and defaults to `0`.
-- The renderer uses a smoothed line, zero-baseline gradient area, visible observations, and a hover bubble.
+- A smoothed line draws from left to right with a light zero-baseline area. The moving endpoint shows its interpolated value; after entry, only the last point is permanently marked. Hover/keyboard details always use actual observations.
+- The top and right borders are open. Returning to view replays motion; reduced motion shows the final state. No click pinning.

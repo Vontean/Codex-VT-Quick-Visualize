@@ -1,401 +1,107 @@
-<div class="quick-grouped-bar-chart" id="{{ROOT_ID}}" role="figure" aria-labelledby="{{ROOT_ID}}-title" aria-describedby="{{ROOT_ID}}-summary">
-  <style>
-    #{{ROOT_ID}} {
-      position: relative;
-      display: grid;
-      gap: 8px;
-      width: 100%;
-      color: var(--foreground);
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-title {
-      margin: 0;
-      color: var(--foreground);
-      font-weight: 500;
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px 16px;
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-legend-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin: 0;
-      padding: 2px 0;
-      color: var(--foreground);
-      font: inherit;
-      background: transparent;
-      border: 0;
-      cursor: var(--cursor-interaction, pointer);
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-legend-button[aria-pressed="false"] {
-      color: var(--muted-foreground);
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-swatch {
-      width: 10px;
-      height: 10px;
-      flex: 0 0 auto;
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-legend-button[aria-pressed="false"] .quick-grouped-bar-swatch {
-      opacity: 0.35;
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-plot {
-      position: relative;
-      min-width: 0;
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-svg {
-      display: block;
-      width: 100%;
-      height: auto;
-      overflow: visible;
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-frame,
-    #{{ROOT_ID}} .quick-grouped-bar-axis path,
-    #{{ROOT_ID}} .quick-grouped-bar-axis line {
-      stroke: var(--border);
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-frame {
-      fill: transparent;
-      stroke-width: 1;
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-grid line {
-      stroke: var(--border);
-      stroke-opacity: 0.55;
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-grid path {
-      display: none;
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-axis text,
-    #{{ROOT_ID}} .quick-grouped-bar-axis-title {
-      fill: var(--foreground);
-      font-size: 12px;
-      font-weight: 400;
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-mark {
-      shape-rendering: geometricPrecision;
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-hover-guide {
-      fill: color-mix(in srgb, var(--foreground) 5%, transparent);
-      stroke: var(--foreground);
-      stroke-opacity: 0.25;
-      pointer-events: none;
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-hit {
-      fill: transparent;
-      cursor: crosshair;
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-tooltip {
-      position: absolute;
-      z-index: 2;
-      display: grid;
-      gap: 6px;
-      max-width: min(260px, calc(100% - 16px));
-      padding: 8px 10px;
-      color: var(--popover-foreground);
-      background: var(--popover);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      box-shadow: 0 6px 18px color-mix(in srgb, var(--foreground) 14%, transparent);
-      pointer-events: none;
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-tooltip[hidden] {
-      display: none;
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-tooltip-category {
-      color: var(--popover-foreground);
-      font-weight: 500;
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-tooltip-rows {
-      display: grid;
-      gap: 4px;
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-tooltip-row {
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-tooltip-name {
-      color: var(--muted-foreground);
-    }
-
-    #{{ROOT_ID}} .quick-grouped-bar-tooltip-value {
-      color: var(--popover-foreground);
-      font-weight: 500;
-      font-variant-numeric: tabular-nums;
-    }
-  </style>
-
-  <h3 class="quick-grouped-bar-title" id="{{ROOT_ID}}-title">{{TITLE}}</h3>
-  <p class="sr-only" id="{{ROOT_ID}}-summary">{{SUMMARY}}</p>
-  <div class="quick-grouped-bar-legend" id="{{ROOT_ID}}-legend" aria-label="数据系列"></div>
-
-  <div class="quick-grouped-bar-plot" id="{{ROOT_ID}}-plot">
-    <svg class="quick-grouped-bar-svg" id="{{ROOT_ID}}-svg" role="img" aria-labelledby="{{ROOT_ID}}-svg-title {{ROOT_ID}}-svg-desc">
-      <title id="{{ROOT_ID}}-svg-title">{{TITLE}}</title>
-      <desc id="{{ROOT_ID}}-svg-desc">{{SUMMARY}}</desc>
-    </svg>
-  </div>
-
-  <div class="quick-grouped-bar-tooltip" id="{{ROOT_ID}}-tooltip" role="tooltip" hidden>
-    <span class="quick-grouped-bar-tooltip-category"></span>
-    <div class="quick-grouped-bar-tooltip-rows"></div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
-  <script>
-    (() => {
-      const root = document.getElementById('{{ROOT_ID}}');
-      const plot = root.querySelector('#{{ROOT_ID}}-plot');
-      const legend = root.querySelector('#{{ROOT_ID}}-legend');
-      const svg = d3.select(root.querySelector('#{{ROOT_ID}}-svg'));
-      const tooltip = root.querySelector('#{{ROOT_ID}}-tooltip');
-      const tooltipCategory = tooltip.querySelector('.quick-grouped-bar-tooltip-category');
-      const tooltipRows = tooltip.querySelector('.quick-grouped-bar-tooltip-rows');
-      const config = {{CONFIG_JSON}};
-      const activeSeries = new Set(config.series.map((series) => series.name));
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const numberFormat = new Intl.NumberFormat(undefined, {
-        minimumFractionDigits: config.decimals,
-        maximumFractionDigits: config.decimals,
-      });
-      const compactNumberFormat = new Intl.NumberFormat(undefined, {
-        notation: 'compact',
-        maximumFractionDigits: 1,
-      });
-      const valueText = (value) => `${config.valuePrefix}${numberFormat.format(value)}${config.valueSuffix}`;
-      const axisValueText = (value) => {
-        const formatted = Math.abs(value) >= 10000
-          ? compactNumberFormat.format(value)
-          : numberFormat.format(value);
-        return `${config.valuePrefix}${formatted}${config.valueSuffix}`;
-      };
-      const colorFor = (index) => `var(--viz-series-${index + 1})`;
-
-      const visibleSeries = () => config.series
-        .map((series, index) => ({ ...series, index }))
-        .filter((series) => activeSeries.has(series.name));
-
-      const updateLegend = () => {
-        legend.querySelectorAll('button').forEach((button) => {
-          button.setAttribute('aria-pressed', String(activeSeries.has(button.dataset.series)));
-        });
-      };
-
-      config.series.forEach((series, index) => {
-        const button = document.createElement('button');
-        button.className = 'quick-grouped-bar-legend-button';
-        button.type = 'button';
-        button.dataset.series = series.name;
-        button.setAttribute('aria-pressed', 'true');
-
-        const swatch = document.createElement('span');
-        swatch.className = 'quick-grouped-bar-swatch';
-        swatch.style.background = colorFor(index);
-        swatch.setAttribute('aria-hidden', 'true');
-        const label = document.createElement('span');
-        label.textContent = series.name;
-        button.append(swatch, label);
-        button.addEventListener('click', () => {
-          if (activeSeries.has(series.name)) {
-            if (activeSeries.size === 1) return;
-            activeSeries.delete(series.name);
-          } else {
-            activeSeries.add(series.name);
-          }
-          updateLegend();
-          draw(true);
-        });
-        legend.append(button);
-      });
-
-      const hideHover = () => {
-        tooltip.hidden = true;
-        svg.selectAll('[data-chart-hover-guide]').attr('visibility', 'hidden');
-      };
-
-      const showTooltip = (event, category, seriesItems, guide) => {
-        tooltipCategory.textContent = category;
-        tooltipRows.replaceChildren();
-        seriesItems.forEach((series) => {
-          const row = document.createElement('div');
-          row.className = 'quick-grouped-bar-tooltip-row';
-          const swatch = document.createElement('span');
-          swatch.className = 'quick-grouped-bar-swatch';
-          swatch.style.background = colorFor(series.index);
-          swatch.setAttribute('aria-hidden', 'true');
-          const name = document.createElement('span');
-          name.className = 'quick-grouped-bar-tooltip-name';
-          name.textContent = series.name;
-          const value = document.createElement('span');
-          value.className = 'quick-grouped-bar-tooltip-value';
-          value.textContent = valueText(series.value);
-          row.append(swatch, name, value);
-          tooltipRows.append(row);
-        });
-        tooltip.hidden = false;
-        guide.attr('visibility', 'visible');
-
-        const rootBounds = root.getBoundingClientRect();
-        const tooltipBounds = tooltip.getBoundingClientRect();
-        const preferredLeft = event.clientX - rootBounds.left - tooltipBounds.width / 2;
-        const maximumLeft = Math.max(8, rootBounds.width - tooltipBounds.width - 8);
-        tooltip.style.left = `${Math.min(maximumLeft, Math.max(8, preferredLeft))}px`;
-        const pointerY = event.clientY - rootBounds.top;
-        const above = pointerY - tooltipBounds.height - 12;
-        tooltip.style.top = `${above >= 8 ? above : pointerY + 12}px`;
-      };
-
-      const draw = (animate = false) => {
-        const width = Math.max(1, Math.round(plot.getBoundingClientRect().width));
-        if (width <= 1) return;
-        const height = width < 480 ? 300 : Math.min(360, Math.max(320, Math.round(width * 0.5)));
-        const margin = { top: 12, right: 18, bottom: 62, left: width < 420 ? 66 : 76 };
-        const innerWidth = Math.max(1, width - margin.left - margin.right);
-        const innerHeight = Math.max(1, height - margin.top - margin.bottom);
-        const shown = visibleSeries();
-        const maximum = d3.max(shown, (series) => d3.max(series.values)) || 0;
-        const yCeiling = maximum === 0 ? 1 : maximum * 1.12;
-
-        svg.attr('viewBox', `0 0 ${width} ${height}`);
-        svg.selectAll('g.quick-grouped-bar-drawing').remove();
-
-        const xCategory = d3.scaleBand()
-          .domain(config.categories)
-          .range([margin.left, margin.left + innerWidth])
-          .padding(0.2);
-        const xSeries = d3.scaleBand()
-          .domain(shown.map((series) => series.name))
-          .range([0, xCategory.bandwidth()])
-          .padding(0.1);
-        const y = d3.scaleLinear()
-          .domain([0, yCeiling])
-          .nice()
-          .range([margin.top + innerHeight, margin.top]);
-        const drawing = svg.append('g').attr('class', 'quick-grouped-bar-drawing');
-        const yTicks = width < 420 ? 4 : 5;
-
-        drawing.append('g')
-          .attr('class', 'quick-grouped-bar-grid')
-          .attr('transform', `translate(${margin.left},0)`)
-          .call(d3.axisLeft(y).ticks(yTicks).tickSize(-innerWidth).tickFormat(''));
-        drawing.append('rect')
-          .attr('class', 'quick-grouped-bar-frame')
-          .attr('data-chart-frame', '')
-          .attr('x', margin.left)
-          .attr('y', margin.top)
-          .attr('width', innerWidth)
-          .attr('height', innerHeight);
-
-        const categories = config.categories.map((category, categoryIndex) => ({
-          category,
-          categoryIndex,
-          series: shown.map((series) => ({
-            ...series,
-            value: series.values[categoryIndex],
-          })),
-        }));
-        const groups = drawing.selectAll('g.quick-grouped-bar-category')
-          .data(categories)
-          .join('g')
-          .attr('class', 'quick-grouped-bar-category');
-
-        const bars = groups.selectAll('rect.quick-grouped-bar-mark')
-          .data((group) => group.series)
-          .join('rect')
-          .attr('class', 'quick-grouped-bar-mark');
-
-        bars
-          .attr('x', function(series) {
-            const group = d3.select(this.parentNode).datum();
-            return xCategory(group.category) + xSeries(series.name);
-          })
-          .attr('width', xSeries.bandwidth())
-          .attr('fill', (series) => colorFor(series.index))
-          .attr('rx', 2)
-          .attr('y', animate && !reducedMotion ? y(0) : (series) => y(series.value))
-          .attr('height', animate && !reducedMotion ? 0 : (series) => Math.max(0, y(0) - y(series.value)));
-
-        if (animate && !reducedMotion) {
-          bars.transition()
-            .duration(180)
-            .attr('y', (series) => y(series.value))
-            .attr('height', (series) => Math.max(0, y(0) - y(series.value)));
-        }
-
-        drawing.append('g')
-          .attr('class', 'quick-grouped-bar-axis')
-          .attr('transform', `translate(0,${margin.top + innerHeight})`)
-          .call(d3.axisBottom(xCategory).tickSizeOuter(0));
-        drawing.append('g')
-          .attr('class', 'quick-grouped-bar-axis')
-          .attr('transform', `translate(${margin.left},0)`)
-          .call(d3.axisLeft(y).ticks(yTicks).tickFormat(axisValueText));
-        drawing.append('text')
-          .attr('class', 'quick-grouped-bar-axis-title')
-          .attr('data-axis', 'x')
-          .attr('x', margin.left + innerWidth / 2)
-          .attr('y', height - 8)
-          .attr('text-anchor', 'middle')
-          .text(config.xAxisLabel);
-        drawing.append('text')
-          .attr('class', 'quick-grouped-bar-axis-title')
-          .attr('data-axis', 'y')
-          .attr('transform', `translate(14,${margin.top + innerHeight / 2}) rotate(-90)`)
-          .attr('text-anchor', 'middle')
-          .text(config.yAxisLabel);
-
-        groups.each(function(group) {
-          const categoryX = xCategory(group.category);
-          const guide = drawing.append('rect')
-            .attr('class', 'quick-grouped-bar-hover-guide')
-            .attr('data-chart-hover-guide', '')
-            .attr('x', categoryX)
-            .attr('y', margin.top)
-            .attr('width', xCategory.bandwidth())
-            .attr('height', innerHeight)
-            .attr('visibility', 'hidden');
-          drawing.append('rect')
-            .attr('class', 'quick-grouped-bar-hit')
-            .attr('data-chart-hit', '')
-            .attr('x', categoryX)
-            .attr('y', margin.top)
-            .attr('width', xCategory.bandwidth())
-            .attr('height', innerHeight)
-            .on('pointerenter pointermove', (event) => showTooltip(event, group.category, group.series, guide))
-            .on('pointerleave', hideHover);
-        });
-        hideHover();
-      };
-
-      const resizeObserver = new ResizeObserver(() => draw(false));
-      resizeObserver.observe(plot);
-      updateLegend();
-      draw(false);
-    })();
-  </script>
+<div id="{{ROOT_ID}}" class="bar-v2" role="figure" aria-labelledby="{{ROOT_ID}}-title">
+<style>
+#{{ROOT_ID}}{position:relative;width:100%;padding-top:32px;color:var(--foreground);--enter:580;--enter-spread:100;--radius:4;--bar-max-width:24;--motion:220;--tip-radius:12px;--section-gap:20px;--title-gap:32px}
+#{{ROOT_ID}} h3{margin:0 90px var(--title-gap) 0;font-weight:500}
+#{{ROOT_ID}} .legend{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 20px;margin:var(--section-gap) 0 0}
+#{{ROOT_ID}} .legend button{font:inherit;display:inline-flex;gap:7px;align-items:center;color:var(--foreground);background:transparent;border:0;border-radius:0;padding:4px 0;cursor:var(--cursor-interaction,pointer)}
+#{{ROOT_ID}} .legend button[aria-pressed=false]{opacity:.35}
+#{{ROOT_ID}} .swatch{display:inline-block;width:9px;height:9px;border-radius:2px;flex-shrink:0}
+#{{ROOT_ID}} .plot{position:relative}
+#{{ROOT_ID}} .chart{display:block;width:100%;overflow:visible}
+#{{ROOT_ID}} .chart text{font-size:12px;font-family:inherit;fill:var(--foreground);font-variant-numeric:tabular-nums}
+#{{ROOT_ID}} .chart .tick-label{fill:var(--muted-foreground)}
+#{{ROOT_ID}} .mark{transition:fill-opacity 180ms ease}
+#{{ROOT_ID}} .month-controls{display:grid;gap:0;margin-top:-36px;position:relative}
+#{{ROOT_ID}} .month-controls button{font:inherit;font-size:12px;min-height:36px;background:transparent;border:0;border-radius:0;padding:4px 0;color:var(--muted-foreground);cursor:var(--cursor-interaction,pointer)}
+#{{ROOT_ID}} .bubble{position:absolute;z-index:3;pointer-events:none;width:188px;max-width:calc(100% - 16px);padding:12px 14px;background:var(--popover);color:var(--popover-foreground);border:1px solid color-mix(in srgb,var(--border) 70%,transparent);border-radius:var(--tip-radius);box-shadow:0 4px 16px color-mix(in srgb,var(--foreground) 10%,transparent)}
+#{{ROOT_ID}} .bubble[hidden]{display:none}
+#{{ROOT_ID}} .bubble-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;font-weight:500}
+#{{ROOT_ID}} .bubble-row{display:grid;grid-template-columns:9px 1fr auto;align-items:center;gap:8px;margin-top:8px;font-size:12px;transition:opacity 150ms}
+#{{ROOT_ID}} .bubble-row strong{font-weight:500;font-variant-numeric:tabular-nums}
+#{{ROOT_ID}} .bubble-row.soft{opacity:.55}
+@media(prefers-reduced-motion:reduce){#{{ROOT_ID}} .mark,#{{ROOT_ID}} .bubble-row{transition:none}}
+@media(pointer:coarse){#{{ROOT_ID}} .legend button,#{{ROOT_ID}} .month-controls button{min-height:44px}}
+</style>
+<h3 id="{{ROOT_ID}}-title">{{TITLE}}</h3>
+<div class="plot"><svg class="chart" role="img" aria-label="{{SUMMARY}}"></svg><div class="month-controls" aria-label="查看类别"></div></div>
+<div class="text-small" style="text-align:center;color:var(--muted-foreground);margin-top:8px" aria-hidden="true">{{X_AXIS_LABEL}}</div>
+<div class="legend text-small" aria-label="显示对象"></div>
+<div class="bubble" role="tooltip" hidden><div class="bubble-head"><span class="bubble-month"></span></div><div class="bubble-rows"></div></div>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script>
+(()=>{
+const root=document.getElementById('{{ROOT_ID}}'),config={{CONFIG_JSON}},count=config.series.length;
+const numberFormat=new Intl.NumberFormat(undefined,{minimumFractionDigits:config.decimals,maximumFractionDigits:config.decimals});const formatValue=v=>config.valuePrefix+numberFormat.format(v)+config.valueSuffix;
+const series=config.series;
+const categories=config.categories;
+const color=i=>`var(--viz-series-${i+1})`;
+const svg=d3.select(root.querySelector('.chart')),plot=root.querySelector('.plot'),legend=root.querySelector('.legend'),months=root.querySelector('.month-controls'),bubble=root.querySelector('.bubble'),rows=root.querySelector('.bubble-rows');
+const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+const active=new Set(series.map((_,i)=>i));let hover=null,legendHover=null,layout=null,entered=false,lastWidth=0;
+const selected=()=>hover;
+const stateKey='{{ROOT_ID}}-visible';
+function restore(state){const s=state?.privateContent?.[stateKey];if(!s)return;if(Array.isArray(s.active)&&s.active.length&&s.active.every(i=>Number.isInteger(i)&&i>=0&&i<count)){active.clear();s.active.forEach(i=>active.add(i));}}
+restore(window.openai?.widgetState);
+function save(){window.openai?.setWidgetState?.({privateContent:{[stateKey]:{active:[...active]}}}).catch(()=>{});}
+function cancel(){hover=null;legendHover=null;paint();}
+function paint(){if(!layout)return;const selectedItem=selected(),focus=legendHover;
+svg.selectAll('.mark').attr('fill-opacity',d=>focus!==null?(d.s===focus?1:.25):(selectedItem&&selectedItem.c!==d.c?.45:1));
+svg.selectAll('.value').attr('opacity',d=>focus!==null&&d.s!==focus?.4:1);
+svg.selectAll('.band').attr('fill',d=>selectedItem?.c===d?'color-mix(in srgb,var(--foreground) 4%,transparent)':'transparent');
+legend.querySelectorAll('button').forEach((b,i)=>b.setAttribute('aria-pressed',String(active.has(i))));
+if(!selectedItem){bubble.hidden=true;return;}
+root.querySelector('.bubble-month').textContent=categories[selectedItem.c];rows.replaceChildren();
+series.forEach((s,i)=>{if(!active.has(i))return;const row=document.createElement('div');row.className='bubble-row'+(selectedItem.s!==null&&selectedItem.s!==i?' soft':'');const dot=document.createElement('span');dot.className='swatch';dot.style.background=color(i);const name=document.createElement('span');name.textContent=s.name;const value=document.createElement('strong');value.textContent=formatValue(s.values[selectedItem.c]);row.append(dot,name,value);rows.append(row);});
+bubble.hidden=false;
+const bounds=root.getBoundingClientRect(),pb=plot.getBoundingClientRect(),bw=bubble.offsetWidth,bh=bubble.offsetHeight,cx=layout.center(selectedItem.c);
+const preferred=cx<layout.width/2?cx+layout.step/2+10:cx-layout.step/2-bw-10;
+bubble.style.left=Math.max(8,Math.min(bounds.width-bw-8,preferred))+'px';
+const value=selectedItem.s===null?Math.max(...[...active].map(i=>series[i].values[selectedItem.c])):series[selectedItem.s].values[selectedItem.c];
+bubble.style.top=Math.max(pb.top-bounds.top+10,Math.min(pb.top-bounds.top+layout.y(value)-10,pb.top-bounds.top+layout.base-bh-8))+'px';
+}
+series.forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.innerHTML=`<span class="swatch" style="background:${color(i)}" aria-hidden="true"></span>`;b.append(document.createTextNode(s.name));b.addEventListener('pointerenter',()=>{hover=null;legendHover=i;paint();});b.addEventListener('pointerleave',()=>{legendHover=null;paint();});b.addEventListener('focus',()=>{hover=null;legendHover=i;paint();});b.addEventListener('blur',()=>{legendHover=null;paint();});b.addEventListener('click',()=>{if(active.has(i)){if(active.size===1)return;active.delete(i);}else active.add(i);hover=null;draw(false,true);save();});legend.append(b);});
+categories.forEach((name,i)=>{const b=document.createElement('button');b.type='button';b.textContent=name;b.setAttribute('aria-label',`查看${name}所有对象`);b.addEventListener('focus',()=>{legendHover=null;hover={c:i,s:null};paint();});b.addEventListener('blur',()=>{hover=null;paint();});b.addEventListener('pointerenter',()=>{legendHover=null;hover={c:i,s:null};paint();});b.addEventListener('pointerleave',()=>{hover=null;paint();});b.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();months.children[(i+(e.key==='ArrowRight'?1:categories.length-1))%categories.length].focus();}});months.append(b);});
+root.addEventListener('pointerleave',cancel);
+root.addEventListener('pointercancel',cancel);
+window.addEventListener('blur',cancel);
+root.addEventListener('keydown',e=>{if(e.key==='Escape')cancel();});
+const measure=document.createElement('canvas').getContext('2d');measure.font='12px '+getComputedStyle(root).fontFamily;
+function axisWidth(){return Math.max(64,...series.flatMap(s=>s.values).map(v=>measure.measureText(formatValue(v)).width+18));}
+function draw(entrance=false,animate=false){const width=Math.round(plot.getBoundingClientRect().width);if(width<1)return;lastWidth=width;
+const height=width<420?290:330,left=Math.min(width*.42,axisWidth()),right=12,top=24,base=height-40,step=(width-left-right)/categories.length,shown=[...active].sort();
+const gap=shown.length>2?3:5,barWidth=Math.min(parseFloat(getComputedStyle(root).getPropertyValue('--bar-max-width')),(step*.78-gap*(shown.length-1))/shown.length),groupWidth=barWidth*shown.length+gap*(shown.length-1);
+const center=c=>left+step*(c+.5),x=(c,s)=>center(c)-groupWidth/2+shown.indexOf(s)*(barWidth+gap);
+const y=d3.scaleLinear().domain([0,(d3.max(series,s=>d3.max(s.values))*1.14||1)]).nice().range([base,top]);layout={width,height,base,step,center,y};
+svg.attr('viewBox',`0 0 ${width} ${height}`);svg.selectAll('*').interrupt();svg.selectAll('.structure,.hit').remove();
+const g=svg.insert('g',':first-child').attr('class','structure');
+g.selectAll('.band').data(d3.range(categories.length)).join('rect').attr('class','band').attr('x',c=>left+step*c+1).attr('y',top).attr('width',step-2).attr('height',base-top).attr('rx',4);
+const ticks=y.ticks(4);g.selectAll('.grid').data(ticks.filter(v=>y(v)>top+.5&&y(v)<base-.5)).join('line').attr('class','grid').attr('x1',left).attr('x2',width-right).attr('y1',y).attr('y2',y).attr('stroke','var(--border)').attr('stroke-opacity',.65);
+g.append('path').attr('class','axis-frame').attr('d',`M${left},${top}V${base}H${width-right}`).attr('fill','none').attr('stroke','var(--border)').attr('stroke-opacity',.8);
+g.selectAll('.tick-label').data(ticks).join('text').attr('class','tick-label').attr('x',left-10).attr('y',v=>y(v)+4).attr('text-anchor','end').text(v=>formatValue(v));
+g.append('text').attr('class','tick-label').attr('x',left).attr('y',10).text(config.yAxisLabel);
+const values=categories.flatMap((_,c)=>shown.map(s=>({c,s,v:series[s].values[c]})));
+const marks=svg.selectAll('.mark').data(values,d=>`${d.c}-${d.s}`);marks.exit().remove();const added=marks.enter().append('rect').attr('class','mark').attr('y',base).attr('height',0);
+const merged=added.merge(marks).attr('fill',d=>color(d.s)).attr('rx',Math.min(4,barWidth/3));
+// 入场先确定横向位置与宽度，只沿高度生长；左右差异来自时长，不来自延迟。
+added.attr('x',d=>x(d.c,d.s)).attr('width',barWidth);
+if(entrance)merged.attr('x',d=>x(d.c,d.s)).attr('width',barWidth).attr('y',base).attr('height',0);
+const tokens=getComputedStyle(root);
+const duration=d=>{if(reduced.matches)return 0;if(!entrance)return animate?220:0;const t=d.c/(categories.length-1),weight=t*t*(3-2*t);return parseFloat(tokens.getPropertyValue('--enter'))+parseFloat(tokens.getPropertyValue('--enter-spread'))*weight;};
+const easing=entrance?d3.easeCubicInOut:d3.easePolyOut.exponent(4);
+merged.transition().duration(duration).delay(0).ease(easing).attr('x',d=>x(d.c,d.s)).attr('width',barWidth).attr('y',d=>y(d.v)).attr('height',d=>base-y(d.v));
+const labels=svg.selectAll('.value').data(count===2&&width>=520&&values.every(d=>measure.measureText(formatValue(d.v)).width<barWidth+gap-2)?values:[],d=>`${d.c}-${d.s}`);labels.exit().remove();const valueLabels=labels.enter().append('text').attr('class','value').attr('text-anchor','middle').merge(labels).text(d=>formatValue(d.v)).attr('x',d=>x(d.c,d.s)+barWidth/2);if(entrance&&!reduced.matches)valueLabels.attr('y',base-8);valueLabels.transition().duration(duration).delay(0).ease(easing).attr('y',d=>y(d.v)-8);
+svg.selectAll('.hit').data(d3.range(categories.length)).join('rect').attr('class','hit').attr('x',c=>left+step*c).attr('y',top).attr('width',step).attr('height',base-top).attr('fill','transparent').style('cursor','var(--cursor-interaction,pointer)').on('pointerenter pointermove',(e,c)=>{legendHover=null;hover={c,s:null};paint();}).on('pointerleave',()=>{hover=null;paint();});
+months.style.marginLeft=left+'px';months.style.marginRight=right+'px';months.style.gridTemplateColumns=`repeat(${categories.length},minmax(0,1fr))`;paint();
+}
+// 完全离开后重新准备；达到20%可见时重播，尺寸变化与点击不重播。
+let inView=false,armed=true;
+function replayIfReady(){if(inView&&armed&&!document.hidden){armed=false;entered=true;draw(true);}}
+const observer=new IntersectionObserver(es=>{const e=es[0];if(!e.isIntersecting){inView=false;armed=true;}else if(e.intersectionRatio>=.2){inView=true;replayIfReady();}},{threshold:[0,.2]});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)armed=true;else replayIfReady();});
+window.addEventListener('pageshow',e=>{if(e.persisted){armed=true;replayIfReady();}});
+draw();if(!reduced.matches)svg.selectAll('.mark').interrupt().attr('height',0).attr('y',layout.base);observer.observe(root);
+new ResizeObserver(()=>{if(Math.round(plot.getBoundingClientRect().width)!==lastWidth)draw();}).observe(plot);
+window.addEventListener('openai:set_globals',e=>{if(e.detail?.globals?.widgetState){restore(e.detail.globals.widgetState);draw();}});
+})();
+</script>
 </div>

@@ -18,7 +18,7 @@ Read only the matching specification. If none fits, use general Visualize.
 | `parameter-form` | 1–12 independent fields | [Parameter Form](references/parameter-form.md) |
 | `comparison` | Choose among 2–4 plans across the same 2–8 dimensions | [Comparison](references/comparison.md) |
 | `line-chart` | One non-negative measure, 2–90 dates | [Line Chart](references/line-chart.md) |
-| `grouped-bar-chart` | 2–3 series, 2–6 shared categories, non-negative scale | [Grouped Bar Chart](references/grouped-bar-chart.md) |
+| `grouped-bar-chart` | 2–4 series, 2–6 shared categories, non-negative scale | [Grouped Bar Chart](references/grouped-bar-chart.md) |
 | `donut-chart` | 2–6 non-negative parts, positive total | [Donut Chart](references/donut-chart.md) |
 | `radar-chart` | 1–4 objects, 3–8 shared dimensions, non-negative scale | [Radar Chart](references/radar-chart.md) |
 

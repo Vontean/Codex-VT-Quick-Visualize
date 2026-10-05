@@ -47,8 +47,8 @@ def normalize_categories(raw_categories: Any) -> list[str]:
 
 
 def normalize_series(raw_series: Any, category_count: int) -> list[dict[str, Any]]:
-    if not isinstance(raw_series, list) or not 2 <= len(raw_series) <= 3:
-        raise ValueError("series must be a list containing 2-3 entries")
+    if not isinstance(raw_series, list) or not 2 <= len(raw_series) <= 4:
+        raise ValueError("series must be a list containing 2-4 entries")
 
     series: list[dict[str, Any]] = []
     seen_names: set[str] = set()
@@ -114,6 +114,7 @@ def render(spec: dict[str, Any], output_path: Path) -> str:
     replacements = {
         "{{ROOT_ID}}": root_id,
         "{{TITLE}}": html.escape(title),
+        "{{X_AXIS_LABEL}}": html.escape(x_axis_label),
         "{{SUMMARY}}": html.escape(summary),
         "{{CONFIG_JSON}}": safe_json(
             {
@@ -132,7 +133,7 @@ def render(spec: dict[str, Any], output_path: Path) -> str:
     fragment = TEMPLATE_PATH.read_text(encoding="utf-8")
     for token, replacement in replacements.items():
         fragment = fragment.replace(token, replacement)
-    if "{{" in fragment or "}}" in fragment:
+    if "{{" in fragment:
         raise ValueError("unresolved template token remains")
     return fragment
 
