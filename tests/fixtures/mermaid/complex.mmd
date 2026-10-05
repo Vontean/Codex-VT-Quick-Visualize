@@ -1,0 +1,37 @@
+flowchart TB
+  subgraph layer0["客户端"]
+    web["Web 应用"]
+    app["移动 App"]
+  end
+  subgraph layer1["接入层"]
+    gateway["API 网关"]
+  end
+  subgraph layer2["业务服务"]
+    auth["认证服务"]
+    content["内容服务"]
+    search["搜索服务"]
+    worker["后台任务"]
+  end
+  subgraph layer3["数据与消息"]
+    db["PostgreSQL"]
+    cache["Redis"]
+    object["对象存储"]
+    queue["消息队列"]
+    index["搜索索引"]
+  end
+  web --> gateway
+  app --> gateway
+  gateway --> auth
+  gateway --> content
+  gateway --> search
+  auth --> db
+  auth --> cache
+  content --> db
+  content --> cache
+  content --> object
+  content -.-> queue
+  queue -.-> worker
+  worker --> object
+  worker --> index
+  search --> index
+  search --> cache

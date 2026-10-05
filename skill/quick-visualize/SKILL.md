@@ -1,6 +1,6 @@
 ---
 name: quick-visualize
-description: Render preset multi-selects, rankings, parameter forms, plan comparisons, and line, grouped bar, donut or radar charts in conversation. Use when a preset covers the full data and interaction model.
+description: Render preset multi-selects, rankings, parameter forms, plan comparisons, and line, grouped bar, donut or radar charts, and Mermaid diagrams in conversation. Use when a preset covers the full data and interaction model.
 ---
 
 # Quick Visualize
@@ -20,13 +20,14 @@ Read only the matching specification. If none fits, use general Visualize.
 | `line-chart` | One non-negative measure, 2–90 dates | [Line Chart](references/line-chart.md) |
 | `grouped-bar-chart` | 2–4 series, 2–6 shared categories, non-negative scale | [Grouped Bar Chart](references/grouped-bar-chart.md) |
 | `donut-chart` | 2–6 non-negative parts, positive total | [Donut Chart](references/donut-chart.md) |
+| `mermaid` | Mermaid architecture source; qv drawing with explicit native fallback outside its scope | [Mermaid](references/mermaid.md) |
 | `radar-chart` | 1–4 objects, 3–8 shared dimensions, non-negative scale | [Radar Chart](references/radar-chart.md) |
 
 ## Execute
 
-1. Write a UTF-8 JSON spec in a task-owned location.
+1. Write a UTF-8 JSON spec in a task-owned location; `mermaid` also accepts a standard `.mmd` file.
 2. Run `python3 <skill-dir>/scripts/render.py <type> <spec.json> <output-directory>/<title>.html`. Prefer the current thread's writable visualization directory; otherwise use task-owned `work/`. Never use system temp or Library.
-3. On `ok: true`, emit the returned `reference` unchanged on its own line in the final answer. Do not read the HTML or load the full Visualize skill for a preset. The runner validates data, placeholders, element references, JavaScript syntax and size before writing.
+3. On `ok: true`, emit the returned `reference` unchanged on its own line in the final answer. Do not read the HTML or load the full Visualize skill for a preset. The runner validates data, placeholders, element references, JavaScript syntax and size before writing. Mermaid syntax and layout are validated in the browser; runner success alone does not confirm a rendered diagram.
 4. On `ok: false`, fix the reported spec error or inspect only the relevant source around the reported line, then rerun. Template defects require a source fix; do not customize template markup for a single question. Browser checks are for template changes or suspected interaction/layout defects, not every invocation.
 
 The reference contains U+E200 / U+E202 / U+E201:
@@ -35,6 +36,8 @@ The reference contains U+E200 / U+E202 / U+E201:
 visualize{"path":"<absolute-path>/<title>.html"}
 ```
 
+For Mermaid, use distinct edge styles only for distinct meanings; explain them with semantic legends or edge labels.
+
 Add concise explanation outside the visual when needed. Never replace the reference with a Markdown link. Use the returned absolute executor path.
 
-`Confirm` places the chosen values in the composer for user review and manual sending. Chart interactions stay local.
+`Confirm` places the chosen values in the composer for user review and manual sending. Chart interactions stay local. All presets share a dot-field loading state that ends on initialization readiness, with no minimum display time.

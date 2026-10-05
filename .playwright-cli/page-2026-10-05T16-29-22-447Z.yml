@@ -1,0 +1,24 @@
+- iframe [ref=e2]:
+  - figure "内容平台 · 复杂架构" [ref=f1e2]:
+    - heading "内容平台 · 复杂架构" [level=3] [ref=f1e3]
+    - region "架构图，可横向滚动" [ref=f1e4]:
+      - generic [ref=f1e5]:
+        - generic: 客户端
+        - generic: 接入层
+        - generic: 业务服务
+        - generic: 数据与消息
+        - button "Web 应用" [ref=f1e6] [cursor=pointer]
+        - button "移动 App" [ref=f1e10] [cursor=pointer]
+        - button "API 网关" [ref=f1e14] [cursor=pointer]
+        - button "认证服务" [ref=f1e21] [cursor=pointer]
+        - button "内容服务" [ref=f1e26] [cursor=pointer]
+        - button "搜索服务" [ref=f1e31] [cursor=pointer]
+        - button "后台任务" [ref=f1e36] [cursor=pointer]
+        - button "PostgreSQL" [ref=f1e42] [cursor=pointer]
+        - button "Redis" [ref=f1e48] [cursor=pointer]
+        - button "对象存储" [ref=f1e52] [cursor=pointer]
+        - button "消息队列" [ref=f1e57] [cursor=pointer]
+        - button "搜索索引" [ref=f1e62] [cursor=pointer]
+    - generic [ref=f1e71]:
+      - generic [ref=f1e72]: 实线连接
+      - generic [ref=f1e74]: 虚线连接

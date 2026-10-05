@@ -131,6 +131,7 @@
           await window.openai.sendFollowUpMessage(payload);
         }
       });
+      root.dispatchEvent(new Event('qv:ready', { bubbles: true }));
     })();
   </script>
 </div>

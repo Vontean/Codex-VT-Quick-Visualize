@@ -78,6 +78,7 @@
       });
 
       update();
+      root.dispatchEvent(new Event('qv:ready', { bubbles: true }));
     })();
   </script>
 </div>

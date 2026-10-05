@@ -1,0 +1,12 @@
+- iframe [ref=e2]:
+  - figure "内容平台 · 复杂架构" [ref=f1e4]:
+    - heading "内容平台 · 复杂架构" [level=3] [ref=f1e5]
+    - region "架构图，可横向滚动" [ref=f1e6]:
+      - generic [ref=f1e7]:
+        - generic: 客户端
+        - generic: 接入层
+        - generic: 业务服务
+        - generic: 数据与消息
+    - generic [ref=f1e8]:
+      - generic [ref=f1e9]: 同步调用
+      - generic [ref=f1e12]: 异步事件

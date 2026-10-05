@@ -1,6 +1,6 @@
 # Codex VT Quick Visualize
 
-一套与 Codex Desktop `Visualize` 插件配合使用的可复用交互和简单图表模板。它把多选、排序、参数表单、方案对比和基础图表收敛为固定前端与 JSON spec，让 Codex 只需匹配模板、填写数据并调用 renderer。
+一套与 Codex Desktop `Visualize` 插件配合使用的可复用交互和简单图表模板。它把多选、排序、参数表单、方案对比和基础图表收敛为固定前端与 JSON spec；Mermaid 图直接接收标准 `.mmd`，让 Codex 只需匹配模板、填写数据并调用 renderer。
 
 > Quick Visualize 不是 Visualize 的替代品。模板负责稳定的结构与交互，Visualize 负责线程级 HTML surface、沙箱运行环境和消息流内呈现。
 
@@ -16,6 +16,7 @@
 | `Line Chart` | 查看单个非负指标随日期的平滑趋势 | 2–90 个日期数据点、单序列 |
 | `Grouped Bar Chart` | 在共享类别和数值轴上比较多个对象 | 2–4 个序列、共同的 2–6 个类别 |
 | `Donut Chart` | 查看共同组成一个整体的类别占比 | 2–6 个类目、非负数值、总和大于 0 |
+| `Mermaid` | 架构、流程与关系图 | 架构图由 qv 自行绘制；不支持的语法明确回退原生 |
 | `Radar Chart` | 比较一个或多个对象在共同指标上的相对强弱 | 1–4 个对象、共同的 3–8 个维度与量表 |
 
 `Parameter Form` 当前支持 `text`、`textarea`、`select`、`radio`、`switch`、`checkbox` 和 `range`。每一种字段都可以单独成表，也可以重复或自由组合。
@@ -30,12 +31,20 @@
 
 四类图表统一采用顶部 32px 留白、标题到图表 32px 间距和居中底部图例。入场动效在离开后重新进入视野时重播，遵循减少动态效果设置。环形图在少类别且空间充足时直接标注名称与占比。详细设计约定见 [DESIGN.md](DESIGN.md)。
 
+`Mermaid` 直接读取标准 `.mmd`，使用 Mermaid 11.12.0 解析节点和关系，再由 qv 自行布局与绘制，沿用已确认的节点、图标、统一连接点、曲线、可选 Tooltip 和逐层生长动效。带标题或节点说明时可使用包含 `source` 的 JSON；无需再写节点坐标或连接数组。浏览器按需加载固定版本的 jsDelivr 模块。嵌套分组、特殊形状等尚未适配的语法及其他图型显示原生回退提示，不伪装成已适配。
+
+```bash
+python3 skill/quick-visualize/scripts/render.py mermaid diagram.mmd work/architecture.html
+```
+
+Mermaid 的语法与布局在浏览器校验，runner 返回的 `runtime: pending-browser` 表示尚未确认实际绘制。详细支持范围见 [Mermaid 规格](skill/quick-visualize/references/mermaid.md)。
+
 ## 路由与运行链
 
 ```mermaid
 flowchart LR
     A["AGENTS.md 选择工具"] --> B["按需读取模板规格"]
-    B --> C["写 JSON spec"]
+    B --> C["写 JSON spec / Mermaid 源码"]
     C --> D["统一 runner 渲染与检查"]
     D --> E{"检查通过？"}
     E -->|"是"| F["返回简短结果和展示引用"]
@@ -200,7 +209,7 @@ python3 -m unittest discover -s tests -v
 
 ## 有意保留的边界
 
-- 不为单次问题修改模板前端；只替换 JSON spec。
+- 不为单次问题修改模板前端；只替换 JSON spec 或 Mermaid 源码。
 - 不把超出任一现有 spec 承载能力的数据或交互强行塞进模板。
 - 不自动发送用户消息。
 - 不自动安装或修改 Visualize 插件。
@@ -208,4 +217,4 @@ python3 -m unittest discover -s tests -v
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE)。Mermaid 11.12.0 通过 CDN 在运行时加载，遵循其 [MIT License](https://cdn.jsdelivr.net/npm/mermaid@11.12.0/LICENSE)，库代码未打包进本仓库。

@@ -566,6 +566,7 @@
       root.addEventListener('pointerleave',hideTooltip);window.addEventListener('blur',hideTooltip);
       const resizeObserver = new ResizeObserver(()=>{const w=Math.round(plot.getBoundingClientRect().width);if(w!==lastWidth){lastWidth=w;draw();}});
       resizeObserver.observe(plot);draw();observer.observe(root);
-    })();
+    root.dispatchEvent(new Event('qv:ready',{bubbles:true}));
+})();
   </script>
 </div>

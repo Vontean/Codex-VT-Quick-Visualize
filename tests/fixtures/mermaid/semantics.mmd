@@ -1,0 +1,8 @@
+flowchart LR
+  A[客户端] -->|请求| B{授权}
+  B ==>|通过| C[(存储)]
+  B -.->|拒绝| A
+  C o--o D((监控))
+  D x--x E[审计]
+  classDef important fill:#dce8ff,stroke:#2769cc
+  class B important

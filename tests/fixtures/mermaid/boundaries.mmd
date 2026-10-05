@@ -1,0 +1,15 @@
+flowchart TB
+  subgraph system[内容平台]
+    subgraph api[接入]
+      client["Web 应用"] --> gateway{授权?}
+    end
+    subgraph services[服务]
+      worker[处理任务] --> store[(持久存储)]
+    end
+    gateway -->|通过| worker
+    gateway -.->|拒绝| client
+    store -->|重试| worker
+  end
+  gateway -->|审计| audit{{日志}}
+  audit --> audit
+  worker <--> monitor[监控]

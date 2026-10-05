@@ -91,6 +91,7 @@ const observer=new IntersectionObserver(es=>{const e=es[0];if(!e.isIntersecting)
 document.addEventListener('visibilitychange',()=>{if(document.hidden)armed=true;else replayIfReady();});
 window.addEventListener('pageshow',e=>{if(e.persisted){armed=true;replayIfReady();}});observer.observe(root);
 new ResizeObserver(()=>{if(Math.round(plot.getBoundingClientRect().width)!==lastWidth){draw();if(!entered&&!reduced.matches)svg.select('.line-marks').attr('visibility','hidden');}}).observe(plot);
+root.dispatchEvent(new Event('qv:ready',{bubbles:true}));
 })();
 </script>
 </div>

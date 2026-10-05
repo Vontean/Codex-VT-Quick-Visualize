@@ -1,0 +1,45 @@
+- iframe [ref=e2]:
+  - generic [ref=f1e5]:
+    - group "Configure the output." [ref=f1e6]:
+      - generic [ref=f1e7]:
+        - generic [ref=f1e8]:
+          - generic [ref=f1e9]: Project name
+          - textbox "Project name" [ref=f1e10]:
+            - /placeholder: Enter a name
+            - text: Quick Visualize
+        - generic [ref=f1e11]:
+          - generic [ref=f1e12]: Notes
+          - textbox "Notes" [ref=f1e13]:
+            - /placeholder: Optional context
+        - generic [ref=f1e14]:
+          - generic [ref=f1e15]: Output format
+          - combobox "Output format" [ref=f1e16]:
+            - option "HTML" [selected]
+            - option "Markdown"
+        - group "Execution mode" [ref=f1e17]:
+          - generic [ref=f1e19]:
+            - generic [ref=f1e20]:
+              - radio "Fast" [ref=f1e21]
+              - generic [ref=f1e22]: Fast
+            - generic [ref=f1e23]:
+              - radio "Balanced" [checked] [ref=f1e24]
+              - generic [ref=f1e25]: Balanced
+            - generic [ref=f1e26]:
+              - radio "Deep" [ref=f1e27]
+              - generic [ref=f1e28]: Deep
+        - generic [ref=f1e29]:
+          - generic [ref=f1e30]: Auto save
+          - generic [ref=f1e31]:
+            - checkbox "Enabled" [checked] [ref=f1e32]
+            - generic [ref=f1e33]: Enabled
+        - generic [ref=f1e34]:
+          - generic [ref=f1e35]: Summary
+          - generic [ref=f1e36]:
+            - checkbox "Include in output" [checked] [ref=f1e37]
+            - generic [ref=f1e38]: Include in output
+        - generic [ref=f1e39]:
+          - generic [ref=f1e40]: Detail level
+          - generic [ref=f1e41]:
+            - status [ref=f1e42]: 6/10
+            - slider "Detail level" [ref=f1e43]: "6"
+    - button "Confirm" [ref=f1e45] [cursor=pointer]

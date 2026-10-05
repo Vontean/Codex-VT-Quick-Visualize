@@ -102,6 +102,7 @@ window.addEventListener('pageshow',e=>{if(e.persisted){armed=true;replayIfReady(
 draw();if(!reduced.matches)svg.selectAll('.mark').interrupt().attr('height',0).attr('y',layout.base);observer.observe(root);
 new ResizeObserver(()=>{if(Math.round(plot.getBoundingClientRect().width)!==lastWidth)draw();}).observe(plot);
 window.addEventListener('openai:set_globals',e=>{if(e.detail?.globals?.widgetState){restore(e.detail.globals.widgetState);draw();}});
+root.dispatchEvent(new Event('qv:ready',{bubbles:true}));
 })();
 </script>
 </div>

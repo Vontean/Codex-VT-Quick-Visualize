@@ -1,0 +1,10 @@
+flowchart LR
+  web["Web 应用"]
+  api["API 服务"]
+  db["PostgreSQL"]
+  cache["Redis"]
+  object["对象存储"]
+  web --> api
+  api --> db
+  api --> cache
+  api --> object

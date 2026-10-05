@@ -5,12 +5,14 @@ import argparse
 import importlib
 import json
 import os
+import re
 import sys
 import tempfile
 from pathlib import Path
 from check_fragment import check_fragment
 
 RENDERERS = {
+    "mermaid": "render_mermaid",
     "multi-select-simple": "render_multi_select",
     "multi-select-complete": "render_multi_select",
     "ranker": "render_ranker",
@@ -32,7 +34,8 @@ def render_checked(kind: str, spec_path: Path, output: Path) -> dict:
         output = output.resolve()
         if output.suffix.lower() != ".html":
             raise ValueError("Output must use the .html extension")
-        spec = json.loads(spec_path.read_text(encoding="utf-8"))
+        raw = spec_path.read_text(encoding="utf-8")
+        spec = {"source": raw} if kind == "mermaid" and spec_path.suffix.lower() == ".mmd" else json.loads(raw)
         if not isinstance(spec, dict):
             raise ValueError("Spec root must be a JSON object")
         if kind.startswith("multi-select-"):
@@ -45,6 +48,9 @@ def render_checked(kind: str, spec_path: Path, output: Path) -> dict:
         if template is None:
             template = getattr(renderer, "TEMPLATE_PATHS", {}).get(kind)
         fragment = renderer.render(spec, output)
+        root_id = re.search(r'<div\b[^>]*\bid="([^"]+)"', fragment).group(1)
+        loading = (Path(__file__).resolve().parents[1] / "assets/chart-loading.html").read_text(encoding="utf-8")
+        fragment = loading.replace("{{LOADING_ID}}", root_id + "-loading").replace("{{CONTENT}}", fragment)
         stage = "check"
         checks = check_fragment(fragment)
         stage = "write"
@@ -56,7 +62,10 @@ def render_checked(kind: str, spec_path: Path, output: Path) -> dict:
         os.replace(temporary, output)
         temporary = None
         reference = "\ue200visualize\ue202" + json.dumps({"path": str(output)}, ensure_ascii=False, separators=(",", ":")) + "\ue201"
-        return {"ok": True, "path": str(output), "checks": checks, "reference": reference}
+        result = {"ok": True, "path": str(output), "checks": checks, "reference": reference}
+        if kind == "mermaid":
+            result["runtime"] = "pending-browser"
+        return result
     except Exception as error:
         detail = {"message": str(error)}
         line = getattr(error, "line", None) or getattr(error, "lineno", None)
