@@ -1,0 +1,4 @@
+{
+  "title": "er · 常规",
+  "source": "erDiagram\n  direction LR\n  AUTHOR[作者] {\n    uuid id PK \"作者标识\"\n    string name \"显示名称\"\n    string email UK \"联系邮箱\"\n  }\n  CONTENT[内容] {\n    uuid id PK \"内容标识\"\n    uuid author_id FK \"所属作者\"\n    string title \"内容标题\"\n    string status \"发布状态\"\n    datetime published_at \"发布时间\"\n  }\n  VERSION[版本] {\n    uuid id PK \"版本标识\"\n    uuid content_id FK \"所属内容\"\n    int revision \"修订序号\"\n    text body \"正文\"\n  }\n  CONTENT_TAG[内容标签] {\n    uuid content_id PK, FK \"所属内容\"\n    uuid tag_id PK, FK \"所属标签\"\n  }\n  TAG[标签] {\n    uuid id PK \"标签标识\"\n    string name UK \"标签名称\"\n  }\n  AUTHOR ||..o{ CONTENT : 创作\n  CONTENT ||--|{ VERSION : 包含\n  CONTENT ||--o{ CONTENT_TAG : 标记\n  TAG ||--o{ CONTENT_TAG : 关联\n"
+}

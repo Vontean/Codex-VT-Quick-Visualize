@@ -101,13 +101,11 @@ Mermaid shape fills: shaped nodes keep a transparent HTML backplate even when la
 
 ## Mermaid ER renderer
 
-- Actual Mermaid11.12 DB owns entities, aliases, attribute order/keys/comments and relationship end cardinalities. Read endpoint marker names from getData, because relSpec's cardA/cardB names reverse their source endpoint association. Read direction from getDirection; do not infer FK bindings from field names.
-- Entity containers keep10px radius,48px header,12px fields,30px rows,14px horizontal padding. Key/name/type columns follow actual canvas text measures; preserve all fields. Notes stay in transient12px details. Empty entities remain visible. Header hover highlights the entity neighborhood; field hover/focus highlights only its own row.
-- ER wires and crow-foot/optional/one markers use1px neutral strokes at80% muted foreground mix. Solid/dashed retain identifying/non-identifying semantics and a legend. Selected line and both endpoint markers share one active theme color; no flow arrows.
-- Each ER relationship has distinct side ports. Self relationships use a lateral loop (EAST/EAST in TB/BT, SOUTH/SOUTH in LR/RL), separate from primary-axis endpoints. Expanded geometry stays identical.
-- Tooltip candidates include outside the complete current/related entities; obstacles include all entity fields, trigger, title and actual endpoint bounds. Keyboard details restore after focus-induced scroll at final coordinates; Escape cancels pending restoration.
-- Cards240ms, relation trace650ms, cardinality50ms after trace. Labels100ms from600ms into their trace, finishing with cardinality. Full exit/re-entry/visibility restoration replays; hover/resize do not. Reduced motion and expanded view stay static.
-- Shared viewport captures current scroll immediately for same-width expansion; when the host first changes width, preserve the last matching inline-width snapshot. Native fallback never creates a viewport controller.
+- Mermaid11.12 DB 是实体、别名、字段顺序、类型、PK/FK/UK、注释和关系基数的唯一来源。读取 getData 实际端点标记，避免 relSpec.cardA/cardB 的反向对应；getDirection 保留方向，字段名称不推导关系。custom style/class/rich label 明确原生回退。
+- 实体白底14px圆角、标题14px/20px，技术ID另行显示；字段置于4%前景混色、8px圆角的内区。实体宽240–360px；key/type/name按实测分配，字段12px/18px换行，各行=max(30px,内容高度+12px)，不继承其他行高度。完整别名及长字段保留。
+- 中性1.4px关系线和crow-foot标记使用明色#727a82／暗色#a3aab3，保留 identifying 实线与 non-identifying 虚线。每条关系独立端口，self loop 横向绕回；展开保持原几何。
+- 标题突出实体邻域；字段只突出本行，有注释才显示详情；关系浮层分来源／目标／基数及关系说明，保持距触发文字≤32px，避免远距离避障。键盘自动滚动后恢复详情，Escape取消恢复。
+- 卡片240ms、关系650ms、基数50ms；共享视口保留返回滚动，hover/resize 不重播，reduced/expanded静态。
 
 ## Mermaid class renderer
 
