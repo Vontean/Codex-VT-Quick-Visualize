@@ -31,3 +31,7 @@
 2026-10-12 用户确认完成，最终区块间距24px。架构核对：模型适配器只读Mermaid DB并复制实际语义，renderer独立负责DOM/曲线/参与条，展开与滚动仍复用共享viewport；无需新增解析器、宿主补丁或布局框架。ResizeObserver继续延后一帧布局，动画与hover只操作展示状态。末行标签底部空间改为实测高度，并加入长末行角色fixture。
 
 最终常规/25步骤压力/长末行角色双主题设计检查6组；normal/stress/single双主题连续尺寸与模式检查6组，无window.error/文字或根外溢。Python30项通过。TODO journey checked，总进度4/18；仅提交Journey源码、规范、测试和验收记录，保留独立donut改动。
+
+## 人员行独立高度补充
+
+用户发现压力图长角色行扩大了所有人员行。原因是所有行共用max(labelHeight+12)。改为每行累加自身实测标签高度+12px间距；参与条按该行自身中心定位，首块24px外缘间距保留。末行与无角色场景保持完整视图边界。回归新增逐行间距与参与条中心检查；双主题三数据源6组设计检查与6组连续resize检查通过。补充证据role-rows-results.json、role-rows-compact.png。Journey保留已完成状态，本补充独立提交。
