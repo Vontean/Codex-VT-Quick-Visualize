@@ -20,7 +20,7 @@ Read only the matching specification. If none fits, use general Visualize.
 | `line-chart` | One non-negative measure, 2–90 dates | [Line Chart](references/line-chart.md) |
 | `grouped-bar-chart` | 2–4 series, 2–6 shared categories, non-negative scale | [Grouped Bar Chart](references/grouped-bar-chart.md) |
 | `donut-chart` | 2–6 non-negative parts, positive total | [Donut Chart](references/donut-chart.md) |
-| `mermaid` | `flowchart` / `architecture-beta` / `sequenceDiagram` / `stateDiagram-v2` / `erDiagram` / `classDiagram` / `timeline` / `journey` / `kanban` / `pie` / `xychart-beta` / `radar-beta` / `sankey-beta` / `quadrantChart` / `block-beta` / C4 / `mindmap`; qv drawing, explicit fallback outside scope | [Mermaid](references/mermaid.md) |
+| `mermaid` | `flowchart` / `architecture-beta` / `sequenceDiagram` / `stateDiagram-v2` / `erDiagram` / `classDiagram` / `timeline` / `journey` / `kanban` / `pie` / `xychart-beta` / `radar-beta` / `sankey-beta` / `quadrantChart` / `block-beta` / C4 / `mindmap` / `gantt`; qv drawing, explicit fallback outside scope | [Mermaid](references/mermaid.md) |
 | `radar-chart` | 1–4 objects, 3–8 shared dimensions, non-negative scale | [Radar Chart](references/radar-chart.md) |
 
 ## Execute

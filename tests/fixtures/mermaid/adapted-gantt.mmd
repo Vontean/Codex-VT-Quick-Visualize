@@ -1,0 +1,16 @@
+gantt
+    title 产品上线排期（模拟数据）
+    dateFormat YYYY-MM-DD
+    axisFormat %m/%d
+    tickInterval 1week
+    todayMarker off
+    section 设计
+    需求梳理 :done, research, 2026-11-02, 3d
+    交互与视觉 :done, design, after research, 5d
+    设计冻结 :milestone, freeze, after design, 0d
+    section 实现
+    前端开发 :crit, active, dev, after freeze, 10d
+    内容准备 :content, after freeze, 7d
+    section 交付
+    联调验收 :crit, qa, after dev content, 5d
+    正式上线 :milestone, launch, after qa, 0d

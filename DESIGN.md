@@ -205,3 +205,7 @@ Mermaid drawing is visible once ready; intersection-triggered entry motion never
 ## Mermaid mindmap renderer
 
 Formal entry reuses the approved bilateral tree. Compute subtree height and per-depth column width from complete parsed hierarchy. Root remains centered, inline drawing scrolls locally, expanded view fits the complete scene. Names wrap at measured node widths; 12px text and 14px root retain host tokens. No areas or sizes represent values.
+
+## Mermaid Gantt renderer
+
+Formal Gantt reuses the approved ruler, section labels, stage-colored interval bars and 13% milestone capsules. Parse task dates and dependencies from Mermaid DB; never recreate schedules in a second data model. Preserve date ticks, move competing milestone captions to separate rows, and keep exact dates/prerequisites in details. Shared qv viewport/loading; reduced and expanded are static.

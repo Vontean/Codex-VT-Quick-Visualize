@@ -2,7 +2,7 @@
 
 本轮重新审视当前 qv 的 18 种 Mermaid 图表。历史审批不计入本轮完成；每次只推进一种，用户确认后将对应的 `[ ]` 改为 `[x]`。
 
-范围依据：`skill/quick-visualize/SKILL.md` 与 `skill/quick-visualize/references/mermaid.md`。其中 16 种已接入 qv 绘制；甘特图和思维导图已有定制成果，本轮接入正式入口。
+范围依据：`skill/quick-visualize/SKILL.md` 与 `skill/quick-visualize/references/mermaid.md`。18 种图表均已接入 qv 绘制；甘特图和思维导图本轮复用已有成果完成正式接入。不支持的具体语法仍明确回退。
 
 ## 图表清单
 
@@ -22,7 +22,7 @@
 - [ ] 14. 象限图 — `quadrantChart`
 - [ ] 15. 块图 — `block-beta`
 - [ ] 16. C4 图 — Context / Container / Component / Dynamic / Deployment
-- [ ] 17. 甘特图 — `gantt`（已有定制成果，本轮核对正式接入）
+- [x] 17. 甘特图 — `gantt`（已核对正式接入）
 - [x] 18. 思维导图 — `mindmap`（已核对正式接入）
 
 ## 每种图表的检查点
@@ -40,8 +40,8 @@
 
 ## 当前进度
 
-- 已确认：2 / 18。
-- 当前项：08. 用户旅程图；先完成 Gantt、mindmap 正式接入核对。
+- 已确认：3 / 18。
+- 当前项：08. 用户旅程图；常规、边界与单步骤样例已生成，等待用户审视。
 - 审视记录：[flowchart-review/REVIEW.md](flowchart-review/REVIEW.md)。
 
 ## 完成记录
@@ -51,3 +51,5 @@
 - 2026-10-12：用户确认 flowchart 第五轮通过；修复长文本、阈值布局、暗色连线、悬浮时序、白灰交替、加载等待与分组路径。补充：总览不提供同层菜单。证据见 flowchart-review/REVIEW.md。
 
 - 2026-10-12：Mindmap 已有双侧树成果接入正式入口；17 节点常规／33 节点五层样例在双主题、320/736px 无重叠、无外溢、展开无裁切，路径高亮及富文本/图标回退核对。证据 integration-review/mindmap-results.json。
+
+- 2026-10-12：Gantt 已有阶段条与里程碑成果接入正式入口；双主题、320/736px、任务/日期/依赖、同日里程碑避让、跨月标题及排除日期回退已核对。证据 integration-review/gantt-results.json。

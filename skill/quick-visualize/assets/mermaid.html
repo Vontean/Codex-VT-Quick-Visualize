@@ -157,6 +157,8 @@ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 {{PIE_JS}}
 {{KANBAN_MODEL_JS}}
 {{KANBAN_JS}}
+{{GANTT_MODEL_JS}}
+{{GANTT_JS}}
 {{MINDMAP_MODEL_JS}}
 {{MINDMAP_JS}}
 {{JOURNEY_MODEL_JS}}
@@ -184,6 +186,7 @@ try {
  if(model.data?.kind==='xy'){await renderMermaidXY(root,model.data);finishLoading();return;}
  if(model.data?.kind==='pie'){renderMermaidPie(root,model.data);finishLoading();return;}
  if(model.data?.kind==='kanban'){renderMermaidKanban(root,model.data);finishLoading();return;}
+ if(model.data?.kind==='gantt'){await renderMermaidGantt(root,model.data);finishLoading();return;}
  if(model.data?.kind==='mindmap'){renderMermaidMindmap(root,model.data);finishLoading();return;}
  if(model.data?.kind==='journey'){renderMermaidJourney(root,model.data);finishLoading();return;}
  if(model.data?.kind==='timeline'){renderMermaidTimeline(root,model.data);finishLoading();return;}
