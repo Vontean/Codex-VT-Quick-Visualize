@@ -15,7 +15,8 @@ async function prepareMermaidErLayout(data) {
   const available=n.layoutWidth-40,key=46,type=Math.min(90,Math.max(52,...n.attributes.map(a=>measure(a.type))));n.columns={key,name:available-key-type-16,type};
   n.headerHeight=Math.max(52,height(n.name,n.layoutWidth-32,14,20)+24)+(n.name!==n.technicalName?height(n.technicalName,n.layoutWidth-32,12,18)+4:0);
   n.attributes.forEach(a=>a.rowHeight=Math.max(30,Math.max(height(a.name,n.columns.name),height(a.type,n.columns.type),height(a.keys.join(', '),key))+12));
-  n.layoutHeight=n.headerHeight+n.attributes.reduce((sum,a)=>sum+a.rowHeight,0)+16;
+  // 字段区上下内边距8px、底部留白10px，以及卡片上下边框2px。
+  n.layoutHeight=n.headerHeight+n.attributes.reduce((sum,a)=>sum+a.rowHeight,0)+20;
  }
  for(const e of data.edges){e.labelWidth=Math.min(180,Math.max(30,measure(e.label)+12));e.labelHeight=Math.max(22,height(e.label,e.labelWidth-12)+4);}probe.remove();
  // 自关联独占侧面端口，避免与主轴上的关系基数叠合。

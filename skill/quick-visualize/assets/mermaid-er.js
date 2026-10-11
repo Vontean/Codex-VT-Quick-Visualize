@@ -6,7 +6,7 @@ function renderMermaidEr(root,data) {
  #${root.id} .er-header{display:flex;align-items:center;justify-content:center;flex-direction:column;align-items:flex-start;gap:4px;width:100%;border:0;background:none;color:var(--foreground);font:inherit;font-weight:500;padding:12px 16px;overflow-wrap:anywhere;text-align:left;cursor:var(--cursor-interaction,pointer)}
  #${root.id} .er-header small{color:light-dark(color-mix(in srgb,var(--foreground) 60%,var(--background)),color-mix(in srgb,var(--foreground) 68%,var(--background)));font-size:12px;font-weight:400}
  #${root.id} .er-field{display:grid;gap:8px;align-items:center;width:100%;min-height:30px;padding:6px 10px;line-height:18px;white-space:pre-wrap;overflow-wrap:anywhere;border:0;background:none;color:var(--foreground);font:inherit;font-size:12px;text-align:left;cursor:var(--cursor-interaction,pointer)}
- #${root.id} .er-field .er-key{color:var(--viz-series-1)} #${root.id} .er-field .er-type{color:light-dark(#287d7b,#80c3ba)} #${root.id} .er-body{margin:0 10px 8px;padding:4px 0;border-radius:8px;background:color-mix(in srgb,var(--foreground) 4%,var(--background))}
+ #${root.id} .er-field .er-key{color:var(--viz-series-1)} #${root.id} .er-field .er-type{color:light-dark(#287d7b,#80c3ba)} #${root.id} .er-body{margin:0 10px 10px;padding:4px 0;border-radius:8px;background:color-mix(in srgb,var(--foreground) 4%,var(--background))}
  #${root.id} .er-field[data-active=true]{background:var(--accent)}
  #${root.id} .er-markers{color:light-dark(#727a82,#a3aab3)}
  #${root.id} .er-cardinality{color:inherit}
