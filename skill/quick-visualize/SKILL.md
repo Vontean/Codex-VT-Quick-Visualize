@@ -48,6 +48,8 @@ An inline visualization error means the host recognized the reference but failed
 
 Architecture-beta preserves full wrapped names and offers unscaled resource/group details with a native object selector on narrow or expanded views. Selection reads the complete model without filtering it.
 
+For node-based Mermaid diagrams, proactively apply the shared design principles in the Mermaid reference: measured threshold-based wrapping, threshold-based layout balancing, alternating containment surfaces, stable hover, focused group navigation and separately calibrated themes. Preserve each diagram type's semantic shapes and relationships; do not wait for the user to repeat accepted principles.
+
 For Mermaid, declare semantic icons for all architecture services; use groups for overview/drilldown. Explain distinct edge styles with semantic legends or edge labels.
 
 Add concise explanation outside the visual when needed. Never replace the reference with a Markdown link. Use the returned absolute executor path.

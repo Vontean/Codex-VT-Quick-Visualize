@@ -33,6 +33,10 @@ Optional title and tooltip text use this envelope; the graph still comes entirel
 
 Flowchart labels remain centered and on one line until measured text exceeds 228px minus icon space. Longer labels wrap and nodes grow to fit; diamonds and circles widen around their central text area. Large elongated complete diagrams (at least 16 nodes, long dimension above 2400px, aspect ratio above 3:1 in either direction) fold into alternating rows or columns inside their existing groups, aiming toward a square overview. Source LR/RL/TB/BT determines the initial reading direction; all node IDs, groups, edges and arrow semantics remain intact. This also applies when returning from group browsing to the complete view. Dark-mode flowchart wires and arrowheads have a slightly stronger contrast; light mode retains its previous colors.
 
+## 节点图表的共同设计思考
+
+生成和审视流程图、状态图与架构图时，主动复用已确认的原则：短文本居中且超过阈值才换行，按真实字体测量容器；普通图保留阅读方向，规模、长边与长宽比同时超限才平衡布局；叶节点为主题背景，包含层从内向外浅灰/背景交替（浅灰为18% muted与背景混色）；复杂容器支持下钻并保留跨边界关系和路径，同层切换不出现在总览；悬浮切换保持稳定，不重播进场动画；暗色单独增强必要对比，不加深浅色灰面。独立内容行不继承最高行高度，浮层只补充不可见信息并避开图中内容。浮层存在实体关系与正文层次时，直接用真实模型字段分别呈现关系、标题和说明，不拼成一段长文本，也不从说明文案猜关系。保留各类型的形状、端点和业务语义，不把共性理解为强制同一布局。完整规则见项目 `DESIGN.md` 的“节点图表的共同设计原则”。
+
 ## Icons and group navigation
 
 For Chinese labels, prefer standard flowchart icon syntax. qv resolves `lucide:` names against the host icon library and draws its approved inline icon/label nodes:
