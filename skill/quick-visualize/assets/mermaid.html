@@ -71,7 +71,7 @@
 
 #{{ROOT_ID}}[data-architecture=true] button.node>.name{width:100%;align-items:flex-start;white-space:normal;line-height:20px}
 #{{ROOT_ID}}[data-architecture=true] .architecture-name{flex:1;min-width:0;font-size:14px;line-height:20px;overflow-wrap:anywhere;white-space:normal}
-#{{ROOT_ID}}[data-architecture=true] button.node>.name>svg{flex:none;margin-top:2px}
+#{{ROOT_ID}}[data-architecture=true] button.node>.name>svg{flex:none;width:16px;height:16px;position:relative;top:2px}
 #{{ROOT_ID}}[data-architecture=true] button.preview-group>.name{position:absolute;left:16px;top:16px;width:calc(100% - 32px)}
 #{{ROOT_ID}}[data-architecture=true] button.preview-group>.name .group-enter{position:static;flex:none;align-self:flex-start}
 #{{ROOT_ID}}[data-architecture=true] .preview-item{height:auto;white-space:normal;overflow:visible;line-height:18px;align-items:flex-start}
@@ -79,12 +79,14 @@
 #{{ROOT_ID}}[data-architecture=true] .preview-section{white-space:normal;line-height:18px}
 #{{ROOT_ID}}[data-architecture=true] .qv-group>span{max-width:calc(100% - 32px);line-height:18px;overflow-wrap:anywhere}
 
-#{{ROOT_ID}} .architecture-readout{position:relative;margin-top:16px;font-size:12px;line-height:18px}
-#{{ROOT_ID}} .architecture-cue{color:var(--muted-foreground);min-height:28px}
-#{{ROOT_ID}} .architecture-readout>.form-label{display:block;margin-bottom:12px}
-#{{ROOT_ID}} .architecture-detail{white-space:normal;overflow-wrap:anywhere;color:var(--foreground);font-size:12px;line-height:18px}
-#{{ROOT_ID}} .architecture-detail>div+div{margin-top:6px}
-#{{ROOT_ID}} .architecture-detail-name{font-weight:500}
+#{{ROOT_ID}}[data-architecture=true] button.node.junction{padding:0;min-width:0;min-height:0;border:0;border-radius:50%;background:var(--muted-foreground)}
+#{{ROOT_ID}} .architecture-detail{position:absolute;z-index:20;box-sizing:border-box;background:#1b1d21;color:#fff;border:1px solid #ffffff24;border-radius:12px;padding:14px 16px;font-size:12px;line-height:18px;white-space:normal;overflow-wrap:anywhere;max-height:min(380px,calc(100vh - 32px));overflow-y:auto;pointer-events:auto;box-shadow:0 8px 24px #00000024}
+#{{ROOT_ID}} .architecture-detail-name{font-size:14px;line-height:20px;font-weight:500;margin-bottom:4px}
+#{{ROOT_ID}} .architecture-detail-label{color:#b8bdc6;font-size:11px;line-height:16px}
+#{{ROOT_ID}} .architecture-detail-section{border-top:1px solid #ffffff24;padding-top:10px;margin-top:10px}
+#{{ROOT_ID}} .architecture-detail-body{margin-top:4px}
+#{{ROOT_ID}} .architecture-detail-link{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:10px;margin-top:8px;align-items:start}
+#{{ROOT_ID}} .architecture-detail-arrow{color:#b8bdc6;padding-top:1px}
 #{{ROOT_ID}} .architecture-group-title{position:absolute;left:16px;top:10px;max-width:calc(100% - 32px);padding:0;border:0;background:none;color:var(--muted-foreground);font:inherit;font-size:12px;line-height:18px;text-align:left;overflow-wrap:anywhere;pointer-events:auto;cursor:var(--cursor-interaction,pointer)}
 
 #{{ROOT_ID}}[data-kind=flowchart] button.node:not(.group-card)>.name{margin:auto;justify-content:center;max-width:100%;white-space:normal;flex:none}
@@ -297,7 +299,7 @@ function draw(){root.dataset.balanced=String(!!data.balanced);updateLegend();mot
 scene.querySelectorAll('.node,.layer,.edge-label,.edge-count,.qv-group').forEach(n=>{n.getAnimations().forEach(a=>a.cancel());n.remove();});svg.querySelectorAll('*').forEach(n=>n.getAnimations().forEach(a=>a.cancel()));root.querySelector('.edge-key').getAnimations().forEach(a=>a.cancel());svg.replaceChildren();nodes=[];arrows=[];edges=[];
 const horizontal=!data.grouped&&['LR','RL'].includes(data.direction),complex=!horizontal;let height=0;
 const layoutOffset=data.generic?Math.max(0,(width-data.layout.width)/2):0;
-if(data.generic){nodes=data.nodes.map(n=>({...n,x:n.x+layoutOffset}));for(const g of (sourceModel.kind==='flowchart'?[...data.layout.groups].sort((a,b)=>containmentLevel(b.id)-containmentLevel(a.id)):data.layout.groups)){const box=document.createElement('div');box.className='qv-group';box.dataset.group=g.id;box.style.cssText=`left:${g.x+layoutOffset}px;top:${g.y}px;width:${g.w}px;height:${g.h}px`;setContainmentSurface(box,g.id);const title=document.createElement(sourceModel.architecture?'button':'span');title.textContent=g.name;if(sourceModel.architecture){title.type='button';title.className='architecture-group-title';title.dataset.group=g.id;title.setAttribute('aria-label',g.name+'，分组详情');title.onpointerenter=()=>architectureReader.choose(g.id,title);title.onpointerleave=()=>{if(!architectureReader.focused)clear();};title.onfocus=()=>architectureReader.choose(g.id,title,true);title.onblur=clear;title.onclick=()=>architectureReader.choose(g.id,title);}box.append(title);scene.append(box);}}else if(horizontal){
+if(data.generic){nodes=data.nodes.map(n=>({...n,x:n.x+layoutOffset}));for(const g of (sourceModel.kind==='flowchart'?[...data.layout.groups].sort((a,b)=>containmentLevel(b.id)-containmentLevel(a.id)):data.layout.groups)){const box=document.createElement('div');box.className='qv-group';box.dataset.group=g.id;box.style.cssText=`left:${g.x+layoutOffset}px;top:${g.y}px;width:${g.w}px;height:${g.h}px`;setContainmentSurface(box,g.id);const title=document.createElement(sourceModel.architecture?'button':'span');title.textContent=g.name;if(sourceModel.architecture){title.type='button';title.className='architecture-group-title';title.dataset.group=g.id;title.setAttribute('aria-label',g.name+'，分组详情');title.onpointerenter=()=>architectureReader.choose(g.id,title);title.onpointerleave=leaveNodeHover;title.onfocus=()=>architectureReader.choose(g.id,title,true);title.onblur=clear;title.onclick=()=>architectureReader.choose(g.id,title);}box.append(title);scene.append(box);}}else if(horizontal){
  const count=data.layers.length,w=Math.min(160,(width-(count-1)*48)/count),gap=count>1?(width-w*count)/(count-1):0;
  const maxRows=Math.max(...data.layers.map((_,layer)=>data.nodes.filter(n=>n.layer===layer).length));
  const extent=(maxRows-1)*76+48;
@@ -402,7 +404,7 @@ async function navigateScope(scope,keyboard=false,origin=null){
  catch(error){notice.hidden=false;notice.textContent='无法进入分组：'+error.message;}
  finally{navigationBusy=false;viewport.setAttribute('aria-busy','false');drawNavigation();if(keyboard)root.querySelector('.scope-nav button')?.focus({preventScroll:true});}
 }
-if(sourceModel.architecture)architectureReader=createArchitectureReader(root,sourceModel,viewport,diagramViewport,focus);
+if(sourceModel.architecture)architectureReader=createArchitectureReader(root,sourceModel,viewport,diagramViewport,focus,()=>clearTimeout(leaveTimer),leaveNodeHover);
 drawNavigation();
 new ResizeObserver(()=>requestAnimationFrame(()=>{if(architectureReader)architectureReader.refresh();else clear();})).observe(root);viewport.addEventListener('scroll',()=>{if(architectureReader)architectureReader.onScroll();else clear();},{passive:true});viewport.addEventListener('pointermove',e=>{if(sourceModel.kind==='flowchart'&&activeNode&&!e.target.closest('button.node')){clearTimeout(leaveTimer);leaveTimer=setTimeout(clear,220);}},{passive:true});root.onpointerleave=leaveNodeHover;document.addEventListener('keydown',e=>{if(e.key==='Escape')clear();});function playMotion(){if(diagramViewport.expanded){runningAnimations.forEach(a=>a.cancel());root.dataset.motion='complete';return;}clear();runningAnimations.forEach(a=>a.cancel());root.dataset.motion=reduced.matches?'complete':'running';root.dataset.replays=String(+(root.dataset.replays||0)+1);runningAnimations=reduced.matches?[]:motionSpecs.map(start=>start());clearTimeout(finishTimer);finishTimer=setTimeout(()=>root.dataset.motion='complete',Math.max(...data.nodes.map(n=>n.layer))*220+810);}
 function scheduleEntry(){clearTimeout(replayTimer);replayTimer=setTimeout(()=>{replayTimer=null;if(visible&&!document.hidden){playMotion();}else armed=true;},80);}

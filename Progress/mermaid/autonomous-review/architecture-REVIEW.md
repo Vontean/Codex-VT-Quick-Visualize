@@ -18,3 +18,5 @@
 ## 明天验收
 
 先看常规的层级和视觉重心，再看压力图的长文本、完整内容和局部详情。若认可，由用户将 TODO 对应项勾选。
+
+2026-10-12 用户复核修订：汇接点被分组padding撑大，已恢复10px且零内距；节点图标16px与首行20px中心对齐；移除底部详情及select，改为近对象的黑底结构化tooltip。新证据 architecture-tooltip-results.json 与 architecture-tooltip-check.cjs；尚待用户确认，不勾选。

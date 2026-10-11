@@ -1,0 +1,346 @@
+[
+  {
+    "sample": "normal",
+    "theme": "light",
+    "width": 320,
+    "baseline": {
+      "height": 849,
+      "readout": false,
+      "select": false,
+      "junctions": [
+        {
+          "w": 10,
+          "h": 10,
+          "padding": "0px"
+        }
+      ],
+      "alignment": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "detail": {
+      "visible": true,
+      "bg": "rgb(27, 29, 33)",
+      "height": 849,
+      "sections": [
+        "所属分组",
+        "直接连接"
+      ],
+      "links": 1,
+      "gap": 12,
+      "overflow": false,
+      "errors": []
+    },
+    "expanded": {
+      "visible": true,
+      "gap": 12.0064697265625,
+      "font": "12px",
+      "errors": []
+    }
+  },
+  {
+    "sample": "normal",
+    "theme": "light",
+    "width": 736,
+    "baseline": {
+      "height": 849,
+      "readout": false,
+      "select": false,
+      "junctions": [
+        {
+          "w": 10,
+          "h": 10,
+          "padding": "0px"
+        }
+      ],
+      "alignment": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "detail": {
+      "visible": true,
+      "bg": "rgb(27, 29, 33)",
+      "height": 849,
+      "sections": [
+        "所属分组",
+        "直接连接"
+      ],
+      "links": 1,
+      "gap": 12,
+      "overflow": false,
+      "errors": []
+    },
+    "expanded": {
+      "visible": true,
+      "gap": 12.0028076171875,
+      "font": "12px",
+      "errors": []
+    }
+  },
+  {
+    "sample": "normal",
+    "theme": "dark",
+    "width": 320,
+    "baseline": {
+      "height": 849,
+      "readout": false,
+      "select": false,
+      "junctions": [
+        {
+          "w": 10,
+          "h": 10,
+          "padding": "0px"
+        }
+      ],
+      "alignment": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "detail": {
+      "visible": true,
+      "bg": "rgb(27, 29, 33)",
+      "height": 849,
+      "sections": [
+        "所属分组",
+        "直接连接"
+      ],
+      "links": 1,
+      "gap": 12,
+      "overflow": false,
+      "errors": []
+    },
+    "expanded": {
+      "visible": true,
+      "gap": 12.00897216796875,
+      "font": "12px",
+      "errors": []
+    }
+  },
+  {
+    "sample": "normal",
+    "theme": "dark",
+    "width": 736,
+    "baseline": {
+      "height": 849,
+      "readout": false,
+      "select": false,
+      "junctions": [
+        {
+          "w": 10,
+          "h": 10,
+          "padding": "0px"
+        }
+      ],
+      "alignment": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "detail": {
+      "visible": true,
+      "bg": "rgb(27, 29, 33)",
+      "height": 849,
+      "sections": [
+        "所属分组",
+        "直接连接"
+      ],
+      "links": 1,
+      "gap": 12,
+      "overflow": false,
+      "errors": []
+    },
+    "expanded": {
+      "visible": true,
+      "gap": 12.0028076171875,
+      "font": "12px",
+      "errors": []
+    }
+  },
+  {
+    "sample": "stress",
+    "theme": "light",
+    "width": 320,
+    "baseline": {
+      "height": 1155,
+      "readout": false,
+      "select": false,
+      "junctions": [],
+      "alignment": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "detail": {
+      "visible": true,
+      "bg": "rgb(27, 29, 33)",
+      "height": 1155,
+      "sections": [
+        "所属分组",
+        "直接连接"
+      ],
+      "links": 2,
+      "gap": 12,
+      "overflow": false,
+      "errors": []
+    },
+    "expanded": {
+      "visible": true,
+      "gap": 0,
+      "font": "12px",
+      "errors": []
+    }
+  },
+  {
+    "sample": "stress",
+    "theme": "light",
+    "width": 736,
+    "baseline": {
+      "height": 1127,
+      "readout": false,
+      "select": false,
+      "junctions": [],
+      "alignment": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "detail": {
+      "visible": true,
+      "bg": "rgb(27, 29, 33)",
+      "height": 1127,
+      "sections": [
+        "所属分组",
+        "直接连接"
+      ],
+      "links": 2,
+      "gap": 12,
+      "overflow": false,
+      "errors": []
+    },
+    "expanded": {
+      "visible": true,
+      "gap": 11.998870849609375,
+      "font": "12px",
+      "errors": []
+    }
+  },
+  {
+    "sample": "stress",
+    "theme": "dark",
+    "width": 320,
+    "baseline": {
+      "height": 1155,
+      "readout": false,
+      "select": false,
+      "junctions": [],
+      "alignment": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "detail": {
+      "visible": true,
+      "bg": "rgb(27, 29, 33)",
+      "height": 1155,
+      "sections": [
+        "所属分组",
+        "直接连接"
+      ],
+      "links": 2,
+      "gap": 12,
+      "overflow": false,
+      "errors": []
+    },
+    "expanded": {
+      "visible": true,
+      "gap": 0,
+      "font": "12px",
+      "errors": []
+    }
+  },
+  {
+    "sample": "stress",
+    "theme": "dark",
+    "width": 736,
+    "baseline": {
+      "height": 1127,
+      "readout": false,
+      "select": false,
+      "junctions": [],
+      "alignment": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "detail": {
+      "visible": true,
+      "bg": "rgb(27, 29, 33)",
+      "height": 1127,
+      "sections": [
+        "所属分组",
+        "直接连接"
+      ],
+      "links": 2,
+      "gap": 12,
+      "overflow": false,
+      "errors": []
+    },
+    "expanded": {
+      "visible": true,
+      "gap": 11.998870849609375,
+      "font": "12px",
+      "errors": []
+    }
+  }
+]

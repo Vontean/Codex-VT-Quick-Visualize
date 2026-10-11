@@ -205,13 +205,13 @@ Navigation transitions differ from initial entry: use a 360ms origin-aware spati
 
 ## Architecture-beta reading
 
-本轮沿用真实端口与原生约束几何，不强制折叠成方形。叶节点使用宿主底色，分组由内向外 muted18% 灰／白交替；灰色不叠加。分组z0、线z1、节点z2、标签z3，暗色连线48% muted-foreground混底、明色36%。详情resize延至下一帧处理，退出保留220ms缓冲，避免快速移动与ResizeObserver同步回写抖动。
+- 使用 Mermaid11.12 真实服务、汇接点、分组、方向与端口；不为视觉优化删除连接。服务240px宽、14px/20px完整换行，图标固定16px且向下偏移2px，对齐文本首行20px行盒的中心。
+- 汇接点10×10px、零内边距，不继承分组卡片的浅灰底和12px/16px内距。保留实际汇接对象与源连线几何，避免空灰胶囊。
+- mermaid-architecture-reader.js 以未缩放的黑底tooltip呈现详情，靠近当前节点／分组，使用共享≤32px定位约束。正文12px/18px，名称14px/20px，次级标签#b8bdc6；浮层填充#1b1d21，浅字和分段线在明暗主题一致。
+- 详情按名称／类型与ID／说明／所属路径／直接成员／直接连接分段。连接分列表示真实来源、方向、目标与端口，group修饰时保留原始服务端点。禁止将节点选择结果更新到图表下方；移除底部详情、提示和对象select。
+- 悬浮／点击／键盘读取同一详情，节点高亮沿用原邻接关系；移入浮层保留，离开使用220ms缓冲。滚动停稳后恢复当前详情，Escape取消待恢复对象。展开仍fit整图，详情独立于场景缩放，返回保留滚动。
+- 叶白、包含层从内向外muted18%灰／白交替，标题透明；明暗连线分别36%／48% muted-foreground混底。分组下钻原行为保留，原生不支持语法明确回退。
 
-- Preserve full Mermaid service/group names. Service cards are 240px wide with wrapped 14px/20px names; calculate height from the actual 184px content width and 500 weight. Junctions remain actual source objects, not inferred data stores.
-- Full group captions are keyboard-accessible reading buttons. Ordinary service click reads identity and relations without drilling down; the existing group-only switch and group-card navigation keep their original behavior.
-- `mermaid-architecture-reader.js` provides an unscaled 12px/18px detail region below the drawing. It includes source name, type/ID, optional description, real parent path, direct connections and original T/B/L/R ports/arrowheads. Group details list direct members; group-modified edges also retain original donor service IDs.
-- At 320px and in expanded mode, a native select lists every original service, junction and group. Selection reads the model without filtering it. Detail height is measured and reserved; keyboard focus scrolls the whole card into view, restores detail after scroll settles, and Escape cancels pending restoration.
-- Expanded preview fits the complete geometry; inline return restores scroll. Source custom constructs continue to use the earlier native fallback before any viewport or reader is initialized. Mermaid11.12 architecture labels have restricted grammar: use valid ASCII source labels, with optional Chinese description, or Chinese flowchart labels.
 
 Breadcrumb hover lists groups at the same level; the overview segment has no popover. Select a group to jump directly to it. ArrowDown opens the list, arrow keys move through it, and Escape closes it.
 

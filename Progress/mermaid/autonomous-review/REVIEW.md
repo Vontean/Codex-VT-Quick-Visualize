@@ -23,7 +23,7 @@
 - `behavior-results.json`：9图实际动效，hover与resize不重播，完整退出重入重播；不将140ms样式transition误算成入场重播。Sequence压力入口将消息stagger总窗口限制900ms。
 - `contrast-results.json`：18组computed color采样。主要文字与关键线条在明暗主题可读；局部采样不等于全图WCAG认证。
 - `extra-results.json`：13组零值、showData、水平XY重复分类、Radar非零min与circle、unsupported style/box回退、非法语法及Sankey循环明确错误。非法语法和原生不能绘制的图不承诺成功回退。
-- `detail-results.json`：42组常规／压力的首、中、末关系或分类，详情距离≤32px、完整文本、Escape后即使再次收到scroll也不重开。Architecture沿用原先的独立未缩放资源详情区，不适用瞬态浮层≤32px规则。
+- `detail-results.json`：42组常规／压力的首、中、末关系或分类，详情距离≤32px、完整文本、Escape后即使再次收到scroll也不重开。Architecture已按后续用户点评改为近对象黑底tooltip；独立修订证据见architecture-tooltip-results.json。
 - `python-tests.txt`：Python30项通过；40个Mermaid JavaScript模块语法检查通过。使用实际parser模型，不新增第二份图数据。
 - `.png`是本机浏览器截图，保留作视觉证据；源JSON与构建脚本已提交，可重建全部样例。消息流HTML位于当前线程visualizations目录。
 

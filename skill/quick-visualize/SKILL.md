@@ -46,7 +46,7 @@ Mermaid references include `mode="wide"` (ASCII) or `"mode":"wide"` (legacy) for
 
 An inline visualization error means the host recognized the reference but failed to load or run the content. Check the filename, path and runtime before blaming model compatibility; `ok: true` confirms generation and static checks, not host rendering.
 
-Architecture-beta preserves full wrapped names and offers unscaled resource/group details with a native object selector on narrow or expanded views. Selection reads the complete model without filtering it.
+Architecture-beta preserves full wrapped names. Hover, focus or click reads structured resource/group details in a nearby dark tooltip, independent of scene scaling; no detail panel or object selector below the diagram.
 
 For node-based Mermaid diagrams, proactively apply the shared design principles in the Mermaid reference: measured threshold-based wrapping, threshold-based layout balancing, alternating containment surfaces, stable hover, focused group navigation and separately calibrated themes. Preserve each diagram type's semantic shapes and relationships; do not wait for the user to repeat accepted principles.
 

@@ -1,51 +1,31 @@
-// 详情留在未缩放的文档流中，完整图只负责展示资源和连接的全貌。
-function createArchitectureReader(root, model, viewport, controller, highlight) {
-  const entries=[...(model.groups||[]).map(g=>({...g,isGroup:true})),...model.nodes];
-  const byId=new Map(entries.map(n=>[n.id,n]));
-  const readout=document.createElement('div');readout.className='architecture-readout';
-  const cue=document.createElement('div');cue.className='architecture-cue';
-  const picker=document.createElement('label');picker.className='form-label';picker.append(document.createTextNode('对象详情'));
-  const select=document.createElement('select');select.className='form-select';select.setAttribute('aria-label','选择架构对象查看详情');
-  const placeholder=document.createElement('option');placeholder.value='';placeholder.textContent='选择资源或分组';select.append(placeholder);
-  for(const n of entries){const option=document.createElement('option');option.value=n.id;option.textContent=(n.isGroup?'分组 · ':'')+n.name;select.append(option);}
-  picker.append(select);
-  const detail=document.createElement('div');detail.className='architecture-detail';detail.id=root.id+'-architecture-detail';detail.setAttribute('role','tooltip');detail.hidden=true;
-  readout.append(cue,picker,detail);viewport.after(readout);
-  let selected=null,epoch=0,scrollTimer,width=0;
-  const sides={NORTH:'T',SOUTH:'B',WEST:'L',EAST:'R'};
+// 详情浮层独立于缩放场景，保留完整源身份和真实端口关系。
+function createArchitectureReader(root, model, viewport, controller, highlight, keepAlive, leave) {
+  const entries=[...(model.groups||[]).map(g=>({...g,isGroup:true})),...model.nodes],byId=new Map(entries.map(n=>[n.id,n]));
+  const detail=document.createElement('div');detail.className='architecture-detail';detail.id=root.id+'-architecture-detail';detail.setAttribute('role','tooltip');detail.hidden=true;root.append(detail);
+  let selected=null,epoch=0,scrollTimer;
+  const sides={NORTH:'上',SOUTH:'下',WEST:'左',EAST:'右'};
   function path(n){const chain=[];for(let parent=byId.get(n.parent);parent;parent=byId.get(parent.parent))chain.unshift(parent.name);return chain.join(' / ');}
-  function content(id){
-    const n=byId.get(id);if(!n)return [];
-    const lines=[n.name,(n.isGroup?'分组':n.junction?'汇接点':'资源'+(n.resource?' · '+n.resource:''))+' · '+n.id];
-    if(n.description)lines.push(n.description);
-    if(n.parent)lines.push('所属：'+path(n));
-    if(n.isGroup){const children=entries.filter(c=>c.parent===id);if(children.length)lines.push('成员：'+children.map(c=>c.name).join(' · '));}
+  const row=(cls,text)=>{const n=document.createElement('div');n.className=cls;n.textContent=text;return n;};
+  function section(title){const el=document.createElement('section');el.className='architecture-detail-section';el.append(row('architecture-detail-label',title));detail.append(el);return el;}
+  function endpoint(id,side){const el=document.createElement('div');el.append(row('architecture-detail-endpoint',byId.get(id)?.name||id));el.append(row('architecture-detail-label',sides[side]?'端口 · '+sides[side]:''));return el;}
+  function fill(id){
+    const n=byId.get(id);detail.replaceChildren();detail.append(row('architecture-detail-name',n.name),row('architecture-detail-label',(n.isGroup?'分组':n.junction?'汇接点':'资源'+(n.resource?' · '+n.resource:''))+' · '+n.id));
+    if(n.description)section('说明').append(row('architecture-detail-body',n.description));
+    if(n.parent)section('所属分组').append(row('architecture-detail-body',path(n)));
+    if(n.isGroup){const children=entries.filter(c=>c.parent===id);if(children.length){const list=section('直接成员');for(const child of children)list.append(row('architecture-detail-body',child.name));}}
     const links=model.edges.filter(e=>e.from===id||e.to===id);
-    for(const e of links){const arrow=e.startArrow&&e.arrow?'↔':e.startArrow?'←':e.arrow?'→':'—';
-      lines.push((byId.get(e.from)?.name||e.from)+' ['+sides[e.fromSide]+(e.fromGroup?' group':'')+'] '+arrow+' '+(byId.get(e.to)?.name||e.to)+' ['+sides[e.toSide]+(e.toGroup?' group':'')+']');
-      if(e.fromGroup||e.toGroup)lines.push('源端点：'+e.sourceFrom+' '+arrow+' '+e.sourceTo);
-    }
-    return lines;
+    if(links.length){const list=section('直接连接');for(const e of links){const link=document.createElement('div');link.className='architecture-detail-link';const arrow=e.startArrow&&e.arrow?'↔':e.startArrow?'←':e.arrow?'→':'—';link.append(endpoint(e.from,e.fromSide),row('architecture-detail-arrow',arrow),endpoint(e.to,e.toSide));list.append(link);if(e.fromGroup||e.toGroup)list.append(row('architecture-detail-label','源端点：'+e.sourceFrom+' '+arrow+' '+e.sourceTo));}}
   }
-  function fill(id){detail.replaceChildren();for(const [i,text] of content(id).entries()){const row=document.createElement('div');row.textContent=text;if(i===0)row.className='architecture-detail-name';else if(i===1)row.style.color='var(--muted-foreground)';else if(text.includes(' → ')||text.includes(' ↔ ')||text.includes(' ← ')){row.style.cssText='padding:8px 10px;border-radius:8px;background:color-mix(in srgb,var(--foreground) 4%,var(--background))';}detail.append(row);}}
-  function clear(){epoch++;clearTimeout(scrollTimer);selected=null;detail.hidden=true;cue.hidden=false;select.value='';root.querySelectorAll('[aria-describedby="'+detail.id+'"]').forEach(n=>n.removeAttribute('aria-describedby'));}
-  function reveal(pending){if(pending!==epoch||!selected)return;fill(selected.id);detail.hidden=false;cue.hidden=true;select.value=selected.id;selected.anchor?.setAttribute('aria-describedby',detail.id);highlight(selected.id);}
+  function clear(){epoch++;clearTimeout(scrollTimer);selected=null;detail.hidden=true;root.querySelectorAll('[aria-describedby="'+detail.id+'"]').forEach(n=>n.removeAttribute('aria-describedby'));}
+  function reveal(pending){if(pending!==epoch||!selected||!selected.anchor?.isConnected)return;fill(selected.id);detail.hidden=false;selected.anchor.setAttribute('aria-describedby',detail.id);highlight(selected.id);placeMermaidDetail(root,detail,selected.anchor);}
   function choose(id,anchor,ensure=false){
     if(!byId.has(id))return;
-    const pending=++epoch;clearTimeout(scrollTimer);selected={id,anchor};
+    clear();const pending=epoch;selected={id,anchor};
     if(ensure&&anchor&&!controller.expanded){const a=anchor.getBoundingClientRect(),v=viewport.getBoundingClientRect();if(a.width<=v.width){if(a.left<v.left+8)viewport.scrollLeft-=v.left+8-a.left;else if(a.right>v.right-8)viewport.scrollLeft+=a.right-v.right+8;}}
     requestAnimationFrame(()=>requestAnimationFrame(()=>reveal(pending)));
   }
-  function onScroll(){if(!selected)return;detail.hidden=true;const pending=epoch;clearTimeout(scrollTimer);scrollTimer=setTimeout(()=>reveal(pending),80);}
-  function refresh(){
-    const nextWidth=root.clientWidth;picker.hidden=!(controller.expanded||nextWidth<=420);cue.textContent=controller.expanded?'完整图概览 · 选择资源或分组查看详情':'可左右滚动 · 聚焦资源或分组查看详情';
-    if(width===nextWidth&&readout.dataset.picker===String(!picker.hidden))return;
-    width=nextWidth;readout.dataset.picker=String(!picker.hidden);
-    readout.style.minHeight='0px';
-    if(selected){fill(selected.id);detail.hidden=false;cue.hidden=true;}else{detail.hidden=true;cue.hidden=false;}
-    controller.refresh();
-  }
-  select.addEventListener('change',()=>{if(select.value)choose(select.value,select);else clear();});
-  select.addEventListener('blur',clear);
+  function onScroll(){if(!selected)return;detail.hidden=true;const pending=epoch;clearTimeout(scrollTimer);scrollTimer=setTimeout(()=>reveal(pending),100);}
+  function refresh(){if(selected)reveal(epoch);}
+  detail.addEventListener('pointerenter',keepAlive);detail.addEventListener('pointerleave',leave);
   return {choose,clear,onScroll,refresh,get focused(){return !!selected&&selected.anchor===document.activeElement;}};
 }

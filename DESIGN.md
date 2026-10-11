@@ -199,16 +199,13 @@ Mermaid shape fills: shaped nodes keep a transparent HTML backplate even when la
 
 ## Architecture-beta resource reader
 
-本轮沿用真实端口与原生约束几何，不强制折叠成方形。叶节点使用宿主底色，分组由内向外 muted18% 灰／白交替；灰色不叠加。分组z0、线z1、节点z2、标签z3，暗色连线48% muted-foreground混底、明色36%。详情resize延至下一帧处理，退出保留220ms缓冲，避免快速移动与ResizeObserver同步回写抖动。
+- 使用 Mermaid11.12 真实服务、汇接点、分组、方向与端口；不为视觉优化删除连接。服务240px宽、14px/20px完整换行，图标固定16px且向下偏移2px，对齐文本首行20px行盒的中心。
+- 汇接点10×10px、零内边距，不继承分组卡片的浅灰底和12px/16px内距。保留实际汇接对象与源连线几何，避免空灰胶囊。
+- mermaid-architecture-reader.js 以未缩放的黑底tooltip呈现详情，靠近当前节点／分组，使用共享≤32px定位约束。正文12px/18px，名称14px/20px，次级标签#b8bdc6；浮层填充#1b1d21，浅字和分段线在明暗主题一致。
+- 详情按名称／类型与ID／说明／所属路径／直接成员／直接连接分段。连接分列表示真实来源、方向、目标与端口，group修饰时保留原始服务端点。禁止将节点选择结果更新到图表下方；移除底部详情、提示和对象select。
+- 悬浮／点击／键盘读取同一详情，节点高亮沿用原邻接关系；移入浮层保留，离开使用220ms缓冲。滚动停稳后恢复当前详情，Escape取消待恢复对象。展开仍fit整图，详情独立于场景缩放，返回保留滚动。
+- 叶白、包含层从内向外muted18%灰／白交替，标题透明；明暗连线分别36%／48% muted-foreground混底。分组下钻原行为保留，原生不支持语法明确回退。
 
-Architecture-beta 保留 Mermaid 11.12.0 实际 DB 的服务、汇接点、嵌套分组、双向箭头与 T/B/L/R 端口；group 修饰仍附着服务所属边界，保留原始服务端点供详情追溯。使用原生约束几何，不另造拓扑。
-
-- 完整服务名称使用 240px 宽卡片、14px/20px、500 字重，真实内容宽 184px 测高，保留 12px 上下内距和 1px 边框。分组浏览卡片 320px，成员使用 12px/18px 的完整换行文本。
-- 完整组标题是真实按钮。服务和完整组标题只阅读详情；组浏览卡片仍按原来的 Enter/Space 下钻，不改变默认分组浏览行为。
-- 未缩放的详情放在图下文档流，使用 host 前景色、12px/18px，显示完整源名称、类型、ID、可选中文说明、所属路径及直接关系与真实端口；组显示直接成员，group 边显示原服务端点。详情区按最宽内容实际测高预留空间，不遮住图形、标题或路径。
-- 320px 和完整图模式提供原生对象 select，列出原模型所有服务、汇接点和分组；选择只读详情，不过滤图。完整图继续 fit 全部几何，返回保留 inline 滚动。
-- 键盘聚焦将能容纳的完整卡片滚入可见区，滚动结束恢复详情。Escape 清除选择并取消尚未发生的详情恢复。缩放不作用于详情。
-- 动效沿用 240ms 节点、650ms 连线、50ms 箭头，以及真实退出/重入重播；reduced-motion 和完整图静态。
 
 Flowchart wires and arrowheads retain the light-theme 26% muted-foreground mix; dark theme uses 36% for a small visibility increase. Tooltip keyboard behavior and long descriptions are unchanged in the 2026-10-11 flowchart audit.
 
