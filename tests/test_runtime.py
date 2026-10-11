@@ -27,11 +27,32 @@ class RuntimeTests(unittest.TestCase):
                 self.assertTrue(result['ok'], result)
                 self.assertTrue(output.exists())
                 self.assertEqual(result['checks'], ['spec', 'placeholders', 'ids', 'javascript', 'size'])
-                self.assertTrue(result['reference'].startswith('\ue200visualize\ue202'))
-                self.assertTrue(result['reference'].endswith('\ue201'))
-                payload = json.loads(result['reference'].split('\ue202')[1][:-1])
-                self.assertEqual(payload['path'], str(output.resolve()))
-                self.assertEqual(payload.get('mode'), 'wide' if kind == 'mermaid' else None)
+                self.assertTrue(result['reference'].startswith(f'::codex-inline-vis{{path="{output.resolve()}"'))
+                self.assertTrue(result['reference'].endswith('}'))
+                self.assertNotIn('\ue200', result['reference'])
+
+    def test_legacy_reference_requires_explicit_format(self):
+        with tempfile.TemporaryDirectory() as folder:
+            source = Path(folder) / 'spec.json'
+            output = Path(folder) / 'chart.html'
+            source.write_text('{"title":"构成","items":[{"label":"A","value":60},{"label":"B","value":40}]}')
+            result = render_checked('donut-chart', source, output, 'visualize')
+            self.assertTrue(result['ok'], result)
+            self.assertTrue(result['reference'].startswith('\ue200visualize\ue202'))
+            self.assertTrue(result['reference'].endswith('\ue201'))
+            payload = json.loads(result['reference'].split('\ue202')[1][:-1])
+            self.assertEqual(payload['path'], str(output.resolve()))
+
+    def test_cli_defaults_to_ascii_without_format_flag(self):
+        import subprocess
+        with tempfile.TemporaryDirectory() as folder:
+            source = Path(folder) / 'spec.json'
+            output = Path(folder) / 'chart.html'
+            source.write_text('{"title":"构成","items":[{"label":"A","value":60},{"label":"B","value":40}]}')
+            completed = subprocess.run([sys.executable, str(SKILL / 'scripts/render.py'), 'donut-chart', str(source), str(output)], capture_output=True, text=True)
+            self.assertEqual(completed.returncode, 0, completed.stderr)
+            result = json.loads(completed.stdout)
+            self.assertEqual(result['reference'], f'::codex-inline-vis{{path="{output.resolve()}"}}')
 
     def test_invalid_spec_preserves_old_output(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -44,6 +65,49 @@ class RuntimeTests(unittest.TestCase):
             self.assertNotIn('reference', result)
             self.assertEqual(output.read_text(), 'previous')
             self.assertEqual(sorted(p.name for p in Path(folder).iterdir()), ['chart.html', 'spec.json'])
+
+    def test_directive_reference_preserves_path_and_wide_mode(self):
+        with tempfile.TemporaryDirectory() as folder:
+            directory = Path(folder) / '中文 directory'
+            directory.mkdir()
+            source = directory / 'spec.json'
+            output = directory / 'chart.html'
+            fragment = '<div id="root"><script>const x = 1;</script></div>'
+            source.write_text('{}')
+            for kind in ('donut-chart', 'mermaid'):
+                with self.subTest(kind=kind), patch('render.importlib.import_module') as module:
+                    module.return_value.render.return_value = fragment
+                    result = render_checked(kind, source, output, 'directive')
+                    self.assertTrue(result['ok'], result)
+                    wide = ' mode="wide"' if kind == 'mermaid' else ''
+                    self.assertEqual(result['reference'], f'::codex-inline-vis{{path="{output.resolve()}"{wide}}}')
+                    self.assertNotIn('\ue200', result['reference'])
+
+    def test_host_rejects_bad_filename_before_writing(self):
+        with tempfile.TemporaryDirectory() as folder:
+            source = Path(folder) / 'spec.json'
+            source.write_text('{}')
+            for name in ('中文.html', 'Chart.html', 'chart name.html', 'chart_name.html', 'chart--name.html', 'chart.HTML'):
+                with self.subTest(name=name):
+                    output = Path(folder) / name
+                    output.write_text('previous')
+                    result = render_checked('donut-chart', source, output)
+                    self.assertFalse(result['ok'])
+                    self.assertEqual(result['stage'], 'spec')
+                    self.assertNotIn('reference', result)
+                    self.assertEqual(output.read_text(), 'previous')
+
+    def test_reference_rejects_unsafe_path_and_unknown_format(self):
+        with tempfile.TemporaryDirectory() as folder:
+            source = Path(folder) / 'spec.json'
+            source.write_text('{}')
+            for parent in ('quote"directory', 'line\nbreak', 'line\rbreak'):
+                result = render_checked('donut-chart', source, Path(folder) / parent / 'chart.html', 'directive')
+                self.assertFalse(result['ok'])
+                self.assertIn('quotes or line breaks', result['error']['message'])
+            result = render_checked('donut-chart', source, Path(folder) / 'chart.html', 'unknown')
+            self.assertFalse(result['ok'])
+            self.assertIn('Reference format', result['error']['message'])
 
     def test_json_error_location(self):
         with tempfile.TemporaryDirectory() as folder:

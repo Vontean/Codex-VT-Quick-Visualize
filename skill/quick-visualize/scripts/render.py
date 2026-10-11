@@ -25,15 +25,20 @@ RENDERERS = {
 }
 
 
-def render_checked(kind: str, spec_path: Path, output: Path) -> dict:
+def render_checked(kind: str, spec_path: Path, output: Path, reference_format: str = "directive") -> dict:
     stage = "spec"
     temporary = None
     fragment = None
     template = None
     try:
         output = output.resolve()
-        if output.suffix.lower() != ".html":
-            raise ValueError("Output must use the .html extension")
+        # 宿主读取接口要求英文 slug；显示标题仍可使用中文。
+        if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*\.html", output.name):
+            raise ValueError("Output filename must use lowercase letters, numbers and single hyphens, ending in .html (for example donut-chart.html)")
+        if reference_format not in {"visualize", "directive"}:
+            raise ValueError("Reference format must be visualize or directive")
+        if '"' in str(output) or "\n" in str(output) or "\r" in str(output):
+            raise ValueError("Output path cannot contain quotes or line breaks")
         raw = spec_path.read_text(encoding="utf-8")
         spec = {"source": raw} if kind == "mermaid" and spec_path.suffix.lower() == ".mmd" else json.loads(raw)
         if not isinstance(spec, dict):
@@ -64,7 +69,10 @@ def render_checked(kind: str, spec_path: Path, output: Path) -> dict:
         payload = {"path": str(output)}
         if kind == "mermaid":
             payload["mode"] = "wide"
-        reference = "\ue200visualize\ue202" + json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\ue201"
+        if reference_format == "directive":
+            reference = '::codex-inline-vis{path="' + str(output) + '"' + (' mode="wide"' if payload.get("mode") == "wide" else '') + '}'
+        else:
+            reference = "\ue200visualize\ue202" + json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\ue201"
         result = {"ok": True, "path": str(output), "checks": checks, "reference": reference}
         if kind == "mermaid":
             result["runtime"] = "pending-browser"
@@ -90,8 +98,9 @@ def main() -> int:
     parser.add_argument("type", choices=RENDERERS)
     parser.add_argument("spec", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--reference-format", choices=("directive", "visualize"), default="directive", help="ASCII directive is the default; visualize explicitly opts into the legacy Unicode reference")
     args = parser.parse_args()
-    result = render_checked(args.type, args.spec, args.output)
+    result = render_checked(args.type, args.spec, args.output, args.reference_format)
     print(json.dumps(result, ensure_ascii=False, separators=(",", ":")))
     return 0 if result["ok"] else 1
 

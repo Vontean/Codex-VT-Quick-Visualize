@@ -5,3 +5,6 @@ __pycache__/
 # Mermaid design fixtures and iteration evidence
 /skill/quick-visualize/test/
 /Progress/
+
+# Task-owned specs, previews and local validation evidence
+/work/

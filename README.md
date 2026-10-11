@@ -4,6 +4,14 @@
 
 > Quick Visualize 不是 Visualize 的替代品。模板负责稳定的结构与交互，Visualize 负责线程级 HTML surface、沙箱运行环境和消息流内呈现。
 
+### GPT 与三方模型兼容
+
+当前 Codex Desktop 可识别纯 ASCII 的 `::codex-inline-vis{path="..."}`。GPT 与三方模型共用模板和渲染流程；runner 默认返回 ASCII 引用，原样输出返回的 `reference` 即可，无需按模型分支。只有旧宿主不支持 ASCII 时，才显式使用 `--reference-format visualize` 返回旧的 Unicode 引用。已有调用无需改参数，但未传格式的 `reference` 会改为 ASCII。
+
+HTML 文件名必须匹配 `[a-z0-9]+(?:-[a-z0-9]+)*\.html`，例如 `donut-chart.html`。中文显示标题写入 spec，不能直接当输出文件名；目录名可以含中文或空格。runner 会在写入前检查宿主的文件名要求，避免静态校验成功后宿主读取失败。
+
+`ok: true` 表示生成与静态检查通过。消息流出现可视化错误框，说明展示入口已识别，还需排查文件读取或运行错误。不要据此认定三方模型无法输出 OpenAI 私有字符。实测范围和验收记录见 [兼容性验证](docs/visualize-compatibility.md)。
+
 ## 模板
 
 | 模板 | 适用场景 | 数据边界 |
