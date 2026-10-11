@@ -152,11 +152,10 @@ Mermaid shape fills: shaped nodes keep a transparent HTML backplate even when la
 
 ## Mermaid XY renderer
 
-- Mermaid11.12 getXYChartData owns real point coordinates, category order, numeric domains and bar/line types. Copy parser data, not source regex or a second graph. This version has no business series names: identify plots by source type/index, never invent meaning.
-- Host series colors,1.5px lines/3px points, neutral grids, complete12px labels and axis titles. Bar thickness at most24px; actual zero baseline anchors positive/negative bars. Categories retain measured minimum readable slots and drawing-only horizontal scrolling. Half-column edge inset keeps the last label inside intrinsic geometry.
-- Inline keeps a64px neutral reference region for value ticks/unit; the axis caption stays centered below the visible viewport. Expanded restores full SVG value reference and fits the complete scene. Return uses shared saved inline position. Wrapping series legend follows20px below the figure and stays centered.
-- Pointer compares all source series at a category; keyboard/click category labels reveal the same complete values. Near-trigger transient themed details constrain to real root bounds and avoid labels/ticks/titles/legend/reference. Whole focused label enters the viewport; settled scrolling restores keyboard detail, Escape cancels delayed restoration.
--650ms simultaneous bars grow from actual zero,1200ms lines trace their unchanged paths. Hover/resize do not replay; expanded/reduced remain static. Complete exit/reentry and visibility restoration replay only when visible; hidden cancels incomplete entry and details.
+- Mermaid11.12 getXYChartData/getChartConfig 保留真实坐标、分类顺序、数值域、orientation和bar/line顺序。每个分类保留源数组索引，重复分类名称是不同的位置，不能用名称去重或将数据聚到首项。此版本无业务系列名，使用源类型／序号，不发明业务含义。
+- 正负柱从实际零基线绘制，柱宽≤24px，折线连接真实坐标，完整分类名换行。水平布局按分类数量和各标签可读槽位增长高度；窄消息流只滚动绘图区，值参考及标题保留，展开整体fit并恢复返回位置。
+- 悬浮／键盘比较该索引下所有系列的精确值，突出当前分类的柱和点，其余降到.18。近对象详情距触发对象≤32px；滚动后恢复键盘详情，Escape取消。重复名称的导线、命中区、标签与详情全部使用同一索引。
+- 柱650ms同时增长，线1200ms描画；hover/resize不重播，完整退出重入／可见性恢复按既有契约重播，reduced/expanded静态。rich axis HTML和额外说明明确回退。
 
 ## Mermaid Radar renderer
 

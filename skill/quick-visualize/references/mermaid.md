@@ -158,11 +158,10 @@ Navigation transitions differ from initial entry: use a 360ms origin-aware spati
 
 ## XY scope
 
-- `xychart-beta` preserves Mermaid11.12 actual point coordinates, category order, numeric x/y domains, orientation and bar/line source order. `getXYChartData` and `getChartConfig` are isolated in mermaid-xy-model.js. Do not reconstruct values from SVG or regex. Pinned11.12 has no named series contract; source type/index labels such as柱形1/折线1 identify plots without invented business names.
-- Independent qv drawing uses proportional bars from actual zero, lines through true coordinates, complete category labels/axis titles and a centered wrapping legend. Inline retains readable category slots with drawing-only scroll and fixed value reference/caption. Expanded fits the whole scene and return restores saved inline position; no custom fullscreen layer.
-- Category hover/pointer, focus and click show exact values from every corresponding source series. One transient near-trigger detail avoids visible labels/values/title/reference/legend and stays inside real frame bounds. Focus brings the whole category label into view; settled scroll restores keyboard detail; Escape cancels it.
-- Bars grow650ms simultaneously from zero; lines trace1200ms. Complete exit/reentry/visibility restoration replay; hidden cancels motion and detail. Hover/resize do not replay; reduced/expanded are static. Rich axis HTML and additional descriptions visibly preserve native semantics.
-
+- Mermaid11.12 getXYChartData/getChartConfig 保留真实坐标、分类顺序、数值域、orientation和bar/line顺序。每个分类保留源数组索引，重复分类名称是不同的位置，不能用名称去重或将数据聚到首项。此版本无业务系列名，使用源类型／序号，不发明业务含义。
+- 正负柱从实际零基线绘制，柱宽≤24px，折线连接真实坐标，完整分类名换行。水平布局按分类数量和各标签可读槽位增长高度；窄消息流只滚动绘图区，值参考及标题保留，展开整体fit并恢复返回位置。
+- 悬浮／键盘比较该索引下所有系列的精确值，突出当前分类的柱和点，其余降到.18。近对象详情距触发对象≤32px；滚动后恢复键盘详情，Escape取消。重复名称的导线、命中区、标签与详情全部使用同一索引。
+- 柱650ms同时增长，线1200ms描画；hover/resize不重播，完整退出重入／可见性恢复按既有契约重播，reduced/expanded静态。rich axis HTML和额外说明明确回退。
 
 ## Radar scope
 
