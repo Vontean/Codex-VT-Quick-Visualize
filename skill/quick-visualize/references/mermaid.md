@@ -197,12 +197,11 @@ Navigation transitions differ from initial entry: use a 360ms origin-aware spati
 
 ## C4 scope
 
-- Read actual Context/Container/Component/Dynamic/Deployment data from Mermaid11.12.0. Preserve typed nodes, source names, technologies/descriptions, real boundary containment, external status and relation protocols. Temporarily observe the parser's own creation callbacks to retain source order and optional-feature presence, then restore every callback in finally. Rel_Back reverses logical endpoints; BiRel retains both arrowheads; Dynamic numbers follow native declaration order rather than ignored RelIndex author numbers.
-- Model, layout and drawing stay separate. Intrinsic200px cells/40px gap/32px padding, external participants beside real boundaries, and two-column container components reduce unnecessary width without inventing groups or changing topology. Per-kind declaration order and UpdateLayoutConfig row ceilings are retained. Complete names14px/20px weight500; type/technology/description/protocol12px/18px. Semantic Lucide icons and neutral1px outlines match the shared language.
-- Route candidates are evaluated after final compaction against actual DOM label sizes. Labels cannot intersect nodes, boundary captions or earlier labels. Reject candidates without zero-overlap positions. Node/group/edge native buttons expose full source details; edges emphasize exactly their endpoints and wire. Details avoid all readable marks or dock below the diagram, with source-derived stable height and unscaled12px text. Narrow expanded mode adds one native node selector for easy complete-name lookup; it opens the same detail and does not filter the graph.
-- Shared whole-scene fit and saved inline scroll handle mode changes. Nodes240ms/4px, solid paths650ms with35ms edge stagger, labels240ms; markers appear after arrival. Full exit followed by20% reentry can replay. Reduced/expanded/resize show final static geometry and cancel timers/animations together.
-- Rich labels, explicit element/relation styles, sprites/tags/links, unknown node/relation semantics and unsupported endpoints visibly retain native output. No qv viewport attaches to native fallback. C4 is an experimental Mermaid family; pinned-parser behavior and actual host toolbar/clipboard/document-hidden acceptance remain separate boundaries.
-
+- Mermaid11.12拥有Context／Container／Component／Dynamic／Deployment源身份、类型、技术／说明、真实边界、外部状态与关系；保留声明顺序、row ceiling、Rel_Back/BiRel和原生Dynamic编号。观察创建回调后finally恢复。rich label、自定义style、sprite/tag/link和未知语义明确原生回退。
+- model/layout/drawing分离；200px cell、40px gap、32px padding，外部参与者位于真实边界旁，组件按两列布局。源名称14px/20px、类型／技术／正文12px/18px，Lucide语义图标；叶白，包裹层由内向外muted18%灰／白，组名透明底完整换行。
+- 连线及marker用明色#727a82／暗色#a3aab3，次级小字60%／68%前景混色。组z0、线z1、节点z2、标签z3；关系文字按最终DOM测量避让真实节点／组名／既有标签，没有合法标签位置的路由不能误报成功。
+- 节点突出直接关系，组突出真实成员，边只突出两端与本边；带额外说明的节点、组、关系保留完整详情，定位距触发对象≤32px。取消远端停靠、隐藏详情区及其无效select，所有源节点仍可通过真实按钮键盘访问。100ms停稳／160ms退出缓冲，无筛选或虚构下钻。
+-240ms节点、650ms线／35ms stagger，240ms标签，箭头到达后出现；resize/hover不重播，reduced/expanded静态。共享整体fit及返回滚动，宿主toolbar／clipboard／可见性恢复须另行验收。
 
 ## Architecture-beta reading
 

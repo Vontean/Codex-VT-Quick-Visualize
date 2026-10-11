@@ -191,11 +191,11 @@ Mermaid shape fills: shaped nodes keep a transparent HTML backplate even when la
 
 ## Mermaid C4 renderer
 
-- Mermaid11.12 owns actual Context/Container/Component/Dynamic/Deployment identities, boundaries, technologies, descriptions and relationships. Retain per-kind declaration order, source row ceilings, external status, reverse/bidirectional endpoints and native Dynamic sequence numbers. Rich labels, custom style, sprites/tags/links and unsupported semantics preserve native fallback.
-- Intrinsic cells200px, gap40px and nested padding32px. Root participants form a reading column beside actual boundaries; container components wrap into two columns. This changes placement only: no synthetic boundary, omitted relation or renamed type. Node names14px/20px weight500; stereotypes, technologies, descriptions and relation labels12px/18px. Nodes10px radius, boundaries12px, neutral1px outlines and semantic Lucide icons retain the common design language.
-- Measure real relation-label rectangles before routing. Final compact paths must admit a label position without intersecting any node, actual boundary caption or earlier label. A route with no free position is rejected rather than choosing the least overlap. Details avoid those same obstacles and dock below the diagram when free nearby space is unavailable.
-- Source nodes, actual boundaries and relationships retain native keyboard entry and complete details. Node emphasis follows actual incident edges; relationship emphasis is exactly two endpoints and one wire. No filtering or invented drilldown. Expanded/narrow views reserve maximum source-detail height below the diagram at unscaled12px. At<=420px expanded width, one labeled native select lists actual node names and opens the same detail, keeping the whole diagram visible and stable.
-- Shared whole-scene fit preserves inline scroll on return. Source-order240ms/4px node entry,650ms wire trace with35ms stagger,240ms labels and endpoint markers after arrival. Complete exit/20% reentry may replay; resize, reduced motion and expanded mode remain final/static. Cancel timers and animations together. Native fallback never receives qv viewport behavior; host toolbar and clipboard acceptance remain separate from simulated mode-event tests.
+- Mermaid11.12拥有Context／Container／Component／Dynamic／Deployment源身份、类型、技术／说明、真实边界、外部状态与关系；保留声明顺序、row ceiling、Rel_Back/BiRel和原生Dynamic编号。观察创建回调后finally恢复。rich label、自定义style、sprite/tag/link和未知语义明确原生回退。
+- model/layout/drawing分离；200px cell、40px gap、32px padding，外部参与者位于真实边界旁，组件按两列布局。源名称14px/20px、类型／技术／正文12px/18px，Lucide语义图标；叶白，包裹层由内向外muted18%灰／白，组名透明底完整换行。
+- 连线及marker用明色#727a82／暗色#a3aab3，次级小字60%／68%前景混色。组z0、线z1、节点z2、标签z3；关系文字按最终DOM测量避让真实节点／组名／既有标签，没有合法标签位置的路由不能误报成功。
+- 节点突出直接关系，组突出真实成员，边只突出两端与本边；带额外说明的节点、组、关系保留完整详情，定位距触发对象≤32px。取消远端停靠、隐藏详情区及其无效select，所有源节点仍可通过真实按钮键盘访问。100ms停稳／160ms退出缓冲，无筛选或虚构下钻。
+-240ms节点、650ms线／35ms stagger，240ms标签，箭头到达后出现；resize/hover不重播，reduced/expanded静态。共享整体fit及返回滚动，宿主toolbar／clipboard／可见性恢复须另行验收。
 
 ## Architecture-beta resource reader
 

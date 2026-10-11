@@ -1,0 +1,4 @@
+{
+  "title": "c4 · 常规",
+  "source": "C4Container\n title 内容平台的应用与数据协作\n Person(reader, \"读者\", \"查找、阅读和整理内容\")\n System_Boundary(platform, \"内容平台\") {\n  Container(web, \"阅读应用\", \"Web\", \"提供内容阅读与搜索入口\")\n  Container(api, \"内容服务\", \"HTTP API\", \"管理内容版本与访问权限\")\n  ContainerDb(store, \"内容库\", \"PostgreSQL\", \"存储内容与历史版本\")\n }\n System_Ext(search, \"搜索服务\", \"提供全文与语义检索\")\n Rel(reader, web, \"阅读与整理\", \"HTTPS\")\n Rel(web, api, \"获取内容\", \"HTTPS / JSON\")\n Rel(api, store, \"读写内容\", \"SQL\")\n Rel(api, search, \"查询索引\", \"HTTPS\")\n"
+}
