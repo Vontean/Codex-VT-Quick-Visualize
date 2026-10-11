@@ -81,6 +81,8 @@ Keep labels concise and split very large diagrams into meaningful views. Never r
 
 ## Sequence scope
 
+需要表达处理区间时，使用 `activate`／`deactivate` 或消息的 `+`／`-` 标记明确激活范围；渲染为浅蓝色激活条，嵌套向右错开。只表示执行顺序区间，不将柱长解读为实际耗时，也不为未声明的区间自动补柱。
+
 - 保留 Mermaid11.12 的参与者顺序、角色、消息方向、虚实线和箭头类型、自动编号、激活条、self message、alt/loop/par/critical 等控制框及 note 的源位置；未支持的 box、rich label、properties 等明确原生回退。
 - 参与者标题按实际 DOM 换行测高，内容宽最多240px；消息最多288px并完整换行。每条消息按自己的高度预留空间，长文本不会覆盖前一条消息或将后续消息统一撑高。共享 intrinsic scene，展开整体 fit，返回保留滚动。
 - 消息线与箭头使用明色#727a82／暗色#a3aab3，lifeline 更轻；次级小字使用60%／68%前景混色。参与者悬浮突出真实邻接消息；消息浮层分列表示来源、目标，再显示完整正文，距离触发对象不超过32px。不重复展示没有额外说明的参与者标题。

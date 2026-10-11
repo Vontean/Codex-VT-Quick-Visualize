@@ -1,0 +1,4 @@
+{
+  "title": "激活条：嵌套、自调用与未关闭区间",
+  "source": "sequenceDiagram\n participant A as 编辑者\n participant B as 内容服务\n A->>+B: 核对特别长的完整业务说明与全部历史资料和权限记录并保留每一次历史变更用于后续审查\n B->>+B: 嵌套核对\n B-->>-B: 内层核对完成\n B-->>-A: 返回结果\n activate A\n deactivate A\n activate B\n B->>B: 后续处理\n"
+}

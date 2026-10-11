@@ -6,11 +6,11 @@ sequenceDiagram
   participant Queue as 消息队列
   Editor->>API: 提交发布请求
   activate API
-  API->>DB: 校验并保存草稿
-  DB-->>API: 草稿已保存
+  API->>+DB: 校验并保存草稿
+  DB-->>-API: 草稿已保存
   alt 校验通过
-    API->>DB: 更新发布状态
-    DB-->>API: 发布完成
+    API->>+DB: 更新发布状态
+    DB-->>-API: 发布完成
     API-)Queue: 提交索引任务
     API-->>Editor: 返回内容链接
   else 信息不完整

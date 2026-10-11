@@ -12,7 +12,7 @@ function renderMermaidSequence(root,data,cfg) {
   #${root.id} .seq-frame{fill:transparent;stroke:color-mix(in srgb,var(--muted-foreground) 48%,var(--background));stroke-width:1}
   #${root.id} .seq-branch{position:absolute;font-size:12px;color:light-dark(color-mix(in srgb,var(--foreground) 60%,var(--background)),color-mix(in srgb,var(--foreground) 68%,var(--background)));padding:0 8px;background:var(--background)}
   #${root.id} .seq-note{position:absolute;padding:10px 12px;border-left:2px solid var(--border);color:light-dark(color-mix(in srgb,var(--foreground) 60%,var(--background)),color-mix(in srgb,var(--foreground) 68%,var(--background)));font-size:12px;background:var(--background)}
-  #${root.id} .seq-activation{fill:var(--background);stroke:color-mix(in srgb,var(--muted-foreground) 55%,var(--background));stroke-width:1}
+  #${root.id} .seq-activation{fill:light-dark(color-mix(in srgb,var(--viz-series-1) 16%,var(--background)),color-mix(in srgb,var(--viz-series-1) 26%,var(--background)));stroke:color-mix(in srgb,var(--viz-series-1) 65%,var(--background));stroke-width:1}
   #${root.id} .seq-tip{position:absolute;z-index:10;max-width:280px;padding:12px 14px;border-radius:12px;background:var(--popover);color:var(--popover-foreground);box-shadow:0 3px 12px #0002;font-size:12px;pointer-events:none}
   #${root.id} .seq-hit{transition:opacity 140ms ease} #${root.id} .seq-hit.is-related .seq-message{stroke:var(--viz-series-1);stroke-width:1.4} #${root.id} .seq-hit.is-related .seq-arrow{fill:var(--viz-series-1)}
   #${root.id} .seq-open{fill:none;stroke:var(--muted-foreground)} #${root.id} .seq-hit.is-related .seq-open{fill:none;stroke:var(--viz-series-1)}
@@ -30,23 +30,27 @@ function renderMermaidSequence(root,data,cfg) {
   const core=Math.max(root.clientWidth-leftExtra-rightExtra,pad*2+(data.actors.length-1)*spacing+120),width=core+leftExtra+rightExtra,step=(core-pad*2-120)/Math.max(1,data.actors.length-1),xs=new Map(data.actors.map((a,i)=>[a.id,leftExtra+pad+60+i*step]));
   // 固定几何宽度，展开时由共享视口整体缩放，HTML 和 SVG 不单独伸展。
   scene.style.width=width+'px';scene.style.minWidth=width+'px';const headers=[],marks=[],labels=[],frames=[],active=new Map();const probe=document.createElement('span');probe.style.cssText='position:absolute;left:-100000px;font:12px/18px '+getComputedStyle(root).fontFamily+';white-space:pre-wrap;overflow-wrap:anywhere';root.append(probe);const textHeight=(text,width)=>{probe.style.width=width+'px';probe.textContent=text;return probe.offsetHeight;};let y=Math.max(92,...data.actors.map(a=>textHeight(a.name,156)+60));
+  const activationLayer=el('g',{class:'seq-activations'});svg.prepend(activationLayer);let lastMessageY=y;
+  const activation=(actor,start,end,depth)=>{const bar=el('rect',{x:xs.get(actor)-5+depth*4,y:start,width:10,height:Math.max(12,end-start),class:'seq-activation','data-actor':actor,'data-depth':depth},activationLayer);activationLayer.prepend(bar);};
   const starts={10:'loop',12:'alt',15:'opt',19:'par',27:'critical',30:'break'},ends=new Set([11,14,16,21,29,31]),branches=new Set([13,20,28]);
-  for(const m of data.messages){
+  for(const [messageIndex,m] of data.messages.entries()){
     if(m.type===26)continue;
     if(starts[m.type]){frames.push({kind:starts[m.type],label:m.message,y:y-10,depth:frames.length});text('seq-branch',starts[m.type]+' · '+m.message,24+frames.length*8,y-17);y+=34;continue;}
     if(branches.has(m.type)){const f=frames.at(-1);el('line',{x1:24+f.depth*8,y1:y-10,x2:width-24-f.depth*8,y2:y-10,class:'seq-life'});text('seq-branch',(m.type===13?'else':'and')+' · '+m.message,32+f.depth*8,y-17);y+=34;continue;}
     if(ends.has(m.type)){const f=frames.pop();el('rect',{x:24+f.depth*8,y:f.y,width:width-48-f.depth*16,height:y-f.y-6,rx:6,class:'seq-frame'});y+=22;continue;}
-    if(m.type===17){const list=active.get(m.from)||[];list.push(y-32);active.set(m.from,list);continue;}
-    if(m.type===18){const list=active.get(m.from)||[],start=list.pop();el('rect',{x:xs.get(m.from)-5+list.length*4,y:start,width:10,height:y-start-34,class:'seq-activation'});continue;}
+    if(m.type===17){const list=active.get(m.from)||[];list.push(lastMessageY);active.set(m.from,list);continue;}
+    if(m.type===18){const list=active.get(m.from)||[],start=list.pop();activation(m.from,start,lastMessageY,list.length);continue;}
     if(m.type===2){const from=xs.get(m.from),to=xs.get(m.to||m.from),nw=m.placement===2?Math.max(140,Math.abs(to-from)+96):Math.min(280,measure(m.message)+28),nx=m.placement===0?from-nw-12:m.placement===1?from+12:(from+to-nw)/2,note=text('seq-note',m.message,nx,y-10);note.style.width=nw+'px';note.dataset.placement=m.placement;y+=Math.max(60,note.offsetHeight+24);continue;}
     const labelWidth=Math.min(288,Math.max(48,measure(m.message)+(m.number===undefined?14:40))),labelHeight=textHeight(m.message,labelWidth-40)+4;y+=Math.max(0,labelHeight-22);
-    const a=xs.get(m.from),b=xs.get(m.to),self=a===b,g=el('g',{class:'seq-hit','data-message':m.id});
-    const direction=b>=a?1:-1,end=b-(self?0:5*direction),path=el('path',{d:self?`M${a} ${y}h46q8 0 8 8v12q0 8 -8 8h-46`:`M${a} ${y}H${end}`,class:'seq-message',...( [1,4,6,25,34].includes(m.type)?{'stroke-dasharray':'4 4'}:{})},g);
-    const ey=self?y+28:y,dx=self?-1:direction;
+    // 激活条跟随真实消息位置；线和箭头位于柱子上层，端点接到柱子边缘。
+    const sourceX=xs.get(m.from),targetX=xs.get(m.to),self=sourceX===targetX,direction=targetX>=sourceX?1:-1,next=data.messages[messageIndex+1],sourceDepth=(active.get(m.from)||[]).length,targetDepth=(active.get(m.to)||[]).length+(next?.type===17&&next.from===m.to?1:0),a=sourceX+(sourceDepth?(-5+(sourceDepth-1)*4+(direction>0||self?10:0)):0),b=targetX+(targetDepth?(-5+(targetDepth-1)*4+(direction<0||self?10:0)):0),g=el('g',{class:'seq-hit','data-message':m.id});
+    const end=b-(self?0:5*direction),path=el('path',{d:self?`M${a} ${y}h46q8 0 8 8v12q0 8 -8 8H${b}`:`M${a} ${y}H${end}`,class:'seq-message',...( [1,4,6,25,34].includes(m.type)?{'stroke-dasharray':'4 4'}:{})},g);
+    const ey=self?y+28:y,dx=self?-1:direction;lastMessageY=ey;
     if([3,4].includes(m.type))el('path',{d:`M${b-3} ${ey-3}l6 6m0 -6l-6 6`,class:'seq-message'},g);
     else if(![5,6].includes(m.type)){const arrow=el('path',{d:[24,25].includes(m.type)?`M${b-5*dx} ${ey-2.5}L${b} ${ey}L${b-5*dx} ${ey+2.5}`:`M${b} ${ey}l${-5*dx} -2.5v5Z`,class:[24,25].includes(m.type)?'seq-arrow seq-open':'seq-arrow'},g);if([33,34].includes(m.type))el('path',{d:`M${a} ${y}l${5*dx} -2.5v5Z`,class:'seq-arrow'},g);}
     const label=document.createElement('button');label.type='button';label.className='seq-label';label.style.width=labelWidth+'px';label.style.left=(self?a+12+labelWidth/2:(a+b)/2)+'px';label.style.top=(y-labelHeight-10)+'px';const num=document.createElement('span');num.className='seq-number';num.textContent=m.number===undefined?'':String(m.number);if(m.number!==undefined)label.append(num);label.append(document.createTextNode(m.message));scene.append(label);label.dataset.message=m.id;label.setAttribute('aria-label',`${m.number??''} ${data.actors.find(n=>n.id===m.from).name} → ${data.actors.find(n=>n.id===m.to).name}：${m.message}`);marks.push({m,g,path,label});labels.push(label);y+=Math.max(self?88:60,labelHeight+36+(self?28:0));
   }
+  for(const [actor,list] of active)list.forEach((start,depth)=>activation(actor,start,lastMessageY+24,depth));
   scene.style.height=(y+12)+'px';svg.style.height=(y+12)+'px';svg.setAttribute('viewBox',`0 0 ${width} ${y+12}`);
   for(const a of data.actors){const x=xs.get(a.id),life=el('line',{x1:x,y1:48,x2:x,y2:y,class:'seq-life'});svg.prepend(life);const h=document.createElement('button');h.type='button';h.className='seq-header';if(a.type==='actor'){const icon=document.createElement('i');icon.setAttribute('data-lucide','user-round');icon.setAttribute('aria-hidden','true');h.append(icon);}h.append(document.createTextNode(a.name));const hw=Math.min(240,Math.max(156,Math.ceil(measure(a.name)*7/6)+50));h.style.cssText=`left:${x-hw/2}px;top:0;width:${hw}px`;scene.append(h);headers.push({a,h});}
   probe.remove();window.lucide?.createIcons({attrs:{width:16,height:16}});
