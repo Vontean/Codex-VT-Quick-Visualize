@@ -9,14 +9,30 @@ async function readMermaidClassModel(db,descriptions={}) {
  return {data:{kind:'class',direction:db.getDirection()||'TB',nodes,groups,layers:[],edges:raw.edges.map(e=>({id:e.id,from:e.start,to:e.end,label:e.label||'',startMark:e.arrowTypeStart,endMark:e.arrowTypeEnd,startMultiplicity:e.startLabelRight||'',endMultiplicity:e.endLabelLeft||'',async:e.pattern==='dashed'}))}};
 }
 async function prepareMermaidClassLayout(data) {
- const context=document.createElement('canvas').getContext('2d');context.font='12px '+getComputedStyle(document.body).fontFamily;const measure=s=>Math.ceil(context.measureText(s).width);
- for(const n of data.nodes){n.headerHeight=n.annotations.length?64:48;n.layoutWidth=Math.max(224,measure(n.name)+40,...[...n.members,...n.methods].map(a=>measure(a.name)+32));n.layoutHeight=n.headerHeight+(n.members.length+n.methods.length)*30+(n.members.length&&n.methods.length?1:0)+12;}
+ const measure=document.createElement('div');measure.style.cssText='position:absolute;left:-100000px;visibility:hidden;white-space:pre-wrap;overflow-wrap:anywhere;box-sizing:border-box';document.body.append(measure);
+ const height=(text,width,font,padding)=>{measure.style.width=width+'px';measure.style.font=font;measure.style.padding=padding;measure.textContent=text;return measure.offsetHeight;};
+ const mono='ui-monospace,SFMono-Regular,Menlo,Consolas,monospace',context=document.createElement('canvas').getContext('2d');context.font='12px '+mono;
+ for(const n of data.nodes){
+  n.layoutWidth=Math.max(240,Math.min(320,Math.max(context.measureText(n.name).width,...[...n.members,...n.methods].map(a=>context.measureText(a.name).width))+32));n.headerHeight=Math.max(52,height(n.name,n.layoutWidth,'600 14px/22px '+getComputedStyle(document.body).fontFamily,'14px 16px'))+(n.annotations.length?24:0);
+  n.descriptionHeight=n.description?height(n.description,n.layoutWidth-20,'12px/18px '+getComputedStyle(document.body).fontFamily,'8px 10px')+8:0;
+  for(const a of [...n.members,...n.methods])a.rowHeight=Math.max(30,height(a.name,n.layoutWidth-20,'12px/20px '+mono,'5px 10px'));
+  n.layoutHeight=n.headerHeight+n.descriptionHeight+[n.members,n.methods].reduce((h,list)=>h+(list.length?44+list.reduce((sum,a)=>sum+a.rowHeight,0):0),0)+10;
+ }
+ context.font='12px '+getComputedStyle(document.body).fontFamily;for(const e of data.edges){e.labelWidth=Math.max(30,Math.min(180,context.measureText(e.label||'连接').width+12));e.labelHeight=height(e.label||'连接',e.labelWidth,'12px/18px '+getComputedStyle(document.body).fontFamily,'2px 6px');}
+ measure.remove();
  for(const e of data.edges)if(e.from===e.to)e.fromSide=e.toSide=['LR','RL'].includes(data.direction)?'SOUTH':'EAST';
  await prepareMermaidLayout(data);
+ // 类图同样只在大量节点且明显长条时比较另一方向，不强制普通图趋近正方形。
+ if(data.nodes.length>=16&&Math.max(data.layout.width,data.layout.height)>=2400&&Math.max(data.layout.width/data.layout.height,data.layout.height/data.layout.width)>=3){
+  const initial=structuredClone(data),ratio=d=>Math.abs(Math.log(d.layout.width/d.layout.height));data.direction=['LR','RL'].includes(data.direction)?'TB':'LR';
+  for(const e of data.edges)if(e.from===e.to)e.fromSide=e.toSide=['LR','RL'].includes(data.direction)?'SOUTH':'EAST';
+  await prepareMermaidLayout(data);if(ratio(data)>=ratio(initial)||data.layout.width*data.layout.height>initial.layout.width*initial.layout.height*1.3)Object.assign(data,initial);
+ }
+
  // 自关联单独留出阅读通道，保留源端点及 UML 方向。
  const map=new Map(data.nodes.map(n=>[n.id,n]));
  for(const e of data.edges.filter(e=>e.from===e.to)){
-  const n=map.get(e.from),a=e.points[0],b=e.points.at(-1),labelWidth=measure(e.label||'连接')+12;
+  const n=map.get(e.from),a=e.points[0],b=e.points.at(-1),labelWidth=e.labelWidth;
   if(e.fromSide==='EAST'){
    const x=n.x+n.w+88;e.points=[a,[x,a[1]],[x,b[1]],b];e.labelPosition={x:x+labelWidth/2+8,y:(a[1]+b[1])/2};
    const right=x+labelWidth+24;data.layout.width=Math.max(data.layout.width,right+28);
