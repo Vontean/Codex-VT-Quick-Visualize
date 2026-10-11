@@ -17,7 +17,7 @@ The runtime entrypoint stays minimal; data contracts live in each reference. Sta
 ## Mermaid architecture renderer
 
 - Mermaid is the input language and parser. Enhanced diagrams are drawn by qv; do not display Mermaid SVG with superficial CSS changes. Internal graph data is derived by the parser, never authored a second time by the agent.
-- For the existing simple flowchart architecture, preserve the accepted design: 32px top/title spacing, single-line icon nodes, 48px node height, up to 160px width, 10px corners, 12px/14px padding, host colors and 16px Lucide icons. Simple architecture uses columns; explicit flat groups use captioned layers and subtle rules.
+- Flowchart nodes retain 32px title spacing, 10px corners, host colors and 16px Lucide icons. Labels stay on one line until the measured text exceeds 228px (minus icon space); then wrap and grow the node height (minimum 48px). Ordinary nodes cap at 262px (including borders and padding); diamonds and circles widen to fit the centered text safely. Flowcharts fold only when all thresholds are met: at least 16 nodes, long dimension above 2400px, aspect ratio above 3:1. Large elongated graphs balance toward 1:1 within each preserved group; LR/RL/TB/BT determines the initial reading direction, while arrows preserve every relationship. Compact diagrams retain the layered layout.
 - Curves share each side's center port. Use 1px strokes with muted foreground mixed at 26% against the background. Integrated arrows are 5px long and 4.4px wide; stop the shaft at the arrow base. Dim unrelated nodes to .22 and lines to .055. Keep semantic thick/dotted line distinctions.
 - Grow node contents from .08 scale over 240ms, stagger layers by 220ms, reveal line length over 650ms and then arrows over 50ms. Replay without rebuilding on full exit and re-entry; honor reduced motion.
 - Optional dark tooltips use white 12px text, 1.6 line height, 7px radius and 10px/12px padding. Rank nearby positions by related-node/line overlap and cursor distance. No persistent description section.
@@ -34,7 +34,7 @@ Mermaid 架构图在窄消息流中仅绘图区横向滚动，保留分层并排
 
 架构图图例仅解释已知语义，使用可选 legend.solid / legend.dotted；生成时默认实线；仅在区分明确的关系语义时使用多种线型，并必须用图例或线上的标注解释。不能省略说明，也不能用“实线连接 / 虚线连接”充当含义。外部源含义不明时先结合上下文确认，不机械推断同步与异步。
 
-复杂架构保留嵌套容器边界、节点形状和连接方向。常见分层图沿用已确认的布局；复杂图由 ELK 计算位置，独立分组方向和 architecture-beta 端口约束使用 Mermaid 原生布局坐标，均由 qv 重绘。复杂连线采用避让节点的圆角折线；连接到分组时，组内节点的悬浮高亮和 Tooltip 避让包含组边。
+复杂架构保留嵌套容器边界、节点形状和连接方向。常见分层图沿用已确认的布局；复杂图由 ELK 计算位置，独立分组方向和 architecture-beta 端口约束使用 Mermaid 原生布局坐标，均由 qv 重绘。过长 flowchart 在每层容器内按源顺序折行，保留分组、回路与独立节点，再重新避让连线；architecture-beta 保留原有端口布局。复杂连线采用避让节点的圆角折线；连接到分组时，组内节点的悬浮高亮和 Tooltip 避让包含组边。
 
 ## Group navigation
 
@@ -58,7 +58,7 @@ Mermaid 架构图在窄消息流中仅绘图区横向滚动，保留分层并排
 
 - Drilldown simplifies group nesting only. Entering a group shows all its direct nodes, subgroup previews and relevant boundary connections together, including disconnected nodes. Never turn normal service nodes into navigation steps or filter to a selected neighborhood.
 - No node index or upstream/current/downstream mode. Ordinary nodes retain hover highlighting and optional descriptions. Group clicks and breadcrumbs are the only hierarchy navigation.
-- Overwide LR/RL local views may use a narrower top-down layout when explicit source ports do not constrain it; preserve every visible node and relationship. Full-view mode keeps original grouping/layers.
+- Overwide LR/RL local views may use a narrower top-down layout when explicit source ports do not constrain it; preserve every visible node and relationship. Full-view mode keeps all original groups and relationships; elongated flowcharts fold for a balanced overview.
 - Keep origin-aware group transitions, keyboard/reduced-motion bypass and complete-view switch. Animation must not add steps or conceal graph content.
 
 ## Mermaid expanded preview
@@ -193,3 +193,11 @@ Architecture-beta 保留 Mermaid 11.12.0 实际 DB 的服务、汇接点、嵌�
 - 320px 和完整图模式提供原生对象 select，列出原模型所有服务、汇接点和分组；选择只读详情，不过滤图。完整图继续 fit 全部几何，返回保留 inline 滚动。
 - 键盘聚焦将能容纳的完整卡片滚入可见区，滚动结束恢复详情。Escape 清除选择并取消尚未发生的详情恢复。缩放不作用于详情。
 - 动效沿用 240ms 节点、650ms 连线、50ms 箭头，以及真实退出/重入重播；reduced-motion 和完整图静态。
+
+Flowchart wires and arrowheads retain the light-theme 26% muted-foreground mix; dark theme uses 36% for a small visibility increase. Tooltip keyboard behavior and long descriptions are unchanged in the 2026-10-11 flowchart audit.
+
+Flowchart hover commits only after the pointer stops moving on a node for 140ms; pointer movement restarts the timer. Rapid crossings retain the prior highlight; settled destinations transition directly without restoring the neutral state. Pointer leave clears after a 220ms grace period. External group portals show the group name plus a Lucide arrow-up-right, with action wording only in the accessible label; no visible action caption. Breadcrumb segments offer a native top-layer popover of sibling groups (overview has no popover). Hover opens after 120ms; pointer travel to the list has a 180ms grace period. ArrowDown opens and focuses the list; arrow keys move between groups, Escape closes, and selection directly navigates without returning to the parent. Diagram tooltip keyboard and long-description presentation otherwise retain the previous behavior.
+
+Flowchart highlight transitions share 140ms easing across node borders, outlines, wires, arrowheads and edge labels; reduced motion removes these transitions. Flowchart containment surfaces are host background / original light gray (muted mixed 18% into background, composited over an opaque host background), alternating from leaves outward: leaf=0 background, direct container=1 gray, outer container=2 background. Compute each group level as one plus the maximum child level from the complete source hierarchy, independent of animation layer and current drilldown scope. Group cards and group portals retain their source container level.
+
+Mermaid drawing is visible once ready; intersection-triggered entry motion never gates content visibility. Large diagrams in short viewports remain readable even when the entry threshold is unreachable.

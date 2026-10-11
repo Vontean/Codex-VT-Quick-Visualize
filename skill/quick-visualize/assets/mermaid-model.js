@@ -91,7 +91,7 @@ async function readMermaidModel(mermaid,source,descriptions) {
   if(simple.diagramType==='block')return readMermaidBlockModel(mermaid,source,descriptions);
   if(simple.diagramType==='c4')return readMermaidC4Model(mermaid,source,descriptions);
   if(simple.diagramType==='quadrantChart')return readMermaidQuadrantModel(mermaid,source,descriptions);
-  if(simple.data)return simple;
+  if(simple.data){simple.data.kind='flowchart';simple.data.generic=true;return simple;}
   const parsed=await mermaid.parse(source),diagram=await mermaid.mermaidAPI.getDiagramFromText(source),db=diagram.db;
   if(parsed.diagramType==='sequence')return readMermaidSequenceModel(mermaid,source,descriptions);
   if(parsed.diagramType==='sankey')return readMermaidSankeyModel(db,descriptions);
@@ -124,5 +124,5 @@ async function readMermaidModel(mermaid,source,descriptions) {
   const groups=rawGroups.map(g=>({id:g.id,name:g.title||g.id,description:descriptions[g.id]||'',parent:parents.get(g.id),direction:g.dir}));
   const nodes=vertices.filter(n=>!groupIds.has(n.id)).map(n=>({id:n.id,name:n.text||n.id,shape:n.icon?(n.form==='circle'?'circle':'round'):shapes[n.type||'square'],parent:parents.get(n.id),icon:declaredMermaidIcon(n.icon)||iconFor(n.text||n.id),explicitIcon:!!n.icon,description:descriptions[n.id]||'',layer:0}));
   const edges=links.map(e=>({from:e.start,to:e.end,label:e.text||'',arrow:e.type!=='arrow_open',startArrow:e.type?.startsWith('double_'),marker:e.type?.includes('circle')?'circle':e.type?.includes('cross')?'cross':'point',async:e.stroke==='dotted',invisible:e.stroke==='invisible',thick:e.stroke==='thick'}));
-  return {data:{nodes,groups,edges,generic:true,nativeGeometry:groups.some(g=>g.direction),db,layers:[],direction:db.getDirection()||'TB',grouped:!!groups.length}};
+  return {data:{nodes,groups,edges,kind:'flowchart',generic:true,nativeGeometry:groups.some(g=>g.direction),db,layers:[],direction:db.getDirection()||'TB',grouped:!!groups.length}};
 }

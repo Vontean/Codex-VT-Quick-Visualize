@@ -36,7 +36,7 @@ function mermaidScopeView(model, scope = null) {
         if(groups.has(child.id)){rows.push({id:child.id,name:child.name,heading:true,depth});visit(child.id,depth+1);}
         else if(!child.junction){rows.push({id:child.id,name:child.name,icon:child.icon,depth});shown++;}
       }}
-      visit(id);let y=model.architecture?96:62;rows.forEach(row=>{row.y=y;if(model.architecture){const text=document.createElement('span');text.style.cssText='position:absolute;left:-100000px;width:248px;font:12px/18px '+getComputedStyle(root).fontFamily+';white-space:normal;overflow-wrap:anywhere';text.textContent=row.name;root.append(text);row.h=Math.max(18,text.offsetHeight);text.remove();y+=row.h+14;}else y+=row.heading?26:32;});
+      visit(id);let y=model.architecture?96:62;rows.forEach(row=>{row.y=y;if(model.architecture||model.kind==='flowchart'){const text=document.createElement('span');text.style.cssText='position:absolute;left:-100000px;width:248px;font:12px/18px '+getComputedStyle(root).fontFamily+';white-space:normal;overflow-wrap:anywhere';text.textContent=row.name;root.append(text);row.h=Math.max(18,text.offsetHeight);text.remove();y+=row.h+14;}else y+=row.heading?26:32;});
       const ids=new Set(rows.filter(r=>!r.heading).map(r=>r.id));
       preview={rows,edges:model.edges.filter(e=>ids.has(e.from)&&ids.has(e.to)&&e.from!==e.to),remaining:count-shown,height:y+(count>shown?28:10)};
     }
@@ -44,7 +44,7 @@ function mermaidScopeView(model, scope = null) {
       groupCard:group&&!external, external, count, preview, icon:group?(raw.icon||'layers'):raw.icon,
       targetGroup:group ? (id===scope?raw.parent||null:id) : undefined,
       description:raw.description||'',
-      layoutWidth:model.architecture?320:undefined,layoutHeight:model.architecture?(preview?.height||64):undefined,
+      layoutWidth:model.architecture||group&&!external&&model.kind==='flowchart'?320:undefined,layoutHeight:model.architecture?(preview?.height||64):undefined,
       layer:0});
     return key;
   }
@@ -64,7 +64,7 @@ function mermaidScopeView(model, scope = null) {
   });
   for(const edge of edges)if(edge.members.length>1)edge.bundleCount=edge.members.length;
   return {nodes:[...visible.values()],edges,groups:[],layers:[],generic:true,navigation:true,
-    direction:model.direction||'LR',grouped:false,scope,architectureCards:!!model.architecture};
+    direction:model.direction||'LR',grouped:false,scope,kind:model.kind,architectureCards:!!model.architecture||model.kind==='flowchart'};
 }
 
 
