@@ -9,7 +9,7 @@ Requires the enabled `visualize@openai-bundled` plugin, Python 3 and Node.js on 
 
 ## Select
 
-Read only the matching specification. If none fits, use general Visualize.
+Read only the matching specification. If no preset covers the required data and interactions, create a custom chart with general Visualize; use this skill’s chart styles and layouts as references to keep typography, spacing, colors and motion consistent, while choosing a structure that fits the actual data.
 
 | Type | Scope | Specification |
 | --- | --- | --- |
