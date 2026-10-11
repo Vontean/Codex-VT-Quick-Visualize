@@ -120,6 +120,14 @@
 #{{ROOT_ID}}[data-kind=flowchart] .wires{z-index:1}
 #{{ROOT_ID}}[data-kind=flowchart] button.node{z-index:2}
 #{{ROOT_ID}}[data-kind=flowchart] .edge-label,#{{ROOT_ID}}[data-kind=flowchart] .edge-count{z-index:3}
+
+#{{ROOT_ID}}[data-architecture=true] .qv-group{z-index:0;background:var(--node-surface,var(--background))}
+#{{ROOT_ID}}[data-architecture=true] .wires{z-index:1}
+#{{ROOT_ID}}[data-architecture=true] button.node{z-index:2}
+#{{ROOT_ID}}[data-architecture=true] button.node:not(.junction){background:var(--node-surface,var(--background))}
+#{{ROOT_ID}}[data-architecture=true] .edge-label{z-index:3}
+#{{ROOT_ID}}[data-architecture=true] .wire{stroke:light-dark(color-mix(in srgb,var(--muted-foreground) 36%,var(--background)),color-mix(in srgb,var(--muted-foreground) 48%,var(--background)))}
+#{{ROOT_ID}}[data-architecture=true] .arrow-head{fill:light-dark(color-mix(in srgb,var(--muted-foreground) 36%,var(--background)),color-mix(in srgb,var(--muted-foreground) 48%,var(--background)))}
 </style>
 <h3 {{TITLE_HIDDEN}}>{{TITLE}}</h3><nav class="scope-nav" aria-label="架构层级" hidden></nav><span class="scope-status sr-only" aria-live="polite"></span><div class="qv-notice" role="status" hidden></div><div class="node-tip" id="{{ROOT_ID}}-tip" role="tooltip" hidden></div><div class="diagram-scroll" role="region" aria-label="架构图，可横向滚动" aria-busy="true"><div class="scene"><svg class="wires" aria-hidden="true"></svg></div></div>
 <div class="edge-key"><span class="solid-key"><i></i><span class="key-label"></span></span><span class="async-key"><i class="async"></i><span class="key-label"></span></span></div>
@@ -228,7 +236,7 @@ function containmentLevel(id){
  const children=[...sourceModel.nodes,...sourceModel.groups].filter(n=>n.parent===id);
  const level=1+Math.max(0,...children.map(n=>containmentLevel(n.id)));containmentLevels.set(id,level);return level;
 }
-function setContainmentSurface(element,id){if(sourceModel.kind!=='flowchart')return;const level=containmentLevel(id);element.dataset.containmentLevel=level;element.style.setProperty('--node-surface',level%2?'var(--flow-container-surface)':'var(--background)');}
+function setContainmentSurface(element,id){if(sourceModel.kind!=='flowchart'&&!sourceModel.architecture)return;const level=containmentLevel(id);element.dataset.containmentLevel=level;element.style.setProperty('--node-surface',level%2?'color-mix(in srgb,var(--muted) 18%,var(--background))':'var(--background)');}
 const parents=new Map([...sourceModel.nodes,...sourceModel.groups||[]].map(n=>[n.id,n.parent]));
 function belongs(id,endpoint){while(id){if(id===endpoint)return true;id=parents.get(id);}return false;}
 function touches(e,id){return belongs(id,e.from)||belongs(id,e.to);}
@@ -247,7 +255,7 @@ function queueNodeHover(n,event){
 }
 function leaveNodeHover(){
  clearTimeout(hoverTimer);pendingHover=null;clearTimeout(leaveTimer);
- if(!architectureReader?.focused)leaveTimer=setTimeout(clear,sourceModel.kind==='flowchart'?220:80);
+ if(!architectureReader?.focused)leaveTimer=setTimeout(clear,220);
 }
 function showTip(n,event){clearTimeout(leaveTimer);if(activeNode===n.id&&!architectureReader)return;if(root.dataset.motion==='running')return;if(architectureReader){clear();activeNode=n.id;architectureReader.choose(n.id,n.button,!event);return;}clearTimeout(tipTimer);tip.hidden=true;nodes.forEach(m=>m.button.removeAttribute('aria-describedby'));focus(n.id);activeNode=n.id;if(!n.description?.trim())return;tipTimer=setTimeout(()=>{if(activeNode!==n.id)return;tip.textContent=n.description;tip.style.maxWidth=Math.min(260,root.clientWidth-16)+'px';tip.hidden=false;n.button.setAttribute('aria-describedby','{{ROOT_ID}}-tip');const rr=root.getBoundingClientRect(),nr=n.button.getBoundingClientRect(),sx=scene.getBoundingClientRect().left-rr.left,sy=scene.getBoundingClientRect().top-rr.top,scale=diagramViewport.scale,box={x:nr.left-rr.left,y:nr.top-rr.top,w:nr.width,h:nr.height},w=tip.offsetWidth,h=tip.offsetHeight,px=event?.clientX?event.clientX-rr.left:box.x+box.w/2,py=event?.clientY?event.clientY-rr.top:box.y+box.h/2,gap=10;
 const candidates=[[box.x+box.w+10,box.y-h-10],[box.x-w-10,box.y-h-10],[box.x+box.w+10,box.y+box.h+10],[box.x-w-10,box.y+box.h+10],[box.x+box.w+gap,py-h/2],[box.x-w-gap,py-h/2],[px-w/2,box.y-h-gap],[px-w/2,box.y+box.h+gap],[box.x,box.y-h-gap],[box.x+box.w-w,box.y+box.h+gap],...([22,38,54].flatMap(g=>[[box.x,box.y+box.h+g],[box.x+box.w-w,box.y+box.h+g],[box.x,box.y-h-g],[box.x+box.w-w,box.y-h-g]]))].map(([x,y])=>({x:Math.max(4,Math.min(root.clientWidth-w-4,x)),y:Math.max(0,Math.min(root.clientHeight-h,y))}));
@@ -396,7 +404,7 @@ async function navigateScope(scope,keyboard=false,origin=null){
 }
 if(sourceModel.architecture)architectureReader=createArchitectureReader(root,sourceModel,viewport,diagramViewport,focus);
 drawNavigation();
-new ResizeObserver(()=>{if(architectureReader)architectureReader.refresh();else clear();}).observe(root);viewport.addEventListener('scroll',()=>{if(architectureReader)architectureReader.onScroll();else clear();},{passive:true});viewport.addEventListener('pointermove',e=>{if(sourceModel.kind==='flowchart'&&activeNode&&!e.target.closest('button.node')){clearTimeout(leaveTimer);leaveTimer=setTimeout(clear,220);}},{passive:true});root.onpointerleave=leaveNodeHover;document.addEventListener('keydown',e=>{if(e.key==='Escape')clear();});function playMotion(){if(diagramViewport.expanded){runningAnimations.forEach(a=>a.cancel());root.dataset.motion='complete';return;}clear();runningAnimations.forEach(a=>a.cancel());root.dataset.motion=reduced.matches?'complete':'running';root.dataset.replays=String(+(root.dataset.replays||0)+1);runningAnimations=reduced.matches?[]:motionSpecs.map(start=>start());clearTimeout(finishTimer);finishTimer=setTimeout(()=>root.dataset.motion='complete',Math.max(...data.nodes.map(n=>n.layer))*220+810);}
+new ResizeObserver(()=>requestAnimationFrame(()=>{if(architectureReader)architectureReader.refresh();else clear();})).observe(root);viewport.addEventListener('scroll',()=>{if(architectureReader)architectureReader.onScroll();else clear();},{passive:true});viewport.addEventListener('pointermove',e=>{if(sourceModel.kind==='flowchart'&&activeNode&&!e.target.closest('button.node')){clearTimeout(leaveTimer);leaveTimer=setTimeout(clear,220);}},{passive:true});root.onpointerleave=leaveNodeHover;document.addEventListener('keydown',e=>{if(e.key==='Escape')clear();});function playMotion(){if(diagramViewport.expanded){runningAnimations.forEach(a=>a.cancel());root.dataset.motion='complete';return;}clear();runningAnimations.forEach(a=>a.cancel());root.dataset.motion=reduced.matches?'complete':'running';root.dataset.replays=String(+(root.dataset.replays||0)+1);runningAnimations=reduced.matches?[]:motionSpecs.map(start=>start());clearTimeout(finishTimer);finishTimer=setTimeout(()=>root.dataset.motion='complete',Math.max(...data.nodes.map(n=>n.layer))*220+810);}
 function scheduleEntry(){clearTimeout(replayTimer);replayTimer=setTimeout(()=>{replayTimer=null;if(visible&&!document.hidden){playMotion();}else armed=true;},80);}
 function replay(){if(visible&&armed&&!document.hidden){armed=false;scheduleEntry();}}
 reduced.addEventListener('change',()=>{runningAnimations.forEach(a=>a.cancel());root.dataset.motion='complete';});

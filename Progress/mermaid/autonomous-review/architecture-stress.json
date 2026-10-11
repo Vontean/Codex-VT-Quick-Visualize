@@ -1,0 +1,5 @@
+{
+  "title": "architecture · 压力：多数据与长文本",
+  "source": "architecture-beta\n group platform(cloud)[Team service]\n group g0(server)[Team service] in platform\n service s0_0(server)[Team service] in g0\n service s0_1(server)[Team service] in g0\n service s0_2(server)[Team service] in g0\n group g1(server)[Team service] in platform\n service s1_0(server)[Team service] in g1\n service s1_1(server)[Customer records and complete historical permissions verification service] in g1\n service s1_2(server)[Team service] in g1\n group g2(server)[Team service] in platform\n service s2_0(server)[Team service] in g2\n service s2_1(server)[Team service] in g2\n service s2_2(server)[Team service] in g2\n group g3(server)[Team service] in platform\n service s3_0(server)[Team service] in g3\n service s3_1(server)[Team service] in g3\n service s3_2(server)[Team service] in g3\n s0_0:R --> L:s0_1\n s0_1:R --> L:s0_2\n s1_0:R --> L:s1_1\n s1_1:R --> L:s1_2\n s2_0:R --> L:s2_1\n s2_1:R --> L:s2_2\n s3_0:R --> L:s3_1\n s3_1:R --> L:s3_2\n s0_2:B --> T:s1_0\n s1_2:B --> T:s2_0\n s2_2:B --> T:s3_0\n",
+  "navigation": "expanded"
+}

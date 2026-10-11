@@ -1,0 +1,5 @@
+{
+  "title": "architecture · 常规",
+  "source": "architecture-beta\n group cloud(cloud)[Cloud]\n group app(server)[Application] in cloud\n service web(internet)[Web] in app\n service api(server)[API] in app\n service db(database)[Database] in cloud\n service disk(disk)[Storage] in cloud\n junction hub in cloud\n web:R --> L:api\n api:B --> T:hub\n hub:R --> L:db\n hub:B --> T:disk\n",
+  "navigation": "expanded"
+}

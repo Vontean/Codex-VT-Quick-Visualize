@@ -27,7 +27,7 @@ function createArchitectureReader(root, model, viewport, controller, highlight) 
     }
     return lines;
   }
-  function fill(id){detail.replaceChildren();for(const [i,text] of content(id).entries()){const row=document.createElement('div');row.textContent=text;if(i===0)row.className='architecture-detail-name';detail.append(row);}}
+  function fill(id){detail.replaceChildren();for(const [i,text] of content(id).entries()){const row=document.createElement('div');row.textContent=text;if(i===0)row.className='architecture-detail-name';else if(i===1)row.style.color='var(--muted-foreground)';else if(text.includes(' → ')||text.includes(' ↔ ')||text.includes(' ← ')){row.style.cssText='padding:8px 10px;border-radius:8px;background:color-mix(in srgb,var(--foreground) 4%,var(--background))';}detail.append(row);}}
   function clear(){epoch++;clearTimeout(scrollTimer);selected=null;detail.hidden=true;cue.hidden=false;select.value='';root.querySelectorAll('[aria-describedby="'+detail.id+'"]').forEach(n=>n.removeAttribute('aria-describedby'));}
   function reveal(pending){if(pending!==epoch||!selected)return;fill(selected.id);detail.hidden=false;cue.hidden=true;select.value=selected.id;selected.anchor?.setAttribute('aria-describedby',detail.id);highlight(selected.id);}
   function choose(id,anchor,ensure=false){
@@ -41,10 +41,8 @@ function createArchitectureReader(root, model, viewport, controller, highlight) 
     const nextWidth=root.clientWidth;picker.hidden=!(controller.expanded||nextWidth<=420);cue.textContent=controller.expanded?'完整图概览 · 选择资源或分组查看详情':'可左右滚动 · 聚焦资源或分组查看详情';
     if(width===nextWidth&&readout.dataset.picker===String(!picker.hidden))return;
     width=nextWidth;readout.dataset.picker=String(!picker.hidden);
-    const current=selected;detail.hidden=false;detail.style.visibility='hidden';let max=0;
-    for(const n of entries){fill(n.id);max=Math.max(max,detail.offsetHeight);}
-    readout.style.minHeight=(max+Math.max(28,cue.offsetHeight)+(picker.hidden?0:picker.offsetHeight+12))+'px';
-    detail.style.visibility='';detail.hidden=true;if(current){fill(current.id);detail.hidden=false;cue.hidden=true;}else cue.hidden=false;
+    readout.style.minHeight='0px';
+    if(selected){fill(selected.id);detail.hidden=false;cue.hidden=true;}else{detail.hidden=true;cue.hidden=false;}
     controller.refresh();
   }
   select.addEventListener('change',()=>{if(select.value)choose(select.value,select);else clear();});

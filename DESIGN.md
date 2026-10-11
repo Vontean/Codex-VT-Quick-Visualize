@@ -204,6 +204,8 @@ Mermaid shape fills: shaped nodes keep a transparent HTML backplate even when la
 
 ## Architecture-beta resource reader
 
+本轮沿用真实端口与原生约束几何，不强制折叠成方形。叶节点使用宿主底色，分组由内向外 muted18% 灰／白交替；灰色不叠加。分组z0、线z1、节点z2、标签z3，暗色连线48% muted-foreground混底、明色36%。详情resize延至下一帧处理，退出保留220ms缓冲，避免快速移动与ResizeObserver同步回写抖动。
+
 Architecture-beta 保留 Mermaid 11.12.0 实际 DB 的服务、汇接点、嵌套分组、双向箭头与 T/B/L/R 端口；group 修饰仍附着服务所属边界，保留原始服务端点供详情追溯。使用原生约束几何，不另造拓扑。
 
 - 完整服务名称使用 240px 宽卡片、14px/20px、500 字重，真实内容宽 184px 测高，保留 12px 上下内距和 1px 边框。分组浏览卡片 320px，成员使用 12px/18px 的完整换行文本。
