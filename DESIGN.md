@@ -166,11 +166,10 @@ Mermaid shape fills: shaped nodes keep a transparent HTML backplate even when la
 
 ## Mermaid Sankey renderer
 
-- Read actual Mermaid11.12 getGraph/getConfig, preserving source order, duplicate links, raw positive quantities, alignment, source/target/gradient color semantics, showValues and prefix/suffix. No second CSV parser or inferred complete reader paths. Pinned grammar accepts ASCII labels only; comparisons share the same valid source. Zero/nonpositive values, loops and custom literal link colors preserve native semantics with a visible reason.
-- D3-sankey0.12.3 supplies proportional DAG coordinates; qv owns SVG bands, HTML labels, interactions and motion. Preserve exact quantitative link widths, including subpixel flows. A separate transparent hit path supplies tolerance without changing the visible width. Stable host series tokens identify nodes and band endpoints; no imported Mono palette.
-- Complete14px names and12px raw values retain source identity. Measure label height for top/node gaps/bottom clearance; all label bounds belong to the scene. Inline uses readable intrinsic columns with drawing-only scroll and a conditional quiet scroll cue. Expanded uses tighter columns then the shared native fit; return restores intrinsic layout and saved scroll.
-- Node details show actual incoming/outgoing quantities; edge details show raw flow with explicitly labeled shares of source outgoing and target incoming. Hover/click and native keyboard flow buttons share one transient themed detail. Avoid heading, readable labels and current focus; use measured trigger bounds. No persistent long flow list, filtering or invented end-to-end attribution.
-- One1000ms quartic-out horizontal clip reveals unchanged proportional bands and nodes. Resize, expanded and reduced motion show complete geometry; complete exit followed by20% reentry may replay. Hidden cancels incomplete motion; real document-hidden remains a host verification boundary.
+- 实际 Mermaid11.12 getGraph/getConfig 保留源ID／顺序／重复边／原始正数量、alignment、source/target/gradient颜色、showValues及prefix/suffix，不另外解析CSV，不推导源到终点的完整路径。当前固定版本的Unicode语法限制应显式报告，不偷偷改名；采用合法ASCII源做样式验证。
+- D3-sankey0.12.3计算DAG位置，宽度与高度按同一数值比例，包括subpixel极小流；透明命中路径提供容错，不能加宽可见流。节点值为max(inflow,outflow)，详情分别说明真实流入／流出，边说明原量及两端对应份额。
+- 名称14px／值12px完整保留，标签实测高度参与间隔；inline intrinsic横向滚动，expanded紧凑列距后整体fit，返回恢复。浮层距真实节点／边命中对象≤32px，优先保持亲密度，再考虑局部避障，不预留无用底部详情区。
+- 1000ms quartic水平mask保持比例；hover/resize不重播，reduced/expanded静态，完整退出后20%重入可重播。零值／非正值／cycles／custom literal color 保留明确native fallback；原生自己无法绘制的循环应显示错误，不能假称回退成功。
 
 ## Mermaid Quadrant renderer
 

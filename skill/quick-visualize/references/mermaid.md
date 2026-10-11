@@ -172,12 +172,10 @@ Navigation transitions differ from initial entry: use a 360ms origin-aware spati
 
 ## Sankey scope
 
-- `sankey-beta` reads actual Mermaid11.12 graph/config through mermaid-sankey-model.js. Preserve source IDs/order, repeated edges, positive finite quantities, nodeAlignment, source/target/gradient linkColor, showValues and value prefix/suffix. Optional descriptions use actual node IDs. No regex CSV parser or graph authored twice. Pinned11.12 grammar does not accept Chinese labels or entity encodings; valid ASCII labels work with quoted commas and doubled quotes. Do not upgrade or rewrite the parser to hide this limitation.
-- Independent qv drawing uses d3-sankey0.12.3 for DAG positions. Band width and node height encode actual quantities with one common scale, including fractional subpixel links. A separate transparent path improves hit tolerance without inflating visible flow. Node values follow max(inflow,outflow); details separately label actual inflow/outflow. Multi-stage aggregate edges do not identify individual paths or establish source-to-final attribution.
-- Complete14px labels and12px values fit measured top/bottom/node gaps. Inline retains intrinsic columns and horizontal drawing scroll, with a conditional cue. Expanded tightens columns and shares the native whole-scene fit; return restores original width and scroll. Neither mode drops nodes, values or edges.
-- Node hover/click/focus highlights direct incident flows; a flow identifies its exact source/target/raw quantity and shares of source outgoing and target incoming. Invisible native flow buttons sit on the actual bands and reveal their raw value on keyboard focus, with complete accessible names and automatic horizontal scrolling. No permanent repeated edge list, filtering or pin state. One transient detail uses real trigger bounds and text obstacles; Escape and settled scroll clear it.
--1000ms quartic-out horizontal clipping reveals fixed complete bands without changing proportions. Reduced/expanded/resize stay complete; complete exit then20% reentry replays. Actual document-hidden restoration and daily Codex manual acceptance remain separate verification boundaries.
-- Zero/nonpositive values, cycles, rich labels and literal custom link colors visibly retain native rendering. Native fallback receives no qv viewport controller and preserves its previous display behavior.
+- 实际 Mermaid11.12 getGraph/getConfig 保留源ID／顺序／重复边／原始正数量、alignment、source/target/gradient颜色、showValues及prefix/suffix，不另外解析CSV，不推导源到终点的完整路径。当前固定版本的Unicode语法限制应显式报告，不偷偷改名；采用合法ASCII源做样式验证。
+- D3-sankey0.12.3计算DAG位置，宽度与高度按同一数值比例，包括subpixel极小流；透明命中路径提供容错，不能加宽可见流。节点值为max(inflow,outflow)，详情分别说明真实流入／流出，边说明原量及两端对应份额。
+- 名称14px／值12px完整保留，标签实测高度参与间隔；inline intrinsic横向滚动，expanded紧凑列距后整体fit，返回恢复。浮层距真实节点／边命中对象≤32px，优先保持亲密度，再考虑局部避障，不预留无用底部详情区。
+- 1000ms quartic水平mask保持比例；hover/resize不重播，reduced/expanded静态，完整退出后20%重入可重播。零值／非正值／cycles／custom literal color 保留明确native fallback；原生自己无法绘制的循环应显示错误，不能假称回退成功。
 
 ## Quadrant scope
 
