@@ -151,10 +151,10 @@ Navigation transitions differ from initial entry: use a 360ms origin-aware spati
 
 ## Pie scope
 
-- `pie` reads Mermaid11.12 getSections Map in actual source order; preserve raw weights, actual distinct labels and showData. Keep zero-valued categories in the list. Positive finite total required; unsupported rich labels and zero total remain native. Optional descriptions use actual category labels as keys, and unknown keys are errors.
-- qv independently draws exact proportional sectors without collapsing tiny shares or inventing units. Host category colors pair with full names and percentages. showData additionally exposes raw values on the list; raw values stay in accessible labels/details otherwise. At narrow widths the complete list stacks below the circle. Shared expanded mode fits the whole scene; no extra fullscreen layer.
-- Real slice hover and button focus/click provide local emphasis with one transient near-trigger detail. Full label/value/share/description are accessible. Avoid readable labels, values and title; no competing native title. No filter, editing or pinned detail.
--1050ms common clockwise reveal clips the complete unchanged sectors. Category readouts appear by cumulative share; resize returns complete static content without replay. Expanded/reduced remain static; complete exit/reentry and visibility restoration replay. `mermaid-pie-model.js` isolates the version-sensitive API and `mermaid-pie.js` owns drawing/interaction.
+- 从 Mermaid11.12 getSections Map 读取源顺序、独立名称、原始非负权重、showData、title，不合并极小份额或发明单位。正有限总量必须大于0；零总量与rich label明确原生回退，零值仍留在图例和详情。
+- 通过 mermaid_presets.py 编译现有 donut-chart.html，再由 mermaid-pie.js 做语义映射；不维护第二套圆环样式。圆环约75%内径、中心总计、host系列色、短数据直标／长数据底部图例沿用已确认方案。Mermaid源数据可多于独立预设的6类，颜色按6个token循环，完整列表保留。
+- 只有正权重绘制弧；角度严格按原值分配，零值没有扇区或缺口，极小份额不会被最小可视角度撑大。showData 在图例／直标带原值，详情使用原始值而非小数位截断。中心大数自动缩小以容纳，长名称换行。
+- 650ms圆环入场，直标随入场淡入；普通resize/hover不重播，完整退出后重入可重播，reduced静态。图例和直标详情靠近触发对象，弧详情靠近圆环。使用宿主展开预览，无额外全屏容器。
 
 ## XY scope
 
