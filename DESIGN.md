@@ -86,11 +86,10 @@ Mermaid shape fills: shaped nodes keep a transparent HTML backplate even when la
 
 ## Mermaid sequence renderer
 
-- Use the same theme surfaces, 48px participant cards, 10px node radius, 12px floating details and shared viewport. Actors retain a host Lucide user icon. No permanent detail panel or pin state.
-- HTML labels and SVG lifelines/frames share a fixed intrinsic scene width. Expanded preview transforms that scene as a whole; no separate SVG stretching. Notes preserve left/right/over; canvas extends to fit notes and self messages.
-- Lifelines stay lightest, messages clearer, activation/frame boundaries visible in both themes. Preserve direction and source solid/dotted/open/cross/bidirectional markers.
-- Trace messages in order with masks (420ms, stagger140ms), reveal labels180ms and arrowheads60ms near trace completion. Reduced motion and expansion skip entry; hover/resize never restart it.
-- Unsupported constructs retain visible native fallback and never initialize the qv viewport.
+- 保留 Mermaid11.12 的参与者顺序、角色、消息方向、虚实线和箭头类型、自动编号、激活条、self message、alt/loop/par/critical 等控制框及 note 的源位置；未支持的 box、rich label、properties 等明确原生回退。
+- 参与者标题按实际 DOM 换行测高，内容宽最多240px；消息最多288px并完整换行。每条消息按自己的高度预留空间，长文本不会覆盖前一条消息或将后续消息统一撑高。共享 intrinsic scene，展开整体 fit，返回保留滚动。
+- 消息线与箭头使用明色#727a82／暗色#a3aab3，lifeline 更轻；次级小字使用60%／68%前景混色。参与者悬浮突出真实邻接消息；消息浮层分列表示来源、目标，再显示完整正文，距离触发对象不超过32px。不重复展示没有额外说明的参与者标题。
+- 消息420ms依次描画，stagger=min(140ms,900ms/(条数−1))，180ms标签和60ms箭头随线到达。减少动态和展开静态；悬浮、resize 不重播，完整退出后重入可重播。
 
 ## Mermaid state renderer
 

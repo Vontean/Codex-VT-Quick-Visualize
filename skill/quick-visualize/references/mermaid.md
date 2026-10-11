@@ -81,11 +81,10 @@ Keep labels concise and split very large diagrams into meaningful views. Never r
 
 ## Sequence scope
 
-`sequenceDiagram` preserves participant order, actor roles (host Lucide user icon), request/reply/async/open/cross/bidirectional arrows, self messages, autonumber start/step, activation, alt/else, loop, opt, par/and, critical/option and break. Note left/right/over retains its source position and reserves canvas space. Custom colored rects, participant boxes, rich labels, links/properties, explicit wrapping and unsupported participant types use visible native fallback instead of discarding semantics.
-
-Neutral 48px participant cards and dashed lifelines share one intrinsic coordinate system with HTML message labels. Inline drawings retain readable 12px text and scroll horizontally; native expansion transforms the entire scene. Messages appear in order: 420ms masked trace, 140ms stagger, 180ms label reveal, then 60ms arrow reveal. Masking preserves reply dashes. Reduced motion and expansion show the complete static diagram; complete viewport exit/re-entry and visibility restoration may replay, but hover and resize do not.
-
-Hover/focus highlights one message or a participant's related messages. Tooltips remain transient, track the current focus and avoid visible labels plus message lines/arrows; no pinned state or permanent panel. Escape, blur, pointer exit, scroll and display-mode changes clear details.
+- 保留 Mermaid11.12 的参与者顺序、角色、消息方向、虚实线和箭头类型、自动编号、激活条、self message、alt/loop/par/critical 等控制框及 note 的源位置；未支持的 box、rich label、properties 等明确原生回退。
+- 参与者标题按实际 DOM 换行测高，内容宽最多240px；消息最多288px并完整换行。每条消息按自己的高度预留空间，长文本不会覆盖前一条消息或将后续消息统一撑高。共享 intrinsic scene，展开整体 fit，返回保留滚动。
+- 消息线与箭头使用明色#727a82／暗色#a3aab3，lifeline 更轻；次级小字使用60%／68%前景混色。参与者悬浮突出真实邻接消息；消息浮层分列表示来源、目标，再显示完整正文，距离触发对象不超过32px。不重复展示没有额外说明的参与者标题。
+- 消息420ms依次描画，stagger=min(140ms,900ms/(条数−1))，180ms标签和60ms箭头随线到达。减少动态和展开静态；悬浮、resize 不重播，完整退出后重入可重播。
 
 ## State scope
 

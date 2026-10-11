@@ -1,0 +1,4 @@
+{
+  "title": "sequence · 常规",
+  "source": "sequenceDiagram\n  autonumber\n  participant Editor as 编辑者\n  participant API as 内容服务\n  participant DB as 内容库\n  participant Queue as 消息队列\n  Editor->>API: 提交发布请求\n  activate API\n  API->>DB: 校验并保存草稿\n  DB-->>API: 草稿已保存\n  alt 校验通过\n    API->>DB: 更新发布状态\n    DB-->>API: 发布完成\n    API-)Queue: 提交索引任务\n    API-->>Editor: 返回内容链接\n  else 信息不完整\n    API-->>Editor: 返回校验错误\n  end\n  deactivate API\n  Note over DB,Queue: 索引更新独立于发布响应\n"
+}
