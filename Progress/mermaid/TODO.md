@@ -41,7 +41,7 @@
 ## 当前进度
 
 - 已确认：3 / 18。
-- 当前项：08. 用户旅程图；常规、边界与单步骤样例已生成，等待用户审视。
+- 当前项：08. 用户旅程图；边界样例 ResizeObserver 通知循环已复现并修复；常规、边界与单步骤样例等待用户审视。
 - 审视记录：[flowchart-review/REVIEW.md](flowchart-review/REVIEW.md)。
 
 ## 完成记录
