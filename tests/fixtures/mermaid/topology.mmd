@@ -1,0 +1,25 @@
+flowchart TB
+ subgraph frontend[客户端]
+   web[Web 应用]
+   app[移动 App]
+ end
+ subgraph platform[平台]
+   subgraph access[接入]
+     gateway[API 网关]
+     auth{已授权?}
+   end
+   subgraph services[服务]
+     content[内容服务]
+     search[搜索服务]
+   end
+ end
+ db[(数据库)]
+ web --> gateway
+ app --> gateway
+ gateway --> auth
+ auth -->|通过| content
+ auth -.->|拒绝| web
+ content <--> search
+ content --> db
+ gateway -->|审计| db
+ db -->|重试| db

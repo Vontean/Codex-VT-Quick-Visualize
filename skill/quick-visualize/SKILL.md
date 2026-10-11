@@ -20,7 +20,7 @@ Read only the matching specification. If none fits, use general Visualize.
 | `line-chart` | One non-negative measure, 2–90 dates | [Line Chart](references/line-chart.md) |
 | `grouped-bar-chart` | 2–4 series, 2–6 shared categories, non-negative scale | [Grouped Bar Chart](references/grouped-bar-chart.md) |
 | `donut-chart` | 2–6 non-negative parts, positive total | [Donut Chart](references/donut-chart.md) |
-| `mermaid` | Mermaid architecture source; qv drawing with explicit native fallback outside its scope | [Mermaid](references/mermaid.md) |
+| `mermaid` | `flowchart` / `architecture-beta` / `sequenceDiagram` / `stateDiagram-v2` / `erDiagram` / `classDiagram` / `timeline` / `journey` / `kanban` / `pie` / `xychart-beta` / `radar-beta` / `sankey-beta` / `quadrantChart` / `block-beta` / C4; qv drawing, explicit fallback outside scope | [Mermaid](references/mermaid.md) |
 | `radar-chart` | 1–4 objects, 3–8 shared dimensions, non-negative scale | [Radar Chart](references/radar-chart.md) |
 
 ## Execute
@@ -36,7 +36,11 @@ The reference contains U+E200 / U+E202 / U+E201:
 visualize{"path":"<absolute-path>/<title>.html"}
 ```
 
-For Mermaid, use distinct edge styles only for distinct meanings; explain them with semantic legends or edge labels.
+Mermaid references include `mode:wide` for the native expanded preview. Keep it unchanged; enhanced qv diagrams fit the current view on expansion. Native fallback retains its existing renderer behavior.
+
+Architecture-beta preserves full wrapped names and offers unscaled resource/group details with a native object selector on narrow or expanded views. Selection reads the complete model without filtering it.
+
+For Mermaid, declare semantic icons for all architecture services; use groups for overview/drilldown. Explain distinct edge styles with semantic legends or edge labels.
 
 Add concise explanation outside the visual when needed. Never replace the reference with a Markdown link. Use the returned absolute executor path.
 

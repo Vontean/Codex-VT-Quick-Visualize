@@ -1,0 +1,8 @@
+architecture-beta
+ group left(cloud)[Source]
+ group right(cloud)[Destination]
+ service a(server)[API] in left
+ service b(database)[Database] in right
+ a{group}:R <--> L:b{group}
+ service c(disk)[Disk]
+ b:B --> T:c

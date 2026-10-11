@@ -1,0 +1,12 @@
+architecture-beta
+ group cloud(cloud)[Cloud]
+ group app(server)[Application] in cloud
+ service web(internet)[Web] in app
+ service api(server)[API] in app
+ service db(database)[Database] in cloud
+ service disk(disk)[Storage] in cloud
+ junction hub in cloud
+ web:R --> L:api
+ api:B --> T:hub
+ hub:R --> L:db
+ hub:B --> T:disk

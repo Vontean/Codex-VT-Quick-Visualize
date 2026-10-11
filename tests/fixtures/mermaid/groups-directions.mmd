@@ -1,0 +1,11 @@
+flowchart LR
+ subgraph outer[平台]
+   subgraph inner[服务]
+     direction TB
+     A[API 服务] --> B[搜索服务]
+   end
+   C[缓存]
+ end
+ X[Web 应用] --> inner
+ inner --> C
+ C --> X

@@ -16,7 +16,7 @@
 | `Line Chart` | 查看单个非负指标随日期的平滑趋势 | 2–90 个日期数据点、单序列 |
 | `Grouped Bar Chart` | 在共享类别和数值轴上比较多个对象 | 2–4 个序列、共同的 2–6 个类别 |
 | `Donut Chart` | 查看共同组成一个整体的类别占比 | 2–6 个类目、非负数值、总和大于 0 |
-| `Mermaid` | 架构、流程与关系图 | 架构图由 qv 自行绘制；不支持的语法明确回退原生 |
+| `Mermaid` | 架构、流程、时序、状态、实体关系、类、时间线、用户旅程、看板、饼图、XY、雷达、桑基、四象限、方块与 C4 图 | 支持范围由 qv 自行绘制；不支持的语法明确回退原生 |
 | `Radar Chart` | 比较一个或多个对象在共同指标上的相对强弱 | 1–4 个对象、共同的 3–8 个维度与量表 |
 
 `Parameter Form` 当前支持 `text`、`textarea`、`select`、`radio`、`switch`、`checkbox` 和 `range`。每一种字段都可以单独成表，也可以重复或自由组合。
@@ -31,11 +31,13 @@
 
 四类图表统一采用顶部 32px 留白、标题到图表 32px 间距和居中底部图例。入场动效在离开后重新进入视野时重播，遵循减少动态效果设置。环形图在少类别且空间充足时直接标注名称与占比。详细设计约定见 [DESIGN.md](DESIGN.md)。
 
-`Mermaid` 直接读取标准 `.mmd`，使用 Mermaid 11.12.0 解析节点和关系，再由 qv 自行布局与绘制，沿用已确认的节点、图标、统一连接点、曲线、可选 Tooltip 和逐层生长动效。带标题或节点说明时可使用包含 `source` 的 JSON；无需再写节点坐标或连接数组。浏览器按需加载固定版本的 jsDelivr 模块。嵌套分组、特殊形状等尚未适配的语法及其他图型显示原生回退提示，不伪装成已适配。
+`Mermaid` 直接读取标准 `.mmd`，使用 Mermaid 11.12.0 解析节点和关系，再由 qv 自行布局与绘制，沿用已确认的节点、图标、统一连接点、曲线、可选 Tooltip 和逐层生长动效。带标题或节点说明时可使用包含 `source` 的 JSON；无需再写节点坐标或连接数组。浏览器按需加载固定版本的 jsDelivr 模块。支持嵌套与部分分组、分组端点、跨层连接、回路、自环、常用节点形状及 `architecture-beta` 的服务、连接点与方向端口。复杂拓扑使用 ELKjs 0.10.0；需原生方向约束时读取 Mermaid 布局坐标，再由 qv 重绘。自定义样式、富文本与特殊图形等未覆盖语法及其他图型明确回退原生。
 
 ```bash
 python3 skill/quick-visualize/scripts/render.py mermaid diagram.mmd work/architecture.html
 ```
+
+所有 Mermaid 输出默认带原生放大入口：qv 自绘图在消息流保留可读字号与绘图区水平滚动，放大后适配完整当前视图，退出恢复滚动位置。整图适配用于 qv 自绘图型；原生回退保留 Mermaid 原有 SVG 尺寸、样式和交互，不套入 qv 缩放。分组图需要复制完整架构时，先关闭“节点组”，再放大并使用原生 Copy as image；它仍是当前预览截图，不是独立的高分辨率整图导出。
 
 Mermaid 的语法与布局在浏览器校验，runner 返回的 `runtime: pending-browser` 表示尚未确认实际绘制。详细支持范围见 [Mermaid 规格](skill/quick-visualize/references/mermaid.md)。
 
@@ -218,3 +220,8 @@ python3 -m unittest discover -s tests -v
 ## License
 
 [MIT](LICENSE)。Mermaid 11.12.0 通过 CDN 在运行时加载，遵循其 [MIT License](https://cdn.jsdelivr.net/npm/mermaid@11.12.0/LICENSE)，库代码未打包进本仓库。
+
+复杂布局按需加载 ELKjs 0.10.0，遵循其 [EPL-2.0 License](https://github.com/kieler/elkjs/blob/v0.10.0/LICENSE.md)；库代码未打包进本仓库。
+
+
+Mermaid architecture-beta 的完整资源名称按实际卡片宽度换行；资源和分组详情放在图下，以原字号展示名称、归属和连接端口。窄屏与展开模式提供原生对象选择，不改变完整图。所有支持的增强图共用展开适配，原生回退保留原来的渲染和视口行为。

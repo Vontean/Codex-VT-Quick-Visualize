@@ -1,0 +1,17 @@
+stateDiagram-v2
+  direction LR
+  state "草稿" as Draft
+  state "审核中" as Review
+  state "待发布" as Ready
+  state "已发布" as Published
+  state "已归档" as Archived
+  state Gate <<choice>>
+  [*] --> Draft
+  Draft --> Review: 提交审核
+  Review --> Gate: 完成审核
+  Gate --> Ready: 通过
+  Gate --> Draft: 需修改
+  Ready --> Published: 发布
+  Published --> Review: 内容更新
+  Published --> Archived: 下架归档
+  Archived --> [*]

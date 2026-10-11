@@ -61,7 +61,10 @@ def render_checked(kind: str, spec_path: Path, output: Path) -> dict:
             handle.write(fragment)
         os.replace(temporary, output)
         temporary = None
-        reference = "\ue200visualize\ue202" + json.dumps({"path": str(output)}, ensure_ascii=False, separators=(",", ":")) + "\ue201"
+        payload = {"path": str(output)}
+        if kind == "mermaid":
+            payload["mode"] = "wide"
+        reference = "\ue200visualize\ue202" + json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\ue201"
         result = {"ok": True, "path": str(output), "checks": checks, "reference": reference}
         if kind == "mermaid":
             result["runtime"] = "pending-browser"

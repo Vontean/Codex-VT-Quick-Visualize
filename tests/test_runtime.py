@@ -31,6 +31,7 @@ class RuntimeTests(unittest.TestCase):
                 self.assertTrue(result['reference'].endswith('\ue201'))
                 payload = json.loads(result['reference'].split('\ue202')[1][:-1])
                 self.assertEqual(payload['path'], str(output.resolve()))
+                self.assertEqual(payload.get('mode'), 'wide' if kind == 'mermaid' else None)
 
     def test_invalid_spec_preserves_old_output(self):
         with tempfile.TemporaryDirectory() as folder:

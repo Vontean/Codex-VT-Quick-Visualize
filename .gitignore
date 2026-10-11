@@ -1,3 +1,7 @@
 .DS_Store
 __pycache__/
 *.py[cod]
+
+# Mermaid design fixtures and iteration evidence
+/skill/quick-visualize/test/
+/Progress/

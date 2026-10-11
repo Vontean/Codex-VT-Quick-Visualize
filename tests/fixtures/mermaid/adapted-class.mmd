@@ -1,0 +1,36 @@
+classDiagram
+  direction LR
+  class Content {
+    <<abstract>>
+    +UUID id
+    +String status
+    +publish() void*
+  }
+  class Article {
+    +String body
+    +updateBody(text) void
+  }
+  class Revision {
+    +int number
+    +String snapshot
+  }
+  class ContentStore {
+    <<interface>>
+    +save(content) void
+    +load(id) Content
+  }
+  class SqlContentStore {
+    -String connectionString
+    +save(content) void
+    +load(id) Content
+  }
+  class PublicationService {
+    -ContentStore store
+    +publish(article) void
+  }
+  Content <|-- Article : 继承
+  Content "1" *-- "1..*" Revision : 保留版本
+  ContentStore <|.. SqlContentStore : 实现
+  PublicationService ..> ContentStore : 依赖
+  PublicationService --> Content : 发布
+  SqlContentStore --> Content : 持久化

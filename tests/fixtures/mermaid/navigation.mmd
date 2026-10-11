@@ -1,0 +1,42 @@
+flowchart LR
+ subgraph clients[客户端]
+  web@{icon: "lucide:monitor", form: "rounded", label: "Web 应用"}
+  mobile@{icon: "lucide:smartphone", form: "rounded", label: "移动 App"}
+  desktop@{icon: "lucide:laptop", form: "rounded", label: "桌面端"}
+ end
+ subgraph platform[应用平台]
+  subgraph api[API 接入]
+   gateway@{icon: "lucide:network", form: "rounded", label: "API 网关"}
+   auth@{icon: "lucide:key-round", form: "rounded", label: "认证服务"}
+   content@{icon: "lucide:file-text", form: "rounded", label: "内容服务"}
+   search@{icon: "lucide:search", form: "rounded", label: "搜索服务"}
+  end
+  subgraph jobs[后台任务]
+   render@{icon: "lucide:film", form: "rounded", label: "媒体转码"}
+   index@{icon: "lucide:scan-search", form: "rounded", label: "索引任务"}
+   notify@{icon: "lucide:bell", form: "rounded", label: "通知任务"}
+  end
+ end
+ subgraph data[数据服务]
+  db@{icon: "lucide:database", form: "rounded", label: "PostgreSQL"}
+  cache@{icon: "lucide:zap", form: "rounded", label: "Redis"}
+  queue@{icon: "lucide:list-tree", form: "rounded", label: "消息队列"}
+  files@{icon: "lucide:archive", form: "rounded", label: "对象存储"}
+ end
+ web --> gateway
+ mobile --> gateway
+ desktop --> gateway
+ gateway --> auth
+ auth --> content
+ content --> search
+ content --> db
+ auth --> cache
+ search --> db
+ content --> files
+ content -.-> queue
+ queue -.-> render
+ render --> files
+ render -.-> index
+ index --> db
+ render -.-> notify
+ notify -.-> web

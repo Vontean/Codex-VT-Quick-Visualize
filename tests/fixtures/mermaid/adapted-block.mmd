@@ -1,0 +1,12 @@
+block-beta
+ columns 5
+ entry["内容入口"]:5
+ space:5
+ draft["草稿"] space review["审核"] space publish["发布"]
+ space:5
+ store[("内容库")]:3 space search["搜索"]
+ entry --> draft
+ draft --> review
+ review --> publish
+ publish --> store
+ store --> search
