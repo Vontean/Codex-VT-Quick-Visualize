@@ -1,0 +1,140 @@
+[
+  {
+    "name": "pie-zero",
+    "expected": "enhanced",
+    "state": "enhanced",
+    "slices": [
+      100
+    ],
+    "labels": [],
+    "scale": "全部：100；没有：0；仍然没有：0",
+    "labelsOverlap": false
+  },
+  {
+    "name": "pie-direct",
+    "expected": "enhanced",
+    "state": "enhanced",
+    "slices": [
+      40,
+      35,
+      25
+    ],
+    "labels": [
+      "编辑40 · 40%",
+      "审核35 · 35%",
+      "归档25 · 25%"
+    ],
+    "scale": "编辑：40；审核：35；归档：25",
+    "labelsOverlap": false
+  },
+  {
+    "name": "pie-empty",
+    "expected": "native",
+    "state": "native",
+    "notice": "饼图需要有效的非负数与正总量；当前显示 Mermaid 原生图。",
+    "slices": [],
+    "labels": [],
+    "scale": null,
+    "labelsOverlap": false
+  },
+  {
+    "name": "sequence-fallback",
+    "expected": "native",
+    "state": "native",
+    "notice": "此时序图包含未适配的参与方、富文本或自定义区域，保留原生语义；当前显示 Mermaid 原生图。",
+    "slices": [],
+    "labels": [],
+    "scale": null,
+    "labelsOverlap": false
+  },
+  {
+    "name": "er-fallback",
+    "expected": "native",
+    "state": "native",
+    "notice": "此实体关系图包含尚未适配的样式、富文本或关系标记，保留原生语义；当前显示 Mermaid 原生图。",
+    "slices": [],
+    "labels": [],
+    "scale": null,
+    "labelsOverlap": false
+  },
+  {
+    "name": "block-fallback",
+    "expected": "native",
+    "state": "native",
+    "notice": "Block 自定义样式保留原生语义；当前显示 Mermaid 原生图。",
+    "slices": [],
+    "labels": [],
+    "scale": null,
+    "labelsOverlap": false
+  },
+  {
+    "name": "c4-fallback",
+    "expected": "native",
+    "state": "native",
+    "notice": "C4 自定义节点或关系样式保留原生语义；当前显示 Mermaid 原生图。",
+    "slices": [],
+    "labels": [],
+    "scale": null,
+    "labelsOverlap": false
+  },
+  {
+    "name": "radar-circle",
+    "expected": "enhanced",
+    "state": "enhanced",
+    "notice": "",
+    "slices": [],
+    "labels": [],
+    "scale": "，量表1至8。Team：Research 2，Accuracy 4，Delivery 6",
+    "labelsOverlap": false
+  },
+  {
+    "name": "sankey-zero",
+    "expected": "native",
+    "state": "native",
+    "notice": "桑基非正值保留原生语义；当前显示 Mermaid 原生图。",
+    "slices": [],
+    "labels": [],
+    "scale": null,
+    "labelsOverlap": false
+  },
+  {
+    "name": "sankey-cycle",
+    "expected": "error",
+    "state": "error",
+    "notice": "无法绘制 Mermaid：circular link",
+    "slices": [],
+    "labels": [],
+    "scale": null,
+    "labelsOverlap": false
+  },
+  {
+    "name": "xy-horizontal",
+    "expected": "enhanced",
+    "state": "enhanced",
+    "notice": "",
+    "slices": [],
+    "labels": [],
+    "scale": "柱形1：完整业务资料与跨团队历史记录核对 -15，周期2 -8，周期3 -1，完整业务资料与跨团队历史记录核对 6，周期5 13，周期6 20，完整业务资料与跨团队历史记录核对 27，周期8 34，周期9 41，完整业务资料与跨团队历史记录核对 48，周期11 55，周期12 62，完整业务资料与跨团队历史记录核对 69，周期14 76，周期15 83，完整业务资料与跨团队历史记录核对 90，周期17 97，周期18 104",
+    "labelsOverlap": false
+  },
+  {
+    "name": "syntax-error",
+    "expected": "error",
+    "state": "error",
+    "notice": "无法绘制 Mermaid：Parsing failed: unexpected character: ->[<- at offset: 35, skipped 9 characters. ",
+    "slices": [],
+    "labels": [],
+    "scale": null,
+    "labelsOverlap": false
+  },
+  {
+    "name": "sankey-unicode-invalid",
+    "expected": "error",
+    "state": "error",
+    "notice": "无法绘制 Mermaid：Parse error on line 2:\nsankey-beta跨地区企业客户资料来源与业务反馈入口,审\n-----------^\nExpecting 'NEWLINE', 'EOF', 'COMMA', got 'NON_ESCAPED_TEXT'",
+    "slices": [],
+    "labels": [],
+    "scale": null,
+    "labelsOverlap": false
+  }
+]

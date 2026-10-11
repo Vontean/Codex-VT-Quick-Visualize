@@ -1,0 +1,1 @@
+{"title": "radar-circle", "source": "radar-beta\naxis a[\"Research\"], b[\"Accuracy\"], c[\"Delivery\"]\ncurve x[\"Team\"]{2,4,6}\nmin 1\nmax 8\nticks 4\ngraticule circle\n"}

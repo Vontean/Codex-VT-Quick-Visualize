@@ -41,8 +41,9 @@
 ## 当前进度
 
 - 已确认：9 / 18。
-- 当前项：剩余9种图表自主审视与优化，完成后待用户验收。
-- 审视记录：[flowchart-review/REVIEW.md](flowchart-review/REVIEW.md)。
+- 当前项：剩余9种图表自主优化与浏览器核对已完成，全部待用户验收。
+- 本轮剩余图记录：[autonomous-review/REVIEW.md](autonomous-review/REVIEW.md)。
+- 已验收图记录：[flowchart-review/REVIEW.md](flowchart-review/REVIEW.md)及各图子目录。
 
 ## 完成记录
 
@@ -63,3 +64,5 @@
 - 2026-10-12：Timeline 用户确认连续主轴、阶段色胶囊与上下同色节点、主题正文色时间名、独立事件竖线和完整文本、无popover、120px渐隐尾线及展开hug。阶段胶囊改为原生sticky，移除异步scroll回写。双主题/320与736px布局、源语义、展开返回、往返滚动及2000px内容宽度核对通过。证据 timeline-review/REVIEW.md。
 
 - 2026-10-12：Class 用户确认分区代码卡片、虚线Namespace、精确UML标记、增强连线及近文字结构化关系浮层。双主题8组、54次定位和12个标记几何检查通过。证据 class-review/REVIEW.md。
+
+- 2026-10-12：剩余 architecture-beta、sequenceDiagram、erDiagram、pie、xychart-beta、radar-beta、sankey-beta、block-beta 与C4完成自主优化。72组布局、18组语义、9图动效和13组额外语义／回退检查通过；逐图原子化提交并同步本机qv，仍待用户验收，不勾选。证据 autonomous-review/REVIEW.md。

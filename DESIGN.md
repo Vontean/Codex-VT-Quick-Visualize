@@ -231,3 +231,5 @@ Formal Gantt reuses the approved ruler, section labels, stage-colored interval b
 局部浮层先保持对象关联：在触发对象12／20／28px处找候选，距离最多32px，再在这些近候选中避让，不为了零遮挡把详情送到远端。优先使用已呈现的信息；只有说明、关系或成员需要补充时显示详情。100ms停稳与160ms退出缓冲避免快速跨节点反复还原。
 
 `mermaid-presentation.js`只负责局部定位、hover时序和包含层底色；模型、布局和各图的交互语义保持独立。`mermaid_presets.py`在生成时编译现有模板，Pie／Radar适配源数据后调用，避免样式复制。ResizeObserver涉及重绘时延至requestAnimationFrame处理，禁止在观察器同一批通知内同步改写被观察对象的布局。
+
+键盘详情遵循相同对象关联：自动滚动应将触发文字留在可见区，不用其来源节点替代触发对象。长时序图在滚动停稳后恢复已选消息详情；Escape既隐藏详情，也取消待恢复对象，后续scroll通知不得重新打开。

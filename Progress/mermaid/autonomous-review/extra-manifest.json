@@ -1,0 +1,15 @@
+{
+  "pie-zero": "enhanced",
+  "pie-direct": "enhanced",
+  "pie-empty": "native",
+  "sequence-fallback": "native",
+  "er-fallback": "native",
+  "block-fallback": "native",
+  "c4-fallback": "native",
+  "radar-circle": "enhanced",
+  "sankey-zero": "native",
+  "sankey-cycle": "error",
+  "xy-horizontal": "enhanced",
+  "syntax-error": "error",
+  "sankey-unicode-invalid": "error"
+}

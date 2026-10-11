@@ -1,0 +1,148 @@
+[
+  {
+    "sample": "normal",
+    "checks": {
+      "nodes": true,
+      "edges": true
+    }
+  },
+  {
+    "sample": "stress",
+    "checks": {
+      "nodes": true,
+      "edges": true
+    }
+  },
+  {
+    "kind": "sequence",
+    "sample": "normal",
+    "checks": {
+      "actors": true,
+      "messages": true,
+      "notes": true
+    }
+  },
+  {
+    "kind": "sequence",
+    "sample": "stress",
+    "checks": {
+      "actors": true,
+      "messages": true,
+      "notes": true
+    }
+  },
+  {
+    "kind": "er",
+    "sample": "normal",
+    "checks": {
+      "nodes": true,
+      "edges": true
+    }
+  },
+  {
+    "kind": "er",
+    "sample": "stress",
+    "checks": {
+      "nodes": true,
+      "edges": true
+    }
+  },
+  {
+    "kind": "pie",
+    "sample": "normal",
+    "checks": {
+      "items": true,
+      "positiveOnly": true,
+      "proportions": true
+    }
+  },
+  {
+    "kind": "pie",
+    "sample": "stress",
+    "checks": {
+      "items": true,
+      "positiveOnly": true,
+      "proportions": true
+    }
+  },
+  {
+    "kind": "xy",
+    "sample": "normal",
+    "checks": {
+      "categories": true,
+      "marks": true
+    }
+  },
+  {
+    "kind": "xy",
+    "sample": "stress",
+    "checks": {
+      "categories": true,
+      "marks": true
+    }
+  },
+  {
+    "kind": "radar",
+    "sample": "normal",
+    "checks": {
+      "axes": true,
+      "series": true
+    }
+  },
+  {
+    "kind": "radar",
+    "sample": "stress",
+    "checks": {
+      "axes": true,
+      "series": true
+    }
+  },
+  {
+    "kind": "sankey",
+    "sample": "normal",
+    "checks": {
+      "values": true,
+      "nodes": true
+    }
+  },
+  {
+    "kind": "sankey",
+    "sample": "stress",
+    "checks": {
+      "values": true,
+      "nodes": true
+    }
+  },
+  {
+    "kind": "block",
+    "sample": "normal",
+    "checks": {
+      "nodes": true,
+      "edges": true
+    }
+  },
+  {
+    "kind": "block",
+    "sample": "stress",
+    "checks": {
+      "nodes": true,
+      "edges": true
+    }
+  },
+  {
+    "kind": "c4",
+    "sample": "normal",
+    "checks": {
+      "nodes": true,
+      "edges": true
+    }
+  },
+  {
+    "kind": "c4",
+    "sample": "stress",
+    "checks": {
+      "nodes": true,
+      "edges": true
+    }
+  }
+]

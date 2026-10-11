@@ -1,0 +1,1 @@
+{"title": "er-fallback", "source": "erDiagram\nA ||--o{ B: owns\nclassDef red fill:#f00\nclass A red\n"}

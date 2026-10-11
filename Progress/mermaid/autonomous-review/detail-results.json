@@ -1,0 +1,380 @@
+[
+  {
+    "kind": "sequence",
+    "sample": "normal",
+    "index": 0,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "编辑者→内容服务提交发布请求"
+  },
+  {
+    "kind": "sequence",
+    "sample": "normal",
+    "index": 4,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "内容库→内容服务发布完成"
+  },
+  {
+    "kind": "sequence",
+    "sample": "normal",
+    "index": 7,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "内容服务→编辑者返回校验错误"
+  },
+  {
+    "kind": "sequence",
+    "sample": "stress",
+    "index": 0,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "团队1→团队2核对跨地区企业客户的完整业务说明与历史修改记录并确认所有团队的资料和权限"
+  },
+  {
+    "kind": "sequence",
+    "sample": "stress",
+    "index": 13,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "团队7→团队1核对资料与权限14"
+  },
+  {
+    "kind": "sequence",
+    "sample": "stress",
+    "index": 25,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "团队7→团队7核对跨地区企业客户的完整业务说明与历史修改记录并确认所有团队的资料和权限"
+  },
+  {
+    "kind": "er",
+    "sample": "normal",
+    "index": 0,
+    "visible": true,
+    "gap": 28,
+    "overflow": false,
+    "text": "作者 1→内容 0..*非识别关系创作"
+  },
+  {
+    "kind": "er",
+    "sample": "normal",
+    "index": 2,
+    "visible": true,
+    "gap": 12.4375,
+    "overflow": false,
+    "text": "内容 1→内容标签 0..*识别关系标记"
+  },
+  {
+    "kind": "er",
+    "sample": "normal",
+    "index": 3,
+    "visible": true,
+    "gap": 28,
+    "overflow": false,
+    "text": "标签 1→内容标签 0..*识别关系关联"
+  },
+  {
+    "kind": "er",
+    "sample": "stress",
+    "index": 0,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "资料实体1 1→资料实体2 0..*识别关系包含"
+  },
+  {
+    "kind": "er",
+    "sample": "stress",
+    "index": 7,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "资料实体8 1→资料实体9 0..*识别关系包含"
+  },
+  {
+    "kind": "er",
+    "sample": "stress",
+    "index": 13,
+    "visible": true,
+    "gap": 28,
+    "overflow": false,
+    "text": "核对跨地区企业客户的完整业务说明与历史修改记录并确认所有团队的资料和权限 0..1→核对跨地区企业客户的完整业务说明与历史修改记录并确认所有团队的资料和权限 0..*非识别关系关联"
+  },
+  {
+    "kind": "pie",
+    "sample": "normal",
+    "index": 0,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "原创文章4242%"
+  },
+  {
+    "kind": "pie",
+    "sample": "normal",
+    "index": 2,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "研究整理1818%"
+  },
+  {
+    "kind": "pie",
+    "sample": "normal",
+    "index": 4,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "其他33%"
+  },
+  {
+    "kind": "pie",
+    "sample": "stress",
+    "index": 0,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "跨地区企业客户反馈与资料来源说明9876553211.13100%"
+  },
+  {
+    "kind": "pie",
+    "sample": "stress",
+    "index": 5,
+    "visible": true,
+    "gap": 28,
+    "overflow": false,
+    "text": "来源628000%"
+  },
+  {
+    "kind": "pie",
+    "sample": "stress",
+    "index": 9,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "来源10240%"
+  },
+  {
+    "kind": "xy",
+    "sample": "normal",
+    "index": 0,
+    "visible": true,
+    "gap": 11.625,
+    "overflow": false,
+    "text": "第1周折线1 · 25"
+  },
+  {
+    "kind": "xy",
+    "sample": "normal",
+    "index": 3,
+    "visible": true,
+    "gap": 11.625,
+    "overflow": false,
+    "text": "第4周折线1 · 38"
+  },
+  {
+    "kind": "xy",
+    "sample": "normal",
+    "index": 5,
+    "visible": true,
+    "gap": 11.625,
+    "overflow": false,
+    "text": "第6周折线1 · 36"
+  },
+  {
+    "kind": "xy",
+    "sample": "stress",
+    "index": 0,
+    "visible": true,
+    "gap": 12.4375,
+    "overflow": false,
+    "text": "周期1柱形1 · -35折线1 · 0"
+  },
+  {
+    "kind": "xy",
+    "sample": "stress",
+    "index": 12,
+    "visible": true,
+    "gap": 12.4375,
+    "overflow": false,
+    "text": "周期13柱形1 · 34折线1 · 55"
+  },
+  {
+    "kind": "xy",
+    "sample": "stress",
+    "index": 23,
+    "visible": true,
+    "gap": 12.4375,
+    "overflow": false,
+    "text": "周期24柱形1 · 86折线1 · 97"
+  },
+  {
+    "kind": "sankey",
+    "sample": "normal",
+    "index": 0,
+    "visible": true,
+    "gap": 12.4375,
+    "overflow": false,
+    "text": "Search流入0流出600"
+  },
+  {
+    "kind": "sankey",
+    "sample": "normal",
+    "index": 2,
+    "visible": true,
+    "gap": 12.4375,
+    "overflow": false,
+    "text": "Notes流入600流出0"
+  },
+  {
+    "kind": "sankey",
+    "sample": "normal",
+    "index": 4,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "Community流入0流出400"
+  },
+  {
+    "kind": "sankey",
+    "sample": "stress",
+    "index": 0,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "Customer records and complete historical business feedback source流入0流出2,962"
+  },
+  {
+    "kind": "sankey",
+    "sample": "stress",
+    "index": 7,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "Source 4流入0流出4,882"
+  },
+  {
+    "kind": "sankey",
+    "sample": "stress",
+    "index": 14,
+    "visible": true,
+    "gap": 12.4375,
+    "overflow": false,
+    "text": "Archive 3流入9,920流出0"
+  },
+  {
+    "kind": "block",
+    "sample": "normal",
+    "index": 0,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "连接关系内容入口 → 草稿"
+  },
+  {
+    "kind": "block",
+    "sample": "normal",
+    "index": 2,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "连接关系审核 → 发布"
+  },
+  {
+    "kind": "block",
+    "sample": "normal",
+    "index": 4,
+    "visible": true,
+    "gap": 20,
+    "overflow": false,
+    "text": "连接关系内容库 → 搜索"
+  },
+  {
+    "kind": "block",
+    "sample": "stress",
+    "index": 0,
+    "visible": true,
+    "gap": 20,
+    "overflow": false,
+    "text": "连接关系资料接收 → 核对跨地区企业客户的完整业务说明与历史修改记录并确认所有团队的资料和权限"
+  },
+  {
+    "kind": "block",
+    "sample": "stress",
+    "index": 3,
+    "visible": true,
+    "gap": 28,
+    "overflow": false,
+    "text": "连接关系处理与复核 → 跨团队协作"
+  },
+  {
+    "kind": "block",
+    "sample": "stress",
+    "index": 6,
+    "visible": true,
+    "gap": 28,
+    "overflow": false,
+    "text": "连接关系历史资料库 → 归档"
+  },
+  {
+    "kind": "c4",
+    "sample": "normal",
+    "index": 0,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "阅读与整理读者 → 内容平台 › 阅读应用 · HTTPS"
+  },
+  {
+    "kind": "c4",
+    "sample": "normal",
+    "index": 2,
+    "visible": true,
+    "gap": 12,
+    "overflow": false,
+    "text": "读写内容内容平台 › 内容服务 → 内容平台 › 内容库 · SQL"
+  },
+  {
+    "kind": "c4",
+    "sample": "normal",
+    "index": 3,
+    "visible": true,
+    "gap": 28,
+    "overflow": false,
+    "text": "查询索引内容平台 › 内容服务 → 搜索服务 · HTTPS"
+  },
+  {
+    "kind": "c4",
+    "sample": "stress",
+    "index": 0,
+    "visible": true,
+    "gap": 28,
+    "overflow": false,
+    "text": "提交资料企业客户 → 跨团队内容与权限平台 › 资料服务1 · HTTPS"
+  },
+  {
+    "kind": "c4",
+    "sample": "stress",
+    "index": 5,
+    "visible": true,
+    "gap": 28,
+    "overflow": false,
+    "text": "传递资料跨团队内容与权限平台 › 资料服务5 → 跨团队内容与权限平台 › 资料服务6 · HTTPS"
+  },
+  {
+    "kind": "c4",
+    "sample": "stress",
+    "index": 9,
+    "visible": true,
+    "gap": 28,
+    "overflow": false,
+    "text": "传递资料跨团队内容与权限平台 › 资料服务9 → 跨团队内容与权限平台 › 资料服务10 · HTTPS"
+  }
+]

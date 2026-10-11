@@ -1,0 +1,2538 @@
+[
+  {
+    "kind": "architecture",
+    "sample": "normal",
+    "theme": "light",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-architecture",
+    "scene": [
+      1094,
+      693
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 5,
+      "wires": 4,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "Web资源 · internet · web所属：Cloud / ApplicationWeb [R] → API [L]",
+      "overflow": false,
+      "gap": 618.9375
+    },
+    "expanded": {
+      "scale": "0.263254113345521",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "architecture",
+    "sample": "normal",
+    "theme": "light",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-architecture",
+    "scene": [
+      1094,
+      693
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 5,
+      "wires": 4,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "Web资源 · internet · web所属：Cloud / ApplicationWeb [R] → API [L]",
+      "overflow": false,
+      "gap": 552.9375
+    },
+    "expanded": {
+      "scale": "0.643510054844607",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "architecture",
+    "sample": "normal",
+    "theme": "dark",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-architecture",
+    "scene": [
+      1094,
+      693
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 5,
+      "wires": 4,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "Web资源 · internet · web所属：Cloud / ApplicationWeb [R] → API [L]",
+      "overflow": false,
+      "gap": 618.9375
+    },
+    "expanded": {
+      "scale": "0.263254113345521",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "architecture",
+    "sample": "normal",
+    "theme": "dark",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-architecture",
+    "scene": [
+      1094,
+      693
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 5,
+      "wires": 4,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "Web资源 · internet · web所属：Cloud / ApplicationWeb [R] → API [L]",
+      "overflow": false,
+      "gap": 552.9375
+    },
+    "expanded": {
+      "scale": "0.643510054844607",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "architecture",
+    "sample": "stress",
+    "theme": "light",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-architecture",
+    "scene": [
+      3238,
+      971
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 12,
+      "wires": 11,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "Team service资源 · server · s0_0所属：Team service / Team serviceTeam service [R] → Team service [L]",
+      "overflow": false,
+      "gap": 897.421875
+    },
+    "expanded": {
+      "scale": "0.08894379246448425",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "architecture",
+    "sample": "stress",
+    "theme": "light",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-architecture",
+    "scene": [
+      3238,
+      971
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 12,
+      "wires": 11,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "Team service资源 · server · s0_0所属：Team service / Team serviceTeam service [R] → Team service [L]",
+      "overflow": false,
+      "gap": 831.421875
+    },
+    "expanded": {
+      "scale": "0.21741815935762818",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "architecture",
+    "sample": "stress",
+    "theme": "dark",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-architecture",
+    "scene": [
+      3238,
+      971
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 12,
+      "wires": 11,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "Team service资源 · server · s0_0所属：Team service / Team serviceTeam service [R] → Team service [L]",
+      "overflow": false,
+      "gap": 897.421875
+    },
+    "expanded": {
+      "scale": "0.08894379246448425",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "architecture",
+    "sample": "stress",
+    "theme": "dark",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-architecture",
+    "scene": [
+      3238,
+      971
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 12,
+      "wires": 11,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "Team service资源 · server · s0_0所属：Team service / Team serviceTeam service [R] → Team service [L]",
+      "overflow": false,
+      "gap": 831.421875
+    },
+    "expanded": {
+      "scale": "0.21741815935762818",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "sequence",
+    "sample": "normal",
+    "theme": "light",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-sequence",
+    "scene": [
+      980,
+      744
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 4,
+      "wires": 8,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "编辑者→内容服务提交发布请求",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "scale": "0.2938775510204082",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "sequence",
+    "sample": "normal",
+    "theme": "light",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-sequence",
+    "scene": [
+      980,
+      744
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 4,
+      "wires": 8,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "编辑者→内容服务提交发布请求",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "scale": "0.7183673469387755",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "sequence",
+    "sample": "normal",
+    "theme": "dark",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-sequence",
+    "scene": [
+      980,
+      744
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 4,
+      "wires": 8,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "编辑者→内容服务提交发布请求",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "scale": "0.2938775510204082",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "sequence",
+    "sample": "normal",
+    "theme": "dark",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-sequence",
+    "scene": [
+      980,
+      744
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 4,
+      "wires": 8,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "编辑者→内容服务提交发布请求",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "scale": "0.7183673469387755",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "sequence",
+    "sample": "stress",
+    "theme": "light",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-sequence",
+    "scene": [
+      2656,
+      2044
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 7,
+      "wires": 26,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "团队1→团队2核对跨地区企业客户的完整业务说明与历史修改记录并确认所有团队的资料和权限",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "scale": "0.10843373493975904",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "sequence",
+    "sample": "stress",
+    "theme": "light",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-sequence",
+    "scene": [
+      2656,
+      2044
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 7,
+      "wires": 26,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "团队1→团队2核对跨地区企业客户的完整业务说明与历史修改记录并确认所有团队的资料和权限",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "scale": "0.26506024096385544",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "sequence",
+    "sample": "stress",
+    "theme": "dark",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-sequence",
+    "scene": [
+      2656,
+      2044
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 7,
+      "wires": 26,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "团队1→团队2核对跨地区企业客户的完整业务说明与历史修改记录并确认所有团队的资料和权限",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "scale": "0.10843373493975904",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "sequence",
+    "sample": "stress",
+    "theme": "dark",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-sequence",
+    "scene": [
+      2656,
+      2044
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 7,
+      "wires": 26,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "团队1→团队2核对跨地区企业客户的完整业务说明与历史修改记录并确认所有团队的资料和权限",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "scale": "0.26506024096385544",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "er",
+    "sample": "normal",
+    "theme": "light",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-er",
+    "scene": [
+      1184,
+      509
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 5,
+      "wires": 4,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "作者 1→内容 0..*非识别关系创作",
+      "overflow": false,
+      "gap": 28
+    },
+    "expanded": {
+      "scale": "0.24324324324324326",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "er",
+    "sample": "normal",
+    "theme": "light",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-er",
+    "scene": [
+      1184,
+      509
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 5,
+      "wires": 4,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "作者 1→内容 0..*非识别关系创作",
+      "overflow": false,
+      "gap": 28
+    },
+    "expanded": {
+      "scale": "0.5945945945945946",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "er",
+    "sample": "normal",
+    "theme": "dark",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-er",
+    "scene": [
+      1184,
+      509
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 5,
+      "wires": 4,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "作者 1→内容 0..*非识别关系创作",
+      "overflow": false,
+      "gap": 28
+    },
+    "expanded": {
+      "scale": "0.24324324324324326",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "er",
+    "sample": "normal",
+    "theme": "dark",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-er",
+    "scene": [
+      1184,
+      509
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 5,
+      "wires": 4,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "作者 1→内容 0..*非识别关系创作",
+      "overflow": false,
+      "gap": 28
+    },
+    "expanded": {
+      "scale": "0.5945945945945946",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "er",
+    "sample": "stress",
+    "theme": "light",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-er",
+    "scene": [
+      466,
+      5094
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 14,
+      "wires": 14,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "资料实体1 1→资料实体2 0..*识别关系包含",
+      "overflow": false,
+      "gap": 12.4375
+    },
+    "expanded": {
+      "scale": "0.12328229289360032",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "er",
+    "sample": "stress",
+    "theme": "light",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-er",
+    "scene": [
+      466,
+      5094
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 14,
+      "wires": 14,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "资料实体1 1→资料实体2 0..*识别关系包含",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "scale": "0.12877895563407932",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "er",
+    "sample": "stress",
+    "theme": "dark",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-er",
+    "scene": [
+      466,
+      5094
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 14,
+      "wires": 14,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "资料实体1 1→资料实体2 0..*识别关系包含",
+      "overflow": false,
+      "gap": 12.4375
+    },
+    "expanded": {
+      "scale": "0.12328229289360032",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "er",
+    "sample": "stress",
+    "theme": "dark",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-er",
+    "scene": [
+      466,
+      5094
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 14,
+      "wires": 14,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "资料实体1 1→资料实体2 0..*识别关系包含",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "scale": "0.12877895563407932",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "pie",
+    "sample": "normal",
+    "theme": "light",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-pie",
+    "scene": [
+      288,
+      510
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 5,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "原创文章4242%",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "nativePreset": true
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "pie",
+    "sample": "normal",
+    "theme": "light",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-pie",
+    "scene": [
+      704,
+      426
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 5,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "原创文章4242%",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "nativePreset": true
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "pie",
+    "sample": "normal",
+    "theme": "dark",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-pie",
+    "scene": [
+      288,
+      510
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 5,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "原创文章4242%",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "nativePreset": true
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "pie",
+    "sample": "normal",
+    "theme": "dark",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-pie",
+    "scene": [
+      704,
+      426
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 5,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "原创文章4242%",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "nativePreset": true
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "pie",
+    "sample": "stress",
+    "theme": "light",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-pie",
+    "scene": [
+      288,
+      690
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 7,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "跨地区企业客户反馈与资料来源说明9876553211.13100%",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "nativePreset": true
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "pie",
+    "sample": "stress",
+    "theme": "light",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-pie",
+    "scene": [
+      704,
+      510
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 7,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "跨地区企业客户反馈与资料来源说明9876553211.13100%",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "nativePreset": true
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "pie",
+    "sample": "stress",
+    "theme": "dark",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-pie",
+    "scene": [
+      288,
+      690
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 7,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "跨地区企业客户反馈与资料来源说明9876553211.13100%",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "nativePreset": true
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "pie",
+    "sample": "stress",
+    "theme": "dark",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-pie",
+    "scene": [
+      704,
+      510
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 7,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "跨地区企业客户反馈与资料来源说明9876553211.13100%",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "nativePreset": true
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "xy",
+    "sample": "normal",
+    "theme": "light",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-xy",
+    "scene": [
+      420,
+      346
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "第1周折线1 · 25",
+      "overflow": false,
+      "gap": 11.625
+    },
+    "expanded": {
+      "scale": "0.6857142857142857",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "xy",
+    "sample": "normal",
+    "theme": "light",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-xy",
+    "scene": [
+      704,
+      346
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "第1周折线1 · 25",
+      "overflow": false,
+      "gap": 11.625
+    },
+    "expanded": {
+      "scale": "1",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "xy",
+    "sample": "normal",
+    "theme": "dark",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-xy",
+    "scene": [
+      420,
+      346
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "第1周折线1 · 25",
+      "overflow": false,
+      "gap": 11.625
+    },
+    "expanded": {
+      "scale": "0.6857142857142857",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "xy",
+    "sample": "normal",
+    "theme": "dark",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-xy",
+    "scene": [
+      704,
+      346
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "第1周折线1 · 25",
+      "overflow": false,
+      "gap": 11.625
+    },
+    "expanded": {
+      "scale": "1",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "xy",
+    "sample": "stress",
+    "theme": "light",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-xy",
+    "scene": [
+      2964,
+      400
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "周期1柱形1 · -35折线1 · 0",
+      "overflow": false,
+      "gap": 12.4375
+    },
+    "expanded": {
+      "scale": "0.09716599190283401",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "xy",
+    "sample": "stress",
+    "theme": "light",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-xy",
+    "scene": [
+      2964,
+      400
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "周期1柱形1 · -35折线1 · 0",
+      "overflow": false,
+      "gap": 12.4375
+    },
+    "expanded": {
+      "scale": "0.23751686909581646",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "xy",
+    "sample": "stress",
+    "theme": "dark",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-xy",
+    "scene": [
+      2964,
+      400
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "周期1柱形1 · -35折线1 · 0",
+      "overflow": false,
+      "gap": 12.4375
+    },
+    "expanded": {
+      "scale": "0.09716599190283401",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "xy",
+    "sample": "stress",
+    "theme": "dark",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-xy",
+    "scene": [
+      2964,
+      400
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "周期1柱形1 · -35折线1 · 0",
+      "overflow": false,
+      "gap": 12.4375
+    },
+    "expanded": {
+      "scale": "0.23751686909581646",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "radar",
+    "sample": "normal",
+    "theme": "light",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-radar",
+    "preset": "radar-chart",
+    "scene": [
+      288,
+      472
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 0,
+      "axes": 6
+    },
+    "detail": {
+      "visible": false
+    },
+    "expanded": {
+      "nativePreset": true
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "radar",
+    "sample": "normal",
+    "theme": "light",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-radar",
+    "preset": "radar-chart",
+    "scene": [
+      704,
+      522
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 0,
+      "axes": 6
+    },
+    "detail": {
+      "visible": false
+    },
+    "expanded": {
+      "nativePreset": true
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "radar",
+    "sample": "normal",
+    "theme": "dark",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-radar",
+    "preset": "radar-chart",
+    "scene": [
+      288,
+      472
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 0,
+      "axes": 6
+    },
+    "detail": {
+      "visible": false
+    },
+    "expanded": {
+      "nativePreset": true
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "radar",
+    "sample": "normal",
+    "theme": "dark",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-radar",
+    "preset": "radar-chart",
+    "scene": [
+      704,
+      522
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 0,
+      "axes": 6
+    },
+    "detail": {
+      "visible": false
+    },
+    "expanded": {
+      "nativePreset": true
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "radar",
+    "sample": "stress",
+    "theme": "light",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-radar",
+    "scene": [
+      640,
+      480
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 0,
+      "axes": 10
+    },
+    "detail": {
+      "visible": true,
+      "text": "跨地区企业客户体验与可访问性核对团队10团队217团队334团队451团队568",
+      "overflow": false,
+      "gap": 28
+    },
+    "expanded": {
+      "scale": "0.45",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "radar",
+    "sample": "stress",
+    "theme": "light",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-radar",
+    "scene": [
+      704,
+      480
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 0,
+      "axes": 10
+    },
+    "detail": {
+      "visible": true,
+      "text": "跨地区企业客户体验与可访问性核对团队10团队217团队334团队451团队568",
+      "overflow": false,
+      "gap": 28
+    },
+    "expanded": {
+      "scale": "1",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "radar",
+    "sample": "stress",
+    "theme": "dark",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-radar",
+    "scene": [
+      640,
+      480
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 0,
+      "axes": 10
+    },
+    "detail": {
+      "visible": true,
+      "text": "跨地区企业客户体验与可访问性核对团队10团队217团队334团队451团队568",
+      "overflow": false,
+      "gap": 28
+    },
+    "expanded": {
+      "scale": "0.45",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "radar",
+    "sample": "stress",
+    "theme": "dark",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-radar",
+    "scene": [
+      704,
+      480
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 0,
+      "wires": 0,
+      "slices": 0,
+      "axes": 10
+    },
+    "detail": {
+      "visible": true,
+      "text": "跨地区企业客户体验与可访问性核对团队10团队217团队334团队451团队568",
+      "overflow": false,
+      "gap": 28
+    },
+    "expanded": {
+      "scale": "1",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "sankey",
+    "sample": "normal",
+    "theme": "light",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-sankey",
+    "scene": [
+      736,
+      480
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 5,
+      "wires": 6,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "Search流入0流出600",
+      "overflow": false,
+      "gap": 12.4375
+    },
+    "expanded": {
+      "scale": "0.5142857142857142",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "sankey",
+    "sample": "normal",
+    "theme": "light",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-sankey",
+    "scene": [
+      736,
+      480
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 5,
+      "wires": 6,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "Search流入0流出600",
+      "overflow": false,
+      "gap": 12.4375
+    },
+    "expanded": {
+      "scale": "1",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "sankey",
+    "sample": "normal",
+    "theme": "dark",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-sankey",
+    "scene": [
+      736,
+      480
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 5,
+      "wires": 6,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "Search流入0流出600",
+      "overflow": false,
+      "gap": 12.4375
+    },
+    "expanded": {
+      "scale": "0.5142857142857142",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "sankey",
+    "sample": "normal",
+    "theme": "dark",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-sankey",
+    "scene": [
+      736,
+      480
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 5,
+      "wires": 6,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "Search流入0流出600",
+      "overflow": false,
+      "gap": 12.4375
+    },
+    "expanded": {
+      "scale": "1",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "sankey",
+    "sample": "stress",
+    "theme": "light",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-sankey",
+    "scene": [
+      1064,
+      1280
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 15,
+      "wires": 44,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "Customer records and complete historical business feedback source流入0流出2,962",
+      "overflow": false,
+      "gap": 12.25
+    },
+    "expanded": {
+      "scale": "0.391304347826087",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "sankey",
+    "sample": "stress",
+    "theme": "light",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-sankey",
+    "scene": [
+      1064,
+      1280
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 15,
+      "wires": 44,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "Customer records and complete historical business feedback source流入0流出2,962",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "scale": "0.5734375",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "sankey",
+    "sample": "stress",
+    "theme": "dark",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-sankey",
+    "scene": [
+      1064,
+      1280
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 15,
+      "wires": 44,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "Customer records and complete historical business feedback source流入0流出2,962",
+      "overflow": false,
+      "gap": 12.25
+    },
+    "expanded": {
+      "scale": "0.391304347826087",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "sankey",
+    "sample": "stress",
+    "theme": "dark",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-sankey",
+    "scene": [
+      1064,
+      1280
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 15,
+      "wires": 44,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "Customer records and complete historical business feedback source流入0流出2,962",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "scale": "0.5734375",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "block",
+    "sample": "normal",
+    "theme": "light",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-block",
+    "scene": [
+      992,
+      398
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 6,
+      "wires": 5,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": false
+    },
+    "expanded": {
+      "scale": "0.2903225806451613",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "block",
+    "sample": "normal",
+    "theme": "light",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-block",
+    "scene": [
+      992,
+      398
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 6,
+      "wires": 5,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": false
+    },
+    "expanded": {
+      "scale": "0.7096774193548387",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "block",
+    "sample": "normal",
+    "theme": "dark",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-block",
+    "scene": [
+      992,
+      398
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 6,
+      "wires": 5,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": false
+    },
+    "expanded": {
+      "scale": "0.2903225806451613",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "block",
+    "sample": "normal",
+    "theme": "dark",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-block",
+    "scene": [
+      992,
+      398
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 6,
+      "wires": 5,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": false
+    },
+    "expanded": {
+      "scale": "0.7096774193548387",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "block",
+    "sample": "stress",
+    "theme": "light",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-block",
+    "scene": [
+      992,
+      506
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 8,
+      "wires": 7,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": false
+    },
+    "expanded": {
+      "scale": "0.2903225806451613",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "block",
+    "sample": "stress",
+    "theme": "light",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-block",
+    "scene": [
+      992,
+      506
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 8,
+      "wires": 7,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": false
+    },
+    "expanded": {
+      "scale": "0.7096774193548387",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "block",
+    "sample": "stress",
+    "theme": "dark",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-block",
+    "scene": [
+      992,
+      506
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 8,
+      "wires": 7,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": false
+    },
+    "expanded": {
+      "scale": "0.2903225806451613",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "block",
+    "sample": "stress",
+    "theme": "dark",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-block",
+    "scene": [
+      992,
+      506
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 8,
+      "wires": 7,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": false
+    },
+    "expanded": {
+      "scale": "0.7096774193548387",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "c4",
+    "sample": "normal",
+    "theme": "light",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-c4",
+    "scene": [
+      1096,
+      388
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 5,
+      "wires": 4,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "读者角色； 查找、阅读和整理内容； 流向：内容平台 › 阅读应用 · 阅读与整理 [HTTPS]",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "scale": "0.26277372262773724",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "c4",
+    "sample": "normal",
+    "theme": "light",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-c4",
+    "scene": [
+      1096,
+      388
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 5,
+      "wires": 4,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "读者角色； 查找、阅读和整理内容； 流向：内容平台 › 阅读应用 · 阅读与整理 [HTTPS]",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "scale": "0.6423357664233577",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "c4",
+    "sample": "normal",
+    "theme": "dark",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-c4",
+    "scene": [
+      1096,
+      388
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 5,
+      "wires": 4,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "读者角色； 查找、阅读和整理内容； 流向：内容平台 › 阅读应用 · 阅读与整理 [HTTPS]",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "scale": "0.26277372262773724",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "c4",
+    "sample": "normal",
+    "theme": "dark",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-c4",
+    "scene": [
+      1096,
+      388
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 5,
+      "wires": 4,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "读者角色； 查找、阅读和整理内容； 流向：内容平台 › 阅读应用 · 阅读与整理 [HTTPS]",
+      "overflow": false,
+      "gap": 12
+    },
+    "expanded": {
+      "scale": "0.6423357664233577",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "c4",
+    "sample": "stress",
+    "theme": "light",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-c4",
+    "scene": [
+      1336,
+      768
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 11,
+      "wires": 10,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "企业客户角色； 核对跨地区企业客户的完整业务说明与历史修改记录并确认所有团队的资料和权限； 流向：跨团队内容与权限平台 › 资料服务1 · 提交资料 [HTTPS]",
+      "overflow": false,
+      "gap": 28
+    },
+    "expanded": {
+      "scale": "0.2155688622754491",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "c4",
+    "sample": "stress",
+    "theme": "light",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-c4",
+    "scene": [
+      1336,
+      768
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 11,
+      "wires": 10,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "企业客户角色； 核对跨地区企业客户的完整业务说明与历史修改记录并确认所有团队的资料和权限； 流向：跨团队内容与权限平台 › 资料服务1 · 提交资料 [HTTPS]",
+      "overflow": false,
+      "gap": 28
+    },
+    "expanded": {
+      "scale": "0.5269461077844312",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "c4",
+    "sample": "stress",
+    "theme": "dark",
+    "width": 320,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-c4",
+    "scene": [
+      1336,
+      768
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 11,
+      "wires": 10,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "企业客户角色； 核对跨地区企业客户的完整业务说明与历史修改记录并确认所有团队的资料和权限； 流向：跨团队内容与权限平台 › 资料服务1 · 提交资料 [HTTPS]",
+      "overflow": false,
+      "gap": 28
+    },
+    "expanded": {
+      "scale": "0.2155688622754491",
+      "clipped": []
+    },
+    "finalErrors": []
+  },
+  {
+    "kind": "c4",
+    "sample": "stress",
+    "theme": "dark",
+    "width": 736,
+    "labelPairs": [],
+    "state": "enhanced",
+    "renderer": "qv-c4",
+    "scene": [
+      1336,
+      768
+    ],
+    "rootOverflow": false,
+    "overflow": [],
+    "outside": [],
+    "notice": "",
+    "errors": [],
+    "animations": 0,
+    "counts": {
+      "nodes": 11,
+      "wires": 10,
+      "slices": 0,
+      "axes": 0
+    },
+    "detail": {
+      "visible": true,
+      "text": "企业客户角色； 核对跨地区企业客户的完整业务说明与历史修改记录并确认所有团队的资料和权限； 流向：跨团队内容与权限平台 › 资料服务1 · 提交资料 [HTTPS]",
+      "overflow": false,
+      "gap": 28
+    },
+    "expanded": {
+      "scale": "0.5269461077844312",
+      "clipped": []
+    },
+    "finalErrors": []
+  }
+]

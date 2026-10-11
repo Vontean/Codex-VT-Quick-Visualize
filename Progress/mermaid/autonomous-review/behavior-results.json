@@ -1,0 +1,101 @@
+[
+  {
+    "kind": "architecture",
+    "maxFinish": 1250,
+    "hover": {
+      "replays": "1",
+      "running": 0
+    },
+    "resize": {
+      "replays": "1",
+      "running": 0
+    },
+    "reentry": "2"
+  },
+  {
+    "kind": "sequence",
+    "maxFinish": 1360,
+    "hover": {
+      "replays": "1",
+      "running": 0
+    },
+    "resize": {
+      "replays": "1",
+      "running": 0
+    },
+    "reentry": "2"
+  },
+  {
+    "kind": "er",
+    "maxFinish": 990,
+    "hover": {
+      "replays": "1",
+      "running": 0
+    },
+    "resize": {
+      "replays": "1",
+      "running": 0
+    },
+    "reentry": "2"
+  },
+  {
+    "kind": "pie",
+    "maxFinish": 0,
+    "hover": {
+      "running": 0
+    },
+    "resize": {
+      "running": 0
+    }
+  },
+  {
+    "kind": "xy",
+    "maxFinish": 1200,
+    "hover": {
+      "running": 0
+    },
+    "resize": {
+      "running": 0
+    }
+  },
+  {
+    "kind": "radar",
+    "maxFinish": 0,
+    "hover": {
+      "running": 0
+    },
+    "resize": {
+      "running": 0
+    }
+  },
+  {
+    "kind": "sankey",
+    "maxFinish": 0,
+    "hover": {
+      "running": 0
+    },
+    "resize": {
+      "running": 0
+    }
+  },
+  {
+    "kind": "block",
+    "maxFinish": 910,
+    "hover": {
+      "running": 0
+    },
+    "resize": {
+      "running": 0
+    }
+  },
+  {
+    "kind": "c4",
+    "maxFinish": 875,
+    "hover": {
+      "running": 0
+    },
+    "resize": {
+      "running": 0
+    }
+  }
+]

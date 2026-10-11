@@ -1,0 +1,398 @@
+[
+  {
+    "theme": "light",
+    "kind": "architecture",
+    "colors": [
+      {
+        "selector": "h3",
+        "color": "rgb(26, 28, 31)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 17.08
+      },
+      {
+        "selector": ".architecture-name",
+        "color": "rgb(26, 28, 31)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 17.08
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "sequence",
+    "colors": [
+      {
+        "selector": "h3",
+        "color": "rgb(26, 28, 31)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 17.08
+      },
+      {
+        "selector": ".seq-label",
+        "color": "rgb(26, 28, 31)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 17.08
+      },
+      {
+        "selector": ".seq-message",
+        "color": "rgb(114, 122, 130)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 4.36
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "er",
+    "colors": [
+      {
+        "selector": "h3",
+        "color": "rgb(26, 28, 31)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 17.08
+      },
+      {
+        "selector": ".er-name",
+        "color": "rgb(26, 28, 31)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 17.08
+      },
+      {
+        "selector": ".er-type",
+        "color": "rgb(40, 125, 123)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 4.87
+      },
+      {
+        "selector": ".er-wire",
+        "color": "rgb(114, 122, 130)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 4.36
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "pie",
+    "colors": [
+      {
+        "selector": "h3",
+        "color": "rgb(26, 28, 31)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 17.08
+      },
+      {
+        "selector": ".legend .name",
+        "color": "rgb(26, 28, 31)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 17.08
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "xy",
+    "colors": [
+      {
+        "selector": "h3",
+        "color": "rgb(26, 28, 31)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 17.08
+      },
+      {
+        "selector": ".xy-label",
+        "color": "rgb(26, 28, 31)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 17.08
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "radar",
+    "colors": [
+      {
+        "selector": "h3",
+        "color": "rgb(26, 28, 31)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 17.08
+      },
+      {
+        "selector": ".quick-radar-title",
+        "color": "rgb(26, 28, 31)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 17.08
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "sankey",
+    "colors": [
+      {
+        "selector": "h3",
+        "color": "rgb(26, 28, 31)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 17.08
+      },
+      {
+        "selector": ".sankey-label",
+        "color": "rgb(26, 28, 31)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 17.08
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "block",
+    "colors": [
+      {
+        "selector": "h3",
+        "color": "rgb(26, 28, 31)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 17.08
+      },
+      {
+        "selector": ".block-node .name",
+        "color": "rgb(26, 28, 31)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 17.08
+      },
+      {
+        "selector": ".block-wire",
+        "color": "rgb(114, 122, 130)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 4.36
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "c4",
+    "colors": [
+      {
+        "selector": "h3",
+        "color": "rgb(26, 28, 31)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 17.08
+      },
+      {
+        "selector": ".c4-node .name",
+        "color": "rgb(26, 28, 31)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 17.08
+      },
+      {
+        "selector": ".c4-description",
+        "color": "color(srgb 0.461176 0.465882 0.472941)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 4.48
+      },
+      {
+        "selector": ".c4-wire",
+        "color": "rgb(114, 122, 130)",
+        "background": "rgb(255, 255, 255)",
+        "ratio": 4.36
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "architecture",
+    "colors": [
+      {
+        "selector": "h3",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 17.76
+      },
+      {
+        "selector": ".architecture-name",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 17.76
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "sequence",
+    "colors": [
+      {
+        "selector": "h3",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 17.76
+      },
+      {
+        "selector": ".seq-label",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 17.76
+      },
+      {
+        "selector": ".seq-message",
+        "color": "rgb(163, 170, 179)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 7.57
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "er",
+    "colors": [
+      {
+        "selector": "h3",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 17.76
+      },
+      {
+        "selector": ".er-name",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 17.76
+      },
+      {
+        "selector": ".er-type",
+        "color": "rgb(128, 195, 186)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 8.82
+      },
+      {
+        "selector": ".er-wire",
+        "color": "rgb(163, 170, 179)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 7.57
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "pie",
+    "colors": [
+      {
+        "selector": "h3",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 17.76
+      },
+      {
+        "selector": ".legend .name",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 17.76
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "xy",
+    "colors": [
+      {
+        "selector": "h3",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 17.76
+      },
+      {
+        "selector": ".xy-label",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 17.76
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "radar",
+    "colors": [
+      {
+        "selector": "h3",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 17.76
+      },
+      {
+        "selector": ".quick-radar-title",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 17.76
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "sankey",
+    "colors": [
+      {
+        "selector": "h3",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 17.76
+      },
+      {
+        "selector": ".sankey-label",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 17.76
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "block",
+    "colors": [
+      {
+        "selector": "h3",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 17.76
+      },
+      {
+        "selector": ".block-node .name",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 17.76
+      },
+      {
+        "selector": ".block-wire",
+        "color": "rgb(163, 170, 179)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 7.57
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "c4",
+    "colors": [
+      {
+        "selector": "h3",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 17.76
+      },
+      {
+        "selector": ".c4-node .name",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 17.76
+      },
+      {
+        "selector": ".c4-description",
+        "color": "color(srgb 0.710118 0.710118 0.710118)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 8.66
+      },
+      {
+        "selector": ".c4-wire",
+        "color": "rgb(163, 170, 179)",
+        "background": "rgb(24, 24, 24)",
+        "ratio": 7.57
+      }
+    ]
+  }
+]

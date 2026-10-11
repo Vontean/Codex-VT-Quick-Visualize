@@ -1,0 +1,1 @@
+{"title": "sequence-fallback", "source": "sequenceDiagram\nbox Team\nparticipant A\nparticipant B\nend\nA->>B: Send\n"}
