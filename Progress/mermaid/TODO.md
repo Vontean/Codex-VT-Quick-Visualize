@@ -9,7 +9,7 @@
 - [x] 01. 流程图 — `flowchart` / `graph`
 - [ ] 02. 架构图 — `architecture-beta`
 - [ ] 03. 时序图 — `sequenceDiagram`
-- [ ] 04. 状态图 — `stateDiagram-v2`
+- [x] 04. 状态图 — `stateDiagram-v2`
 - [ ] 05. 实体关系图 — `erDiagram`
 - [ ] 06. 类图 — `classDiagram`
 - [ ] 07. 时间线 — `timeline`
@@ -40,8 +40,8 @@
 
 ## 当前进度
 
-- 已确认：5 / 18。
-- 最近完成：09. 看板；用户确认新版常规与压力图。下一项：04. 状态图。
+- 已确认：6 / 18。
+- 当前项：14. 象限图；状态图已获用户确认，本轮完成。接下来生成象限图常规与压力样例并逐项核对。
 - 审视记录：[flowchart-review/REVIEW.md](flowchart-review/REVIEW.md)。
 
 ## 完成记录

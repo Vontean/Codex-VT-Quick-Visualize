@@ -32,12 +32,12 @@ async function prepareMermaidLayout(data) {
   }
   const port=(id,face,incoming,edgeIndex)=>{const n=byId.get(id),pid=id+'::'+face+'::'+(incoming?'in':'out')+(['er','class'].includes(data.kind)?'::'+edgeIndex:'');n.ports??=[];if(!n.ports.some(p=>p.id===pid))n.ports.push({id:pid,width:0,height:0,layoutOptions:{'elk.port.side':face}});return pid;};
   const defaultFaces={TB:['SOUTH','NORTH'],BT:['NORTH','SOUTH'],LR:['EAST','WEST'],RL:['WEST','EAST']}[data.direction]||['SOUTH','NORTH'];
-  data.edges.forEach((e,i)=>{const label=e.label?{id:'label'+i,text:e.label,width:Math.max(30,[...e.label].length*12+12),height:22}:null;graph.edges.push({id:'edge'+i,sources:[port(e.from,e.fromSide||defaultFaces[0],false,i)],targets:[port(e.to,e.toSide||defaultFaces[1],true,i)],...(label?{labels:[label]}:{})});});
+  data.edges.forEach((e,i)=>{const label=e.label?{id:'label'+i,text:e.label,width:e.labelWidth??Math.max(30,[...e.label].length*12+12),height:e.labelHeight??22}:null;graph.edges.push({id:'edge'+i,sources:[port(e.from,e.fromSide||defaultFaces[0],false,i)],targets:[port(e.to,e.toSide||defaultFaces[1],true,i)],...(label?{labels:[label]}:{})});});
   if(data.order)for(const node of byId.values())if(node.children)node.children.sort((a,b)=>(data.order.get(a.id)||0)-(data.order.get(b.id)||0));
   const result=await new window.ELK().layout(graph),positions=new Map(),groups=[];
   function visit(g,x=0,y=0){const gx=x+(g.x||0),gy=y+(g.y||0);positions.set(g.id,{x:gx,y:gy,w:g.width,h:g.height});if(g!==result&&g.children)groups.push({...data.groups.find(n=>n.id===g.id),x:gx,y:gy,w:g.width,h:g.height});for(const c of g.children||[])visit(c,gx,gy);}
   visit(result);
-  const routes=new Map();function collect(g,ox=0,oy=0){const x=ox+(g.x||0),y=oy+(g.y||0);for(const e of g.edges||[]){const points=(e.sections||[]).flatMap(s=>[s.startPoint,...s.bendPoints||[],s.endPoint].map(p=>[p.x,p.y]));routes.set(e.id,{points,labelPosition:e.labels?.[0]?{x:e.labels[0].x+e.labels[0].width/2,y:e.labels[0].y+11}:null});}for(const c of g.children||[])collect(c,x,y);}collect(result);
+  const routes=new Map();function collect(g,ox=0,oy=0){const x=ox+(g.x||0),y=oy+(g.y||0);for(const e of g.edges||[]){const points=(e.sections||[]).flatMap(s=>[s.startPoint,...s.bendPoints||[],s.endPoint].map(p=>[p.x,p.y]));routes.set(e.id,{points,labelPosition:e.labels?.[0]?{x:e.labels[0].x+e.labels[0].width/2,y:e.labels[0].y+e.labels[0].height/2}:null});}for(const c of g.children||[])collect(c,x,y);}collect(result);
   data.nodes.forEach(n=>Object.assign(n,positions.get(n.id)));
   data.edges.forEach((e,i)=>{Object.assign(e,routes.get('edge'+i));if(!e.points?.length)throw new Error('布局缺少连线：'+e.from+' → '+e.to);});
   data.layout={width:result.width,height:result.height,groups};

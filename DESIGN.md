@@ -94,9 +94,9 @@ Mermaid shape fills: shaped nodes keep a transparent HTML backplate even when la
 
 ## Mermaid state renderer
 
-- Preserve state semantics with48px neutral cards,20px terminal boxes (solid start, double-circle end),32px choice diamonds and64×6 fork/join bars. Compound states remain visible together with their contents; no state drilldown.
+- Preserve state semantics with at least48px neutral cards, names/body wrapping after20 Unicode characters with measured16px/24px title and12px/18px body,20px terminal boxes (solid start, double-circle end),32px choice diamonds and64×6 fork/join bars. Compound states are initially complete; clicking a compound header enters its direct-child scope with boundary connections and breadcrumbs. The 总览 breadcrumb restores the full view; hide the entire breadcrumb bar in that root view. State diagrams have no group switch. Preserve the source vertical/horizontal direction without folding. Group entry arrows share the title row immediately to its right. Leaf cards and containing groups follow the common containment surfaces.
 - Within each parent scope, order layout and entry from actual initial states along transitions; retain every backward link and route it peripherally. Retries use side ports independent from main incoming/outgoing connections. Preserve declared direction.
-- Use8px rounded bends,5px integrated arrows,12px condition labels with18px line-height and8px clearance from the associated wire. Theme-aware nodes, boundaries, labels and transient12px details follow existing qv tokens.
+- Use8px rounded bends,5px integrated arrows,12px condition labels with18px line-height and8px clearance from the associated wire. State condition labels have a transparent background; their transient details retain the popover surface. Theme-aware nodes, boundaries, labels and transient12px details follow existing qv tokens.
 - Trigger/label bounds outrank sampled line segments in tooltip collision placement. Hover and focus highlight one state neighborhood or transition without pinning or deleting content.
 - Initial nodes240ms, trace650ms, arrows50ms, labels180ms. Labels follow their transfer; reduced motion/fullscreen stay static. Scroll restoration must work whether the host sends globals before or after resizing its frame.
 
