@@ -159,11 +159,10 @@ Mermaid shape fills: shaped nodes keep a transparent HTML backplate even when la
 
 ## Mermaid Radar renderer
 
-- Read ordered axes, normalized curve entries, labels, domain, ticks, grid shape and legend visibility from the pinned Mermaid DB. Radial distance encodes the value within its declared min/max; polygon area is not a total score.
-- Reuse host series tokens, neutral 1px grid, 12px complete axis labels, 1.7px data lines and low-opacity .035 fills. Pair the first three series with circle/square/diamond and solid/dashed/dotted lines; keep legend identity consistent with the marks.
-- Keep an intrinsic readable scene, wider labels and outer spacing for long multi-axis data. On initial narrow inline entry center the diagram and retain horizontal scrolling. Expanded mode fits the complete scene and remains static; returning restores the inline position.
-- Axis labels and tolerant axis/point hits show same-dimension values across series. Series keys expose the complete named profile. Details use measured source coordinates and must not intersect the source, heading or other readable labels. Prefer nearby free space; use a transient natural-flow detail below the chart when no free overlay fits. Keyboard focus scrolls the complete axis label into view and restores details after scrolling; Escape closes details from both SVG mouse and button keyboard entry.
-- Reveal vertices radially over 900ms with quartic easing; keep marker dimensions and strokes constant. Resize, expanded mode and reduced motion show final geometry without replay. Only complete exit followed by re-entry arms replay; actual document-hidden restoration remains a host verification boundary.
+- 从 Mermaid11.12 DB 读取有序axis、positional/keyed curve、名称、min/max、ticks、graticule和showLegend；非零最小值必须保留。径向距离编码值，面积不解释为总分；非法范围／rich label／额外说明明确回退。
+- 当min=0、polygon、5ticks、显示图例、≤8轴、≤4系列、轴名≤12字时，mermaid_presets.py 直接复用 radar-chart.html。不能满足预设表达能力时，保留原增强绘制，支持非零min、circle、长名称、多轴多系列，不删除数据或更改语义以硬塞预设。
+- 两条路径沿用相同设计：host系列色、细中性网格、隐藏数字刻度标签，900ms quartic径向展开；点优先读取所属对象，轴比较全部对象，图例保持身份。非活动线／点.10、填充.003，近触发对象的完整详情。扩展绘制使用共享≤32px定位约束。
+- 扩展绘制的可读intrinsic scene可横向滚动，展开fit并恢复返回位置。reduced/resize/展开不重播，完整离场再重入可重播；真实宿主可见性恢复仍需人工验收。
 
 ## Mermaid Sankey renderer
 

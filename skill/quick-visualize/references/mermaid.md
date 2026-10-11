@@ -165,10 +165,10 @@ Navigation transitions differ from initial entry: use a 360ms origin-aware spati
 
 ## Radar scope
 
-- `radar-beta` reads ordered axes, normalized positional/keyed curves, names, min/max, ticks, graticule shape and showLegend directly from Mermaid11.12 DB. `mermaid-radar-model.js` isolates this internal contract. The auto maximum comes from actual curve values; non-zero minima are retained. Rich labels, extra descriptions and out-of-range/degenerate domains visibly preserve native semantics without a qv viewport.
-- Independent qv drawing follows the existing radar language: thin neutral grid, complete12px labels,1.7px outlines/.035 fill, stable series tokens and circle/square/diamond with corresponding solid/dashed/dotted identification. Radial distance encodes score, not polygon area. Wider labels/outer separation accommodate long dimensions; intrinsic inline geometry initially centers and scrolls, full view fits all content and restores the saved inline position.
-- Axis label focus/click and tolerant axis/point hits compare all source series for that dimension. A series key reads its complete profile. Focus scrolls the full label into view and restores details after scrolling. Details must avoid the heading, source, dimensions, series keys and scale labels completely; use a nearby free position, or a transient natural-flow detail below the chart when none fits. Keep actual values and complete names. Escape closes mouse SVG and keyboard button details alike.
-- Vertices expand radially900ms with quartic easing; stroke/marker sizes remain constant. Resize, reduced motion and expanded entry remain static; complete exit then20% reentry replays. Hidden cancels motion; actual hidden/restoration remains an explicitly unverified host boundary. No persistent filters, edit controls or custom full-screen overlay.
+- 从 Mermaid11.12 DB 读取有序axis、positional/keyed curve、名称、min/max、ticks、graticule和showLegend；非零最小值必须保留。径向距离编码值，面积不解释为总分；非法范围／rich label／额外说明明确回退。
+- 当min=0、polygon、5ticks、显示图例、≤8轴、≤4系列、轴名≤12字时，mermaid_presets.py 直接复用 radar-chart.html。不能满足预设表达能力时，保留原增强绘制，支持非零min、circle、长名称、多轴多系列，不删除数据或更改语义以硬塞预设。
+- 两条路径沿用相同设计：host系列色、细中性网格、隐藏数字刻度标签，900ms quartic径向展开；点优先读取所属对象，轴比较全部对象，图例保持身份。非活动线／点.10、填充.003，近触发对象的完整详情。扩展绘制使用共享≤32px定位约束。
+- 扩展绘制的可读intrinsic scene可横向滚动，展开fit并恢复返回位置。reduced/resize/展开不重播，完整离场再重入可重播；真实宿主可见性恢复仍需人工验收。
 
 ## Sankey scope
 

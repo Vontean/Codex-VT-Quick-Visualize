@@ -1,0 +1,4 @@
+{
+  "title": "radar · 常规",
+  "source": "radar-beta\n  title 内容团队能力画像\n  axis research[\"研究深度\"], accuracy[\"事实准确\"], clarity[\"表达清晰\"], delivery[\"交付效率\"], reach[\"传播覆盖\"], reuse[\"知识复用\"]\n  curve editorial[\"编辑团队\"]{85, 92, 88, 64, 72, 80}\n  curve operations[\"运营团队\"]{68, 82, 78, 91, 94, 66}\n  max 100\n  min 0\n  ticks 5\n  graticule polygon\n"
+}
