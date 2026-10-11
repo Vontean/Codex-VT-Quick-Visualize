@@ -1,0 +1,4 @@
+{
+  "title": "block · 常规",
+  "source": "block-beta\n columns 5\n entry[\"内容入口\"]:5\n space:5\n draft[\"草稿\"] space review[\"审核\"] space publish[\"发布\"]\n space:5\n store[(\"内容库\")]:3 space search[\"搜索\"]\n entry --> draft\n draft --> review\n review --> publish\n publish --> store\n store --> search\n"
+}

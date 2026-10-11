@@ -189,12 +189,11 @@ Navigation transitions differ from initial entry: use a 360ms origin-aware spati
 
 ## Block scope
 
-- `block-beta` reads the pinned Mermaid root/children tree, actual node IDs, source labels, group labels, column settings, spans, explicit spaces and connections. Preserve the manual grid rather than substitute automatic topology. Mermaid expands `space:N` into N children: each expanded child occupies one column. Optional descriptions use actual leaf/group IDs; unknown IDs are errors.
-- The original `edgeStrToEdgeData` callback records already-parsed line tokens while the complete Mermaid parser runs, then restores the method in `finally` on success or failure. Solid/dotted lines, labeled thick lines, circle/cross endpoints and self loops retain source identity. Validate legal syntax with the pinned parser; do not assume another diagram's edge syntax is accepted. Custom style/class, rich HTML, unsupported shapes and cross-row span overflow visibly retain native output without a qv viewport.
-- Separate model/layout/drawing files keep layout semantic and styling independent. Intrinsic cells160px inline /128px expanded, gaps24/20px, nested padding24px. Source rows and columns stay exact; measured12px/18px complete names determine height. Normal nodes48px minimum, one1px neutral outline,10px corners; shaped nodes grow as required. A cylinder uses one closed theme-aware body and an unfilled internal arc. Orthogonal obstacle routes avoid node bodies and group captions, with7px rounded bends and5px arrowheads.
-- Nodes show actual incoming/outgoing relationships; groups show complete descendant members. Every visible relation has an accessible native button at its actual route, even when it has no source label. Relation focus highlights only its two source endpoints and that relation. No filtering, invented weights or drilldown.
-- Inline keeps readable intrinsic text and horizontal drawing scroll with a conditional cue. Expanded tightens cells and fits the whole scene through the shared viewport. Restore intrinsic layout before reapplying saved inline scroll. Narrow and expanded modes reserve source-derived detail height below the drawing, keeping complete names, membership and relations at unscaled12px. Wide inline details use nearby free space and avoid actual nodes/captions/labels. The detail is transient, themed,12px-radius and12px×14px padding; Escape clears it.
-- Source-order nodes240ms/4px; solid lines trace650ms with35ms edge stagger, and target markers appear after their line reaches the destination. Complete exit then20% reentry may replay. Reduced/expanded/resize finish static; timers and animations are canceled together and actual completion sets the final state. Real document-hidden restoration and daily Codex native controls remain host verification boundaries.
+- 固定版本的root/children tree保留columns、span、explicit space、真实node/group/edge identity，不能把手动网格改为自动拓扑或解释面积为数量。space:N已展开成N个子项，每个占一列；源line callback观察后必须finally恢复。custom style/class、rich label、unsupported shape及跨行span溢出明确回退。
+- model/layout/drawing分离；inline与expanded均保持160px cell、24px gap／nested padding，展开整体fit同一几何。节点至少48px，完整12px/18px标签按实测增长；组标题真实换行测高。叶节点底色，组由内向外灰／白交替，灰为muted18%混底，标题透明。
+- 分组z0、连线z1、节点z2、标签z3，明暗中性线#727a82／#a3aab3，7px圆角折线与5pxmarker；原shape、solid/dotted/thick、circle/cross、self loop保持。透明命中和键盘按钮留在实际关系位置。
+- 节点仅额外说明显示浮层，组显示成员，边显示真实两端；稳定hover为100ms停稳／160ms退出缓冲，近对象详情≤32px。移除预留底部详情区，避免为未打开的详情撑出空白；无筛选或虚构下钻。
+-240ms节点、650ms实线／35ms stagger，箭头到达后出现；hover/resize不重播，reduced/expanded静态，完整退出20%重入可重播。
 
 ## C4 scope
 

@@ -183,10 +183,11 @@ Mermaid shape fills: shaped nodes keep a transparent HTML backplate even when la
 
 ## Mermaid Block renderer
 
-- The canonical Mermaid tree owns columns, spans, explicit space and containment. Never replace manual positions with automatic topology or treat node area as a quantity. Layout and obstacle routing are separate from source adaptation and visual drawing.
-- Intrinsic cell160px/gap24px inline,128px/gap20px expanded,24px nested padding. Complete names12px/18px measured before placement; normal nodes48px minimum and10px radius. Each actual source shape has one1px neutral outline; cylinder body follows theme and top arc remains unfilled. Groups use12px corners and actual source captions. Wires use7px bends and5px integrated markers.
-- All nodes/groups/visible source edges retain native keyboard entry. Node details list real incident relations; groups list actual descendants; edge emphasis is exactly two endpoints plus one edge. No persistent relation list or filtering. Wide inline detail candidates avoid all node/caption/label rectangles. Expanded and narrow views reserve worst-case source detail height below the drawing, preserving unscaled12px complete reading without changing diagram geometry during focus. Themed detail uses12px radius,12px×14px padding and pointer transparency.
-- Expanded is the shared whole-scene preview, followed by restored intrinsic inline layout and saved scroll. Source-order240ms/4px nodes,650ms solid-wire trace/35ms stagger and end markers after arrival. Complete exit/20% reentry may replay; reduced/full/resize static, timers and animation cleanup match the real complete state. Native fallback stays untouched.
+- 固定版本的root/children tree保留columns、span、explicit space、真实node/group/edge identity，不能把手动网格改为自动拓扑或解释面积为数量。space:N已展开成N个子项，每个占一列；源line callback观察后必须finally恢复。custom style/class、rich label、unsupported shape及跨行span溢出明确回退。
+- model/layout/drawing分离；inline与expanded均保持160px cell、24px gap／nested padding，展开整体fit同一几何。节点至少48px，完整12px/18px标签按实测增长；组标题真实换行测高。叶节点底色，组由内向外灰／白交替，灰为muted18%混底，标题透明。
+- 分组z0、连线z1、节点z2、标签z3，明暗中性线#727a82／#a3aab3，7px圆角折线与5pxmarker；原shape、solid/dotted/thick、circle/cross、self loop保持。透明命中和键盘按钮留在实际关系位置。
+- 节点仅额外说明显示浮层，组显示成员，边显示真实两端；稳定hover为100ms停稳／160ms退出缓冲，近对象详情≤32px。移除预留底部详情区，避免为未打开的详情撑出空白；无筛选或虚构下钻。
+-240ms节点、650ms实线／35ms stagger，箭头到达后出现；hover/resize不重播，reduced/expanded静态，完整退出20%重入可重播。
 
 ## Mermaid C4 renderer
 

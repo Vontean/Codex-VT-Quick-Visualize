@@ -10,7 +10,7 @@ function layoutMermaidBlocks(data,measure,{cell=160,gap=24,padding=24}={}){
  }
  function place(n,x,y,width){
   if(n.type!=='group'){const h=n.type==='space'?24:measure(n,width),box={...n,x,y,w:width,h};boxes.set(n.id,box);return h;}
-  const cols=n.columns>0?n.columns:Math.max(1,n.children.reduce((s,c)=>s+c.span,0)),unit=(width-2*padding-gap*(cols-1))/cols,head=n.id!=='root'&&n.name?32:0;
+  const cols=n.columns>0?n.columns:Math.max(1,n.children.reduce((s,c)=>s+c.span,0)),unit=(width-2*padding-gap*(cols-1))/cols,head=n.id!=='root'&&n.name?Math.max(32,measure(n,width-2*padding)-12):0;
   let position=0;const grouped=[];
   for(const c of n.children){const col=position%cols,row=Math.floor(position/cols);(grouped[row]||=[]).push({n:c,col});position+=c.span;}
   let rowY=y+padding+head;
