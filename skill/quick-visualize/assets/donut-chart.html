@@ -1,6 +1,6 @@
 <div id="{{ROOT_ID}}" role="figure" aria-labelledby="{{ROOT_ID}}-title">
 <style>
-#{{ROOT_ID}}{position:relative;padding-top:32px;width:100%;color:var(--foreground);--ring-enter:1000}
+#{{ROOT_ID}}{position:relative;padding-top:32px;width:100%;color:var(--foreground);--ring-enter:650}
 #{{ROOT_ID}} h3{margin:0 90px 32px 0;font-weight:500}
 #{{ROOT_ID}} .plot{position:relative}
 #{{ROOT_ID}} .direct-label{position:absolute;transform:translate(-50%,-50%);background:transparent;border:0;padding:5px;color:var(--foreground);font:inherit;font-size:14px;text-align:center;white-space:nowrap;cursor:var(--cursor-interaction,pointer)}
@@ -38,25 +38,26 @@ const total=d3.sum(data,d=>d.value),color=i=>`var(--viz-series-${i+1})`,pct=i=>`
 const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');let layout=null,entered=false,lastWidth=0;
 let direct=false;const eligibleDirect=data.length<=4&&d3.min(data,d=>d.value/total)>=.08&&data.every(d=>d.label.length<=12);
 function clear(){svg.selectAll('.slice').attr('opacity',1);root.querySelectorAll('.legend button,.direct-label').forEach(b=>b.style.opacity=1);root.querySelector('.center-value').textContent=config.valuePrefix+numberFormat.format(total);root.querySelector('.center-label').textContent='总计'+(config.valueSuffix.trim()?' · '+config.valueSuffix.trim():'');bubble.hidden=true;}
-function show(i){if(!layout)return;svg.selectAll('.slice').attr('opacity',(_,j)=>j===i?1:.25);root.querySelectorAll('.legend button,.direct-label').forEach((b,j)=>b.style.opacity=j===i?1:.55);root.querySelector('.center-value').textContent=pct(i);root.querySelector('.center-label').textContent=data[i].label;
+function show(i){if(!layout)return;svg.selectAll('.slice').attr('opacity',d=>d.index===i?1:.25);root.querySelectorAll('.legend button,.direct-label').forEach((b,j)=>b.style.opacity=j===i?1:.55);root.querySelector('.center-value').textContent=pct(i);root.querySelector('.center-label').textContent=data[i].label;
 root.querySelector('.bubble-title').textContent=data[i].label;const description=root.querySelector('.description');description.textContent=data[i].description||'';description.hidden=!data[i].description;root.querySelector('.bubble-value').textContent=formatValue(data[i].value);root.querySelector('.bubble-percent').textContent=pct(i);root.querySelector('.bubble .swatch').style.background=color(i);bubble.hidden=false;
 const d=layout.arcs[i],angle=(d.startAngle+d.endAngle)/2,px=layout.cx+Math.sin(angle)*layout.radius,py=layout.cy-Math.cos(angle)*layout.radius;
 const rb=root.getBoundingClientRect(),pb=plot.getBoundingClientRect(),bw=bubble.offsetWidth,bh=bubble.offsetHeight;
 bubble.style.left=Math.max(8,Math.min(rb.width-bw-8,px>=layout.cx?px+14:px-bw-14))+'px';bubble.style.top=Math.max(pb.top-rb.top+8,Math.min(pb.top-rb.top+py-bh/2,pb.bottom-rb.top-bh-8))+'px';}
 data.forEach((d,i)=>{const b=document.createElement('button');b.type='button';b.innerHTML=`<span class="swatch" style="background:${color(i)}" aria-hidden="true"></span><span class="name"></span><span class="percent"></span>`;b.querySelector('.name').textContent=d.label;b.querySelector('.percent').textContent=pct(i);b.addEventListener('pointerenter',()=>show(i));b.addEventListener('pointerleave',clear);b.addEventListener('focus',()=>show(i));b.addEventListener('blur',clear);legend.append(b);});
 function draw(animate=false){const width=Math.round(plot.getBoundingClientRect().width);if(width<1)return;lastWidth=width;direct=eligibleDirect&&width>=420;const height=direct?340:280,cx=width/2,cy=height/2,radius=direct?Math.min(104,width/2-50):Math.min(118,width/2-16),inner=radius*.75;
-const arcs=d3.pie().sort(null).padAngle(.025).value(d=>d.value)(data),arc=d3.arc().innerRadius(inner).outerRadius(radius).cornerRadius(3);layout={width,cx,cy,radius,arcs};
+// 间隔不参与角度分配；随最小正值缩小，避免零值和极小值撑大缺口。
+const arcs=d3.pie().sort(null).value(d=>d.value)(data),positiveArcs=arcs.filter(d=>d.data.value>0),smallestAngle=d3.min(positiveArcs,d=>d.endAngle-d.startAngle),gap=positiveArcs.length>1?Math.min(.025,smallestAngle*.2):0;
+const arc=d3.arc().innerRadius(inner).outerRadius(radius).padAngle(gap).cornerRadius(Math.min(3,radius*smallestAngle*.2)),enter=parseFloat(getComputedStyle(root).getPropertyValue('--ring-enter'));layout={width,cx,cy,radius,arcs};
 svg.selectAll('*').interrupt();svg.selectAll('*').remove();svg.attr('viewBox',`0 0 ${width} ${height}`);const g=svg.append('g').attr('transform',`translate(${cx},${cy})`);
-const slices=g.selectAll('.slice').data(arcs).join('path').attr('class','slice').attr('fill',(_,i)=>color(i)).attr('d',arc).on('pointerenter pointermove',(_,d)=>show(d.index)).on('pointerleave pointercancel',clear).on('pointerup',e=>{if(e.pointerType==='touch')clear();});
+const slices=g.selectAll('.slice').data(positiveArcs).join('path').attr('class','slice').attr('fill',d=>color(d.index)).attr('d',arc).on('pointerenter pointermove',(_,d)=>show(d.index)).on('pointerleave pointercancel',clear).on('pointerup',e=>{if(e.pointerType==='touch')clear();});
 plot.querySelectorAll('.direct-label').forEach(e=>{e.getAnimations().forEach(a=>a.cancel());e.remove();});legend.hidden=direct;
 if(direct){arcs.forEach((d,i)=>{const a=(d.startAngle+d.endAngle)/2,side=Math.sin(a)>0?1:-1,narrow=width<460;
 const peers=arcs.filter(q=>(Math.sin((q.startAngle+q.endAngle)/2)>0?1:-1)===side).sort((p,q)=>Math.cos((q.startAngle+q.endAngle)/2)-Math.cos((p.startAngle+p.endAngle)/2));const rank=peers.indexOf(d);
 const x=narrow?cx+(i<2?1:-1)*width*.28:cx+Math.sin(a)*(radius+64),y=narrow?(i===0||i===3?32:height-32):cy-Math.cos(a)*(radius+48);
 const b=document.createElement('button');b.type='button';b.className='direct-label';b.style.left=x+'px';b.style.top=y+'px';b.append(document.createTextNode(data[i].label));const percent=document.createElement('span');percent.textContent=pct(i);b.append(percent);b.onpointerenter=()=>show(i);b.onpointerleave=clear;b.onfocus=()=>show(i);b.onblur=clear;plot.append(b);
 if(animate&&!reduced.matches){
-// 沿用 Lieflat 的交叠淡入节奏，按当前圆环时长等比例加速。
-const delay=325+i*50;
-b.animate([{opacity:0},{opacity:1}],{delay,duration:450,easing:'ease',fill:'backwards'});
+const delay=enter*(.2+i*.05);
+b.animate([{opacity:0},{opacity:1}],{delay,duration:enter*.4,easing:'ease',fill:'backwards'});
 }
 const px=cx+Math.sin(a)*(radius+7),py=cy-Math.cos(a)*(radius+7);
 });}
@@ -67,8 +68,8 @@ const segments=d3.range(120),unit=Math.PI*2/120;
 const reveal=d3.arc().innerRadius(inner-2);
 const cells=mask.selectAll('path').data(segments).join('path').attr('fill','white').attr('d',i=>reveal.outerRadius(inner-2)({startAngle:i*unit-.002,endAngle:(i+1)*unit+.002}));
 g.attr('mask',`url(#${id})`);
-cells.transition().delay(i=>i*5).duration(450).ease(d3.easeCubicOut).attrTween('d',i=>t=>reveal.outerRadius(inner-2+(radius-inner+4)*t)({startAngle:i*unit-.002,endAngle:(i+1)*unit+.002}));
-g.transition().delay(1050).on('end',()=>{g.attr('mask',null);mask.remove();});
+cells.transition().delay(i=>i/(segments.length-1)*enter*.55).duration(enter*.45).ease(d3.easeCubicOut).attrTween('d',i=>t=>reveal.outerRadius(inner-2+(radius-inner+4)*t)({startAngle:i*unit-.002,endAngle:(i+1)*unit+.002}));
+g.transition().delay(enter).on('end',()=>{g.attr('mask',null);mask.remove();});
 }clear();}
 root.addEventListener('pointerleave',clear);root.addEventListener('keydown',e=>{if(e.key==='Escape')clear();});window.addEventListener('blur',clear);
 draw();if(!reduced.matches)svg.attr('visibility','hidden');let inView=false,armed=true;

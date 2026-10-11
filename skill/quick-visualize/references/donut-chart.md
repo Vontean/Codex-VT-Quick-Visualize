@@ -24,4 +24,5 @@ Use this template for 2-6 categories whose non-negative values form one whole. T
 - `decimals` accepts an integer from 0 to 2 and defaults to `0`.
 - The center shows the total. Hover temporarily shows the active category and percentage; leaving restores the total.
 - Up to 4 categories with every share at least 8%, short labels (up to 12 characters), and at least 420px available width use direct labels; otherwise use a centered bottom legend.
-- Labels fade in during the ring reveal. Returning to view replays motion; reduced motion shows the final state. No click pinning.
+- Zero-value items stay in the legend and details but draw no slice or angular gap. Positive values keep their actual proportions; gaps shrink for tiny shares, including shares that round to 0%.
+- The ring reveals in 650ms, with labels fading in during the reveal. Returning to view replays motion; reduced motion shows the final state. No click pinning.

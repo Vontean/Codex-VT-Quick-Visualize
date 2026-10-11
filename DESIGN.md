@@ -8,7 +8,7 @@
 - Cartesian frames keep left/bottom axes and internal grid lines only. Bar width is at most 24px; dense charts omit value labels.
 - Entry motion replays after complete viewport exit and 20% re-entry, or document visibility restoration. Resizes and ordinary hovers do not replay; reduced motion disables entry animation.
 - Bars grow upward in 580–680ms with simultaneous starts. Lines trace their path in 1200ms with a moving value and matching area reveal.
-- Donut reveals outward around the ring in about 1050ms. Direct labels use 325ms + index × 50ms delay and 450ms ease fade; the centered number and subtitle share one centered wrapper. Direct labels need <=4 categories, >=8% minimum share, short labels and adequate width.
+- Donut reveals outward around the ring in 650ms. Direct labels use 130ms + index × 32.5ms delay and 260ms ease fade; the centered number and subtitle share one centered wrapper. Zero values draw no slice or angular gap; gaps shrink with the smallest positive share without changing data proportions. Direct labels need <=4 categories, >=8% minimum share, short labels and adequate width.
 - Radar vertices expand in 900ms quartic-out, keeping stroke and marker sizes constant. Numeric grid labels stay hidden. Points take priority over axes; axes compare objects, points/edges/areas describe one object. No native SVG title tooltip.
 - Radar inactive strokes/markers: .10 opacity; fill: .003; legend: .32. Object markers belong in tooltip headings, not every dimension row. Nearby tooltip candidates use 16–40px pointer distance, minimizing polygon overlap within that range.
 
