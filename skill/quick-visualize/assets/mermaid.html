@@ -134,6 +134,7 @@ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 {{NAVIGATION_JS}}
 {{ARCHITECTURE_READER_JS}}
 {{VIEWPORT_JS}}
+{{PRESENTATION_JS}}
 {{SEQUENCE_JS}}
 {{STATE_MODEL_JS}}
 {{STATE_JS}}
@@ -154,6 +155,7 @@ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 {{XY_MODEL_JS}}
 {{XY_JS}}
 {{PIE_MODEL_JS}}
+{{CHART_PRESETS_JS}}
 {{PIE_JS}}
 {{KANBAN_MODEL_JS}}
 {{KANBAN_JS}}
@@ -182,9 +184,9 @@ try {
  if(model.data?.kind==='c4'){renderMermaidC4(root,model.data);finishLoading();return;}
  if(model.data?.kind==='quadrant'){renderMermaidQuadrant(root,model.data);finishLoading();return;}
  if(model.data?.kind==='sankey'){await renderMermaidSankey(root,model.data);finishLoading();return;}
- if(model.data?.kind==='radar'){renderMermaidRadar(root,model.data);finishLoading();return;}
+ if(model.data?.kind==='radar'){await renderMermaidRadar(root,model.data);finishLoading();return;}
  if(model.data?.kind==='xy'){await renderMermaidXY(root,model.data);finishLoading();return;}
- if(model.data?.kind==='pie'){renderMermaidPie(root,model.data);finishLoading();return;}
+ if(model.data?.kind==='pie'){await renderMermaidPie(root,model.data);finishLoading();return;}
  if(model.data?.kind==='kanban'){renderMermaidKanban(root,model.data);finishLoading();return;}
  if(model.data?.kind==='gantt'){await renderMermaidGantt(root,model.data);finishLoading();return;}
  if(model.data?.kind==='mindmap'){renderMermaidMindmap(root,model.data);finishLoading();return;}

@@ -2,6 +2,7 @@
 import hashlib
 import html
 import json
+from mermaid_presets import compile_presets
 from pathlib import Path
 
 TEMPLATE_PATH = Path(__file__).resolve().parents[1] / 'assets' / 'mermaid.html'
@@ -49,6 +50,7 @@ def render(spec, output_path):
     fragment = TEMPLATE_PATH.read_text(encoding='utf-8').replace('{{MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-model.js').read_text(encoding='utf-8')).replace('{{LAYOUT_JS}}', TEMPLATE_PATH.with_name('mermaid-layout.js').read_text(encoding='utf-8'))
     fragment = fragment.replace('{{NAVIGATION_JS}}', TEMPLATE_PATH.with_name('mermaid-navigation.js').read_text(encoding='utf-8'))
     fragment = fragment.replace('{{ARCHITECTURE_READER_JS}}', TEMPLATE_PATH.with_name('mermaid-architecture-reader.js').read_text(encoding='utf-8'))
+    fragment = fragment.replace('{{PRESENTATION_JS}}', TEMPLATE_PATH.with_name('mermaid-presentation.js').read_text(encoding='utf-8'))
     fragment = fragment.replace('{{VIEWPORT_JS}}', TEMPLATE_PATH.with_name('mermaid-viewport.js').read_text(encoding='utf-8'))
     fragment = fragment.replace('{{SEQUENCE_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-sequence-model.js').read_text(encoding='utf-8'))
     fragment = fragment.replace('{{SEQUENCE_JS}}', TEMPLATE_PATH.with_name('mermaid-sequence.js').read_text(encoding='utf-8'))
@@ -84,6 +86,7 @@ def render(spec, output_path):
     fragment = fragment.replace('{{PIE_JS}}', TEMPLATE_PATH.with_name('mermaid-pie.js').read_text(encoding='utf-8'))
     fragment = fragment.replace('{{KANBAN_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-kanban-model.js').read_text(encoding='utf-8'))
     fragment = fragment.replace('{{KANBAN_JS}}', TEMPLATE_PATH.with_name('mermaid-kanban.js').read_text(encoding='utf-8'))
+    fragment = fragment.replace('{{CHART_PRESETS_JS}}', compile_presets(TEMPLATE_PATH.parent))
     for key, value in values.items():
         fragment = fragment.replace(key, value)
     return fragment
