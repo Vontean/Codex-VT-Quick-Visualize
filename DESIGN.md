@@ -201,3 +201,7 @@ Flowchart hover commits only after the pointer stops moving on a node for 140ms;
 Flowchart highlight transitions share 140ms easing across node borders, outlines, wires, arrowheads and edge labels; reduced motion removes these transitions. Flowchart containment surfaces are host background / original light gray (muted mixed 18% into background, composited over an opaque host background), alternating from leaves outward: leaf=0 background, direct container=1 gray, outer container=2 background. Compute each group level as one plus the maximum child level from the complete source hierarchy, independent of animation layer and current drilldown scope. Group cards and group portals retain their source container level.
 
 Mermaid drawing is visible once ready; intersection-triggered entry motion never gates content visibility. Large diagrams in short viewports remain readable even when the entry threshold is unreachable.
+
+## Mermaid mindmap renderer
+
+Formal entry reuses the approved bilateral tree. Compute subtree height and per-depth column width from complete parsed hierarchy. Root remains centered, inline drawing scrolls locally, expanded view fits the complete scene. Names wrap at measured node widths; 12px text and 14px root retain host tokens. No areas or sizes represent values.

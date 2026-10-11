@@ -60,6 +60,8 @@ def render(spec, output_path):
     fragment = fragment.replace('{{CLASS_JS}}', TEMPLATE_PATH.with_name('mermaid-class.js').read_text(encoding='utf-8'))
     fragment = fragment.replace('{{TIMELINE_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-timeline-model.js').read_text(encoding='utf-8'))
     fragment = fragment.replace('{{TIMELINE_JS}}', TEMPLATE_PATH.with_name('mermaid-timeline.js').read_text(encoding='utf-8'))
+    fragment = fragment.replace('{{MINDMAP_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-mindmap-model.js').read_text(encoding='utf-8'))
+    fragment = fragment.replace('{{MINDMAP_JS}}', TEMPLATE_PATH.with_name('mermaid-mindmap.js').read_text(encoding='utf-8'))
     fragment = fragment.replace('{{JOURNEY_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-journey-model.js').read_text(encoding='utf-8'))
     fragment = fragment.replace('{{JOURNEY_JS}}', TEMPLATE_PATH.with_name('mermaid-journey.js').read_text(encoding='utf-8'))
     fragment = fragment.replace('{{QUADRANT_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-quadrant-model.js').read_text(encoding='utf-8'))

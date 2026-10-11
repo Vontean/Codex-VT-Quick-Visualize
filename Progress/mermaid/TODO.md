@@ -23,7 +23,7 @@
 - [ ] 15. 块图 — `block-beta`
 - [ ] 16. C4 图 — Context / Container / Component / Dynamic / Deployment
 - [ ] 17. 甘特图 — `gantt`（已有定制成果，本轮核对正式接入）
-- [ ] 18. 思维导图 — `mindmap`（已有定制成果，本轮核对正式接入）
+- [x] 18. 思维导图 — `mindmap`（已核对正式接入）
 
 ## 每种图表的检查点
 
@@ -40,7 +40,7 @@
 
 ## 当前进度
 
-- 已确认：1 / 18。
+- 已确认：2 / 18。
 - 当前项：08. 用户旅程图；先完成 Gantt、mindmap 正式接入核对。
 - 审视记录：[flowchart-review/REVIEW.md](flowchart-review/REVIEW.md)。
 
@@ -49,3 +49,5 @@
 每完成一种，在这里记录用户确认结论、选定改动或无需修改的原因，以及样例和验证证据路径。
 
 - 2026-10-12：用户确认 flowchart 第五轮通过；修复长文本、阈值布局、暗色连线、悬浮时序、白灰交替、加载等待与分组路径。补充：总览不提供同层菜单。证据见 flowchart-review/REVIEW.md。
+
+- 2026-10-12：Mindmap 已有双侧树成果接入正式入口；17 节点常规／33 节点五层样例在双主题、320/736px 无重叠、无外溢、展开无裁切，路径高亮及富文本/图标回退核对。证据 integration-review/mindmap-results.json。

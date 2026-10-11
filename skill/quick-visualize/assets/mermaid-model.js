@@ -99,6 +99,7 @@ async function readMermaidModel(mermaid,source,descriptions) {
   if(parsed.diagramType==='xychart')return readMermaidXYModel(db,descriptions);
   if(parsed.diagramType==='pie')return readMermaidPieModel(db,descriptions);
   if(parsed.diagramType==='kanban')return readMermaidKanbanModel(db,descriptions);
+  if(parsed.diagramType==='mindmap')return readMermaidMindmapModel(db,descriptions);
   if(parsed.diagramType==='journey')return readMermaidJourneyModel(db,descriptions);
   if(parsed.diagramType==='timeline')return readMermaidTimelineModel(db,descriptions);
   if(parsed.diagramType==='class')return readMermaidClassModel(db,descriptions);
