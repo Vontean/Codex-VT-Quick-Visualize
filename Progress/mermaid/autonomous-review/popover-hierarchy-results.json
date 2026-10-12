@@ -1,0 +1,74 @@
+[
+  {
+    "kind": "xy",
+    "sample": "stress",
+    "theme": "light",
+    "visible": true,
+    "title": "14px",
+    "weight": "600",
+    "label": "rgb(255, 255, 255)",
+    "value": "rgb(184, 189, 198)",
+    "body": "12px",
+    "overflow": false
+  },
+  {
+    "kind": "radar",
+    "sample": "stress",
+    "theme": "light",
+    "visible": true,
+    "title": "14px",
+    "weight": "600",
+    "label": "rgb(26, 28, 31)",
+    "value": "color(srgb 0.425255 0.430275 0.437804)",
+    "body": "12px",
+    "overflow": false
+  },
+  {
+    "kind": "radar",
+    "sample": "normal",
+    "theme": "light",
+    "visible": true,
+    "title": "14px",
+    "weight": "600",
+    "label": "rgb(26, 28, 31)",
+    "value": "color(srgb 0.425255 0.430275 0.437804)",
+    "body": "12px",
+    "overflow": false
+  },
+  {
+    "kind": "xy",
+    "sample": "stress",
+    "theme": "dark",
+    "visible": true,
+    "title": "14px",
+    "weight": "600",
+    "label": "rgb(255, 255, 255)",
+    "value": "rgb(184, 189, 198)",
+    "body": "12px",
+    "overflow": false
+  },
+  {
+    "kind": "radar",
+    "sample": "stress",
+    "theme": "dark",
+    "visible": true,
+    "title": "14px",
+    "weight": "600",
+    "label": "rgb(255, 255, 255)",
+    "value": "color(srgb 0.736471 0.736471 0.736471)",
+    "body": "12px",
+    "overflow": false
+  },
+  {
+    "kind": "radar",
+    "sample": "normal",
+    "theme": "dark",
+    "visible": true,
+    "title": "14px",
+    "weight": "600",
+    "label": "rgb(255, 255, 255)",
+    "value": "color(srgb 0.736471 0.736471 0.736471)",
+    "body": "12px",
+    "overflow": false
+  }
+]

@@ -129,7 +129,7 @@
       position: absolute;
       z-index: 2;
       display: grid;
-      gap: 6px;
+      gap: 12px;
       width:188px;
       box-sizing:border-box;
       max-width: min(260px, calc(100% - 16px));
@@ -153,7 +153,9 @@
       align-items:center;
       gap:8px;
       color: var(--popover-foreground);
-      font-weight: 500;
+      font-size:14px;
+      line-height:20px;
+      font-weight:600;
     }
 
     #{{ROOT_ID}} .quick-radar-tooltip-rows {
@@ -169,18 +171,17 @@
       font-size: 12px;
     }
 
-    #{{ROOT_ID}} .quick-radar-tooltip-row.is-active .quick-radar-tooltip-name,
-    #{{ROOT_ID}} .quick-radar-tooltip-row.is-active .quick-radar-tooltip-value {
+    #{{ROOT_ID}} .quick-radar-tooltip-row.is-active .quick-radar-tooltip-name {
       color: var(--popover-foreground);
       font-weight: 500;
     }
 
     #{{ROOT_ID}} .quick-radar-tooltip-name {
-      color: var(--muted-foreground);
+      color: var(--popover-foreground);
     }
 
     #{{ROOT_ID}} .quick-radar-tooltip-value {
-      color: var(--popover-foreground);
+      color: light-dark(color-mix(in srgb,var(--popover-foreground) 64%,var(--popover)),color-mix(in srgb,var(--popover-foreground) 68%,var(--popover)));
       font-variant-numeric: tabular-nums;
     }
 

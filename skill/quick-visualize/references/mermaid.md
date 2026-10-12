@@ -163,7 +163,7 @@ Navigation transitions differ from initial entry: use a 360ms origin-aware spati
 - Mermaid11.12 getXYChartData/getChartConfig 保留真实坐标、分类顺序、数值域、orientation和bar/line顺序。每个分类保留源数组索引，重复分类名称是不同的位置，不能用名称去重或将数据聚到首项。此版本无业务系列名，使用源类型／序号，不发明业务含义。
 - 正负柱从实际零基线绘制，柱宽≤24px，折线连接真实坐标，完整分类名换行。水平布局按分类数量和各标签可读槽位增长高度；窄消息流只滚动绘图区，值参考及标题保留，展开整体fit并恢复返回位置。
 - 悬浮／键盘比较该索引下所有系列的精确值，突出当前分类的柱和点，其余降到.18。近对象详情距触发对象≤32px；滚动后恢复键盘详情，Escape取消。重复名称的导线、命中区、标签与详情全部使用同一索引。
-- 详情使用#1b1d21深色底、12px圆角、12px×14px内边距、最大240px宽；14px/20px标题与12px/18px数据行用分隔线区分。数据行对齐系列色标、次级系列名和等宽数字。以当前分类真实柱子和点的屏幕边界为避让对象，在侧边保留12px间距；可用空间不足时缩窄宽度并换行，不盖住当前标记。展开保留浮层字号，不随场景缩放。
+- 详情使用#1b1d21深色底、12px圆角、12px×14px内边距、最大240px宽；14px/20px标题与12px/18px数据行用分隔线区分。数据行对齐系列色标、主文字系列名和次级灰色等宽数字。以当前分类真实柱子和点的屏幕边界为避让对象，在侧边保留12px间距；可用空间不足时缩窄宽度并换行，不盖住当前标记。展开保留浮层字号，不随场景缩放。
 - 柱650ms同时增长，线1200ms描画；hover/resize不重播，完整退出重入／可见性恢复按既有契约重播，reduced/expanded静态。rich axis HTML和额外说明明确回退。
 
 ## Radar scope
@@ -171,14 +171,15 @@ Navigation transitions differ from initial entry: use a 360ms origin-aware spati
 - 从 Mermaid11.12 DB 读取有序axis、positional/keyed curve、名称、min/max、ticks、graticule和showLegend；非零最小值必须保留。径向距离编码值，面积不解释为总分；非法范围／rich label／额外说明明确回退。
 - 当min=0、polygon、5ticks、显示图例、≤8轴、≤4系列、轴名≤12字时，mermaid_presets.py 直接复用 radar-chart.html。不能满足预设表达能力时，保留原增强绘制，支持非零min、circle、长名称、多轴多系列，不删除数据或更改语义以硬塞预设。
 - 两条路径沿用相同设计：host系列色、细中性网格、隐藏数字刻度标签，900ms quartic径向展开；点优先读取所属对象，轴比较全部对象，图例保持身份。非活动线／点.10、填充.003，近触发对象的完整详情。扩展绘制使用共享≤32px定位约束。
-- 扩展绘制详情沿用常规radar预设：188px首选宽、12px圆角、12px×14px内边距、6px标题／正文间距、4px数据行间距，宿主popover底色和描边。团队标题带对应系列形状／色标，指标名换行，数值独立右对齐且对齐首行；轴对比行带各系列色标。点／多边形显示完整团队指标；图例hover、click、focus只突出系列，不显示详情。
+- 扩展绘制详情沿用常规radar预设：188px首选宽、12px圆角、12px×14px内边距、12px标题／正文间距、4px数据行间距，宿主popover底色和描边。团队标题14px/20px／600并带对应系列形状／色标，指标名用主文字色并换行，数值用次级灰色独立右对齐且对齐首行；轴对比行带各系列色标。点／多边形显示完整团队指标；图例hover、click、focus只突出系列，不显示详情。
 - 扩展绘制的可读intrinsic scene可横向滚动，展开fit并恢复返回位置。reduced/resize/展开不重播，完整离场再重入可重播；真实宿主可见性恢复仍需人工验收。
 
 ## Sankey scope
 
 - 实际 Mermaid11.12 getGraph/getConfig 保留源ID／顺序／重复边／原始正数量、alignment、source/target/gradient颜色、showValues及prefix/suffix，不另外解析CSV，不推导源到终点的完整路径。当前固定版本的Unicode语法限制应显式报告，不偷偷改名；采用合法ASCII源做样式验证。
 - D3-sankey0.12.3计算DAG位置，宽度与高度按同一数值比例，包括subpixel极小流；透明命中路径提供容错，不能加宽可见流。节点值为max(inflow,outflow)，详情分别说明真实流入／流出，边说明原量及两端对应份额。
-- 名称14px／值12px完整保留，标签实测高度参与间隔；inline intrinsic横向滚动，expanded紧凑列距后整体fit，返回恢复。浮层距真实节点／边命中对象≤32px，优先保持亲密度，再考虑局部避障，不预留无用底部详情区。
+- 名称14px／值12px完整保留，标签实测高度参与间隔；inline intrinsic横向滚动，expanded紧凑列距后整体fit，返回恢复。浮层就近关联真实节点／流带，优先保证不遮挡当前活跃流带，不预留无用底部详情区。
+- 桑基详情首选200px宽，标题14px/20px／600，标题至条目12px、条目间6px，标签主文字色、值64%／68%前景与popover背景混色。按选中流线真实曲线和可见带宽采样，优先选择与当前高亮流带零交叉的附近位置，流入／流出节点详情避开其全部直接相连的活跃流带；厚流带计入宽度，不能只按鼠标或整条包围盒避让。路径采样缓存，滚动时按实际屏幕坐标转换；无底部详情面板，不改变图表高度。
 - 1000ms quartic水平mask保持比例；hover/resize不重播，reduced/expanded静态，完整退出后20%重入可重播。零值／非正值／cycles／custom literal color 保留明确native fallback；原生自己无法绘制的循环应显示错误，不能假称回退成功。
 
 ## Quadrant scope
@@ -240,3 +241,7 @@ Flowchart gray retains the original muted 18% mix over the host background, with
 `mermaid-presentation.js`只负责局部定位、hover时序和包含层底色；模型、布局和各图的交互语义保持独立。`mermaid_presets.py`在生成时编译现有模板，Pie／Radar适配源数据后调用，避免样式复制。ResizeObserver涉及重绘时延至requestAnimationFrame处理，禁止在观察器同一批通知内同步改写被观察对象的布局。
 
 键盘详情遵循相同对象关联：自动滚动应将触发文字留在可见区，不用其来源节点替代触发对象。长时序图在滚动停稳后恢复已选消息详情；Escape既隐藏详情，也取消待恢复对象，后续scroll通知不得重新打开。
+
+## Shared popover hierarchy
+
+- 浮层层级：标题14px/20px、600字重，条目12px/18px；主标签用当前主题主文字色，数值用有足够对比度的次级灰色（深色浮层中对应浅字／浅灰）。标题与条目组间距12px，条目间距4–6px，禁止标题与正文同字号、同字重。默认按内容选窄幅卡片，数值比较188–240px；名称换行、数值独立右对齐，不用空白撑宽。关系浮层按来源／目标／说明组织，保留其语义层级。

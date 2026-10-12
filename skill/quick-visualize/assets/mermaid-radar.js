@@ -11,15 +11,15 @@ async function renderMermaidRadar(root,data) {
  #${root.id} .radar-legend{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-top:20px}
  #${root.id} .radar-series-key{display:flex;align-items:center;gap:7px;border:0;background:transparent;color:var(--foreground);font:inherit;font-size:12px;line-height:20px;padding:4px 0;cursor:var(--cursor-interaction,pointer)}
  #${root.id} .radar-swatch{width:10px;height:10px;background:currentColor}
- #${root.id} .radar-detail{position:absolute;z-index:10;display:grid;gap:6px;width:188px;box-sizing:border-box;max-width:min(260px,calc(100% - 16px));padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:var(--popover);color:var(--popover-foreground);font-size:12px;line-height:18px;box-shadow:0 6px 18px color-mix(in srgb,var(--foreground) 10%,transparent);pointer-events:none}
+ #${root.id} .radar-detail{position:absolute;z-index:10;display:grid;gap:12px;width:188px;box-sizing:border-box;max-width:min(260px,calc(100% - 16px));padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:var(--popover);color:var(--popover-foreground);font-size:12px;line-height:18px;box-shadow:0 6px 18px color-mix(in srgb,var(--foreground) 10%,transparent);pointer-events:none}
  #${root.id} .radar-detail[hidden]{display:none}
- #${root.id} .radar-detail-title{display:flex;align-items:center;gap:8px;font-weight:500;overflow-wrap:anywhere}
+ #${root.id} .radar-detail-title{display:flex;align-items:center;gap:8px;font-size:14px;line-height:20px;font-weight:600;overflow-wrap:anywhere}
  #${root.id} .radar-detail-rows{display:grid;gap:4px}
  #${root.id} .radar-detail-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:start;gap:6px}
  #${root.id} .radar-detail[data-mode="series"] .radar-detail-row{grid-template-columns:minmax(0,1fr) auto}
- #${root.id} .radar-detail-name{color:var(--muted-foreground);overflow-wrap:anywhere}
- #${root.id} .radar-detail[data-mode="series"] .radar-detail-name,#${root.id} .radar-detail[data-mode="series"] .radar-detail-value{color:var(--popover-foreground);font-weight:500}
- #${root.id} .radar-detail-value{font-variant-numeric:tabular-nums;white-space:nowrap}
+ #${root.id} .radar-detail-name{color:var(--popover-foreground);overflow-wrap:anywhere}
+ #${root.id} .radar-detail[data-mode="series"] .radar-detail-name{color:var(--popover-foreground);font-weight:500}
+ #${root.id} .radar-detail-value{color:light-dark(color-mix(in srgb,var(--popover-foreground) 64%,var(--popover)),color-mix(in srgb,var(--popover-foreground) 68%,var(--popover)));font-variant-numeric:tabular-nums;white-space:nowrap}
  #${root.id} .radar-detail .radar-swatch{flex-shrink:0}
 
  `;root.append(style);
