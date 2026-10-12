@@ -1,6 +1,6 @@
 # c4 自主审视记录
 
-状态：已完成本轮自主优化与浏览器核对，待用户验收；尚未 checked。
+状态：2026-10-12 用户明确确认“All checked”，本图 checked，验收完成。
 
 改动：白灰边界、增强连线／小字对比及局部详情。设计契约见仓库 DESIGN.md 及 Mermaid reference 的对应段落。源解析、布局、绘制职责分离，未删除真实节点／关系／数值来压缩图形。
 
@@ -15,7 +15,7 @@
 - 数据：normal/stress解析模型与实际名称／节点／关系／标记或数值一一核对，记录semantic-results.json；额外fallback／零值／参数样例见extra-results.json。
 - 完整证据汇总：[REVIEW.md](REVIEW.md)、results.json、behavior-results.json。以上是隔离浏览器和模拟宿主展开事件证据；真实Codex消息流、宿主toolbar／clipboard／可见性恢复由用户验收。
 
-## 明天验收
+## 验收说明
 
 先看常规的层级和视觉重心，再看压力图的长文本、完整内容和局部详情。若认可，由用户将 TODO 对应项勾选。
 
@@ -28,4 +28,4 @@
 - 节点／边界／连线详情拆成标题、字段与直接连接，260px首选宽，使用共享明暗一致深色表面。
 - c4-dark-detail-check.cjs：normal/stress × light/dark × 320/736px，共8组；卡片正文和下内距、透明关系标签、结构化详情、Escape与浏览器错误均检查通过。
 - c4-expanded-check.cjs：2组模拟宿主展开＋实际鼠标悬浮，浮层保持12px字号，文字完整。chart-dark-detail-check.cjs另核对8类渲染器与4种独立预设在两主题的浮层颜色变量，共24组。Python30项通过。
-- 仍待用户在真实消息流验收，尚未checked。
+- 2026-10-12 用户已确认真实消息流展示结果，本图 checked。

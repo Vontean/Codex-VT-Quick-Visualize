@@ -7,21 +7,21 @@
 ## 图表清单
 
 - [x] 01. 流程图 — `flowchart` / `graph`
-- [ ] 02. 架构图 — `architecture-beta`
-- [ ] 03. 时序图 — `sequenceDiagram`
+- [x] 02. 架构图 — `architecture-beta`
+- [x] 03. 时序图 — `sequenceDiagram`
 - [x] 04. 状态图 — `stateDiagram-v2`
-- [ ] 05. 实体关系图 — `erDiagram`
+- [x] 05. 实体关系图 — `erDiagram`
 - [x] 06. 类图 — `classDiagram`
 - [x] 07. 时间线 — `timeline`
 - [x] 08. 用户旅程图 — `journey`
 - [x] 09. 看板 — `kanban`
-- [ ] 10. 饼图 — `pie`
-- [ ] 11. XY 图 — `xychart-beta`（柱形、折线及混合）
-- [ ] 12. 雷达图 — `radar-beta`
-- [ ] 13. 桑基图 — `sankey-beta`
+- [x] 10. 饼图 — `pie`
+- [x] 11. XY 图 — `xychart-beta`（柱形、折线及混合）
+- [x] 12. 雷达图 — `radar-beta`
+- [x] 13. 桑基图 — `sankey-beta`
 - [x] 14. 象限图 — `quadrantChart`
-- [ ] 15. 块图 — `block-beta`
-- [ ] 16. C4 图 — Context / Container / Component / Dynamic / Deployment
+- [x] 15. 块图 — `block-beta`
+- [x] 16. C4 图 — Context / Container / Component / Dynamic / Deployment
 - [x] 17. 甘特图 — `gantt`（已核对正式接入）
 - [x] 18. 思维导图 — `mindmap`（已核对正式接入）
 
@@ -40,8 +40,8 @@
 
 ## 当前进度
 
-- 已确认：9 / 18。
-- 当前项：剩余9种图表自主优化与浏览器核对已完成，全部待用户验收。
+- 已确认：18 / 18。
+- 当前项：全部18种图表及统一浮层样式已由用户确认 checked，本轮完成。
 - 本轮剩余图记录：[autonomous-review/REVIEW.md](autonomous-review/REVIEW.md)。
 - 已验收图记录：[flowchart-review/REVIEW.md](flowchart-review/REVIEW.md)及各图子目录。
 
@@ -66,3 +66,5 @@
 - 2026-10-12：Class 用户确认分区代码卡片、虚线Namespace、精确UML标记、增强连线及近文字结构化关系浮层。双主题8组、54次定位和12个标记几何检查通过。证据 class-review/REVIEW.md。
 
 - 2026-10-12：剩余 architecture-beta、sequenceDiagram、erDiagram、pie、xychart-beta、radar-beta、sankey-beta、block-beta 与C4完成自主优化。72组布局、18组语义、9图动效和13组额外语义／回退检查通过；逐图原子化提交并同步本机qv，仍待用户验收，不勾选。证据 autonomous-review/REVIEW.md。
+
+- 2026-10-12：用户明确确认“All checked”，本轮18/18全部验收通过；统一浮层采用亮色白底、暗色黑底，标题14px/20px／600。验收记录见autonomous-review/popover-theme-REVIEW.md；本机技能以仓库完整版本同步并逐字节核对。

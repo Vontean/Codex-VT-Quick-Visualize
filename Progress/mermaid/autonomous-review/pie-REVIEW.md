@@ -1,6 +1,6 @@
 # pie 自主审视记录
 
-状态：已完成本轮自主优化与浏览器核对，待用户验收；尚未 checked。
+状态：2026-10-12 用户明确确认“All checked”，本图 checked，验收完成。
 
 改动：复用现有环形图，零值弧省略、原量及大数中心适配。设计契约见仓库 DESIGN.md 及 Mermaid reference 的对应段落。源解析、布局、绘制职责分离，未删除真实节点／关系／数值来压缩图形。
 
@@ -15,7 +15,7 @@
 - 数据：normal/stress解析模型与实际名称／节点／关系／标记或数值一一核对，记录semantic-results.json；额外fallback／零值／参数样例见extra-results.json。
 - 完整证据汇总：[REVIEW.md](REVIEW.md)、results.json、behavior-results.json。以上是隔离浏览器和模拟宿主展开事件证据；真实Codex消息流、宿主toolbar／clipboard／可见性恢复由用户验收。
 
-## 明天验收
+## 验收说明
 
 先看常规的层级和视觉重心，再看压力图的长文本、完整内容和局部详情。若认可，由用户将 TODO 对应项勾选。
 

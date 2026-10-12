@@ -46,7 +46,9 @@ Mermaid references include `mode="wide"` (ASCII) or `"mode":"wide"` (legacy) for
 
 An inline visualization error means the host recognized the reference but failed to load or run the content. Check the filename, path and runtime before blaming model compatibility; `ok: true` confirms generation and static checks, not host rendering.
 
-Architecture-beta preserves full wrapped names. Hover, focus or click reads structured resource/group details in a nearby dark tooltip, independent of scene scaling; no detail panel or object selector below the diagram.
+Architecture-beta preserves full wrapped names. Hover, focus or click reads structured resource/group details in a nearby theme-aware tooltip, independent of scene scaling; no detail panel or object selector below the diagram.
+
+All chart data popovers use a white surface with dark text in light mode, and a black surface with light text in dark mode. Keep titles at 14px/20px with 600 weight, body rows at 12px/18px, secondary values muted, and the title-to-body gap larger than the row gap. Use compact widths and preserve the active object's visibility; do not add popovers where the chart already presents the complete information.
 
 For node-based Mermaid diagrams, proactively apply the shared design principles in the Mermaid reference: measured threshold-based wrapping, threshold-based layout balancing, alternating containment surfaces, stable hover, focused group navigation and separately calibrated themes. Preserve each diagram type's semantic shapes and relationships; do not wait for the user to repeat accepted principles.
 
