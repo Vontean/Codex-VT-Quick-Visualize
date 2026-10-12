@@ -1,0 +1,20 @@
+[
+  {
+    "selector": "circle[data-category=\"1\"]",
+    "visible": true,
+    "title": "周期2",
+    "selected": [
+      0,
+      0
+    ]
+  },
+  {
+    "selector": "rect[data-category=\"1\"]",
+    "visible": true,
+    "title": "周期2",
+    "selected": [
+      0,
+      0
+    ]
+  }
+]
