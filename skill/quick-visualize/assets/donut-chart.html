@@ -39,6 +39,7 @@ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');let layout=n
 let direct=false;const eligibleDirect=data.length<=4&&d3.min(data,d=>d.value/total)>=.08&&data.every(d=>d.label.length<=12);
 function clear(){svg.selectAll('.slice').attr('opacity',1);root.querySelectorAll('.legend button,.direct-label').forEach(b=>b.style.opacity=1);root.querySelector('.center-value').textContent=config.valuePrefix+numberFormat.format(total);root.querySelector('.center-label').textContent='总计'+(config.valueSuffix.trim()?' · '+config.valueSuffix.trim():'');bubble.hidden=true;}
 function show(i){if(!layout)return;svg.selectAll('.slice').attr('opacity',d=>d.index===i?1:.25);root.querySelectorAll('.legend button,.direct-label').forEach((b,j)=>b.style.opacity=j===i?1:.55);root.querySelector('.center-value').textContent=pct(i);root.querySelector('.center-label').textContent=data[i].label;
+if(config.showTooltip===false)return;
 root.querySelector('.bubble-title').textContent=data[i].label;const description=root.querySelector('.description');description.textContent=data[i].description||'';description.hidden=!data[i].description;root.querySelector('.bubble-value').textContent=formatValue(data[i].value);root.querySelector('.bubble-percent').textContent=pct(i);root.querySelector('.bubble .swatch').style.background=color(i);bubble.hidden=false;
 const d=layout.arcs[i],angle=(d.startAngle+d.endAngle)/2,px=layout.cx+Math.sin(angle)*layout.radius,py=layout.cy-Math.cos(angle)*layout.radius;
 const rb=root.getBoundingClientRect(),pb=plot.getBoundingClientRect(),bw=bubble.offsetWidth,bh=bubble.offsetHeight;
@@ -47,7 +48,8 @@ data.forEach((d,i)=>{const b=document.createElement('button');b.type='button';b.
 function draw(animate=false){const width=Math.round(plot.getBoundingClientRect().width);if(width<1)return;lastWidth=width;direct=eligibleDirect&&width>=420;const height=direct?340:280,cx=width/2,cy=height/2,radius=direct?Math.min(104,width/2-50):Math.min(118,width/2-16),inner=radius*.75;
 // 间隔不参与角度分配；随最小正值缩小，避免零值和极小值撑大缺口。
 const arcs=d3.pie().sort(null).value(d=>d.value)(data),positiveArcs=arcs.filter(d=>d.data.value>0),smallestAngle=d3.min(positiveArcs,d=>d.endAngle-d.startAngle),gap=positiveArcs.length>1?Math.min(.025,smallestAngle*.2):0;
-const arc=d3.arc().innerRadius(inner).outerRadius(radius).padAngle(gap).cornerRadius(Math.min(3,radius*smallestAngle*.2)),enter=parseFloat(getComputedStyle(root).getPropertyValue('--ring-enter'));layout={width,cx,cy,radius,arcs};
+// 保留接近整圆时的微小端点差，避免三位小数将两端舍入为同一点。
+const arc=d3.arc().digits(9).innerRadius(inner).outerRadius(radius).padAngle(gap).cornerRadius(Math.min(3,radius*smallestAngle*.2)),enter=parseFloat(getComputedStyle(root).getPropertyValue('--ring-enter'));layout={width,cx,cy,radius,arcs};
 svg.selectAll('*').interrupt();svg.selectAll('*').remove();svg.attr('viewBox',`0 0 ${width} ${height}`);const g=svg.append('g').attr('transform',`translate(${cx},${cy})`);
 const slices=g.selectAll('.slice').data(positiveArcs).join('path').attr('class','slice').attr('fill',d=>color(d.index)).attr('d',arc).on('pointerenter pointermove',(_,d)=>show(d.index)).on('pointerleave pointercancel',clear).on('pointerup',e=>{if(e.pointerType==='touch')clear();});
 plot.querySelectorAll('.direct-label').forEach(e=>{e.getAnimations().forEach(a=>a.cancel());e.remove();});legend.hidden=direct;

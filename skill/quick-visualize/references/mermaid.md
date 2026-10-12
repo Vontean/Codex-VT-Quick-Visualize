@@ -153,10 +153,10 @@ Navigation transitions differ from initial entry: use a 360ms origin-aware spati
 
 ## Pie scope
 
-- 从 Mermaid11.12 getSections Map 读取源顺序、独立名称、原始非负权重、showData、title，不合并极小份额或发明单位。正有限总量必须大于0；零总量与rich label明确原生回退，零值仍留在图例和详情。
+- 从 Mermaid11.12 getSections Map 读取源顺序、独立名称、原始非负权重、showData、title，不合并极小份额或发明单位。正有限总量必须大于0；零总量与rich label明确原生回退，零值仍留在图例。
 - 通过 mermaid_presets.py 编译现有 donut-chart.html，再由 mermaid-pie.js 做语义映射；不维护第二套圆环样式。圆环约75%内径、中心总计、host系列色、短数据直标／长数据底部图例沿用已确认方案。Mermaid源数据可多于独立预设的6类，颜色按6个token循环，完整列表保留。
-- 只有正权重绘制弧；角度严格按原值分配，零值没有扇区或缺口，极小份额不会被最小可视角度撑大。showData 在图例／直标带原值，详情使用原始值而非小数位截断。中心大数自动缩小以容纳，长名称换行。
-- 650ms圆环入场，直标随入场淡入；普通resize/hover不重播，完整退出后重入可重播，reduced静态。图例和直标详情靠近触发对象，弧详情靠近圆环。使用宿主展开预览，无额外全屏容器。
+- 只有正权重绘制弧；角度严格按原值分配，零值没有扇区或缺口，极小份额不会被最小可视角度撑大。showData 在图例／直标带原值，原始值不做小数位截断；弧路径坐标保留9位小数，避免接近100%的弧线端点被舍入为同一点。中心大数自动缩小以容纳，长名称换行。
+- 650ms圆环入场，直标随入场淡入；普通resize/hover不重播，完整退出后重入可重播，reduced静态。Pie的图例、直标及圆环悬浮只突出对应份额并更新中心信息，不显示popover；独立donut预设保留自身详情能力。使用宿主展开预览，无额外全屏容器。
 
 ## XY scope
 
