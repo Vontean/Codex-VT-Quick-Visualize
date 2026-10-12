@@ -171,6 +171,7 @@ Navigation transitions differ from initial entry: use a 360ms origin-aware spati
 - 从 Mermaid11.12 DB 读取有序axis、positional/keyed curve、名称、min/max、ticks、graticule和showLegend；非零最小值必须保留。径向距离编码值，面积不解释为总分；非法范围／rich label／额外说明明确回退。
 - 当min=0、polygon、5ticks、显示图例、≤8轴、≤4系列、轴名≤12字时，mermaid_presets.py 直接复用 radar-chart.html。不能满足预设表达能力时，保留原增强绘制，支持非零min、circle、长名称、多轴多系列，不删除数据或更改语义以硬塞预设。
 - 两条路径沿用相同设计：host系列色、细中性网格、隐藏数字刻度标签，900ms quartic径向展开；点优先读取所属对象，轴比较全部对象，图例保持身份。非活动线／点.10、填充.003，近触发对象的完整详情。扩展绘制使用共享≤32px定位约束。
+- 扩展绘制详情沿用常规radar预设：188px首选宽、12px圆角、12px×14px内边距、6px标题／正文间距、4px数据行间距，宿主popover底色和描边。团队标题带对应系列形状／色标，指标名换行，数值独立右对齐且对齐首行；轴对比行带各系列色标。点／多边形显示完整团队指标；图例hover、click、focus只突出系列，不显示详情。
 - 扩展绘制的可读intrinsic scene可横向滚动，展开fit并恢复返回位置。reduced/resize/展开不重播，完整离场再重入可重播；真实宿主可见性恢复仍需人工验收。
 
 ## Sankey scope

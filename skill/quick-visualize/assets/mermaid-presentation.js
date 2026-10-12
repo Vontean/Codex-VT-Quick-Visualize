@@ -1,8 +1,8 @@
 // 浮层避让只在触发对象附近进行，局部遮挡优先于失去关联。
-function placeMermaidDetail(root,tip,anchor,event){
+function placeMermaidDetail(root,tip,anchor,event,preferredWidth=280){
  const rr=root.getBoundingClientRect(),r=anchor?.getBoundingClientRect();
  if(!r)return;
- tip.style.position='absolute';tip.style.marginTop='0';tip.style.width=Math.min(280,root.clientWidth-16)+'px';tip.style.maxWidth='calc(100% - 8px)';tip.style.boxSizing='border-box';tip.style.overflowWrap='anywhere';
+ tip.style.position='absolute';tip.style.marginTop='0';tip.style.width=Math.min(preferredWidth,root.clientWidth-16)+'px';tip.style.maxWidth='calc(100% - 8px)';tip.style.boxSizing='border-box';tip.style.overflowWrap='anywhere';
  const w=tip.offsetWidth,h=tip.offsetHeight,pointer=event?.type?.startsWith('pointer'),x=pointer?event.clientX-rr.left:r.left-rr.left,y=pointer?event.clientY-rr.top:r.top-rr.top,aw=pointer?0:r.width,ah=pointer?0:r.height;
  const candidates=[];
  for(const gap of [12,20,28])for(const [left,top]of [[x+aw+gap,y+(ah-h)/2],[x-w-gap,y+(ah-h)/2],[x+(aw-w)/2,y-h-gap],[x+(aw-w)/2,y+ah+gap]]){
