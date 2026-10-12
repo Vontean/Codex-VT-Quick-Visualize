@@ -1,0 +1,1 @@
+{"title": "Bars", "x_axis_label": "Group", "y_axis_label": "Value", "categories": ["A", "B"], "series": [{"name": "Team", "values": [4, 8]}, {"name": "Other", "values": [2, 6]}]}

@@ -157,7 +157,7 @@ Mermaid shape fills: shaped nodes keep a transparent HTML backplate even when la
 - Mermaid11.12 getXYChartData/getChartConfig 保留真实坐标、分类顺序、数值域、orientation和bar/line顺序。每个分类保留源数组索引，重复分类名称是不同的位置，不能用名称去重或将数据聚到首项。此版本无业务系列名，使用源类型／序号，不发明业务含义。
 - 正负柱从实际零基线绘制，柱宽≤24px，折线连接真实坐标，完整分类名换行。水平布局按分类数量和各标签可读槽位增长高度；窄消息流只滚动绘图区，值参考及标题保留，展开整体fit并恢复返回位置。
 - 悬浮／键盘比较该索引下所有系列的精确值，突出当前分类的柱和点，其余降到.18。近对象详情距触发对象≤32px；滚动后恢复键盘详情，Escape取消。重复名称的导线、命中区、标签与详情全部使用同一索引。
-- 详情使用#1b1d21深色底、12px圆角、12px×14px内边距、最大240px宽；14px/20px标题与12px/18px数据行用分隔线区分。数据行对齐系列色标、主文字系列名和次级灰色等宽数字。以当前分类真实柱子和点的屏幕边界为避让对象，在侧边保留12px间距；可用空间不足时缩窄宽度并换行，不盖住当前标记。展开保留浮层字号，不随场景缩放。
+- 详情使用#111214深色底、12px圆角、12px×14px内边距、最大240px宽；14px/20px标题与12px/18px数据行用分隔线区分。数据行对齐系列色标、主文字系列名和次级灰色等宽数字。以当前分类真实柱子和点的屏幕边界为避让对象，在侧边保留12px间距；可用空间不足时缩窄宽度并换行，不盖住当前标记。展开保留浮层字号，不随场景缩放。
 - 柱650ms同时增长，线1200ms描画；hover/resize不重播，完整退出重入／可见性恢复按既有契约重播，reduced/expanded静态。rich axis HTML和额外说明明确回退。
 
 ## Mermaid Radar renderer
@@ -165,7 +165,7 @@ Mermaid shape fills: shaped nodes keep a transparent HTML backplate even when la
 - 从 Mermaid11.12 DB 读取有序axis、positional/keyed curve、名称、min/max、ticks、graticule和showLegend；非零最小值必须保留。径向距离编码值，面积不解释为总分；非法范围／rich label／额外说明明确回退。
 - 当min=0、polygon、5ticks、显示图例、≤8轴、≤4系列、轴名≤12字时，mermaid_presets.py 直接复用 radar-chart.html。不能满足预设表达能力时，保留原增强绘制，支持非零min、circle、长名称、多轴多系列，不删除数据或更改语义以硬塞预设。
 - 两条路径沿用相同设计：host系列色、细中性网格、隐藏数字刻度标签，900ms quartic径向展开；点优先读取所属对象，轴比较全部对象，图例保持身份。非活动线／点.10、填充.003，近触发对象的完整详情。扩展绘制使用共享≤32px定位约束。
-- 扩展绘制详情沿用常规radar预设：188px首选宽、12px圆角、12px×14px内边距、12px标题／正文间距、4px数据行间距，宿主popover底色和描边。团队标题14px/20px／600并带对应系列形状／色标，指标名用主文字色并换行，数值用次级灰色独立右对齐且对齐首行；轴对比行带各系列色标。点／多边形显示完整团队指标；图例hover、click、focus只突出系列，不显示详情。
+- 扩展绘制详情沿用常规radar预设：188px首选宽、12px圆角、12px×14px内边距、12px标题／正文间距、4px数据行间距，共享深色浮层底色和描边。团队标题14px/20px／600并带对应系列形状／色标，指标名用主文字色并换行，数值用次级灰色独立右对齐且对齐首行；轴对比行带各系列色标。点／多边形显示完整团队指标；图例hover、click、focus只突出系列，不显示详情。
 - 扩展绘制的可读intrinsic scene可横向滚动，展开fit并恢复返回位置。reduced/resize/展开不重播，完整离场再重入可重播；真实宿主可见性恢复仍需人工验收。
 
 ## Mermaid Sankey renderer
@@ -206,7 +206,7 @@ Mermaid shape fills: shaped nodes keep a transparent HTML backplate even when la
 
 - 使用 Mermaid11.12 真实服务、汇接点、分组、方向与端口；不为视觉优化删除连接。服务240px宽、14px/20px完整换行，图标固定16px且向下偏移2px，对齐文本首行20px行盒的中心。
 - 汇接点10×10px、零内边距，不继承分组卡片的浅灰底和12px/16px内距。保留实际汇接对象与源连线几何，避免空灰胶囊。
-- mermaid-architecture-reader.js 以未缩放的黑底tooltip呈现详情，靠近当前节点／分组，使用共享≤32px定位约束。正文12px/18px，名称14px/20px，次级标签#b8bdc6；浮层填充#1b1d21，浅字和分段线在明暗主题一致。
+- mermaid-architecture-reader.js 以未缩放的黑底tooltip呈现详情，靠近当前节点／分组，使用共享≤32px定位约束。正文12px/18px，名称14px/20px，次级标签#b8bdc6；浮层填充#111214，浅字和分段线在明暗主题一致。
 - 详情按名称／类型与ID／说明／所属路径／直接成员／直接连接分段。连接分列表示真实来源、方向、目标与端口，group修饰时保留原始服务端点。禁止将节点选择结果更新到图表下方；移除底部详情、提示和对象select。
 - 悬浮／点击／键盘读取同一详情，节点高亮沿用原邻接关系；移入浮层保留，离开使用220ms缓冲。滚动停稳后恢复当前详情，Escape取消待恢复对象。展开仍fit整图，详情独立于场景缩放，返回保留滚动。
 - 叶白、包含层从内向外muted18%灰／白交替，标题透明；明暗连线分别36%／48% muted-foreground混底。分组下钻原行为保留，原生不支持语法明确回退。
@@ -235,3 +235,5 @@ Formal Gantt reuses the approved ruler, section labels, stage-colored interval b
 `mermaid-presentation.js`只负责局部定位、hover时序和包含层底色；模型、布局和各图的交互语义保持独立。`mermaid_presets.py`在生成时编译现有模板，Pie／Radar适配源数据后调用，避免样式复制。ResizeObserver涉及重绘时延至requestAnimationFrame处理，禁止在观察器同一批通知内同步改写被观察对象的布局。
 
 键盘详情遵循相同对象关联：自动滚动应将触发文字留在可见区，不用其来源节点替代触发对象。长时序图在滚动停稳后恢复已选消息详情；Escape既隐藏详情，也取消待恢复对象，后续scroll通知不得重新打开。
+
+- 所有数据浮层在明暗模式均使用#111214填充、#fff主文字、#b8bdc6次级文字与#ffffff24描边；作用域限定role=tooltip，不改变图表、卡片或导航菜单。以共享变量继承至各渲染器及预设，标题14px/20px、600字重，正文12px/18px。

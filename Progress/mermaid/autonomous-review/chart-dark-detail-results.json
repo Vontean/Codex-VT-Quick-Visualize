@@ -1,0 +1,362 @@
+[
+  {
+    "theme": "light",
+    "kind": "architecture",
+    "tooltips": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      },
+      {
+        "class": "architecture-detail",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "sequence",
+    "tooltips": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      },
+      {
+        "class": "seq-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "er",
+    "tooltips": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      },
+      {
+        "class": "er-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "xy",
+    "tooltips": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      },
+      {
+        "class": "xy-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "radar",
+    "tooltips": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      },
+      {
+        "class": "radar-detail",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "sankey",
+    "tooltips": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      },
+      {
+        "class": "sankey-detail",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "block",
+    "tooltips": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "pie",
+    "tooltips": [
+      {
+        "class": "bubble",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "donut-chart",
+    "tooltips": [
+      {
+        "class": "bubble",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "radar-chart",
+    "tooltips": [
+      {
+        "class": "quick-radar-tooltip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "line-chart",
+    "tooltips": [
+      {
+        "class": "bubble",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "kind": "grouped-bar-chart",
+    "tooltips": [
+      {
+        "class": "bubble",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "architecture",
+    "tooltips": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      },
+      {
+        "class": "architecture-detail",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "sequence",
+    "tooltips": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      },
+      {
+        "class": "seq-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "er",
+    "tooltips": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      },
+      {
+        "class": "er-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "xy",
+    "tooltips": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      },
+      {
+        "class": "xy-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "radar",
+    "tooltips": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      },
+      {
+        "class": "radar-detail",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "sankey",
+    "tooltips": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      },
+      {
+        "class": "sankey-detail",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "block",
+    "tooltips": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "pie",
+    "tooltips": [
+      {
+        "class": "bubble",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "donut-chart",
+    "tooltips": [
+      {
+        "class": "bubble",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "radar-chart",
+    "tooltips": [
+      {
+        "class": "quick-radar-tooltip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "line-chart",
+    "tooltips": [
+      {
+        "class": "bubble",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "kind": "grouped-bar-chart",
+    "tooltips": [
+      {
+        "class": "bubble",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "secondary": "#b8bdc6"
+      }
+    ]
+  }
+]
