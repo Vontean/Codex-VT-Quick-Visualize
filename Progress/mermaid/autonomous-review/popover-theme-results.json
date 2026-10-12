@@ -1,0 +1,1202 @@
+[
+  {
+    "kind": "flowchart",
+    "sample": "normal",
+    "theme": "light",
+    "details": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 260,
+        "overflow": false,
+        "text": 34,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "architecture",
+    "sample": "normal",
+    "theme": "light",
+    "details": [
+      {
+        "class": "architecture-detail",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 280,
+        "overflow": false,
+        "text": 68,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "architecture",
+    "sample": "stress",
+    "theme": "light",
+    "details": [
+      {
+        "class": "architecture-detail",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 280,
+        "overflow": false,
+        "text": 102,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "sequence",
+    "sample": "normal",
+    "theme": "light",
+    "details": [
+      {
+        "class": "seq-tip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 280,
+        "overflow": false,
+        "text": 14,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "sequence",
+    "sample": "stress",
+    "theme": "light",
+    "details": [
+      {
+        "class": "seq-tip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 280,
+        "overflow": false,
+        "text": 43,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "er",
+    "sample": "normal",
+    "theme": "light",
+    "details": [
+      {
+        "class": "er-tip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 280,
+        "overflow": false,
+        "text": 19,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "er",
+    "sample": "stress",
+    "theme": "light",
+    "details": [
+      {
+        "class": "er-tip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 280,
+        "overflow": false,
+        "text": 24,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "class",
+    "sample": "normal",
+    "theme": "light",
+    "details": [
+      {
+        "class": "class-tip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 320,
+        "overflow": false,
+        "text": 23,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "class",
+    "sample": "stress",
+    "theme": "light",
+    "details": [
+      {
+        "class": "class-tip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 320,
+        "overflow": false,
+        "text": 18,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "state",
+    "sample": "normal",
+    "theme": "light",
+    "details": [
+      {
+        "class": "state-tip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 153.5,
+        "overflow": false,
+        "text": 21,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "state",
+    "sample": "stress",
+    "theme": "light",
+    "details": [
+      {
+        "class": "state-tip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 173.375,
+        "overflow": false,
+        "text": 23,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "quadrant",
+    "sample": "normal",
+    "theme": "light",
+    "details": [
+      {
+        "class": "quadrant-detail",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 252,
+        "overflow": false,
+        "text": 23,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "quadrant",
+    "sample": "stress",
+    "theme": "light",
+    "details": [
+      {
+        "class": "quadrant-detail",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 252,
+        "overflow": false,
+        "text": 32,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "xy",
+    "sample": "normal",
+    "theme": "light",
+    "details": [
+      {
+        "class": "xy-tip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 240,
+        "overflow": false,
+        "text": 8,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "xy",
+    "sample": "stress",
+    "theme": "light",
+    "details": [
+      {
+        "class": "xy-tip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 240,
+        "overflow": false,
+        "text": 13,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "radar",
+    "sample": "normal",
+    "theme": "light",
+    "details": [
+      {
+        "class": "quick-radar-tooltip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 188,
+        "overflow": false,
+        "text": 35,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "radar",
+    "sample": "stress",
+    "theme": "light",
+    "details": [
+      {
+        "class": "radar-detail",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 188,
+        "overflow": false,
+        "text": 40,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "sankey",
+    "sample": "normal",
+    "theme": "light",
+    "details": [
+      {
+        "class": "sankey-detail",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 200,
+        "overflow": false,
+        "text": 14,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "sankey",
+    "sample": "stress",
+    "theme": "light",
+    "details": [
+      {
+        "class": "sankey-detail",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 200,
+        "overflow": false,
+        "text": 75,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "block",
+    "sample": "normal",
+    "theme": "light",
+    "details": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 280,
+        "overflow": false,
+        "text": 13,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "block",
+    "sample": "stress",
+    "theme": "light",
+    "details": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 280,
+        "overflow": false,
+        "text": 47,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "c4",
+    "sample": "normal",
+    "theme": "light",
+    "details": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 260,
+        "overflow": false,
+        "text": 45,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "c4",
+    "sample": "stress",
+    "theme": "light",
+    "details": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 260,
+        "overflow": false,
+        "text": 79,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "gantt",
+    "sample": "normal",
+    "theme": "light",
+    "details": [
+      {
+        "class": "bubble",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 206,
+        "overflow": false,
+        "text": 38,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "gantt",
+    "sample": "stress",
+    "theme": "light",
+    "details": [
+      {
+        "class": "bubble",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 206,
+        "overflow": false,
+        "text": 65,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "mindmap",
+    "sample": "normal",
+    "theme": "light",
+    "details": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 250.453125,
+        "overflow": false,
+        "text": 19,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "pie",
+    "sample": "normal",
+    "theme": "light",
+    "details": [],
+    "expected": "no-popover"
+  },
+  {
+    "kind": "pie",
+    "sample": "stress",
+    "theme": "light",
+    "details": [],
+    "expected": "no-popover"
+  },
+  {
+    "kind": "journey",
+    "sample": "normal",
+    "theme": "light",
+    "details": [],
+    "expected": "no-popover"
+  },
+  {
+    "kind": "journey",
+    "sample": "stress",
+    "theme": "light",
+    "details": [],
+    "expected": "no-popover"
+  },
+  {
+    "kind": "kanban",
+    "sample": "normal",
+    "theme": "light",
+    "details": [],
+    "expected": "no-popover"
+  },
+  {
+    "kind": "kanban",
+    "sample": "stress",
+    "theme": "light",
+    "details": [],
+    "expected": "no-popover"
+  },
+  {
+    "kind": "timeline",
+    "sample": "normal",
+    "theme": "light",
+    "details": [],
+    "expected": "no-popover"
+  },
+  {
+    "kind": "timeline",
+    "sample": "stress",
+    "theme": "light",
+    "details": [],
+    "expected": "no-popover"
+  },
+  {
+    "kind": "donut-chart",
+    "sample": "normal",
+    "theme": "light",
+    "details": [
+      {
+        "class": "bubble",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 176,
+        "overflow": false,
+        "text": 6,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "radar-chart",
+    "sample": "normal",
+    "theme": "light",
+    "details": [
+      {
+        "class": "quick-radar-tooltip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 188,
+        "overflow": false,
+        "text": 19,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "line-chart",
+    "sample": "normal",
+    "theme": "light",
+    "details": [
+      {
+        "class": "bubble",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 174,
+        "overflow": false,
+        "text": 16,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "grouped-bar-chart",
+    "sample": "normal",
+    "theme": "light",
+    "details": [
+      {
+        "class": "bubble",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 188,
+        "overflow": false,
+        "text": 12,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "flowchart",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 260,
+        "overflow": false,
+        "text": 34,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "architecture",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "architecture-detail",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 280,
+        "overflow": false,
+        "text": 68,
+        "hardWhite": 9
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "architecture",
+    "sample": "stress",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "architecture-detail",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 280,
+        "overflow": false,
+        "text": 102,
+        "hardWhite": 9
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "sequence",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "seq-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 280,
+        "overflow": false,
+        "text": 14,
+        "hardWhite": 5
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "sequence",
+    "sample": "stress",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "seq-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 280,
+        "overflow": false,
+        "text": 43,
+        "hardWhite": 5
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "er",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "er-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 280,
+        "overflow": false,
+        "text": 19,
+        "hardWhite": 5
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "er",
+    "sample": "stress",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "er-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 280,
+        "overflow": false,
+        "text": 24,
+        "hardWhite": 5
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "class",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "class-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 320,
+        "overflow": false,
+        "text": 23,
+        "hardWhite": 7
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "class",
+    "sample": "stress",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "class-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 320,
+        "overflow": false,
+        "text": 18,
+        "hardWhite": 7
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "state",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "state-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 153.5,
+        "overflow": false,
+        "text": 21,
+        "hardWhite": 7
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "state",
+    "sample": "stress",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "state-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 173.375,
+        "overflow": false,
+        "text": 23,
+        "hardWhite": 7
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "quadrant",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "quadrant-detail",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 252,
+        "overflow": false,
+        "text": 23,
+        "hardWhite": 2
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "quadrant",
+    "sample": "stress",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "quadrant-detail",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 252,
+        "overflow": false,
+        "text": 32,
+        "hardWhite": 3
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "xy",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "xy-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 240,
+        "overflow": false,
+        "text": 8,
+        "hardWhite": 3
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "xy",
+    "sample": "stress",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "xy-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 240,
+        "overflow": false,
+        "text": 13,
+        "hardWhite": 5
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "radar",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "quick-radar-tooltip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 188,
+        "overflow": false,
+        "text": 35,
+        "hardWhite": 6
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "radar",
+    "sample": "stress",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "radar-detail",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 188,
+        "overflow": false,
+        "text": 40,
+        "hardWhite": 12
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "sankey",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "sankey-detail",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 200,
+        "overflow": false,
+        "text": 14,
+        "hardWhite": 6
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "sankey",
+    "sample": "stress",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "sankey-detail",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 200,
+        "overflow": false,
+        "text": 75,
+        "hardWhite": 6
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "block",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 280,
+        "overflow": false,
+        "text": 13,
+        "hardWhite": 1
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "block",
+    "sample": "stress",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 280,
+        "overflow": false,
+        "text": 47,
+        "hardWhite": 1
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "c4",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 260,
+        "overflow": false,
+        "text": 45,
+        "hardWhite": 9
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "c4",
+    "sample": "stress",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 260,
+        "overflow": false,
+        "text": 79,
+        "hardWhite": 9
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "gantt",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "bubble",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 206,
+        "overflow": false,
+        "text": 38,
+        "hardWhite": 7
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "gantt",
+    "sample": "stress",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "bubble",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 206,
+        "overflow": false,
+        "text": 65,
+        "hardWhite": 7
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "mindmap",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 250.453125,
+        "overflow": false,
+        "text": 19,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "pie",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [],
+    "expected": "no-popover"
+  },
+  {
+    "kind": "pie",
+    "sample": "stress",
+    "theme": "dark",
+    "details": [],
+    "expected": "no-popover"
+  },
+  {
+    "kind": "journey",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [],
+    "expected": "no-popover"
+  },
+  {
+    "kind": "journey",
+    "sample": "stress",
+    "theme": "dark",
+    "details": [],
+    "expected": "no-popover"
+  },
+  {
+    "kind": "kanban",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [],
+    "expected": "no-popover"
+  },
+  {
+    "kind": "kanban",
+    "sample": "stress",
+    "theme": "dark",
+    "details": [],
+    "expected": "no-popover"
+  },
+  {
+    "kind": "timeline",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [],
+    "expected": "no-popover"
+  },
+  {
+    "kind": "timeline",
+    "sample": "stress",
+    "theme": "dark",
+    "details": [],
+    "expected": "no-popover"
+  },
+  {
+    "kind": "donut-chart",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "bubble",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 176,
+        "overflow": false,
+        "text": 6,
+        "hardWhite": 2
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "radar-chart",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "quick-radar-tooltip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 188,
+        "overflow": false,
+        "text": 19,
+        "hardWhite": 4
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "line-chart",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "bubble",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 174,
+        "overflow": false,
+        "text": 16,
+        "hardWhite": 3
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "grouped-bar-chart",
+    "sample": "normal",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "bubble",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 188,
+        "overflow": false,
+        "text": 12,
+        "hardWhite": 7
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "flowchart",
+    "sample": "stress",
+    "theme": "light",
+    "details": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 260,
+        "overflow": false,
+        "text": 34,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "mindmap",
+    "sample": "stress",
+    "theme": "light",
+    "details": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(255, 255, 255)",
+        "fg": "rgb(24, 25, 27)",
+        "width": 250.453125,
+        "overflow": false,
+        "text": 19,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "flowchart",
+    "sample": "stress",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 260,
+        "overflow": false,
+        "text": 34,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  },
+  {
+    "kind": "mindmap",
+    "sample": "stress",
+    "theme": "dark",
+    "details": [
+      {
+        "class": "node-tip",
+        "bg": "rgb(17, 18, 20)",
+        "fg": "rgb(255, 255, 255)",
+        "width": 250.453125,
+        "overflow": false,
+        "text": 19,
+        "hardWhite": 0
+      }
+    ],
+    "expected": "theme-surface"
+  }
+]

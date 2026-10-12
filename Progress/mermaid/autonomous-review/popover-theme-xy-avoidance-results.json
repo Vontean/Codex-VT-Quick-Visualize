@@ -1,0 +1,586 @@
+[
+  {
+    "sample": "normal",
+    "theme": "light",
+    "width": 320,
+    "checks": [
+      {
+        "index": 0,
+        "visible": true,
+        "title": "第1周",
+        "rows": 1,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 1,
+        "visible": true,
+        "title": "第2周",
+        "rows": 1,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 2,
+        "visible": true,
+        "title": "第3周",
+        "rows": 1,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 3,
+        "visible": true,
+        "title": "第4周",
+        "rows": 1,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 5,
+        "visible": true,
+        "title": "第6周",
+        "rows": 1,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      }
+    ],
+    "expanded": {
+      "visible": true,
+      "title": "第2周",
+      "rows": 1,
+      "bg": "rgb(255, 255, 255)",
+      "overlap": 0,
+      "gap": 11.988388061523438,
+      "outside": false,
+      "overflow": false
+    },
+    "errors": []
+  },
+  {
+    "sample": "normal",
+    "theme": "light",
+    "width": 736,
+    "checks": [
+      {
+        "index": 0,
+        "visible": true,
+        "title": "第1周",
+        "rows": 1,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 11.989585876464844,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 1,
+        "visible": true,
+        "title": "第2周",
+        "rows": 1,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 2,
+        "visible": true,
+        "title": "第3周",
+        "rows": 1,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 11.994781494140625,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 3,
+        "visible": true,
+        "title": "第4周",
+        "rows": 1,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 11.989593505859375,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 5,
+        "visible": true,
+        "title": "第6周",
+        "rows": 1,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 12.00518798828125,
+        "outside": false,
+        "overflow": false
+      }
+    ],
+    "expanded": {
+      "visible": true,
+      "title": "第2周",
+      "rows": 1,
+      "bg": "rgb(255, 255, 255)",
+      "overlap": 0,
+      "gap": 12,
+      "outside": false,
+      "overflow": false
+    },
+    "errors": []
+  },
+  {
+    "sample": "normal",
+    "theme": "dark",
+    "width": 320,
+    "checks": [
+      {
+        "index": 0,
+        "visible": true,
+        "title": "第1周",
+        "rows": 1,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 1,
+        "visible": true,
+        "title": "第2周",
+        "rows": 1,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 2,
+        "visible": true,
+        "title": "第3周",
+        "rows": 1,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 3,
+        "visible": true,
+        "title": "第4周",
+        "rows": 1,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 5,
+        "visible": true,
+        "title": "第6周",
+        "rows": 1,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      }
+    ],
+    "expanded": {
+      "visible": true,
+      "title": "第2周",
+      "rows": 1,
+      "bg": "rgb(17, 18, 20)",
+      "overlap": 0,
+      "gap": 11.988388061523438,
+      "outside": false,
+      "overflow": false
+    },
+    "errors": []
+  },
+  {
+    "sample": "normal",
+    "theme": "dark",
+    "width": 736,
+    "checks": [
+      {
+        "index": 0,
+        "visible": true,
+        "title": "第1周",
+        "rows": 1,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 11.989585876464844,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 1,
+        "visible": true,
+        "title": "第2周",
+        "rows": 1,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 2,
+        "visible": true,
+        "title": "第3周",
+        "rows": 1,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 11.994781494140625,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 3,
+        "visible": true,
+        "title": "第4周",
+        "rows": 1,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 11.989593505859375,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 5,
+        "visible": true,
+        "title": "第6周",
+        "rows": 1,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 12.00518798828125,
+        "outside": false,
+        "overflow": false
+      }
+    ],
+    "expanded": {
+      "visible": true,
+      "title": "第2周",
+      "rows": 1,
+      "bg": "rgb(17, 18, 20)",
+      "overlap": 0,
+      "gap": 12,
+      "outside": false,
+      "overflow": false
+    },
+    "errors": []
+  },
+  {
+    "sample": "stress",
+    "theme": "light",
+    "width": 320,
+    "checks": [
+      {
+        "index": 0,
+        "visible": true,
+        "title": "周期1",
+        "rows": 2,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 1,
+        "visible": true,
+        "title": "周期2",
+        "rows": 2,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 2,
+        "visible": true,
+        "title": "核对跨地区企业客户的完整业务说明与历史修改记录并确认所有团队的资料和权限",
+        "rows": 2,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 12,
+        "visible": true,
+        "title": "周期13",
+        "rows": 2,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 23,
+        "visible": true,
+        "title": "周期24",
+        "rows": 2,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      }
+    ],
+    "expanded": {
+      "visible": true,
+      "title": "周期2",
+      "rows": 2,
+      "bg": "rgb(255, 255, 255)",
+      "overlap": 0,
+      "gap": 11.984880447387695,
+      "outside": false,
+      "overflow": false
+    },
+    "errors": []
+  },
+  {
+    "sample": "stress",
+    "theme": "light",
+    "width": 736,
+    "checks": [
+      {
+        "index": 0,
+        "visible": true,
+        "title": "周期1",
+        "rows": 2,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 1,
+        "visible": true,
+        "title": "周期2",
+        "rows": 2,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 2,
+        "visible": true,
+        "title": "核对跨地区企业客户的完整业务说明与历史修改记录并确认所有团队的资料和权限",
+        "rows": 2,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 12,
+        "visible": true,
+        "title": "周期13",
+        "rows": 2,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 23,
+        "visible": true,
+        "title": "周期24",
+        "rows": 2,
+        "bg": "rgb(255, 255, 255)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      }
+    ],
+    "expanded": {
+      "visible": true,
+      "title": "周期2",
+      "rows": 2,
+      "bg": "rgb(255, 255, 255)",
+      "overlap": 0,
+      "gap": 11.992557525634766,
+      "outside": false,
+      "overflow": false
+    },
+    "errors": []
+  },
+  {
+    "sample": "stress",
+    "theme": "dark",
+    "width": 320,
+    "checks": [
+      {
+        "index": 0,
+        "visible": true,
+        "title": "周期1",
+        "rows": 2,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 1,
+        "visible": true,
+        "title": "周期2",
+        "rows": 2,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 2,
+        "visible": true,
+        "title": "核对跨地区企业客户的完整业务说明与历史修改记录并确认所有团队的资料和权限",
+        "rows": 2,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 12,
+        "visible": true,
+        "title": "周期13",
+        "rows": 2,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 23,
+        "visible": true,
+        "title": "周期24",
+        "rows": 2,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      }
+    ],
+    "expanded": {
+      "visible": true,
+      "title": "周期2",
+      "rows": 2,
+      "bg": "rgb(17, 18, 20)",
+      "overlap": 0,
+      "gap": 11.984880447387695,
+      "outside": false,
+      "overflow": false
+    },
+    "errors": []
+  },
+  {
+    "sample": "stress",
+    "theme": "dark",
+    "width": 736,
+    "checks": [
+      {
+        "index": 0,
+        "visible": true,
+        "title": "周期1",
+        "rows": 2,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 1,
+        "visible": true,
+        "title": "周期2",
+        "rows": 2,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 2,
+        "visible": true,
+        "title": "核对跨地区企业客户的完整业务说明与历史修改记录并确认所有团队的资料和权限",
+        "rows": 2,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 12,
+        "visible": true,
+        "title": "周期13",
+        "rows": 2,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      },
+      {
+        "index": 23,
+        "visible": true,
+        "title": "周期24",
+        "rows": 2,
+        "bg": "rgb(17, 18, 20)",
+        "overlap": 0,
+        "gap": 12,
+        "outside": false,
+        "overflow": false
+      }
+    ],
+    "expanded": {
+      "visible": true,
+      "title": "周期2",
+      "rows": 2,
+      "bg": "rgb(17, 18, 20)",
+      "overlap": 0,
+      "gap": 11.992557525634766,
+      "outside": false,
+      "overflow": false
+    },
+    "errors": []
+  }
+]

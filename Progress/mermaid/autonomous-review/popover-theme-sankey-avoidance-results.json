@@ -1,0 +1,1258 @@
+[
+  {
+    "sample": "normal",
+    "theme": "light",
+    "width": 320,
+    "checks": [
+      {
+        "kind": "node",
+        "index": 0,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入0",
+          "流出600"
+        ],
+        "title": "Search"
+      },
+      {
+        "kind": "node",
+        "index": 2,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入600",
+          "流出0"
+        ],
+        "title": "Notes"
+      },
+      {
+        "kind": "node",
+        "index": 4,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入0",
+          "流出400"
+        ],
+        "title": "Community"
+      },
+      {
+        "kind": "link",
+        "index": 0,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量420",
+          "占来源流出70.00%",
+          "占目标流入52.50%"
+        ],
+        "title": "Search → Essays"
+      },
+      {
+        "kind": "link",
+        "index": 3,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量140",
+          "占来源流出35.00%",
+          "占目标流入23.33%"
+        ],
+        "title": "Subscription → Notes"
+      },
+      {
+        "kind": "link",
+        "index": 5,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量280",
+          "占来源流出70.00%",
+          "占目标流入46.67%"
+        ],
+        "title": "Community → Notes"
+      }
+    ],
+    "expanded": {
+      "visible": true,
+      "width": 200,
+      "titleSize": "14px",
+      "titleWeight": "600",
+      "bodySize": "12px",
+      "titleGap": "12px",
+      "itemGap": "6px",
+      "labelColor": "rgb(24, 25, 27)",
+      "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+      "overflow": false,
+      "intersections": 0,
+      "algorithmOverlap": 0,
+      "rows": [
+        "流量420",
+        "占来源流出70.00%",
+        "占目标流入52.50%"
+      ],
+      "title": "Search → Essays"
+    },
+    "errors": []
+  },
+  {
+    "sample": "normal",
+    "theme": "light",
+    "width": 736,
+    "checks": [
+      {
+        "kind": "node",
+        "index": 0,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入0",
+          "流出600"
+        ],
+        "title": "Search"
+      },
+      {
+        "kind": "node",
+        "index": 2,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入600",
+          "流出0"
+        ],
+        "title": "Notes"
+      },
+      {
+        "kind": "node",
+        "index": 4,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入0",
+          "流出400"
+        ],
+        "title": "Community"
+      },
+      {
+        "kind": "link",
+        "index": 0,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量420",
+          "占来源流出70.00%",
+          "占目标流入52.50%"
+        ],
+        "title": "Search → Essays"
+      },
+      {
+        "kind": "link",
+        "index": 3,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量140",
+          "占来源流出35.00%",
+          "占目标流入23.33%"
+        ],
+        "title": "Subscription → Notes"
+      },
+      {
+        "kind": "link",
+        "index": 5,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量280",
+          "占来源流出70.00%",
+          "占目标流入46.67%"
+        ],
+        "title": "Community → Notes"
+      }
+    ],
+    "expanded": {
+      "visible": true,
+      "width": 200,
+      "titleSize": "14px",
+      "titleWeight": "600",
+      "bodySize": "12px",
+      "titleGap": "12px",
+      "itemGap": "6px",
+      "labelColor": "rgb(24, 25, 27)",
+      "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+      "overflow": false,
+      "intersections": 0,
+      "algorithmOverlap": 0,
+      "rows": [
+        "流量420",
+        "占来源流出70.00%",
+        "占目标流入52.50%"
+      ],
+      "title": "Search → Essays"
+    },
+    "errors": []
+  },
+  {
+    "sample": "normal",
+    "theme": "dark",
+    "width": 320,
+    "checks": [
+      {
+        "kind": "node",
+        "index": 0,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入0",
+          "流出600"
+        ],
+        "title": "Search"
+      },
+      {
+        "kind": "node",
+        "index": 2,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入600",
+          "流出0"
+        ],
+        "title": "Notes"
+      },
+      {
+        "kind": "node",
+        "index": 4,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入0",
+          "流出400"
+        ],
+        "title": "Community"
+      },
+      {
+        "kind": "link",
+        "index": 0,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量420",
+          "占来源流出70.00%",
+          "占目标流入52.50%"
+        ],
+        "title": "Search → Essays"
+      },
+      {
+        "kind": "link",
+        "index": 3,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量140",
+          "占来源流出35.00%",
+          "占目标流入23.33%"
+        ],
+        "title": "Subscription → Notes"
+      },
+      {
+        "kind": "link",
+        "index": 5,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量280",
+          "占来源流出70.00%",
+          "占目标流入46.67%"
+        ],
+        "title": "Community → Notes"
+      }
+    ],
+    "expanded": {
+      "visible": true,
+      "width": 200,
+      "titleSize": "14px",
+      "titleWeight": "600",
+      "bodySize": "12px",
+      "titleGap": "12px",
+      "itemGap": "6px",
+      "labelColor": "rgb(255, 255, 255)",
+      "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+      "overflow": false,
+      "intersections": 0,
+      "algorithmOverlap": 0,
+      "rows": [
+        "流量420",
+        "占来源流出70.00%",
+        "占目标流入52.50%"
+      ],
+      "title": "Search → Essays"
+    },
+    "errors": []
+  },
+  {
+    "sample": "normal",
+    "theme": "dark",
+    "width": 736,
+    "checks": [
+      {
+        "kind": "node",
+        "index": 0,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入0",
+          "流出600"
+        ],
+        "title": "Search"
+      },
+      {
+        "kind": "node",
+        "index": 2,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入600",
+          "流出0"
+        ],
+        "title": "Notes"
+      },
+      {
+        "kind": "node",
+        "index": 4,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入0",
+          "流出400"
+        ],
+        "title": "Community"
+      },
+      {
+        "kind": "link",
+        "index": 0,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量420",
+          "占来源流出70.00%",
+          "占目标流入52.50%"
+        ],
+        "title": "Search → Essays"
+      },
+      {
+        "kind": "link",
+        "index": 3,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量140",
+          "占来源流出35.00%",
+          "占目标流入23.33%"
+        ],
+        "title": "Subscription → Notes"
+      },
+      {
+        "kind": "link",
+        "index": 5,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量280",
+          "占来源流出70.00%",
+          "占目标流入46.67%"
+        ],
+        "title": "Community → Notes"
+      }
+    ],
+    "expanded": {
+      "visible": true,
+      "width": 200,
+      "titleSize": "14px",
+      "titleWeight": "600",
+      "bodySize": "12px",
+      "titleGap": "12px",
+      "itemGap": "6px",
+      "labelColor": "rgb(255, 255, 255)",
+      "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+      "overflow": false,
+      "intersections": 0,
+      "algorithmOverlap": 0,
+      "rows": [
+        "流量420",
+        "占来源流出70.00%",
+        "占目标流入52.50%"
+      ],
+      "title": "Search → Essays"
+    },
+    "errors": []
+  },
+  {
+    "sample": "stress",
+    "theme": "light",
+    "width": 320,
+    "checks": [
+      {
+        "kind": "node",
+        "index": 0,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入0",
+          "流出2,962"
+        ],
+        "title": "Customer records and complete historical business feedback source"
+      },
+      {
+        "kind": "node",
+        "index": 7,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入0",
+          "流出4,882"
+        ],
+        "title": "Source 4"
+      },
+      {
+        "kind": "node",
+        "index": 14,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入9,920",
+          "流出0"
+        ],
+        "title": "Archive 3"
+      },
+      {
+        "kind": "link",
+        "index": 0,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量1",
+          "占来源流出0.03%",
+          "占目标流入0.01%"
+        ],
+        "title": "Customer records and complete historical business feedback source → Review 1"
+      },
+      {
+        "kind": "link",
+        "index": 22,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量3,240",
+          "占来源流出34.46%",
+          "占目标流入24.32%"
+        ],
+        "title": "Source 6 → Review 3"
+      },
+      {
+        "kind": "link",
+        "index": 43,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量2,900",
+          "占来源流出34.90%",
+          "占目标流入29.23%"
+        ],
+        "title": "Review 4 → Archive 3"
+      }
+    ],
+    "expanded": {
+      "visible": true,
+      "width": 200,
+      "titleSize": "14px",
+      "titleWeight": "600",
+      "bodySize": "12px",
+      "titleGap": "12px",
+      "itemGap": "6px",
+      "labelColor": "rgb(24, 25, 27)",
+      "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+      "overflow": false,
+      "intersections": 0,
+      "algorithmOverlap": 0,
+      "rows": [
+        "流量1",
+        "占来源流出0.03%",
+        "占目标流入0.01%"
+      ],
+      "title": "Customer records and complete historical business feedback source → Review 1"
+    },
+    "errors": []
+  },
+  {
+    "sample": "stress",
+    "theme": "light",
+    "width": 736,
+    "checks": [
+      {
+        "kind": "node",
+        "index": 0,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入0",
+          "流出2,962"
+        ],
+        "title": "Customer records and complete historical business feedback source"
+      },
+      {
+        "kind": "node",
+        "index": 7,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入0",
+          "流出4,882"
+        ],
+        "title": "Source 4"
+      },
+      {
+        "kind": "node",
+        "index": 14,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入9,920",
+          "流出0"
+        ],
+        "title": "Archive 3"
+      },
+      {
+        "kind": "link",
+        "index": 0,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量1",
+          "占来源流出0.03%",
+          "占目标流入0.01%"
+        ],
+        "title": "Customer records and complete historical business feedback source → Review 1"
+      },
+      {
+        "kind": "link",
+        "index": 22,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量3,240",
+          "占来源流出34.46%",
+          "占目标流入24.32%"
+        ],
+        "title": "Source 6 → Review 3"
+      },
+      {
+        "kind": "link",
+        "index": 43,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(24, 25, 27)",
+        "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量2,900",
+          "占来源流出34.90%",
+          "占目标流入29.23%"
+        ],
+        "title": "Review 4 → Archive 3"
+      }
+    ],
+    "expanded": {
+      "visible": true,
+      "width": 200,
+      "titleSize": "14px",
+      "titleWeight": "600",
+      "bodySize": "12px",
+      "titleGap": "12px",
+      "itemGap": "6px",
+      "labelColor": "rgb(24, 25, 27)",
+      "valueColor": "color(srgb 0.420235 0.422745 0.427765)",
+      "overflow": false,
+      "intersections": 0,
+      "algorithmOverlap": 0,
+      "rows": [
+        "流量1",
+        "占来源流出0.03%",
+        "占目标流入0.01%"
+      ],
+      "title": "Customer records and complete historical business feedback source → Review 1"
+    },
+    "errors": []
+  },
+  {
+    "sample": "stress",
+    "theme": "dark",
+    "width": 320,
+    "checks": [
+      {
+        "kind": "node",
+        "index": 0,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入0",
+          "流出2,962"
+        ],
+        "title": "Customer records and complete historical business feedback source"
+      },
+      {
+        "kind": "node",
+        "index": 7,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入0",
+          "流出4,882"
+        ],
+        "title": "Source 4"
+      },
+      {
+        "kind": "node",
+        "index": 14,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入9,920",
+          "流出0"
+        ],
+        "title": "Archive 3"
+      },
+      {
+        "kind": "link",
+        "index": 0,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量1",
+          "占来源流出0.03%",
+          "占目标流入0.01%"
+        ],
+        "title": "Customer records and complete historical business feedback source → Review 1"
+      },
+      {
+        "kind": "link",
+        "index": 22,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量3,240",
+          "占来源流出34.46%",
+          "占目标流入24.32%"
+        ],
+        "title": "Source 6 → Review 3"
+      },
+      {
+        "kind": "link",
+        "index": 43,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量2,900",
+          "占来源流出34.90%",
+          "占目标流入29.23%"
+        ],
+        "title": "Review 4 → Archive 3"
+      }
+    ],
+    "expanded": {
+      "visible": true,
+      "width": 200,
+      "titleSize": "14px",
+      "titleWeight": "600",
+      "bodySize": "12px",
+      "titleGap": "12px",
+      "itemGap": "6px",
+      "labelColor": "rgb(255, 255, 255)",
+      "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+      "overflow": false,
+      "intersections": 0,
+      "algorithmOverlap": 0,
+      "rows": [
+        "流量1",
+        "占来源流出0.03%",
+        "占目标流入0.01%"
+      ],
+      "title": "Customer records and complete historical business feedback source → Review 1"
+    },
+    "errors": []
+  },
+  {
+    "sample": "stress",
+    "theme": "dark",
+    "width": 736,
+    "checks": [
+      {
+        "kind": "node",
+        "index": 0,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入0",
+          "流出2,962"
+        ],
+        "title": "Customer records and complete historical business feedback source"
+      },
+      {
+        "kind": "node",
+        "index": 7,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入0",
+          "流出4,882"
+        ],
+        "title": "Source 4"
+      },
+      {
+        "kind": "node",
+        "index": 14,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流入9,920",
+          "流出0"
+        ],
+        "title": "Archive 3"
+      },
+      {
+        "kind": "link",
+        "index": 0,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量1",
+          "占来源流出0.03%",
+          "占目标流入0.01%"
+        ],
+        "title": "Customer records and complete historical business feedback source → Review 1"
+      },
+      {
+        "kind": "link",
+        "index": 22,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量3,240",
+          "占来源流出34.46%",
+          "占目标流入24.32%"
+        ],
+        "title": "Source 6 → Review 3"
+      },
+      {
+        "kind": "link",
+        "index": 43,
+        "visible": true,
+        "width": 200,
+        "titleSize": "14px",
+        "titleWeight": "600",
+        "bodySize": "12px",
+        "titleGap": "12px",
+        "itemGap": "6px",
+        "labelColor": "rgb(255, 255, 255)",
+        "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+        "overflow": false,
+        "intersections": 0,
+        "algorithmOverlap": 0,
+        "rows": [
+          "流量2,900",
+          "占来源流出34.90%",
+          "占目标流入29.23%"
+        ],
+        "title": "Review 4 → Archive 3"
+      }
+    ],
+    "expanded": {
+      "visible": true,
+      "width": 200,
+      "titleSize": "14px",
+      "titleWeight": "600",
+      "bodySize": "12px",
+      "titleGap": "12px",
+      "itemGap": "6px",
+      "labelColor": "rgb(255, 255, 255)",
+      "valueColor": "color(srgb 0.701333 0.702588 0.705098)",
+      "overflow": false,
+      "intersections": 0,
+      "algorithmOverlap": 0,
+      "rows": [
+        "流量1",
+        "占来源流出0.03%",
+        "占目标流入0.01%"
+      ],
+      "title": "Customer records and complete historical business feedback source → Review 1"
+    },
+    "errors": []
+  }
+]

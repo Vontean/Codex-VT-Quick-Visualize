@@ -19,8 +19,8 @@ function renderMermaidState(root,data) {
  #${root.id} .state-tip-relation svg{width:14px;height:14px;color:var(--muted-foreground)}
  #${root.id} .state-tip-endpoint{min-width:0}
  #${root.id} .state-tip-caption{display:block;font-size:11px;line-height:16px;color:var(--muted-foreground);font-weight:400;margin-bottom:4px}
- #${root.id} .state-tip-name{display:block;font-size:12px;line-height:18px;font-weight:500;white-space:normal;overflow-wrap:anywhere}
- #${root.id} .state-tip-body{margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:12px;line-height:20px;overflow-wrap:anywhere}
+ #${root.id} .state-tip-name{display:block;font-size:14px;line-height:20px;font-weight:600;white-space:normal;overflow-wrap:anywhere}
+ #${root.id} .state-tip-body{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;line-height:20px;overflow-wrap:anywhere}
  #${root.id} .state-title{display:inline-flex;align-items:center;justify-content:center;gap:8px;max-width:100%;min-width:0}
  #${root.id} .state-title-name{min-width:0;white-space:pre-line}
  #${root.id} .state-node small:first-of-type{margin-top:8px}

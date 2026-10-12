@@ -19,7 +19,7 @@ function renderMermaidQuadrant(root,data) {
   const same=group?data.points.filter(q=>q.x===p.x&&q.y===p.y):[p];
   marks.forEach((m,j)=>m.style.opacity=same.includes(data.points[j])?'1':'.25');
   leaders.forEach((m,j)=>m.style.opacity=same.includes(data.points[j])?'1':'.25');
-  const head=document.createElement('div');head.style.fontWeight='500';head.textContent=same.length>1?same.length+' 个方案位于同一坐标':p.name;tip.replaceChildren(head);
+  const head=document.createElement('div');head.className='quadrant-detail-title';head.textContent=same.length>1?same.length+' 个方案位于同一坐标':p.name;tip.replaceChildren(head);
   if(same.length>1)same.forEach(q=>{const n=document.createElement('div');n.textContent=q.name;tip.append(n);});
   const row=document.createElement('div');row.style.color='var(--muted-foreground)';row.textContent='X '+fmt(p.x)+' · Y '+fmt(p.y);tip.append(row);
   const location=document.createElement('div');location.textContent=p.x===.5||p.y===.5?'位于象限分界线':data.quadrants[p.y>.5?(p.x>.5?0:1):(p.x>.5?3:2)];tip.append(location);

@@ -1,0 +1,242 @@
+[
+  {
+    "kind": "flowchart",
+    "sample": "normal",
+    "spec": "Progress/mermaid/autonomous-review/popover-audit-flowchart-normal.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-flowchart-normal.html"
+  },
+  {
+    "kind": "flowchart",
+    "sample": "stress",
+    "spec": "Progress/mermaid/autonomous-review/popover-audit-flowchart-stress.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-flowchart-stress.html"
+  },
+  {
+    "kind": "architecture",
+    "sample": "normal",
+    "spec": "Progress/mermaid/autonomous-review/architecture-normal.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-architecture-normal.html"
+  },
+  {
+    "kind": "architecture",
+    "sample": "stress",
+    "spec": "Progress/mermaid/autonomous-review/architecture-stress.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-architecture-stress.html"
+  },
+  {
+    "kind": "sequence",
+    "sample": "normal",
+    "spec": "Progress/mermaid/autonomous-review/sequence-normal.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-sequence-normal.html"
+  },
+  {
+    "kind": "sequence",
+    "sample": "stress",
+    "spec": "Progress/mermaid/autonomous-review/sequence-stress.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-sequence-stress.html"
+  },
+  {
+    "kind": "er",
+    "sample": "normal",
+    "spec": "Progress/mermaid/autonomous-review/er-normal.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-er-normal.html"
+  },
+  {
+    "kind": "er",
+    "sample": "stress",
+    "spec": "Progress/mermaid/autonomous-review/er-stress.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-er-stress.html"
+  },
+  {
+    "kind": "class",
+    "sample": "normal",
+    "spec": "Progress/mermaid/class-review/class-normal.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-class-normal.html"
+  },
+  {
+    "kind": "class",
+    "sample": "stress",
+    "spec": "Progress/mermaid/class-review/class-stress.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-class-stress.html"
+  },
+  {
+    "kind": "state",
+    "sample": "normal",
+    "spec": "Progress/mermaid/state-review/state-normal.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-state-normal.html"
+  },
+  {
+    "kind": "state",
+    "sample": "stress",
+    "spec": "Progress/mermaid/state-review/state-stress.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-state-stress.html"
+  },
+  {
+    "kind": "quadrant",
+    "sample": "normal",
+    "spec": "Progress/mermaid/quadrant-review/quadrant-normal.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-quadrant-normal.html"
+  },
+  {
+    "kind": "quadrant",
+    "sample": "stress",
+    "spec": "Progress/mermaid/quadrant-review/quadrant-stress.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-quadrant-stress.html"
+  },
+  {
+    "kind": "xy",
+    "sample": "normal",
+    "spec": "Progress/mermaid/autonomous-review/xy-normal.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-xy-normal.html"
+  },
+  {
+    "kind": "xy",
+    "sample": "stress",
+    "spec": "Progress/mermaid/autonomous-review/xy-stress.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-xy-stress.html"
+  },
+  {
+    "kind": "radar",
+    "sample": "normal",
+    "spec": "Progress/mermaid/autonomous-review/radar-normal.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-radar-normal.html"
+  },
+  {
+    "kind": "radar",
+    "sample": "stress",
+    "spec": "Progress/mermaid/autonomous-review/radar-stress.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-radar-stress.html"
+  },
+  {
+    "kind": "sankey",
+    "sample": "normal",
+    "spec": "Progress/mermaid/autonomous-review/sankey-normal.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-sankey-normal.html"
+  },
+  {
+    "kind": "sankey",
+    "sample": "stress",
+    "spec": "Progress/mermaid/autonomous-review/sankey-stress.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-sankey-stress.html"
+  },
+  {
+    "kind": "block",
+    "sample": "normal",
+    "spec": "Progress/mermaid/autonomous-review/block-normal.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-block-normal.html"
+  },
+  {
+    "kind": "block",
+    "sample": "stress",
+    "spec": "Progress/mermaid/autonomous-review/block-stress.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-block-stress.html"
+  },
+  {
+    "kind": "c4",
+    "sample": "normal",
+    "spec": "Progress/mermaid/autonomous-review/c4-normal.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-c4-normal.html"
+  },
+  {
+    "kind": "c4",
+    "sample": "stress",
+    "spec": "Progress/mermaid/autonomous-review/c4-stress.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-c4-stress.html"
+  },
+  {
+    "kind": "gantt",
+    "sample": "normal",
+    "spec": "tests/fixtures/mermaid/adapted-gantt.mmd",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-gantt-normal.html"
+  },
+  {
+    "kind": "gantt",
+    "sample": "stress",
+    "spec": "tests/fixtures/mermaid/adapted-gantt-boundary.mmd",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-gantt-stress.html"
+  },
+  {
+    "kind": "mindmap",
+    "sample": "normal",
+    "spec": "Progress/mermaid/autonomous-review/popover-audit-mindmap-normal.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-mindmap-normal.html"
+  },
+  {
+    "kind": "mindmap",
+    "sample": "stress",
+    "spec": "Progress/mermaid/autonomous-review/popover-audit-mindmap-stress.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-mindmap-stress.html"
+  },
+  {
+    "kind": "pie",
+    "sample": "normal",
+    "spec": "Progress/mermaid/autonomous-review/pie-normal.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-pie-normal.html"
+  },
+  {
+    "kind": "pie",
+    "sample": "stress",
+    "spec": "Progress/mermaid/autonomous-review/pie-stress.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-pie-stress.html"
+  },
+  {
+    "kind": "journey",
+    "sample": "normal",
+    "spec": "Progress/mermaid/journey-review/journey-normal.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-journey-normal.html"
+  },
+  {
+    "kind": "journey",
+    "sample": "stress",
+    "spec": "Progress/mermaid/journey-review/journey-stress.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-journey-stress.html"
+  },
+  {
+    "kind": "kanban",
+    "sample": "normal",
+    "spec": "Progress/mermaid/kanban-review/kanban-normal.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-kanban-normal.html"
+  },
+  {
+    "kind": "kanban",
+    "sample": "stress",
+    "spec": "Progress/mermaid/kanban-review/kanban-stress.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-kanban-stress.html"
+  },
+  {
+    "kind": "timeline",
+    "sample": "normal",
+    "spec": "Progress/mermaid/timeline-review/timeline-normal.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-timeline-normal.html"
+  },
+  {
+    "kind": "timeline",
+    "sample": "stress",
+    "spec": "Progress/mermaid/timeline-review/timeline-stress.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-timeline-stress.html"
+  },
+  {
+    "kind": "donut-chart",
+    "sample": "normal",
+    "spec": "Progress/mermaid/autonomous-review/donut-chart-dark-detail.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-donut-chart-normal.html"
+  },
+  {
+    "kind": "radar-chart",
+    "sample": "normal",
+    "spec": "Progress/mermaid/autonomous-review/radar-chart-dark-detail.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-radar-chart-normal.html"
+  },
+  {
+    "kind": "line-chart",
+    "sample": "normal",
+    "spec": "Progress/mermaid/autonomous-review/line-chart-dark-detail.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-line-chart-normal.html"
+  },
+  {
+    "kind": "grouped-bar-chart",
+    "sample": "normal",
+    "spec": "Progress/mermaid/autonomous-review/grouped-bar-chart-dark-detail.json",
+    "path": "/Users/mac/.codex/visualizations/2026/10/11/01a12b31-d03a-7830-89bd-a80ca5a79807/popover-audit-grouped-bar-chart-normal.html"
+  }
+]
