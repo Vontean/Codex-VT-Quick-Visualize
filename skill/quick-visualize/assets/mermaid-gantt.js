@@ -36,7 +36,7 @@ async function renderMermaidGantt(root,data){
 
 #${root.id} .scene{margin:0;min-width:0} #${root.id} .bubble-head span{overflow-wrap:anywhere} #${root.id} .task-hit{border:0;background:none;min-height:0;padding:0}
 `;root.append(style);
- const reduced=matchMedia('(prefers-reduced-motion:reduce)'),measure=document.createElement('canvas').getContext('2d'),view=createMermaidViewport(root);
+ const reduced=matchMedia('(prefers-reduced-motion:reduce)'),measure=document.createElement('canvas').getContext('2d'),view=createMermaidViewport(root,{expandedSizing:'hug'});
  const day=86400000,date=d=>`${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`,tasks=data.tasks,sections=data.sections;
  let layout=null,lastWidth=0,resizeFrame=0,hover=null,inView=false,armed=true;
  const color=t=>`var(--viz-series-${sections.indexOf(t.section)%6+1})`;

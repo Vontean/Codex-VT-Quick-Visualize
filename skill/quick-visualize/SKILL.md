@@ -42,7 +42,7 @@ Only for older hosts that do not recognize the ASCII directive, explicitly run w
 visualize{"path":"<absolute-path>/<slug>.html"}
 ```
 
-Mermaid references include `mode="wide"` (ASCII) or `"mode":"wide"` (legacy) for the native expanded preview. Keep it unchanged; enhanced qv diagrams fit the current view on expansion. Native fallback retains its existing renderer behavior.
+Mermaid references include `mode="wide"` (ASCII) or `"mode":"wide"` (legacy) for the native expanded preview. Keep it unchanged; enhanced qv diagrams fit the current view on expansion, except Gantt, whose container hugs its content at 1:1 scale. Native fallback retains its existing renderer behavior.
 
 An inline visualization error means the host recognized the reference but failed to load or run the content. Check the filename, path and runtime before blaming model compatibility; `ok: true` confirms generation and static checks, not host rendering.
 

@@ -1,5 +1,5 @@
 // 视口适配只改变展示比例，不改图模型和布局坐标。
-function createMermaidViewport(root) {
+function createMermaidViewport(root, { expandedSizing = 'fit' } = {}) {
   const viewport = root.querySelector('.diagram-scroll'), scene = root.querySelector('.scene');
   const scrollPositions = new Map(), inlinePositions = new Map();
   let restorePending = null;
@@ -13,12 +13,13 @@ function createMermaidViewport(root) {
     if (mode === 'fullscreen') {
       const chrome = root.offsetHeight - viewport.offsetHeight;
       const available = Math.max(120, (Number(maxHeight) || window.innerHeight) - chrome - 24);
-      scale = Math.min(1, viewport.clientWidth / width, available / height);
+      // Hug 按内容高度展开，避免长图在放大后反而缩小文字。
+      scale = expandedSizing === 'hug' ? 1 : Math.min(1, viewport.clientWidth / width, available / height);
       scene.style.transformOrigin = '0 0';
       scene.style.transform = `scale(${scale})`;
       scene.style.marginLeft = Math.max(0, (viewport.clientWidth - width * scale) / 2) + 'px';
       viewport.style.height = Math.ceil(height * scale) + 'px';
-      viewport.style.overflow = 'hidden';
+      viewport.style.overflow = expandedSizing === 'hug' ? 'auto' : 'hidden';
       viewport.scrollLeft = 0;
     } else {
       scale = 1;

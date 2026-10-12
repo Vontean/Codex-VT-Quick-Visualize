@@ -31,7 +31,7 @@ async page => {
         const clipped=marks.filter(n=>{const r=n.getBoundingClientRect();return r.left<box.left-1||r.right>box.right+1||r.top<box.top-1||r.bottom>box.bottom+1;}).map(n=>n.textContent);
         return {mode:root.dataset.displayMode,scale:+root.dataset.viewportScale,height:root.offsetHeight,clipped,nodes:root.querySelectorAll('button.node').length,animations:root.getAnimations({subtree:true}).filter(a=>a.playState==='running').length};
       });
-      check(actual.mode==='fullscreen'&&!actual.clipped.length&&actual.height<=650&&!actual.animations,name+': '+JSON.stringify(actual));
+      check(actual.mode==='fullscreen'&&!actual.clipped.length&&(name==='gantt'?actual.scale===1:actual.height<=650)&&!actual.animations,name+': '+JSON.stringify(actual));
       results.push({name,width,state,...actual});
     }
     await page.setViewportSize({width:736,height:850});
