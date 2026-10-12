@@ -1,0 +1,130 @@
+[
+  {
+    "theme": "light",
+    "width": 320,
+    "sample": "normal",
+    "cards": 5,
+    "edge": "rgba(0, 0, 0, 0)",
+    "detail": {
+      "visible": true,
+      "bg": "rgb(17, 18, 20)",
+      "fg": "rgb(255, 255, 255)",
+      "width": 260,
+      "rows": 3,
+      "title": "14px",
+      "overflow": false
+    }
+  },
+  {
+    "theme": "light",
+    "width": 320,
+    "sample": "stress",
+    "cards": 11,
+    "edge": "rgba(0, 0, 0, 0)",
+    "detail": {
+      "visible": true,
+      "bg": "rgb(17, 18, 20)",
+      "fg": "rgb(255, 255, 255)",
+      "width": 260,
+      "rows": 3,
+      "title": "14px",
+      "overflow": false
+    }
+  },
+  {
+    "theme": "light",
+    "width": 736,
+    "sample": "normal",
+    "cards": 5,
+    "edge": "rgba(0, 0, 0, 0)",
+    "detail": {
+      "visible": true,
+      "bg": "rgb(17, 18, 20)",
+      "fg": "rgb(255, 255, 255)",
+      "width": 260,
+      "rows": 3,
+      "title": "14px",
+      "overflow": false
+    }
+  },
+  {
+    "theme": "light",
+    "width": 736,
+    "sample": "stress",
+    "cards": 11,
+    "edge": "rgba(0, 0, 0, 0)",
+    "detail": {
+      "visible": true,
+      "bg": "rgb(17, 18, 20)",
+      "fg": "rgb(255, 255, 255)",
+      "width": 260,
+      "rows": 3,
+      "title": "14px",
+      "overflow": false
+    }
+  },
+  {
+    "theme": "dark",
+    "width": 320,
+    "sample": "normal",
+    "cards": 5,
+    "edge": "rgba(0, 0, 0, 0)",
+    "detail": {
+      "visible": true,
+      "bg": "rgb(17, 18, 20)",
+      "fg": "rgb(255, 255, 255)",
+      "width": 260,
+      "rows": 3,
+      "title": "14px",
+      "overflow": false
+    }
+  },
+  {
+    "theme": "dark",
+    "width": 320,
+    "sample": "stress",
+    "cards": 11,
+    "edge": "rgba(0, 0, 0, 0)",
+    "detail": {
+      "visible": true,
+      "bg": "rgb(17, 18, 20)",
+      "fg": "rgb(255, 255, 255)",
+      "width": 260,
+      "rows": 3,
+      "title": "14px",
+      "overflow": false
+    }
+  },
+  {
+    "theme": "dark",
+    "width": 736,
+    "sample": "normal",
+    "cards": 5,
+    "edge": "rgba(0, 0, 0, 0)",
+    "detail": {
+      "visible": true,
+      "bg": "rgb(17, 18, 20)",
+      "fg": "rgb(255, 255, 255)",
+      "width": 260,
+      "rows": 3,
+      "title": "14px",
+      "overflow": false
+    }
+  },
+  {
+    "theme": "dark",
+    "width": 736,
+    "sample": "stress",
+    "cards": 11,
+    "edge": "rgba(0, 0, 0, 0)",
+    "detail": {
+      "visible": true,
+      "bg": "rgb(17, 18, 20)",
+      "fg": "rgb(255, 255, 255)",
+      "width": 260,
+      "rows": 3,
+      "title": "14px",
+      "overflow": false
+    }
+  }
+]

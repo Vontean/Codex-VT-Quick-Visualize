@@ -1,0 +1,20 @@
+[
+  {
+    "sample": "normal",
+    "visible": true,
+    "font": "12px",
+    "bg": "rgb(17, 18, 20)",
+    "rows": 6,
+    "overflow": false,
+    "scale": "scale(0.756477)"
+  },
+  {
+    "sample": "stress",
+    "visible": true,
+    "font": "12px",
+    "bg": "rgb(17, 18, 20)",
+    "rows": 6,
+    "overflow": false,
+    "scale": "scale(0.481013)"
+  }
+]

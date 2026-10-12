@@ -203,7 +203,7 @@ Navigation transitions differ from initial entry: use a 360ms origin-aware spati
 ## C4 scope
 
 - Mermaid11.12拥有Context／Container／Component／Dynamic／Deployment源身份、类型、技术／说明、真实边界、外部状态与关系；保留声明顺序、row ceiling、Rel_Back/BiRel和原生Dynamic编号。观察创建回调后finally恢复。rich label、自定义style、sprite/tag/link和未知语义明确原生回退。
-- model/layout/drawing分离；200px cell、40px gap、32px padding，外部参与者位于真实边界旁，组件按两列布局。源名称14px/20px、类型／技术／正文12px/18px，Lucide语义图标；叶白，包裹层由内向外muted18%灰／白，组名透明底完整换行。
+- model/layout/drawing分离；280px cell、72px gap、40px padding，外部参与者位于真实边界旁，组件按两列布局。源名称14px/20px、类型／技术／正文12px/18px，Lucide语义图标；叶白，包裹层由内向外muted18%灰／白，组名透明底完整换行。
 - 连线及marker用明色#727a82／暗色#a3aab3，次级小字60%／68%前景混色。组z0、线z1、节点z2、标签z3；关系文字按最终DOM测量避让真实节点／组名／既有标签，没有合法标签位置的路由不能误报成功。
 - 节点突出直接关系，组突出真实成员，边只突出两端与本边；带额外说明的节点、组、关系保留完整详情，定位距触发对象≤32px。取消远端停靠、隐藏详情区及其无效select，所有源节点仍可通过真实按钮键盘访问。100ms停稳／160ms退出缓冲，无筛选或虚构下钻。
 -240ms节点、650ms线／35ms stagger，240ms标签，箭头到达后出现；resize/hover不重播，reduced/expanded静态。共享整体fit及返回滚动，宿主toolbar／clipboard／可见性恢复须另行验收。
@@ -247,3 +247,4 @@ Flowchart gray retains the original muted 18% mix over the host background, with
 - 浮层层级：标题14px/20px、600字重，条目12px/18px；主标签用当前主题主文字色，数值用有足够对比度的次级灰色（深色浮层中对应浅字／浅灰）。标题与条目组间距12px，条目间距4–6px，禁止标题与正文同字号、同字重。默认按内容选窄幅卡片，数值比较188–240px；名称换行、数值独立右对齐，不用空白撑宽。关系浮层按来源／目标／说明组织，保留其语义层级。
 
 - 所有数据浮层在明暗模式均使用#111214填充、#fff主文字、#b8bdc6次级文字与#ffffff24描边；作用域限定role=tooltip，不改变图表、卡片或导航菜单。以共享变量继承至各渲染器及预设，标题14px/20px、600字重，正文12px/18px。
+- C4 卡片20px内距、白色（暗色主题对应主表面）填充；技术栈／职责放入12px内距、12px条目间距的浅灰分区，技术值等宽。按实际DOM内容测量各卡片高度，保留完整换行。关系文字透明底并离开线段8px，关系详情按来源／目标／协议／说明分行，节点详情按类型／技术／职责／所属与直接连接分组；首选260px宽，避免分号拼成长段。
