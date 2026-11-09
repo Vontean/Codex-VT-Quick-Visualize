@@ -1,0 +1,352 @@
+[
+  {
+    "theme": "light",
+    "slug": "radar-generic-title-normal",
+    "index": 0,
+    "detail": {
+      "distance": 17.13437857733144,
+      "pointerCovered": false,
+      "background": "rgb(255, 255, 255)",
+      "radius": "12px",
+      "padding": "12px 14px",
+      "font": "12px",
+      "line": "18px",
+      "titleWeight": "500",
+      "offsetParent": "qv-mermaid qv-radar"
+    }
+  },
+  {
+    "theme": "light",
+    "slug": "radar-generic-title-normal",
+    "index": 2,
+    "detail": {
+      "distance": 32,
+      "pointerCovered": false,
+      "background": "rgb(255, 255, 255)",
+      "radius": "12px",
+      "padding": "12px 14px",
+      "font": "12px",
+      "line": "18px",
+      "titleWeight": "500",
+      "offsetParent": "qv-mermaid qv-radar"
+    }
+  },
+  {
+    "theme": "light",
+    "slug": "radar-preset-title-normal",
+    "index": 0,
+    "detail": {
+      "distance": 18.82000732421875,
+      "pointerCovered": false,
+      "background": "rgb(255, 255, 255)",
+      "radius": "12px",
+      "padding": "12px 14px",
+      "font": "12px",
+      "line": "18px",
+      "titleWeight": "500",
+      "offsetParent": "qv-mermaid"
+    }
+  },
+  {
+    "theme": "light",
+    "slug": "radar-preset-title-normal",
+    "index": 2,
+    "detail": {
+      "distance": 16.0684814453125,
+      "pointerCovered": false,
+      "background": "rgb(255, 255, 255)",
+      "radius": "12px",
+      "padding": "12px 14px",
+      "font": "12px",
+      "line": "18px",
+      "titleWeight": "500",
+      "offsetParent": "qv-mermaid"
+    }
+  },
+  {
+    "theme": "light",
+    "slug": "er-stress",
+    "before": {
+      "scroll": 0,
+      "style": "width: 678px; min-width: 678px; height: 7592px;"
+    },
+    "expanded": {
+      "state": "enhanced",
+      "renderer": "qv-er",
+      "displayMode": "fullscreen",
+      "viewportScale": "0.08245521601685986",
+      "style": "width: 678px; min-width: 678px; height: 7592px; transform-origin: 0px 0px; transform: scale(0.0824552); margin-left: 484.048px;",
+      "running": 0
+    },
+    "returnedScroll": 0
+  },
+  {
+    "theme": "light",
+    "slug": "class-stress",
+    "before": {
+      "scroll": 0,
+      "style": "width: 993.008px; min-width: 993.008px; height: 10786px;"
+    },
+    "expanded": {
+      "state": "enhanced",
+      "renderer": "qv-class",
+      "displayMode": "fullscreen",
+      "viewportScale": "0.06526979417763767",
+      "style": "width: 993.008px; min-width: 993.008px; height: 10786px; transform-origin: 0px 0px; transform: scale(0.0652698); margin-left: 479.594px;",
+      "running": 0
+    },
+    "returnedScroll": 0
+  },
+  {
+    "theme": "light",
+    "slug": "journey-normal",
+    "before": {
+      "scroll": 0,
+      "style": "min-width: 600px; width: 600px; height: 435px;"
+    },
+    "expanded": {
+      "state": "enhanced",
+      "renderer": "qv-journey",
+      "displayMode": "fullscreen",
+      "viewportScale": "1",
+      "replays": "1",
+      "style": "min-width: 616px; width: 616px; height: 435px; transform-origin: 0px 0px; transform: scale(1); margin-left: 0px;",
+      "running": 0
+    },
+    "returnedScroll": 0
+  },
+  {
+    "theme": "light",
+    "slug": "quadrant-stress",
+    "before": {
+      "scroll": 0,
+      "style": "min-width: 736px; width: 736px; height: 688px;"
+    },
+    "expanded": {
+      "state": "enhanced",
+      "renderer": "qv-quadrant",
+      "displayMode": "fullscreen",
+      "viewportScale": "0.9418604651162791",
+      "style": "min-width: 736px; width: 736px; height: 688px; transform-origin: 0px 0px; transform: scale(0.94186); margin-left: 165.395px;",
+      "running": 0
+    },
+    "returnedScroll": 0
+  },
+  {
+    "theme": "light",
+    "slug": "flow-stress",
+    "before": {
+      "scroll": 80,
+      "style": "min-width: 1258px; height: 6542px;"
+    },
+    "expanded": {
+      "state": "enhanced",
+      "architecture": "false",
+      "kind": "flowchart",
+      "hasGroups": "true",
+      "layoutMode": "axis-scroll",
+      "renderer": "qv-architecture",
+      "motion": "complete",
+      "balanced": "false",
+      "hoverNode": "",
+      "displayMode": "fullscreen",
+      "viewportScale": "0.10761235096300825",
+      "style": "min-width: 1258px; height: 6542px; transform-origin: 0px 0px; transform: scale(0.107612); margin-left: 444.312px;",
+      "running": 0
+    },
+    "returnedScroll": 80
+  },
+  {
+    "theme": "light",
+    "slug": "fallback-normal",
+    "before": {
+      "scroll": 0,
+      "style": null
+    },
+    "expanded": {
+      "state": "native",
+      "style": null,
+      "running": 0
+    },
+    "returnedScroll": 0
+  },
+  {
+    "theme": "light",
+    "reducedMotion": true
+  },
+  {
+    "theme": "dark",
+    "slug": "radar-generic-title-normal",
+    "index": 0,
+    "detail": {
+      "distance": 16,
+      "pointerCovered": false,
+      "background": "color(srgb 0.225882 0.225882 0.225882)",
+      "radius": "12px",
+      "padding": "12px 14px",
+      "font": "12px",
+      "line": "18px",
+      "titleWeight": "500",
+      "offsetParent": "qv-mermaid qv-radar"
+    }
+  },
+  {
+    "theme": "dark",
+    "slug": "radar-generic-title-normal",
+    "index": 2,
+    "detail": {
+      "distance": 32,
+      "pointerCovered": false,
+      "background": "color(srgb 0.225882 0.225882 0.225882)",
+      "radius": "12px",
+      "padding": "12px 14px",
+      "font": "12px",
+      "line": "18px",
+      "titleWeight": "500",
+      "offsetParent": "qv-mermaid qv-radar"
+    }
+  },
+  {
+    "theme": "dark",
+    "slug": "radar-preset-title-normal",
+    "index": 0,
+    "detail": {
+      "distance": 18.1217041015625,
+      "pointerCovered": false,
+      "background": "color(srgb 0.225882 0.225882 0.225882)",
+      "radius": "12px",
+      "padding": "12px 14px",
+      "font": "12px",
+      "line": "18px",
+      "titleWeight": "500",
+      "offsetParent": "qv-mermaid"
+    }
+  },
+  {
+    "theme": "dark",
+    "slug": "radar-preset-title-normal",
+    "index": 2,
+    "detail": {
+      "distance": 16.0430908203125,
+      "pointerCovered": false,
+      "background": "color(srgb 0.225882 0.225882 0.225882)",
+      "radius": "12px",
+      "padding": "12px 14px",
+      "font": "12px",
+      "line": "18px",
+      "titleWeight": "500",
+      "offsetParent": "qv-mermaid"
+    }
+  },
+  {
+    "theme": "dark",
+    "slug": "er-stress",
+    "before": {
+      "scroll": 0,
+      "style": "width: 678px; min-width: 678px; height: 7592px;"
+    },
+    "expanded": {
+      "state": "enhanced",
+      "renderer": "qv-er",
+      "displayMode": "fullscreen",
+      "viewportScale": "0.08245521601685986",
+      "style": "width: 678px; min-width: 678px; height: 7592px; transform-origin: 0px 0px; transform: scale(0.0824552); margin-left: 484.048px;",
+      "running": 0
+    },
+    "returnedScroll": 0
+  },
+  {
+    "theme": "dark",
+    "slug": "class-stress",
+    "before": {
+      "scroll": 0,
+      "style": "width: 993.008px; min-width: 993.008px; height: 10786px;"
+    },
+    "expanded": {
+      "state": "enhanced",
+      "renderer": "qv-class",
+      "displayMode": "fullscreen",
+      "viewportScale": "0.06526979417763767",
+      "style": "width: 993.008px; min-width: 993.008px; height: 10786px; transform-origin: 0px 0px; transform: scale(0.0652698); margin-left: 479.594px;",
+      "running": 0
+    },
+    "returnedScroll": 0
+  },
+  {
+    "theme": "dark",
+    "slug": "journey-normal",
+    "before": {
+      "scroll": 0,
+      "style": "min-width: 600px; width: 600px; height: 435px;"
+    },
+    "expanded": {
+      "state": "enhanced",
+      "renderer": "qv-journey",
+      "displayMode": "fullscreen",
+      "viewportScale": "1",
+      "replays": "1",
+      "style": "min-width: 616px; width: 616px; height: 435px; transform-origin: 0px 0px; transform: scale(1); margin-left: 0px;",
+      "running": 0
+    },
+    "returnedScroll": 0
+  },
+  {
+    "theme": "dark",
+    "slug": "quadrant-stress",
+    "before": {
+      "scroll": 0,
+      "style": "min-width: 736px; width: 736px; height: 688px;"
+    },
+    "expanded": {
+      "state": "enhanced",
+      "renderer": "qv-quadrant",
+      "displayMode": "fullscreen",
+      "viewportScale": "0.9418604651162791",
+      "style": "min-width: 736px; width: 736px; height: 688px; transform-origin: 0px 0px; transform: scale(0.94186); margin-left: 165.395px;",
+      "running": 0
+    },
+    "returnedScroll": 0
+  },
+  {
+    "theme": "dark",
+    "slug": "flow-stress",
+    "before": {
+      "scroll": 80,
+      "style": "min-width: 1258px; height: 6542px;"
+    },
+    "expanded": {
+      "state": "enhanced",
+      "architecture": "false",
+      "kind": "flowchart",
+      "hasGroups": "true",
+      "layoutMode": "axis-scroll",
+      "renderer": "qv-architecture",
+      "motion": "complete",
+      "balanced": "false",
+      "hoverNode": "",
+      "displayMode": "fullscreen",
+      "viewportScale": "0.10761235096300825",
+      "style": "min-width: 1258px; height: 6542px; transform-origin: 0px 0px; transform: scale(0.107612); margin-left: 444.312px;",
+      "running": 0
+    },
+    "returnedScroll": 80
+  },
+  {
+    "theme": "dark",
+    "slug": "fallback-normal",
+    "before": {
+      "scroll": 0,
+      "style": null
+    },
+    "expanded": {
+      "state": "native",
+      "style": null,
+      "running": 0
+    },
+    "returnedScroll": 0
+  },
+  {
+    "theme": "dark",
+    "reducedMotion": true
+  }
+]

@@ -1,5 +1,9 @@
 # Mermaid architecture browser acceptance
 
+## Current product rules: 2026-11-09
+
+The 2.0.54 product-rule migration supersedes historical flowchart folding, node-group switches, flow/architecture drilldown and tooltip tokens below. Use `render_mermaid_polish.py`, `mermaid-polish-check.cjs`, `mermaid-polish-interactions.cjs` and `mermaid-polish-boundaries.cjs` for the current contract. Always await `root.qvReady`, check final state/readiness and runtime errors. Evidence and per-rule mapping: `docs/verification/mermaid-polish/`. Historical checks remain provenance, not current navigation requirements.
+
 The Python tests check input round-trip, escaping and fragment generation. They do not prove design fidelity or validate Mermaid syntax.
 
 ## Release smoke check: 2026-10-11

@@ -20,7 +20,7 @@ Read only the matching specification. If no preset covers the required data and 
 | `line-chart` | One non-negative measure, 2–90 dates | [Line Chart](references/line-chart.md) |
 | `grouped-bar-chart` | 2–4 series, 2–6 shared categories, non-negative scale | [Grouped Bar Chart](references/grouped-bar-chart.md) |
 | `donut-chart` | 2–6 non-negative parts, positive total | [Donut Chart](references/donut-chart.md) |
-| `mermaid` | `flowchart` / `architecture-beta` / `sequenceDiagram` / `stateDiagram-v2` / `erDiagram` / `classDiagram` / `timeline` / `journey` / `kanban` / `pie` / `xychart-beta` / `radar-beta` / `sankey-beta` / `quadrantChart` / `block-beta` / C4 / `mindmap` / `gantt`; qv drawing, explicit fallback outside scope | [Mermaid](references/mermaid.md) |
+| `mermaid` | `flowchart` / `architecture-beta` / `sequenceDiagram` / `stateDiagram-v2` / `erDiagram` / `classDiagram` / `timeline` / `journey` / `kanban` / `pie` / `xychart-beta` / `radar-beta` / `sankey-beta` / `quadrantChart` / `block-beta` / C4 / `mindmap` / `gantt` / `gitGraph`; qv drawing, explicit fallback outside scope | [Mermaid](references/mermaid.md) |
 | `radar-chart` | 1–4 objects, 3–8 shared dimensions, non-negative scale | [Radar Chart](references/radar-chart.md) |
 
 ## Execute
@@ -48,11 +48,11 @@ An inline visualization error means the host recognized the reference but failed
 
 Architecture-beta preserves full wrapped names. Hover, focus or click reads structured resource/group details in a nearby theme-aware tooltip, independent of scene scaling; no detail panel or object selector below the diagram.
 
-All chart data popovers use a white surface with dark text in light mode, and a black surface with light text in dark mode. Keep titles at 14px/20px with 600 weight, body rows at 12px/18px, secondary values muted, and the title-to-body gap larger than the row gap. Use compact widths and preserve the active object's visibility; do not add popovers where the chart already presents the complete information.
+数据浮层使用共享 token：浅色为 `--popover`，深色为 `--popover-foreground` 向 `--popover` 混入 6%；文字为 `--popover-foreground`，名称为 `--muted-foreground`，数值为主文字色、500 字重及等宽数字。1px `--border`、12px 圆角、12×14px 内距；标题14px/20px、500字重，正文12px/18px。阴影为浅色前景9%、深色黑色50%；140ms 淡入和 .97 浮起，reduced-motion 关闭过渡。
 
-For node-based Mermaid diagrams, proactively apply the shared design principles in the Mermaid reference: measured threshold-based wrapping, threshold-based layout balancing, alternating containment surfaces, stable hover, focused group navigation and separately calibrated themes. Preserve each diagram type's semantic shapes and relationships; do not wait for the user to repeat accepted principles.
+For node-based Mermaid diagrams, proactively apply the shared design principles in the Mermaid reference: measured threshold-based wrapping, available-width axis comparison, alternating containment surfaces, stable hover, state-only hierarchy navigation and separately calibrated themes. Preserve each diagram type's semantic shapes and relationships; do not wait for the user to repeat accepted principles.
 
-For Mermaid, declare semantic icons for all architecture services; use groups for overview/drilldown. Explain distinct edge styles with semantic legends or edge labels.
+For Mermaid, declare semantic icons for all architecture services; use groups for semantic containment, always showing the complete flowchart/architecture. State diagrams retain their own hierarchy navigation. Explain distinct edge styles with semantic legends or edge labels.
 
 Add concise explanation outside the visual when needed. Never replace the reference with a Markdown link. Use the returned absolute executor path.
 

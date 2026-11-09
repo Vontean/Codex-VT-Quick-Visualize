@@ -24,7 +24,7 @@ HTML 文件名必须匹配 `[a-z0-9]+(?:-[a-z0-9]+)*\.html`，例如 `donut-char
 | `Line Chart` | 查看单个非负指标随日期的平滑趋势 | 2–90 个日期数据点、单序列 |
 | `Grouped Bar Chart` | 在共享类别和数值轴上比较多个对象 | 2–4 个序列、共同的 2–6 个类别 |
 | `Donut Chart` | 查看共同组成一个整体的类别占比 | 2–6 个类目、非负数值、总和大于 0 |
-| `Mermaid` | 架构、流程、时序、状态、实体关系、类、时间线、用户旅程、看板、饼图、XY、雷达、桑基、四象限、方块与 C4 图 | 支持范围由 qv 自行绘制；不支持的语法明确回退原生 |
+| `Mermaid` | 架构、流程、时序、状态、实体关系、类、时间线、用户旅程、看板、饼图、XY、雷达、桑基、四象限、方块、Git 与 C4 图 | 支持范围由 qv 自行绘制；不支持的语法明确回退原生 |
 | `Radar Chart` | 比较一个或多个对象在共同指标上的相对强弱 | 1–4 个对象、共同的 3–8 个维度与量表 |
 
 `Parameter Form` 当前支持 `text`、`textarea`、`select`、`radio`、`switch`、`checkbox` 和 `range`。每一种字段都可以单独成表，也可以重复或自由组合。
@@ -45,7 +45,7 @@ HTML 文件名必须匹配 `[a-z0-9]+(?:-[a-z0-9]+)*\.html`，例如 `donut-char
 python3 skill/quick-visualize/scripts/render.py mermaid diagram.mmd work/architecture.html
 ```
 
-所有 Mermaid 输出默认带原生放大入口：qv 自绘图在消息流保留可读字号与绘图区水平滚动，放大后适配完整当前视图，退出恢复滚动位置。整图适配用于 qv 自绘图型；原生回退保留 Mermaid 原有 SVG 尺寸、样式和交互，不套入 qv 缩放。分组图需要复制完整架构时，先关闭“节点组”，再放大并使用原生 Copy as image；它仍是当前预览截图，不是独立的高分辨率整图导出。
+所有 Mermaid 输出默认带原生放大入口：qv 自绘图在消息流保留可读字号与绘图区水平滚动，放大后适配完整当前视图，退出恢复滚动位置。整图适配用于 qv 自绘图型；原生回退保留 Mermaid 原有 SVG 尺寸、样式和交互，不套入 qv 缩放。流程图与架构图始终展示完整图，可放大并使用原生 Copy as image；它仍是当前预览截图，不是独立的高分辨率整图导出。
 
 Mermaid 的语法与布局在浏览器校验，runner 返回的 `runtime: pending-browser` 表示尚未确认实际绘制。详细支持范围见 [Mermaid 规格](skill/quick-visualize/references/mermaid.md)。
 
@@ -232,4 +232,6 @@ python3 -m unittest discover -s tests -v
 复杂布局按需加载 ELKjs 0.10.0，遵循其 [EPL-2.0 License](https://github.com/kieler/elkjs/blob/v0.10.0/LICENSE.md)；库代码未打包进本仓库。
 
 
-Mermaid architecture-beta 的完整资源名称按实际卡片宽度换行；资源和分组详情放在图下，以原字号展示名称、归属和连接端口。窄屏与展开模式提供原生对象选择，不改变完整图。所有支持的增强图共用展开适配，原生回退保留原来的渲染和视口行为。
+Mermaid architecture-beta 的完整资源名称按实际卡片宽度换行；补充详情通过就近浮层读取，支持键盘，不添加底部对象选择。所有支持的增强图共用展开适配，原生回退保留原来的渲染和视口行为。
+
+Mermaid frontmatter 标题按需使用固定版本 js-yaml 4.1.1（JSON_SCHEMA），通过已允许的 jsDelivr 模块加载，遵循 [MIT License](https://github.com/nodeca/js-yaml/blob/4.1.1/LICENSE)。
