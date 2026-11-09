@@ -27,7 +27,7 @@
 <script>
 {{CHART_MOTION_JS}}
 {{CHART_DETAIL_POSITION_JS}}
-{{CHART_LEGEND_JS}}
+{{CHART_ALIGNMENT_JS}}
 (()=>{
 const root=document.getElementById('{{ROOT_ID}}'),plot=root.querySelector('.plot'),svg=d3.select(root.querySelector('.chart')),bubble=root.querySelector('.bubble'),keyboard=root.querySelector('.keyboard');
 const config={{CONFIG_JSON}};
@@ -96,7 +96,7 @@ window.addEventListener('pageshow',e=>{if(e.persisted){armed=true;replayIfReady(
 new ResizeObserver(()=>{if(Math.round(plot.getBoundingClientRect().width)!==lastWidth){draw();if(!entered&&!reduced.matches)svg.select('.line-marks').attr('visibility','hidden');}}).observe(plot);
 root.dispatchEvent(new Event('qv:ready',{bubbles:true}));
 })();
-requestAnimationFrame(()=>alignMermaidLegends(document.getElementById('{{ROOT_ID}}')));
+requestAnimationFrame(()=>alignChartPresentation(document.getElementById('{{ROOT_ID}}')));
 </script>
 </div>
 

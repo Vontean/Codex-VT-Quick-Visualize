@@ -31,7 +31,7 @@
 <script>
 {{CHART_MOTION_JS}}
 {{CHART_DETAIL_POSITION_JS}}
-{{CHART_LEGEND_JS}}
+{{CHART_ALIGNMENT_JS}}
 (()=>{
 const root=document.getElementById('{{ROOT_ID}}'),config={{CONFIG_JSON}},count=config.series.length;
 const numberFormat=new Intl.NumberFormat(undefined,{minimumFractionDigits:config.decimals,maximumFractionDigits:config.decimals});const formatValue=v=>config.valuePrefix+numberFormat.format(v)+config.valueSuffix;
@@ -107,7 +107,7 @@ new ResizeObserver(()=>{if(Math.round(plot.getBoundingClientRect().width)!==last
 window.addEventListener('openai:set_globals',e=>{if(e.detail?.globals?.widgetState){restore(e.detail.globals.widgetState);draw();}});
 root.dispatchEvent(new Event('qv:ready',{bubbles:true}));
 })();
-requestAnimationFrame(()=>alignMermaidLegends(document.getElementById('{{ROOT_ID}}')));
+requestAnimationFrame(()=>alignChartPresentation(document.getElementById('{{ROOT_ID}}')));
 </script>
 </div>
 

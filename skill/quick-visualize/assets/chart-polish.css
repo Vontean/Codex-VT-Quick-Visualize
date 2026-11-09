@@ -22,3 +22,8 @@
 #{{ROOT_ID}} h3[data-title-wrapped]{text-align:left}
 
 #{{ROOT_ID}} [role="tooltip"]{overflow-wrap:anywhere}
+
+/* 换行后的数据图例整列居中，项内左对齐。 */
+#{{ROOT_ID}} :is(.radar-legend,.xy-key,.legend,.quick-radar-legend)[data-legend-stacked]{display:grid;grid-template-columns:minmax(0,max-content);justify-content:center;justify-items:start;max-width:100%}
+#{{ROOT_ID}} [data-legend-stacked]>*{max-width:100%;min-width:0}
+#{{ROOT_ID}} [data-legend-stacked] .qv-legend-text{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}

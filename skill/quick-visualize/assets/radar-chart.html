@@ -212,7 +212,7 @@
   <script>
 {{CHART_MOTION_JS}}
 {{CHART_DETAIL_POSITION_JS}}
-{{CHART_LEGEND_JS}}
+{{CHART_ALIGNMENT_JS}}
     (() => {
       const SVG_NS = 'http://www.w3.org/2000/svg';
       const root = document.getElementById('{{ROOT_ID}}');
@@ -572,7 +572,7 @@
       resizeObserver.observe(plot);draw();observer.observe(root);
     root.dispatchEvent(new Event('qv:ready',{bubbles:true}));
 })();
-  requestAnimationFrame(()=>alignMermaidLegends(document.getElementById('{{ROOT_ID}}')));
+  requestAnimationFrame(()=>alignChartPresentation(document.getElementById('{{ROOT_ID}}')));
 </script>
 </div>
 

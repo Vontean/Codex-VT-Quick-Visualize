@@ -31,13 +31,13 @@
 <script>
 {{CHART_MOTION_JS}}
 {{CHART_DETAIL_POSITION_JS}}
-{{CHART_LEGEND_JS}}
+{{CHART_ALIGNMENT_JS}}
 (()=>{
 const root=document.getElementById('{{ROOT_ID}}'),plot=root.querySelector('.plot'),svg=d3.select(root.querySelector('.chart')),legend=root.querySelector('.legend'),bubble=root.querySelector('.bubble');
 const config={{CONFIG_JSON}};
-const numberFormat=new Intl.NumberFormat(undefined,{minimumFractionDigits:config.decimals,maximumFractionDigits:config.decimals});const formatValue=v=>config.valuePrefix+numberFormat.format(v)+config.valueSuffix;
+const numberFormat=new Intl.NumberFormat(undefined,{minimumFractionDigits:config.decimals,maximumFractionDigits:config.decimals});const formatValue=v=>config.valuePrefix+(config.exactValues?String(v):numberFormat.format(v))+config.valueSuffix;
 const data=config.items;
-const total=d3.sum(data,d=>d.value),color=i=>`var(--viz-series-${i+1})`,pct=i=>`${Number((data[i].value/total*100).toFixed(1))}%`;
+const total=d3.sum(data,d=>d.value),color=i=>`var(--viz-series-${i%6+1})`,pct=i=>`${Number((data[i].value/total*100).toFixed(1))}%`;
 const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');let layout=null,entered=false,lastWidth=0;
 let direct=false;const eligibleDirect=data.length<=4&&d3.min(data,d=>d.value/total)>=.08&&data.every(d=>d.label.length<=12);
 function clear(){svg.selectAll('.slice').attr('opacity',1);root.querySelectorAll('.legend button,.direct-label').forEach(b=>b.style.opacity=1);root.querySelector('.center-value').textContent=config.valuePrefix+numberFormat.format(total);root.querySelector('.center-label').textContent='总计'+(config.valueSuffix.trim()?' · '+config.valueSuffix.trim():'');bubble.hidden=true;}
@@ -59,7 +59,7 @@ plot.querySelectorAll('.direct-label').forEach(e=>{e.getAnimations().forEach(a=>
 if(direct){arcs.forEach((d,i)=>{const a=(d.startAngle+d.endAngle)/2,side=Math.sin(a)>0?1:-1,narrow=width<460;
 const peers=arcs.filter(q=>(Math.sin((q.startAngle+q.endAngle)/2)>0?1:-1)===side).sort((p,q)=>Math.cos((q.startAngle+q.endAngle)/2)-Math.cos((p.startAngle+p.endAngle)/2));const rank=peers.indexOf(d);
 const x=narrow?cx+(i<2?1:-1)*width*.28:cx+Math.sin(a)*(radius+64),y=narrow?(i===0||i===3?32:height-32):cy-Math.cos(a)*(radius+48);
-const b=document.createElement('button');b.type='button';b.className='direct-label';b.style.left=x+'px';b.style.top=y+'px';b.append(document.createTextNode(data[i].label));const percent=document.createElement('span');percent.textContent=pct(i);b.append(percent);b.onpointerenter=()=>show(i);b.onpointerleave=clear;b.onfocus=()=>show(i);b.onblur=clear;plot.append(b);
+const b=document.createElement('button');b.type='button';b.className='direct-label';b.style.left=x+'px';b.style.top=y+'px';b.append(document.createTextNode(data[i].label));const percent=document.createElement('span');percent.textContent=(config.showData?data[i].value+' · ':'')+pct(i);b.append(percent);b.onpointerenter=()=>show(i);b.onpointerleave=clear;b.onfocus=()=>show(i);b.onblur=clear;plot.append(b);
 if(animate&&!reduced.matches){
 const delay=enter*(.2+i*.05);
 animateMermaidEntry(b,[{opacity:0},{opacity:1}],{delay,duration:enter*.4,easing:'ease',fill:'backwards'});
@@ -85,7 +85,7 @@ window.addEventListener('pageshow',e=>{if(e.persisted){armed=true;replayIfReady(
 new ResizeObserver(()=>{if(Math.round(plot.getBoundingClientRect().width)!==lastWidth)draw();}).observe(plot);
 root.dispatchEvent(new Event('qv:ready',{bubbles:true}));
 })();
-requestAnimationFrame(()=>alignMermaidLegends(document.getElementById('{{ROOT_ID}}')));
+requestAnimationFrame(()=>alignChartPresentation(document.getElementById('{{ROOT_ID}}')));
 </script>
 </div>
 

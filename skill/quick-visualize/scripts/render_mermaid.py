@@ -1,9 +1,8 @@
 """Keep Mermaid source intact; add only presentation metadata."""
-from chart_assets import compile_chart_assets
+from mermaid_assets import compile_mermaid_template
 import hashlib
 import html
 import json
-from mermaid_presets import compile_presets
 from pathlib import Path
 
 TEMPLATE_PATH = Path(__file__).resolve().parents[1] / 'assets' / 'mermaid.html'
@@ -46,48 +45,7 @@ def render(spec, output_path):
         encoded = encoded.replace(char, '\\u%04x' % ord(char))
     values = {'{{ROOT_ID}}': 'qv-mermaid-' + digest, '{{TITLE}}': html.escape(title),
               '{{TITLE_HIDDEN}}': '' if title else 'hidden', '{{CONFIG_JSON}}': encoded}
-    fragment = compile_chart_assets(TEMPLATE_PATH.read_text(encoding='utf-8'), TEMPLATE_PATH.parent).replace('{{MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-model.js').read_text(encoding='utf-8')).replace('{{LAYOUT_JS}}', TEMPLATE_PATH.with_name('mermaid-layout.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{NAVIGATION_JS}}', TEMPLATE_PATH.with_name('mermaid-navigation.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{ARCHITECTURE_READER_JS}}', TEMPLATE_PATH.with_name('mermaid-architecture-reader.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{PRESENTATION_JS}}', TEMPLATE_PATH.with_name('mermaid-presentation.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{VIEWPORT_JS}}', TEMPLATE_PATH.with_name('mermaid-viewport.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{SEQUENCE_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-sequence-model.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{SEQUENCE_JS}}', TEMPLATE_PATH.with_name('mermaid-sequence.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{STATE_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-state-model.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{STATE_JS}}', TEMPLATE_PATH.with_name('mermaid-state.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{ER_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-er-model.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{ER_JS}}', TEMPLATE_PATH.with_name('mermaid-er.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{CLASS_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-class-model.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{CLASS_JS}}', TEMPLATE_PATH.with_name('mermaid-class.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{TIMELINE_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-timeline-model.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{TIMELINE_JS}}', TEMPLATE_PATH.with_name('mermaid-timeline.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{GANTT_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-gantt-model.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{GANTT_JS}}', TEMPLATE_PATH.with_name('mermaid-gantt.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{MINDMAP_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-mindmap-model.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{MINDMAP_JS}}', TEMPLATE_PATH.with_name('mermaid-mindmap.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{JOURNEY_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-journey-model.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{JOURNEY_JS}}', TEMPLATE_PATH.with_name('mermaid-journey.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{QUADRANT_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-quadrant-model.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{QUADRANT_JS}}', TEMPLATE_PATH.with_name('mermaid-quadrant.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{BLOCK_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-block-model.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{BLOCK_LAYOUT_JS}}', TEMPLATE_PATH.with_name('mermaid-block-layout.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{BLOCK_JS}}', TEMPLATE_PATH.with_name('mermaid-block.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{C4_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-c4-model.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{C4_LAYOUT_JS}}', TEMPLATE_PATH.with_name('mermaid-c4-layout.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{C4_JS}}', TEMPLATE_PATH.with_name('mermaid-c4.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{SANKEY_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-sankey-model.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{SANKEY_JS}}', TEMPLATE_PATH.with_name('mermaid-sankey.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{RADAR_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-radar-model.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{RADAR_JS}}', TEMPLATE_PATH.with_name('mermaid-radar.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{XY_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-xy-model.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{XY_JS}}', TEMPLATE_PATH.with_name('mermaid-xy.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{PIE_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-pie-model.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{PIE_JS}}', TEMPLATE_PATH.with_name('mermaid-pie.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{KANBAN_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-kanban-model.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{KANBAN_JS}}', TEMPLATE_PATH.with_name('mermaid-kanban.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{GIT_JS}}', TEMPLATE_PATH.with_name('mermaid-git.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{TITLE_JS}}', TEMPLATE_PATH.with_name('mermaid-title.js').read_text(encoding='utf-8'))
-    fragment = fragment.replace('{{CHART_PRESETS_JS}}', compile_presets(TEMPLATE_PATH.parent))
+    fragment = compile_mermaid_template(TEMPLATE_PATH)
     for key, value in values.items():
         fragment = fragment.replace(key, value)
     return fragment

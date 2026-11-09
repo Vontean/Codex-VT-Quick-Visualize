@@ -2,14 +2,14 @@
 import json
 import re
 from pathlib import Path
+from chart_assets import without_chart_assets
 
 
 def compile_presets(assets: Path) -> str:
     functions = []
     for name, function in [('donut-chart', 'renderMermaidDonutPreset'), ('radar-chart', 'renderMermaidRadarPreset')]:
         source = (assets / (name + '.html')).read_text(encoding='utf-8')
-        for token in ['CHART_MOTION_JS', 'CHART_DETAIL_POSITION_JS', 'CHART_POLISH_CSS', 'CHART_LEGEND_JS']:
-            source = source.replace('{{' + token + '}}', '')
+        source = without_chart_assets(source)
         scripts = re.findall(r'<script(?:\s[^>]*)?>([\s\S]*?)</script>', source)
         runtime = next(script for script in scripts if '{{CONFIG_JSON}}' in script)
         runtime = re.sub(r'const config\s*=\s*\{\{CONFIG_JSON\}\};', '', runtime)
@@ -17,11 +17,7 @@ def compile_presets(assets: Path) -> str:
         runtime = runtime.replace('{{ROOT_ID}}', "${presetRoot.id}")
         # Selectors containing an ID are ordinary strings in the preset source.
         runtime = re.sub(r"(['\"])([^'\"\n]*\$\{presetRoot.id\}[^'\"\n]*)\1", r'`\2`', runtime)
-        runtime = runtime.replace('i+1})', 'i%6+1})') if name == 'donut-chart' else runtime
         runtime = runtime.replace('new ResizeObserver(', 'new PresetResizeObserver(')
-        if name == 'donut-chart':
-            runtime = runtime.replace('numberFormat.format(v)+config.valueSuffix', '(config.exactValues?String(v):numberFormat.format(v))+config.valueSuffix')
-            runtime = runtime.replace('percent.textContent=pct(i);', "percent.textContent=(config.showData?data[i].value+' · ':'')+pct(i);")
         markup = re.sub(r'<script(?:\s[^>]*)?>[\s\S]*?</script>', '', source)
         markup = markup[markup.index('>')+1:markup.rfind('</div>')]
         markup = markup.replace('{{ROOT_ID}}', '@@ID@@').replace('{{TITLE}}', '@@TITLE@@').replace('{{SUMMARY}}', '@@SUMMARY@@')

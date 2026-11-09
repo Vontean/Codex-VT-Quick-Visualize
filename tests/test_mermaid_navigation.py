@@ -15,7 +15,7 @@ class MermaidNavigationTests(unittest.TestCase):
         return json.loads(result.stdout)
 
     def fixture(self):
-        return {'direction':'LR', 'groups':[{'id':'app','name':'App'}, {'id':'api','name':'API','parent':'app'}, {'id':'data','name':'Data'}],
+        return {'kind':'state', 'direction':'LR', 'groups':[{'id':'app','name':'App'}, {'id':'api','name':'API','parent':'app'}, {'id':'data','name':'Data'}],
                 'nodes':[{'id':'web','name':'Web'}, {'id':'a','name':'A','parent':'api'}, {'id':'b','name':'B','parent':'api'}, {'id':'db','name':'DB','parent':'data'}],
                 'edges':[{'from':'web','to':'a','arrow':True}, {'from':'web','to':'b','arrow':True}, {'from':'a','to':'b','arrow':True}, {'from':'b','to':'db','arrow':True}, {'from':'a','to':'a','arrow':True}]}
 
@@ -55,19 +55,20 @@ class MermaidNavigationTests(unittest.TestCase):
         self.assertTrue(boundary['external'])
         self.assertEqual(boundary['targetGroup'],'app')
 
-    def test_preview_preserves_membership_and_real_internal_edges(self):
-        view=self.project(self.fixture())
-        preview=next(n for n in view['nodes'] if n['id']=='app')['preview']
-        self.assertEqual([r['id'] for r in preview['rows']], ['api','a','b'])
-        self.assertEqual([(e['from'],e['to']) for e in preview['edges']], [('a','b')])
-        self.assertEqual(preview['remaining'], 0)
+    def test_composite_uses_real_count_and_navigation_target(self):
+        model=self.fixture()
+        model['groups'][0]['lines']=['保持源复合状态说明']
+        node=next(n for n in self.project(model)['nodes'] if n['id']=='app')
+        self.assertEqual(node['count'], 2)
+        self.assertEqual(node['targetGroup'], 'app')
+        self.assertEqual(node['lines'], ['保持源复合状态说明'])
 
-    def test_large_preview_reports_omitted_members(self):
+    def test_large_scope_keeps_every_direct_state(self):
         model=self.fixture()
         model['nodes'] += [{'id':str(i),'name':str(i),'parent':'api'} for i in range(12)]
-        preview=next(n for n in self.project(model)['nodes'] if n['id']=='app')['preview']
-        self.assertEqual(len([r for r in preview['rows'] if not r.get('heading')]), 8)
-        self.assertEqual(preview['remaining'], 6)
+        view=self.project(model,'api')
+        self.assertTrue({'a','b',*(str(i) for i in range(12))}.issubset({n['id'] for n in view['nodes']}))
+        self.assertEqual(next(n for n in self.project(model)['nodes'] if n['id']=='app')['count'], 14)
 
     def test_scope_keeps_all_internal_nodes_including_disconnected(self):
         model=self.fixture();model['nodes'].append({'id':'isolated','name':'Isolated','parent':'api'})

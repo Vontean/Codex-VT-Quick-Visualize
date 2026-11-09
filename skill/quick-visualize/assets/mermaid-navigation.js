@@ -28,23 +28,10 @@ function mermaidScopeView(model, scope = null) {
     if (visible.has(key)) return key;
     const raw = all.get(id), group = groups.has(id);
     const count = group ? model.nodes.filter(n => !n.junction && inside(n.id,id)).length : 0;
-    let preview;
-    if(group&&!external){
-      const rows=[];let shown=0;
-      function visit(parent,depth=0){for(const child of all.values())if(child.parent===parent){
-        if(shown>=8)break;
-        if(groups.has(child.id)){rows.push({id:child.id,name:child.name,heading:true,depth});visit(child.id,depth+1);}
-        else if(!child.junction){rows.push({id:child.id,name:child.name,icon:child.icon,depth});shown++;}
-      }}
-      visit(id);let y=model.architecture?96:62;rows.forEach(row=>{row.y=y;if(model.architecture||model.kind==='flowchart'){const text=document.createElement('span');text.style.cssText='position:absolute;left:-100000px;width:248px;font:12px/18px '+getComputedStyle(root).fontFamily+';white-space:normal;overflow-wrap:anywhere';text.textContent=row.name;root.append(text);row.h=Math.max(18,text.offsetHeight);text.remove();y+=row.h+14;}else y+=row.heading?26:32;});
-      const ids=new Set(rows.filter(r=>!r.heading).map(r=>r.id));
-      preview={rows,edges:model.edges.filter(e=>ids.has(e.from)&&ids.has(e.to)&&e.from!==e.to),remaining:count-shown,height:y+(count>shown?28:10)};
-    }
     visible.set(key, {...raw, id:key, parent:undefined, shape:group?'round':raw.shape,
-      groupCard:group&&!external, external, count, preview, icon:group?(raw.icon||'layers'):raw.icon,
+      groupCard:group&&!external, external, count,
       targetGroup:group ? (id===scope?raw.parent||null:id) : undefined,
       description:raw.description||'',
-      layoutWidth:model.architecture||group&&!external&&model.kind==='flowchart'?320:undefined,layoutHeight:model.architecture?(preview?.height||64):undefined,
       layer:0});
     return key;
   }
@@ -64,5 +51,5 @@ function mermaidScopeView(model, scope = null) {
   });
   for(const edge of edges)if(edge.members.length>1)edge.bundleCount=edge.members.length;
   return {nodes:[...visible.values()],edges,groups:[],layers:[],generic:true,navigation:true,
-    direction:model.direction||'LR',grouped:false,scope,kind:model.kind,architectureCards:!!model.architecture||model.kind==='flowchart'};
+    direction:model.direction||'LR',grouped:false,scope,kind:model.kind};
 }

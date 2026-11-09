@@ -96,8 +96,8 @@
 <script>
 {{CHART_MOTION_JS}}
 {{CHART_DETAIL_POSITION_JS}}
-{{CHART_LEGEND_JS}}
-document.getElementById('{{ROOT_ID}}').qvReady=(async()=>{document.addEventListener("qv:ready",e=>{const r=e.target.closest?.(".qv-mermaid");if(r)requestAnimationFrame(()=>alignMermaidLegends(r));});
+{{CHART_ALIGNMENT_JS}}
+document.getElementById('{{ROOT_ID}}').qvReady=(async()=>{document.addEventListener("qv:ready",e=>{const r=e.target.closest?.(".qv-mermaid");if(r)requestAnimationFrame(()=>alignChartPresentation(r));});
 const root=document.getElementById('{{ROOT_ID}}'),scene=root.querySelector('.scene'),svg=root.querySelector('.wires'),cfg=JSON.parse({{CONFIG_JSON}});
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 
