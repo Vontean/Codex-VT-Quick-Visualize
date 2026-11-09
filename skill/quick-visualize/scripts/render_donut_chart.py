@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+from chart_assets import compile_chart_assets
 import argparse
 import hashlib
 import html
@@ -119,7 +120,7 @@ def render(spec: dict[str, Any], output_path: Path) -> str:
         ),
     }
 
-    fragment = TEMPLATE_PATH.read_text(encoding="utf-8")
+    fragment = compile_chart_assets(TEMPLATE_PATH.read_text(encoding="utf-8"), TEMPLATE_PATH.parent)
     for token, replacement in replacements.items():
         fragment = fragment.replace(token, replacement)
     if "{{" in fragment:

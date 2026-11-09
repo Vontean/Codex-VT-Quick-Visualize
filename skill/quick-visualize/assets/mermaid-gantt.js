@@ -21,7 +21,7 @@ async function renderMermaidGantt(root,data){
 #${root.id} .chart .tick-label{fill:var(--muted-foreground)}
 #${root.id} .task{transition:opacity 160ms ease}
 #${root.id} .swatch{display:inline-block;width:9px;height:9px;border-radius:2px;flex-shrink:0}
-#${root.id} .bubble{position:absolute;z-index:3;pointer-events:none;width:206px;max-width:calc(100% - 16px);box-sizing:border-box;padding:12px 14px;background:var(--popover);color:var(--popover-foreground);border:1px solid color-mix(in srgb,var(--border) 70%,transparent);border-radius:var(--tip-radius);box-shadow:0 4px 16px color-mix(in srgb,var(--foreground) 10%,transparent)}
+#${root.id} .bubble{position:absolute;z-index:3;pointer-events:none;width:206px;max-width:calc(100% - 16px);box-sizing:border-box;padding:12px 14px;background:var(--qv-tip-surface,var(--popover));color:var(--popover-foreground);border:1px solid color-mix(in srgb,var(--border) 70%,transparent);border-radius:var(--tip-radius);box-shadow:var(--qv-tip-shadow)}
 #${root.id} .bubble[hidden]{display:none}
 #${root.id} .bubble-head{display:flex;gap:8px;align-items:center;margin-bottom:10px;font-weight:500}
 #${root.id} .bubble-row{display:flex;justify-content:space-between;gap:14px;margin-top:7px;font-size:12px}
@@ -110,7 +110,7 @@ function draw(animate=false){
    g.append('line').attr('class','bar-start').attr('x1',a).attr('x2',a).attr('y1',y+1).attr('y2',y+p.barHeight-1).attr('stroke',color(t)).attr('stroke-width',2);
    const labelNode=g.append('text').attr('class','task-label').attr('x',labelX).attr('y',y+(p.lines.length>1?16:20)).attr('aria-label',t.task);
    p.lines.forEach((line,index)=>labelNode.append('tspan').attr('x',labelX).attr('dy',index?14:0).text(line));
-   if(animate&&!reduced.matches){const f=i/Math.max(1,tasks.length-1),weight=f*f*(3-2*f);bar.transition().duration(580+100*weight).delay(0).ease(d3.easeCubicInOut).attr('width',b-a);}
+   if(animate&&!reduced.matches){const f=i/Math.max(1,tasks.length-1),weight=f*f*(3-2*f);bar.transition().duration(580+100*weight).delay(0).ease(mermaidEntryProgress).attr('width',b-a);}
    box={left:a-4,right:Math.min(width-right,b+4),top:p.y-5,bottom:y+p.barHeight+5};
   }
   layout.boxes.set(t.id,box);

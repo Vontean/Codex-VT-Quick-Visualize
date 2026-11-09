@@ -7,7 +7,7 @@
 #{{ROOT_ID}} .chart text{font-family:inherit;font-size:12px;fill:var(--foreground);font-variant-numeric:tabular-nums}
 #{{ROOT_ID}} .chart .tick-label{fill:var(--muted-foreground)}
 #{{ROOT_ID}} .trend{fill:none;stroke:var(--viz-series-1);stroke-width:var(--line-width);stroke-linecap:round;stroke-linejoin:round}
-#{{ROOT_ID}} .bubble{position:absolute;z-index:3;pointer-events:none;width:174px;max-width:calc(100% - 16px);padding:12px 14px;background:var(--popover);color:var(--popover-foreground);border:1px solid color-mix(in srgb,var(--border) 70%,transparent);border-radius:var(--line-tip-radius);box-shadow:0 4px 16px color-mix(in srgb,var(--foreground) 10%,transparent)}
+#{{ROOT_ID}} .bubble{position:absolute;z-index:3;pointer-events:none;width:174px;max-width:calc(100% - 16px);padding:12px 14px;background:var(--qv-tip-surface,var(--popover));color:var(--popover-foreground);border:1px solid color-mix(in srgb,var(--border) 70%,transparent);border-radius:var(--line-tip-radius);box-shadow:var(--qv-tip-shadow)}
 #{{ROOT_ID}} .bubble[hidden]{display:none}
 #{{ROOT_ID}} .bubble-date{font-weight:500;margin-bottom:10px;font-size:12px}
 #{{ROOT_ID}} .bubble-row{display:grid;grid-template-columns:9px 1fr auto;align-items:center;gap:8px;font-size:12px}
@@ -25,6 +25,9 @@
 <div class="bubble" role="tooltip" hidden><div class="bubble-date"></div><div class="bubble-row"><span class="swatch" aria-hidden="true"></span><span class="measure-label"></span><strong></strong></div><div class="description text-small" style="margin-top:8px" hidden></div></div>
 <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
 <script>
+{{CHART_MOTION_JS}}
+{{CHART_DETAIL_POSITION_JS}}
+{{CHART_LEGEND_JS}}
 (()=>{
 const root=document.getElementById('{{ROOT_ID}}'),plot=root.querySelector('.plot'),svg=d3.select(root.querySelector('.chart')),bubble=root.querySelector('.bubble'),keyboard=root.querySelector('.keyboard');
 const config={{CONFIG_JSON}};
@@ -78,7 +81,7 @@ function moveHead(t){const point=path.getPointAtLength(length*t);endpoint.select
 moveHead(0);
 trend.attr('stroke-dasharray',`${length} ${length}`).attr('stroke-dashoffset',length);
 // 曲线按实际弧长绘制，面积边界跟随线头的横坐标。
-trend.transition().duration(parseFloat(getComputedStyle(root).getPropertyValue('--line-enter'))).ease(d3.easeCubicInOut).tween('trace',()=>t=>{trend.attr('stroke-dashoffset',length*(1-t));clip.attr('width',Math.max(0,moveHead(t).x-left+8));}).on('end',()=>{trend.attr('stroke-dasharray',null).attr('stroke-dashoffset',null);clip.attr('width',width-left+8);moveHead(1);});
+trend.transition().duration(parseFloat(getComputedStyle(root).getPropertyValue('--line-enter'))).ease(mermaidEntryProgress).tween('trace',()=>t=>{trend.attr('stroke-dashoffset',length*(1-t));clip.attr('width',Math.max(0,moveHead(t).x-left+8));}).on('end',()=>{trend.attr('stroke-dasharray',null).attr('stroke-dashoffset',null);clip.attr('width',width-left+8);moveHead(1);});
 }
 if(active!==null)show(active);
 }
@@ -93,5 +96,10 @@ window.addEventListener('pageshow',e=>{if(e.persisted){armed=true;replayIfReady(
 new ResizeObserver(()=>{if(Math.round(plot.getBoundingClientRect().width)!==lastWidth){draw();if(!entered&&!reduced.matches)svg.select('.line-marks').attr('visibility','hidden');}}).observe(plot);
 root.dispatchEvent(new Event('qv:ready',{bubbles:true}));
 })();
+requestAnimationFrame(()=>alignMermaidLegends(document.getElementById('{{ROOT_ID}}')));
 </script>
 </div>
+
+<style>
+{{CHART_POLISH_CSS}}
+</style>

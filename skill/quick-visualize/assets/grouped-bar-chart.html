@@ -13,7 +13,7 @@
 #{{ROOT_ID}} .mark{transition:fill-opacity 180ms ease}
 #{{ROOT_ID}} .month-controls{display:grid;gap:0;margin-top:-36px;position:relative}
 #{{ROOT_ID}} .month-controls button{font:inherit;font-size:12px;min-height:36px;background:transparent;border:0;border-radius:0;padding:4px 0;color:var(--muted-foreground);cursor:var(--cursor-interaction,pointer)}
-#{{ROOT_ID}} .bubble{position:absolute;z-index:3;pointer-events:none;width:188px;max-width:calc(100% - 16px);padding:12px 14px;background:var(--popover);color:var(--popover-foreground);border:1px solid color-mix(in srgb,var(--border) 70%,transparent);border-radius:var(--tip-radius);box-shadow:0 4px 16px color-mix(in srgb,var(--foreground) 10%,transparent)}
+#{{ROOT_ID}} .bubble{position:absolute;z-index:3;pointer-events:none;width:188px;max-width:calc(100% - 16px);padding:12px 14px;background:var(--qv-tip-surface,var(--popover));color:var(--popover-foreground);border:1px solid color-mix(in srgb,var(--border) 70%,transparent);border-radius:var(--tip-radius);box-shadow:var(--qv-tip-shadow)}
 #{{ROOT_ID}} .bubble[hidden]{display:none}
 #{{ROOT_ID}} .bubble-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;font-weight:500}
 #{{ROOT_ID}} .bubble-row{display:grid;grid-template-columns:9px 1fr auto;align-items:center;gap:8px;margin-top:8px;font-size:12px;transition:opacity 150ms}
@@ -29,6 +29,9 @@
 <div class="bubble" role="tooltip" hidden><div class="bubble-head"><span class="bubble-month"></span></div><div class="bubble-rows"></div></div>
 <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
 <script>
+{{CHART_MOTION_JS}}
+{{CHART_DETAIL_POSITION_JS}}
+{{CHART_LEGEND_JS}}
 (()=>{
 const root=document.getElementById('{{ROOT_ID}}'),config={{CONFIG_JSON}},count=config.series.length;
 const numberFormat=new Intl.NumberFormat(undefined,{minimumFractionDigits:config.decimals,maximumFractionDigits:config.decimals});const formatValue=v=>config.valuePrefix+numberFormat.format(v)+config.valueSuffix;
@@ -87,7 +90,7 @@ added.attr('x',d=>x(d.c,d.s)).attr('width',barWidth);
 if(entrance)merged.attr('x',d=>x(d.c,d.s)).attr('width',barWidth).attr('y',base).attr('height',0);
 const tokens=getComputedStyle(root);
 const duration=d=>{if(reduced.matches)return 0;if(!entrance)return animate?220:0;const t=d.c/(categories.length-1),weight=t*t*(3-2*t);return parseFloat(tokens.getPropertyValue('--enter'))+parseFloat(tokens.getPropertyValue('--enter-spread'))*weight;};
-const easing=entrance?d3.easeCubicInOut:d3.easePolyOut.exponent(4);
+const easing=entrance?mermaidEntryProgress:d3.easePolyOut.exponent(4);
 merged.transition().duration(duration).delay(0).ease(easing).attr('x',d=>x(d.c,d.s)).attr('width',barWidth).attr('y',d=>y(d.v)).attr('height',d=>base-y(d.v));
 const labels=svg.selectAll('.value').data(count===2&&width>=520&&values.every(d=>measure.measureText(formatValue(d.v)).width<barWidth+gap-2)?values:[],d=>`${d.c}-${d.s}`);labels.exit().remove();const valueLabels=labels.enter().append('text').attr('class','value').attr('text-anchor','middle').merge(labels).text(d=>formatValue(d.v)).attr('x',d=>x(d.c,d.s)+barWidth/2);if(entrance&&!reduced.matches)valueLabels.attr('y',base-8);valueLabels.transition().duration(duration).delay(0).ease(easing).attr('y',d=>y(d.v)-8);
 svg.selectAll('.hit').data(d3.range(categories.length)).join('rect').attr('class','hit').attr('x',c=>left+step*c).attr('y',top).attr('width',step).attr('height',base-top).attr('fill','transparent').style('cursor','var(--cursor-interaction,pointer)').on('pointerenter pointermove',(e,c)=>{legendHover=null;hover={c,s:null};paint();}).on('pointerleave',()=>{hover=null;paint();});
@@ -104,5 +107,10 @@ new ResizeObserver(()=>{if(Math.round(plot.getBoundingClientRect().width)!==last
 window.addEventListener('openai:set_globals',e=>{if(e.detail?.globals?.widgetState){restore(e.detail.globals.widgetState);draw();}});
 root.dispatchEvent(new Event('qv:ready',{bubbles:true}));
 })();
+requestAnimationFrame(()=>alignMermaidLegends(document.getElementById('{{ROOT_ID}}')));
 </script>
 </div>
+
+<style>
+{{CHART_POLISH_CSS}}
+</style>

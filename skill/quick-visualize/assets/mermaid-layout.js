@@ -18,10 +18,25 @@ async function loadMermaidLayoutEngine() {
   })().catch(error=>{elkLoad=null;throw error;});
   await elkLoad;
 }
-async function prepareMermaidLayout(data) {
+async function prepareMermaidLayout(data){
+ // 流程图没有显式回流标记：先排一次，按主轴位置找出指向上游的连线，再改端口重排。
+ for(const e of data.edges)if(e.__qvBack){delete e.fromSide;delete e.toSide;delete e.__qvBack;}
+ await __qvBaseLayout(data);
+ if(data.kind!=='flowchart')return;
+ const map=new Map(data.nodes.map(n=>[n.id,n])),lr=['LR','RL'].includes(data.direction),flipped=['RL','BT'].includes(data.direction);
+ const at=n=>lr?n.x+n.w/2:n.y+n.h/2;let changed=false;
+ for(const e of data.edges){if(e.fromSide||e.toSide||e.from===e.to)continue;const a=map.get(e.from),b=map.get(e.to);if(!a||!b)continue;
+  const d=at(b)-at(a);if(!(flipped?d>0:d<0))continue;
+  // 同组回流与正向线并行；跨组回流走组外侧的单条通道，避免层级布线绕大圈。
+  if((a.parent||null)===(b.parent||null)){const lr=['LR','RL'].includes(data.direction),flip=['RL','BT'].includes(data.direction);
+e.fromSide=lr?(flip?'EAST':'WEST'):(flip?'SOUTH':'NORTH');e.toSide=lr?(flip?'WEST':'EAST'):(flip?'NORTH':'SOUTH');}else{e.fromSide=e.toSide=lr?'SOUTH':'EAST';}
+  e.__qvBack=true;changed=true;}
+ if(changed)await __qvBaseLayout(data);
+}
+async function __qvBaseLayout(data) {
   await loadMermaidLayoutEngine();
   const direction={TB:'DOWN',BT:'UP',LR:'RIGHT',RL:'LEFT'};
-  const graph={id:'qv-layout',layoutOptions:{'elk.algorithm':'layered','elk.direction':direction[data.direction]||'DOWN','elk.hierarchyHandling':'INCLUDE_CHILDREN','elk.edgeRouting':'ORTHOGONAL','elk.json.edgeCoords':'ROOT','elk.spacing.nodeNode':'38','elk.layered.spacing.nodeNodeBetweenLayers':data.navigation?'56':'84','elk.padding':'[top=28,left=28,bottom=28,right=28]',...(['er','class'].includes(data.kind)?{'elk.spacing.edgeNode':'28','elk.layered.spacing.edgeNodeBetweenLayers':'28'}:{}),...(data.kind==='state'?{'elk.layered.cycleBreaking.strategy':'MODEL_ORDER','elk.layered.considerModelOrder.strategy':'NODES_AND_EDGES','elk.layered.spacing.nodeNodeBetweenLayers':'48'}:{})},children:[],edges:[]};
+  const graph={id:'qv-layout',layoutOptions:{'elk.algorithm':'layered',...(data.kind==='flowchart'?{'elk.layered.cycleBreaking.strategy':'MODEL_ORDER'}:{}),'elk.layered.nodePlacement.bk.fixedAlignment':'BALANCED','elk.direction':direction[data.direction]||'DOWN','elk.hierarchyHandling':'INCLUDE_CHILDREN','elk.edgeRouting':'ORTHOGONAL','elk.json.edgeCoords':'ROOT','elk.spacing.nodeNode':'38','elk.layered.spacing.nodeNodeBetweenLayers':data.navigation?'56':'84','elk.padding':'[top=28,left=28,bottom=28,right=28]',...(['er','class'].includes(data.kind)?{'elk.spacing.edgeNode':'28','elk.layered.spacing.edgeNodeBetweenLayers':'28'}:{}),...(data.kind==='state'?{'elk.layered.cycleBreaking.strategy':'MODEL_ORDER','elk.layered.considerModelOrder.strategy':'NODES_AND_EDGES','elk.layered.spacing.nodeNodeBetweenLayers':'48'}:{})},children:[],edges:[]};
   const byId=new Map([[null,graph]]);
   for(const g of data.groups||[])byId.set(g.id,{id:g.id,children:[],layoutOptions:{'elk.padding':'[top=44,left=24,bottom=24,right=24]',...(g.direction?{'elk.direction':direction[g.direction]}:{}),...(data.kind==='state'?{'elk.layered.cycleBreaking.strategy':'MODEL_ORDER'}:{})}});
   for(const g of data.groups||[])(byId.get(g.parent)||graph).children.push(byId.get(g.id));
@@ -47,7 +62,8 @@ async function prepareMermaidLayout(data) {
 }
 
 // 使用 Mermaid 自己的方向约束布局；只读取显式节点 ID 对应的几何，不从图形猜测关系。
-async function prepareNativeGeometry(data,mermaid,source,db,architecture) {
+async function prepareArchitectureLayout(data){const measure=(name,width)=>{const t=document.createElement('span');t.style.cssText='position:absolute;left:-100000px;width:'+width+'px;font:500 14px/20px '+getComputedStyle(root).fontFamily+';white-space:normal;overflow-wrap:anywhere';t.textContent=name;root.append(t);const h=t.offsetHeight;t.remove();return h;};for(const n of data.nodes){if(n.junction){n.layoutWidth=n.layoutHeight=10;}else{n.layoutWidth=240;n.layoutHeight=Math.max(48,26+measure(n.name,184));}}const sideways=data.edges.filter(e=>['EAST','WEST'].includes(e.fromSide)).length;data.direction=sideways*2>=data.edges.length?'LR':'TB';root.dataset.layoutMode='arch-elk';await prepareMermaidLayout(data);}
+async function prepareNativeGeometry(data,mermaid,source,db,architecture) {let gridFailed=false;
  if(window.lucide){const icons={};for(const name of new Set(data.nodes.map(n=>n.icon).filter(Boolean))){const key=name.replace(/(^|-)([a-z0-9])/g,(_,dash,c)=>c.toUpperCase()),definition=window.lucide.icons[key];if(!definition)continue;const svg=window.lucide.createElement(definition),group=document.createElementNS(svg.namespaceURI,'g');for(const a of svg.attributes)if(!['width','height','viewBox','xmlns','class'].includes(a.name))group.setAttribute(a.name,a.value);for(const child of [...svg.children])group.append(child);icons[name]={body:group.outerHTML};}mermaid.registerIconPacks([{name:'lucide',icons:{prefix:'lucide',width:24,height:24,icons}}]);}
  const id='qv-measure-'+Math.random().toString(36).slice(2),result=await mermaid.render(id,source),host=document.createElement('div');host.style.cssText='position:absolute;left:-100000px;visibility:hidden;pointer-events:none';host.innerHTML=result.svg;document.body.append(host);
  try {
@@ -56,13 +72,13 @@ async function prepareNativeGeometry(data,mermaid,source,db,architecture) {
   const rect=(id,service=false)=>{const el=host.querySelector('#'+CSS.escape(id));if(!el)throw new Error('缺少布局节点：'+id);let b=el.getBoundingClientRect();if(service){const matrix=el.getScreenCTM(),size=db.getConfigField('iconSize'),p=new DOMPoint(0,0).matrixTransform(matrix);b={x:p.x,y:p.y,width:size*matrix.a,height:size*matrix.d};}return {x:(b.x-sr.x)*scaleX+24,y:(b.y-sr.y)*scaleY+24,w:b.width*scaleX,h:b.height*scaleY};};
   const measureText=(name,width,size=14)=>{const text=document.createElement('span');text.style.cssText='position:absolute;left:-100000px;width:'+width+'px;font:'+'500 '+size+'px/'+(size===14?20:18)+'px '+getComputedStyle(root).fontFamily+';white-space:normal;overflow-wrap:anywhere';text.textContent=name;root.append(text);const height=text.offsetHeight;text.remove();return height;};
   for(const n of data.nodes){const b=rect(architecture?(n.junction?'node-':'service-')+n.id:db.lookUpDomId(n.id),architecture&&!n.junction);n.w=n.junction?10:Math.max(154,Math.min(260,b.w));n.h=n.junction?10:['circle','doublecircle'].includes(n.shape)?n.w:['diamond','hexagon'].includes(n.shape)?94:48;if(architecture&&!n.junction){n.w=240;n.h=Math.max(48,26+measureText(n.name,n.w-56));}if(data.kind==='flowchart')Object.assign(n,measureFlowchartNode(n,root.dataset.hasGroups==='true'));n.x=b.x+b.w/2-n.w/2;n.y=b.y+b.h/2-n.h/2;}
-  const groups=data.groups.map(g=>({...g,...rect(architecture?'group-'+g.id:g.id)}));
+  if(architecture){const snap=(key,size)=>{const items=data.nodes.map(n=>({n,c:n[key]+n[size]/2})).sort((a,b)=>a.c-b.c),levels=[];for(const it of items){const last=levels.at(-1);if(last&&it.c-last.c<=24)last.items.push(it);else levels.push({c:it.c,items:[it]});}return levels;};const cols=snap('x','w'),rows=snap('y','h'),depth=Math.max(0,...data.groups.map(g=>{let d=1,p=g.parent;while(p){d++;p=data.groups.find(x=>x.id===p)?.parent;}return d;})),colGap=48+48*depth,rowGap=48+68*depth,colOf=new Map(),rowOf=new Map(),cells=new Set();cols.forEach((l,i)=>l.items.forEach(it=>colOf.set(it.n,i)));rows.forEach((l,i)=>l.items.forEach(it=>rowOf.set(it.n,i)));for(const n of data.nodes)cells.add(colOf.get(n)+':'+rowOf.get(n));if(cells.size!==data.nodes.length)gridFailed=true;else{const colW=cols.map(l=>Math.max(...l.items.map(it=>it.n.w))),rowH=rows.map(l=>Math.max(...l.items.map(it=>it.n.h))),colX=[],rowY=[];colW.reduce((x,w,i)=>(colX[i]=x,x+w+colGap),24);rowH.reduce((y,h,i)=>(rowY[i]=y,y+h+rowGap),68);for(const n of data.nodes){const c=colOf.get(n),r=rowOf.get(n);n.x=colX[c]+(colW[c]-n.w)/2;n.y=rowY[r]+(rowH[r]-n.h)/2;}}}const groups=data.groups.map(g=>({...g,...rect(architecture?'group-'+g.id:g.id)}));
   // 将原生图标布局转换成卡片后重新包住后代，并为标题留空间。
   const children=id=>[...data.nodes.filter(n=>n.parent===id),...groups.filter(g=>g.parent===id)];
   function bounds(g){for(const child of groups.filter(n=>n.parent===g.id))bounds(child);const list=children(g.id);if(list.length){const x=Math.min(...list.map(n=>n.x))-24,y=Math.min(...list.map(n=>n.y))-44;g.w=Math.max(Math.max(...list.map(n=>n.x+n.w))+24-x,architecture?240:0);g.h=Math.max(...list.map(n=>n.y+n.h))+24-y;g.x=x;g.y=y;}}
-  for(const g of groups.filter(g=>!g.parent))bounds(g);
+  for(const g of groups.filter(g=>!g.parent))bounds(g);if(architecture){const inside=(n,g)=>{for(let p=n.parent;p;p=groups.find(x=>x.id===p)?.parent)if(p===g.id)return true;return false;};if(gridFailed||groups.some(g=>data.nodes.some(n=>!inside(n,g)&&n.x<g.x+g.w&&g.x<n.x+n.w&&n.y<g.y+g.h&&g.y<n.y+n.h)))return prepareArchitectureLayout(data);}
   const all=[...groups,...data.nodes],dx=24-Math.min(...all.map(n=>n.x)),dy=24-Math.min(...all.map(n=>n.y));for(const n of all){n.x+=dx;n.y+=dy;}
-  finishMermaidGeometry(data,groups,architecture);
+  if(architecture){try{finishMermaidGeometry(data,groups,architecture);root.dataset.layoutMode='arch-grid';}catch(error){return prepareArchitectureLayout(data);}}else finishMermaidGeometry(data,groups,architecture);
  } finally{host.remove();}
 }
 function routeAroundNodes(start,end,nodes){
@@ -98,27 +114,11 @@ function measureFlowchartNode(n,grouped){
 async function prepareFlowchartLayout(data,mermaid,source){
  data.balanced=false;
  if(data.nativeGeometry)await prepareNativeGeometry(data,mermaid,source,data.db,false);else await prepareMermaidLayout(data);
- if(data.navigation||data.nodes.length<16||Math.max(data.layout.width,data.layout.height)<2400||Math.max(data.layout.width/data.layout.height,data.layout.height/data.layout.width)<3)return;
- // 只折叠过长的流程，按源节点顺序蛇形排列；每层分组独立保留边界。
- const groups=(data.groups||[]).map(g=>({...g}));
- const place=parent=>{
-  const items=[...data.nodes.filter(n=>(n.parent||null)===parent),...groups.filter(g=>(g.parent||null)===parent)];
-  const order=n=>groups.includes(n)?Math.min(...data.nodes.filter(node=>{for(let parent=node.parent;parent;parent=groups.find(g=>g.id===parent)?.parent)if(parent===n.id)return true;return false;}).map(node=>data.nodes.indexOf(node))):data.nodes.indexOf(n);items.sort((a,b)=>order(a)-order(b));
-  for(const g of items.filter(n=>groups.includes(n)))Object.assign(g,place(g.id));
-  if(!items.length)return {w:160,h:80};
-  const direction=groups.find(g=>g.id===parent)?.direction||data.direction,vertical=['TB','BT'].includes(direction);
-  let best;
-  for(let lanes=1;lanes<=items.length;lanes++){
-   const cells=items.map((n,i)=>{const run=Math.floor(i/lanes),offset=i%lanes,across=run%2?lanes-1-offset:offset;return {n,c:vertical?run:across,r:vertical?across:run};});
-   const cols=Array.from({length:Math.max(...cells.map(c=>c.c))+1},(_,i)=>Math.max(...cells.filter(c=>c.c===i).map(c=>c.n.w))),rows=Array.from({length:Math.max(...cells.map(c=>c.r))+1},(_,i)=>Math.max(...cells.filter(c=>c.r===i).map(c=>c.n.h)));
-   const w=cols.reduce((a,b)=>a+b,0)+(cols.length-1)*84+48,h=rows.reduce((a,b)=>a+b,0)+(rows.length-1)*72+68;
-   const score=Math.abs(Math.log(w/h))+.06*(w*h)/(items.reduce((sum,n)=>sum+n.w*n.h,0));
-   if(!best||score<best.score)best={cells,cols,rows,w,h,score};
-  }
-  for(const {n,c,r} of best.cells){n.x=24+best.cols.slice(0,c).reduce((a,b)=>a+b+84,0)+(best.cols[c]-n.w)/2;n.y=44+best.rows.slice(0,r).reduce((a,b)=>a+b+72,0)+(best.rows[r]-n.h)/2;if(direction==='RL')n.x=best.w-n.x-n.w;if(direction==='BT')n.y=best.h-n.y-n.h;}
-  return {w:best.w,h:best.h};
- };
- place(null);
- const translate=(parent,dx=0,dy=0)=>{for(const n of [...data.nodes,...groups].filter(n=>(n.parent||null)===parent)){n.x+=dx;n.y+=dy;if(groups.includes(n))translate(n.id,n.x,n.y);}};translate(null);
- data.balanced=true;finishMermaidGeometry(data,groups);
-}
+ {const limit=cfg.readingWidth||root.clientWidth;
+if(data.navigation||data.layout.width<=limit){root.dataset.layoutMode="fit";return;}
+if(!data.nativeGeometry){const original=data.direction,first=data.layout.width,swap=['LR','RL'].includes(original)?'TB':'LR';
+data.direction=swap;await prepareMermaidLayout(data);
+if(data.layout.width<=limit){root.dataset.layoutMode="axis";return;}
+if(data.layout.width<first){root.dataset.layoutMode="axis-scroll";return;}
+data.direction=original;await prepareMermaidLayout(data);}
+root.dataset.layoutMode="scroll";return;}}

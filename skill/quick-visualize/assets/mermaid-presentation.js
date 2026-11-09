@@ -13,14 +13,14 @@ function placeMermaidDetail(root,tip,anchor,event,preferredWidth=280){
  const obstacles=[...root.querySelectorAll('button,h3')].filter(n=>n!==anchor&&!tip.contains(n)).map(n=>{const b=n.getBoundingClientRect();return{x:b.left-rr.left,y:b.top-rr.top,w:b.width,h:b.height};});
  for(const c of candidates){c.anchor=overlap(c,{x,y,w:aw,h:ah});c.score=obstacles.reduce((sum,o)=>sum+overlap(c,o),0)+c.distance*8;}
  candidates.sort((a,b)=>a.anchor-b.anchor||a.score-b.score);const c=candidates[0]||{x:Math.max(4,Math.min(root.clientWidth-w-4,x)),y:y+ah+12};
- tip.style.left=c.x+'px';tip.style.top=c.y+'px';tip.dataset.placement='near';
+ tip.style.left=c.x+'px';tip.style.top=c.y+'px';tip.dataset.placement='near';tip.style.transformOrigin=`${Math.max(0,Math.min(w,x+aw/2-c.x))}px ${Math.max(0,Math.min(h,y+ah/2-c.y))}px`;
 }
 function createMermaidHover(root,clear){
  let enter=0,leave=0,current=null;
  const cancel=()=>{clearTimeout(enter);clearTimeout(leave);};const reset=()=>{current=null;clear();};
  root.addEventListener('keydown',e=>{if(e.key==='Escape'){cancel();current=null;}});root.addEventListener('qv:display-mode',cancel);
  return (element,activate)=>{
-  const queue=()=>{cancel();if(current!==element)enter=setTimeout(()=>{current=element;activate();},100);};element.onpointerenter=queue;element.onpointermove=queue;
+  const queue=()=>{cancel();if(current!==element)enter=setTimeout(()=>{current=element;activate();},current?0:100);};element.onpointerenter=queue;element.onpointermove=queue;
   element.onpointerleave=()=>{clearTimeout(enter);leave=setTimeout(reset,160);};
   element.onfocus=()=>{cancel();current=element;activate(true);};element.onblur=()=>{cancel();reset();};element.onclick=()=>{cancel();current=element;activate(true);};
  };

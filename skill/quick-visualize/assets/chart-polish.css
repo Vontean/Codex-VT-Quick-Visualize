@@ -1,0 +1,22 @@
+#{{ROOT_ID}}{--qv-ease-out:cubic-bezier(.23,1,.32,1);--qv-tip-shadow:0 4px 16px light-dark(color-mix(in srgb,var(--foreground) 9%,transparent),rgb(0 0 0/.5));--qv-tip-surface:light-dark(var(--popover),color-mix(in srgb,var(--popover-foreground) 6%,var(--popover)))}
+#{{ROOT_ID}} :is(.node-tip,.seq-tip,.er-tip,.class-tip,.state-tip,.state-peers,.xy-tip,.sankey-detail,.radar-detail,.quadrant-detail,.architecture-detail,.bubble,.quick-radar-tooltip){background:var(--qv-tip-surface);color:var(--popover-foreground);border:1px solid var(--border);border-radius:12px;padding:12px 14px;font-size:12px;line-height:18px;box-shadow:var(--qv-tip-shadow);transition:opacity 140ms var(--qv-ease-out),scale 140ms var(--qv-ease-out)}
+@starting-style{#{{ROOT_ID}} :is(.node-tip,.seq-tip,.er-tip,.class-tip,.state-tip,.state-peers,.xy-tip,.sankey-detail,.radar-detail,.quadrant-detail,.architecture-detail,.bubble,.quick-radar-tooltip){opacity:0;scale:.97}}
+#{{ROOT_ID}} :is(.xy-tip-title,.sankey-detail-title,.radar-detail-title,.c4-tip-title,.state-tip-name,.bubble-title,.bubble-date,.bubble-month,.bubble-head,.quick-radar-tooltip-dimension,.seq-tip-title,.er-tip-title,.class-tip-title,.block-tip-title,.quadrant-detail-title,.architecture-detail-title){font-size:14px;line-height:20px;font-weight:500}
+#{{ROOT_ID}} :is(.xy-tip-name,.radar-detail-name,.quick-radar-tooltip-name){color:var(--muted-foreground);font-weight:400}
+#{{ROOT_ID}} :is(.xy-tip-value,.radar-detail-value,.quick-radar-tooltip-value,.bubble-value,.bubble-percent,.bubble-row strong){color:var(--popover-foreground);font-weight:500;font-variant-numeric:tabular-nums}
+#{{ROOT_ID}} :is(.state-tip-caption,.architecture-detail-label){font-size:12px;line-height:18px}
+@media (prefers-reduced-motion:reduce){#{{ROOT_ID}} :is(.node-tip,.seq-tip,.er-tip,.class-tip,.state-tip,.state-peers,.xy-tip,.sankey-detail,.radar-detail,.quadrant-detail,.architecture-detail,.bubble,.quick-radar-tooltip){transition:none}}
+
+/* 规则 37：标题、正文与辅助信息保持稳定层级。 */
+#{{ROOT_ID}} h3{font-size:16px;line-height:24px;overflow-wrap:anywhere}
+#{{ROOT_ID}} .state-node{font-size:14px;line-height:20px}
+#{{ROOT_ID}} .timeline-period{font-size:14px}
+#{{ROOT_ID}} .er-type{color:var(--muted-foreground)}
+
+/* 内容画布在宽容器内居中，超宽时保留左侧可达的滚动起点。 */
+#{{ROOT_ID}}:is([data-renderer="qv-quadrant"],[data-renderer="qv-er"],[data-renderer="qv-class"]) .scene{margin-inline:auto}
+/* Journey 的固定参考轴与步骤画布一起居中，溢出时只滚动步骤。 */
+#{{ROOT_ID}}[data-renderer="qv-journey"] .journey-frame{max-width:100%;margin-inline:auto}
+#{{ROOT_ID}}:is([data-renderer="qv-radar"],[data-renderer="qv-sankey"]) h3{margin-inline:0;text-align:center}
+
+#{{ROOT_ID}} [role="tooltip"]{overflow-wrap:anywhere}

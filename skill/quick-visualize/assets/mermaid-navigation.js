@@ -1,4 +1,4 @@
-// 下钻只改变可见投影；完整模型与关系始终保留。
+// 状态图的层级投影；流程图和架构图始终绘制完整模型。
 function mermaidScopeView(model, scope = null) {
   const groups = new Map((model.groups || []).map(g => [g.id, g]));
   const all = new Map([...groups.values(), ...model.nodes].map(n => [n.id, n]));
@@ -65,33 +65,4 @@ function mermaidScopeView(model, scope = null) {
   for(const edge of edges)if(edge.members.length>1)edge.bundleCount=edge.members.length;
   return {nodes:[...visible.values()],edges,groups:[],layers:[],generic:true,navigation:true,
     direction:model.direction||'LR',grouped:false,scope,kind:model.kind,architectureCards:!!model.architecture||model.kind==='flowchart'};
-}
-
-
-// 总览保留源码的分组顺序，反馈连接绕到外围，不让循环反转主阅读方向。
-async function prepareNavigationView(data){
- if(!['LR','RL'].includes(data.direction)||data.scope!==null||!data.nodes.length||data.nodes.length>5||!data.nodes.every(n=>n.groupCard))return prepareMermaidLayout(data);
- const reversed=['RL','BT'].includes(data.direction),ordered=reversed?[...data.nodes].reverse():data.nodes;
- const width=data.architectureCards?320:184,gap=64,top=24,maxHeight=Math.max(...ordered.map(n=>n.preview.height));
- ordered.forEach((n,i)=>Object.assign(n,{x:16+i*(width+gap),y:top+(maxHeight-n.preview.height)/2,w:width,h:n.preview.height,layer:i}));
- const map=new Map(data.nodes.map(n=>[n.id,n]));let returns=0;
- data.edges.forEach(e=>{const a=map.get(e.from),b=map.get(e.to),forward=reversed?a.x>b.x:a.x<b.x;
-  if(forward&&Math.abs(a.x-b.x)<(width+gap)*1.1){
-   const right=b.x>a.x,sx=a.x+(right?a.w:0),tx=b.x+(right?0:b.w),sy=a.y+a.h/2+(e.async?18:-10),ty=b.y+b.h/2+(e.async?18:-10);
-   e.curve=[sx,sy,(sx+tx)/2,sy,(sx+tx)/2,ty,tx,ty];e.points=undefined;e.labelPosition={x:(sx+tx)/2,y:(sy+ty)/2-10};
-  }else{
-   const y=top+maxHeight+90+returns++*36,side=b.x>a.x?1:-1,ax=a.x+a.w/2+side*12,bx=b.x+b.w/2-side*12;
-   e.curve=[ax,a.y+a.h,ax,y,bx,y,bx,b.y+b.h+1];e.points=undefined;e.labelPosition={x:(ax+bx)/2,y:((a.y+a.h)+6*y+(b.y+b.h))/8-10};
-  }
- });
- data.layout={width:ordered.length*width+(ordered.length-1)*gap+32,height:top+maxHeight+returns*36+70,groups:[]};
-}
-
-// 局部视图完整展示当前层；过宽时尝试纵向排布，不按邻域过滤节点。
-async function prepareCompleteScope(data,width){
- await prepareNavigationView(data);
- if(data.scope===null||data.layout.width<=width||!['LR','RL'].includes(data.direction)||data.edges.some(e=>e.fromSide||e.toSide))return;
- const alternative={...data,direction:'TB',nodes:data.nodes.map(n=>({...n})),edges:data.edges.map(e=>({...e,curve:undefined,points:undefined})),groups:[]};
- await prepareMermaidLayout(alternative);
- if(alternative.layout.width<data.layout.width)Object.assign(data,alternative);
 }

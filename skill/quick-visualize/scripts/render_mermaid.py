@@ -1,4 +1,5 @@
 """Keep Mermaid source intact; add only presentation metadata."""
+from chart_assets import compile_chart_assets
 import hashlib
 import html
 import json
@@ -33,8 +34,6 @@ def render(spec, output_path):
     if not isinstance(legend, dict) or set(legend) - {'solid', 'dotted'} or any(not isinstance(v, str) or not v.strip() or len(v) > 80 for v in legend.values()):
         raise ValueError('legend must map solid/dotted to nonempty labels of at most 80 characters')
     config = {'source': source, 'title': title, 'descriptions': descriptions}
-    if 'navigation' in spec:
-        config['navigation'] = spec['navigation']
     if 'legend' in spec:
         config['legend'] = legend
     if 'icons' in spec:
@@ -47,7 +46,7 @@ def render(spec, output_path):
         encoded = encoded.replace(char, '\\u%04x' % ord(char))
     values = {'{{ROOT_ID}}': 'qv-mermaid-' + digest, '{{TITLE}}': html.escape(title),
               '{{TITLE_HIDDEN}}': '' if title else 'hidden', '{{CONFIG_JSON}}': encoded}
-    fragment = TEMPLATE_PATH.read_text(encoding='utf-8').replace('{{MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-model.js').read_text(encoding='utf-8')).replace('{{LAYOUT_JS}}', TEMPLATE_PATH.with_name('mermaid-layout.js').read_text(encoding='utf-8'))
+    fragment = compile_chart_assets(TEMPLATE_PATH.read_text(encoding='utf-8'), TEMPLATE_PATH.parent).replace('{{MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-model.js').read_text(encoding='utf-8')).replace('{{LAYOUT_JS}}', TEMPLATE_PATH.with_name('mermaid-layout.js').read_text(encoding='utf-8'))
     fragment = fragment.replace('{{NAVIGATION_JS}}', TEMPLATE_PATH.with_name('mermaid-navigation.js').read_text(encoding='utf-8'))
     fragment = fragment.replace('{{ARCHITECTURE_READER_JS}}', TEMPLATE_PATH.with_name('mermaid-architecture-reader.js').read_text(encoding='utf-8'))
     fragment = fragment.replace('{{PRESENTATION_JS}}', TEMPLATE_PATH.with_name('mermaid-presentation.js').read_text(encoding='utf-8'))
@@ -86,6 +85,8 @@ def render(spec, output_path):
     fragment = fragment.replace('{{PIE_JS}}', TEMPLATE_PATH.with_name('mermaid-pie.js').read_text(encoding='utf-8'))
     fragment = fragment.replace('{{KANBAN_MODEL_JS}}', TEMPLATE_PATH.with_name('mermaid-kanban-model.js').read_text(encoding='utf-8'))
     fragment = fragment.replace('{{KANBAN_JS}}', TEMPLATE_PATH.with_name('mermaid-kanban.js').read_text(encoding='utf-8'))
+    fragment = fragment.replace('{{GIT_JS}}', TEMPLATE_PATH.with_name('mermaid-git.js').read_text(encoding='utf-8'))
+    fragment = fragment.replace('{{TITLE_JS}}', TEMPLATE_PATH.with_name('mermaid-title.js').read_text(encoding='utf-8'))
     fragment = fragment.replace('{{CHART_PRESETS_JS}}', compile_presets(TEMPLATE_PATH.parent))
     for key, value in values.items():
         fragment = fragment.replace(key, value)

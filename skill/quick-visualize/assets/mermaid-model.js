@@ -92,7 +92,7 @@ async function readMermaidModel(mermaid,source,descriptions) {
   if(simple.diagramType==='c4')return readMermaidC4Model(mermaid,source,descriptions);
   if(simple.diagramType==='quadrantChart')return readMermaidQuadrantModel(mermaid,source,descriptions);
   if(simple.data){simple.data.kind='flowchart';simple.data.generic=true;return simple;}
-  const parsed=await mermaid.parse(source),diagram=await mermaid.mermaidAPI.getDiagramFromText(source),db=diagram.db;
+  const parsed=await mermaid.parse(source),diagram=await mermaid.mermaidAPI.getDiagramFromText(source,{title:await readMermaidTitle(source)}),db=diagram.db;
   if(parsed.diagramType==='sequence')return readMermaidSequenceModel(mermaid,source,descriptions);
   if(parsed.diagramType==='sankey')return readMermaidSankeyModel(db,descriptions);
   if(parsed.diagramType==='radar')return readMermaidRadarModel(db,descriptions);
@@ -102,7 +102,7 @@ async function readMermaidModel(mermaid,source,descriptions) {
   if(parsed.diagramType==='gantt')return readMermaidGanttModel(db,descriptions);
   if(parsed.diagramType==='mindmap')return readMermaidMindmapModel(db,descriptions);
   if(parsed.diagramType==='journey')return readMermaidJourneyModel(db,descriptions);
-  if(parsed.diagramType==='timeline')return readMermaidTimelineModel(db,descriptions);
+  if(parsed.diagramType==='timeline')return readMermaidTimelineModel(db,descriptions);if(parsed.diagramType==='gitGraph')return readMermaidGitModel(db,descriptions);
   if(parsed.diagramType==='class')return readMermaidClassModel(db,descriptions);
   if(parsed.diagramType==='er')return readMermaidErModel(db,descriptions);
   if(parsed.diagramType==='stateDiagram')return readMermaidStateModel(db,descriptions);

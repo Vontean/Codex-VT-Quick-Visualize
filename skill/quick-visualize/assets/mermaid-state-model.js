@@ -26,7 +26,7 @@ async function prepareMermaidStateLayout(data) {
     for(const n of siblings)if(!rank.has(n.id))rank.set(n.id,index++);
   }
   data.order=rank;
-  for(const e of data.edges){delete e.fromSide;delete e.toSide;if(e.from===e.to){e.fromSide=e.toSide=['LR','RL'].includes(data.direction)?'SOUTH':'EAST';continue;}if(all.find(n=>n.id===e.from)?.parent===all.find(n=>n.id===e.to)?.parent&&rank.get(e.from)>rank.get(e.to)){e.fromSide=e.toSide=['LR','RL'].includes(data.direction)?'NORTH':'WEST';}}
+  for(const e of data.edges){delete e.fromSide;delete e.toSide;if(e.from===e.to){e.fromSide=e.toSide=['LR','RL'].includes(data.direction)?'SOUTH':'EAST';continue;}if(all.find(n=>n.id===e.from)?.parent===all.find(n=>n.id===e.to)?.parent&&rank.get(e.from)>rank.get(e.to)){const lr=['LR','RL'].includes(data.direction),flip=['RL','BT'].includes(data.direction);e.fromSide=lr?(flip?'EAST':'WEST'):(flip?'SOUTH':'NORTH');e.toSide=lr?(flip?'WEST':'EAST'):(flip?'NORTH':'SOUTH');}}
   data.balanced=false;await prepareMermaidLayout(data);
   for(const n of data.nodes)n.layer=Math.min(6,rank.get(n.id)||0);
 }

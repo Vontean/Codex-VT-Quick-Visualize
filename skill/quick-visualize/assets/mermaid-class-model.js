@@ -23,10 +23,10 @@ async function prepareMermaidClassLayout(data) {
  for(const e of data.edges)if(e.from===e.to)e.fromSide=e.toSide=['LR','RL'].includes(data.direction)?'SOUTH':'EAST';
  await prepareMermaidLayout(data);
  // 类图同样只在大量节点且明显长条时比较另一方向，不强制普通图趋近正方形。
- if(data.nodes.length>=16&&Math.max(data.layout.width,data.layout.height)>=2400&&Math.max(data.layout.width/data.layout.height,data.layout.height/data.layout.width)>=3){
+ if(data.layout.width>root.clientWidth&&['LR','RL'].includes(data.direction)){
   const initial=structuredClone(data),ratio=d=>Math.abs(Math.log(d.layout.width/d.layout.height));data.direction=['LR','RL'].includes(data.direction)?'TB':'LR';
   for(const e of data.edges)if(e.from===e.to)e.fromSide=e.toSide=['LR','RL'].includes(data.direction)?'SOUTH':'EAST';
-  await prepareMermaidLayout(data);if(ratio(data)>=ratio(initial)||data.layout.width*data.layout.height>initial.layout.width*initial.layout.height*1.3)Object.assign(data,initial);
+  await prepareMermaidLayout(data);if(data.layout.width>=initial.layout.width)Object.assign(data,initial);
  }
 
  // 自关联单独留出阅读通道，保留源端点及 UML 方向。

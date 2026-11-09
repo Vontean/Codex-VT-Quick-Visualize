@@ -21,13 +21,13 @@ function renderMermaidMindmap(root,data){
 #${root.id} .error{color:var(--muted-foreground)}
 @media(prefers-reduced-motion:reduce){#${root.id} button.node,#${root.id} .wire{transition:none}}
 
-#${root.id} button.node{min-width:0;transform:none;text-align:center} #${root.id} .scene{min-width:0;margin:0} #${root.id} button.node-tip{max-width:260px}
+#${root.id} button.node{min-width:0;transform:none;text-align:center} #${root.id} .scene{min-width:0;margin:0} #${root.id} button.node-tip{max-width:260px} #${root.id} button.node.branch{border-color:color-mix(in srgb,var(--branch) 45%,var(--background));background:color-mix(in srgb,var(--branch) 10%,var(--background))} #${root.id} button.node.branch:hover{border-color:color-mix(in srgb,var(--branch) 75%,var(--background))} #${root.id} button.node.twig{color:color-mix(in srgb,var(--branch) 40%,var(--foreground))} #${root.id} .wire[data-branch]{stroke:color-mix(in srgb,var(--branch) 50%,var(--background))} #${root.id} .wire[data-depth="0"]{stroke-width:2} #${root.id} .wire[data-depth="1"]{stroke-width:1.5} #${root.id} .wire.active[data-branch]{stroke:color-mix(in srgb,var(--branch) 85%,var(--foreground))}
 `;root.append(style);
  const NS='http://www.w3.org/2000/svg',reduce=matchMedia('(prefers-reduced-motion:reduce)'),view=createMermaidViewport(root),isExpanded=()=>view.expanded;
  const model=data.nodes;let animations=[],visible=false,replayArmed=true,viewGeometry=null,inlineOffset=0;
 function highlight(id){const target=model.find(n=>n.id===id);if(target.description){tip.textContent=target.description;tip.hidden=false;tip.style.left='8px';tip.style.top='48px';}else tip.hidden=true;const active=new Set();let n=target;while(n){active.add(n.id);n=model.find(t=>t.id===n.parent);}const descendants=p=>{for(const c of model.filter(t=>t.parent===p)){active.add(c.id);descendants(c.id);}};descendants(id);scene.querySelectorAll('.node').forEach(b=>b.classList.toggle('dim',!active.has(b.dataset.id)));svg.querySelectorAll('.wire').forEach(p=>{const a=active.has(p.dataset.from)&&active.has(p.dataset.to);p.classList.toggle('dim',!a);p.classList.toggle('active',a);});}
 function clear(){tip.hidden=true;scene.querySelectorAll('.dim,.active').forEach(n=>n.classList.remove('dim','active'));}
-function replay(){if(reduce.matches||isExpanded())return;animations.forEach(a=>a.cancel());animations=[];scene.querySelectorAll('.node').forEach(b=>{animations.push(b.animate([{transform:'scale(.08)',opacity:0},{transform:'scale(1)',opacity:1}],{duration:240,delay:+b.dataset.depth*220,easing:'cubic-bezier(.2,.7,.3,1)',fill:'backwards'}));});svg.querySelectorAll('.wire').forEach(p=>{const length=p.getTotalLength();animations.push(p.animate([{strokeDasharray:`${length} ${length}`,strokeDashoffset:length},{strokeDasharray:`${length} ${length}`,strokeDashoffset:0}],{duration:650,delay:+p.dataset.depth*220,easing:'cubic-bezier(.2,.7,.3,1)',fill:'backwards'}));});root.dataset.replays=String(+(root.dataset.replays||0)+1);}
+function replay(){if(reduce.matches||isExpanded())return;animations.forEach(a=>a.cancel());animations=[];scene.querySelectorAll('.node').forEach(b=>{animations.push(animateMermaidEntry(b,[{transform:'scale(.08)',opacity:0},{transform:'scale(1)',opacity:1}],{duration:240,delay:+b.dataset.depth*220,easing:'cubic-bezier(.2,.7,.3,1)',fill:'backwards'}));});svg.querySelectorAll('.wire').forEach(p=>{const length=p.getTotalLength();animations.push(animateMermaidEntry(p,[{strokeDasharray:`${length} ${length}`,strokeDashoffset:length},{strokeDasharray:`${length} ${length}`,strokeDashoffset:0}],{duration:650,delay:+p.dataset.depth*220,easing:'cubic-bezier(.2,.7,.3,1)',fill:'backwards'}));});root.dataset.replays=String(+(root.dataset.replays||0)+1);}
 function draw(){
  const viewOffset=viewGeometry?.mode==='inline'?viewport.scrollLeft+viewGeometry.viewportWidth/2-viewGeometry.rootCenter:inlineOffset;
  if(viewGeometry?.mode==='inline')inlineOffset=viewOffset;
@@ -36,7 +36,7 @@ function draw(){
  const byId=new Map(model.map(n=>[n.id,n])),buttons=new Map(),sizes=new Map(),spans=new Map(),positions=new Map();
  const canvas=document.createElement('canvas'),context=canvas.getContext('2d');context.font='12px '+getComputedStyle(root).fontFamily;
  for(const n of model){
-  const leaf=n.children.length===0,b=document.createElement('button');b.type='button';b.className='node '+(n.depth===0?'root':n.depth===1?'branch':leaf?'leaf':'twig');b.textContent=n.label;b.dataset.id=n.id;b.dataset.depth=n.depth;b.setAttribute('aria-label',n.label+(n.description?' · '+n.description:''));
+  const leaf=n.children.length===0,b=document.createElement('button');b.type='button';b.className='node '+(n.depth===0?'root':n.depth===1?'branch':leaf?'leaf':'twig');b.textContent=n.label;b.dataset.id=n.id;b.dataset.depth=n.depth;b.setAttribute('aria-label',n.label+(n.description?' · '+n.description:''));if(n.depth>0){let owner=n;while(owner.depth>1)owner=byId.get(owner.parent);const k=model.filter(t=>t.depth===1).indexOf(owner);b.style.setProperty('--branch',`var(--viz-series-${k%6+1})`);}
   const w=n.depth===0?116:n.depth===1?100:Math.min(140,Math.max(76,Math.ceil(context.measureText(n.label).width)+32));
   Object.assign(b.style,{width:w+'px',minHeight:'44px',height:'auto',visibility:'hidden'});scene.append(b);
   const h=Math.max(44,Math.ceil(b.offsetHeight));sizes.set(n.id,{w,h});buttons.set(n.id,b);
@@ -60,7 +60,7 @@ function draw(){
  for(const side of ['left','right']){let cursor=(height-totals[side])/2;for(const n of sides[side]){place(n.id,side,cursor);cursor+=spans.get(n.id)+30;}}
  for(const n of model){const p=positions.get(n.id),b=buttons.get(n.id);b.classList.toggle('left',p.side==='left');Object.assign(b.style,{left:p.x+'px',top:p.y+'px',height:p.h+'px',visibility:''});
   if(n.parent){const a=positions.get(n.parent),left=p.side==='left',sx=left?a.x:a.x+a.w,ex=left?p.x+p.w:p.x,sy=a.y+a.h/2,ey=p.y+p.h/2,mid=(sx+ex)/2;
-   const path=document.createElementNS(NS,'path');path.setAttribute('d',`M${sx},${sy} C${mid},${sy} ${mid},${ey} ${ex},${ey}`);path.setAttribute('class','wire');Object.assign(path.dataset,{from:n.parent,to:n.id,depth:n.depth-1});svg.append(path);}
+   const path=document.createElementNS(NS,'path');path.setAttribute('d',`M${sx},${sy} C${mid},${sy} ${mid},${ey} ${ex},${ey}`);path.setAttribute('class','wire');Object.assign(path.dataset,{from:n.parent,to:n.id,depth:n.depth-1,branch:''});path.style.setProperty('--branch',buttons.get(n.id).style.getPropertyValue('--branch'));svg.append(path);}
  }
  view.refresh();
  if(!view.expanded){viewport.scrollLeft=cx+rw/2+viewOffset-viewport.clientWidth/2;}

@@ -8,6 +8,8 @@ def compile_presets(assets: Path) -> str:
     functions = []
     for name, function in [('donut-chart', 'renderMermaidDonutPreset'), ('radar-chart', 'renderMermaidRadarPreset')]:
         source = (assets / (name + '.html')).read_text(encoding='utf-8')
+        for token in ['CHART_MOTION_JS', 'CHART_DETAIL_POSITION_JS', 'CHART_POLISH_CSS', 'CHART_LEGEND_JS']:
+            source = source.replace('{{' + token + '}}', '')
         scripts = re.findall(r'<script(?:\s[^>]*)?>([\s\S]*?)</script>', source)
         runtime = next(script for script in scripts if '{{CONFIG_JSON}}' in script)
         runtime = re.sub(r'const config\s*=\s*\{\{CONFIG_JSON\}\};', '', runtime)

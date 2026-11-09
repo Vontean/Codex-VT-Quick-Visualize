@@ -135,10 +135,10 @@
       max-width: min(260px, calc(100% - 16px));
       padding: 12px 14px;
       color: var(--popover-foreground);
-      background: var(--popover);
+      background:var(--qv-tip-surface,var(--popover));
       border: 1px solid var(--border);
       border-radius: 12px;
-      box-shadow: 0 6px 18px color-mix(in srgb, var(--foreground) 10%, transparent);
+      box-shadow:var(--qv-tip-shadow);
       pointer-events: none;
     }
 
@@ -155,7 +155,7 @@
       color: var(--popover-foreground);
       font-size:14px;
       line-height:20px;
-      font-weight:600;
+      font-weight:500;
     }
 
     #{{ROOT_ID}} .quick-radar-tooltip-rows {
@@ -210,6 +210,9 @@
   </div>
 
   <script>
+{{CHART_MOTION_JS}}
+{{CHART_DETAIL_POSITION_JS}}
+{{CHART_LEGEND_JS}}
     (() => {
       const SVG_NS = 'http://www.w3.org/2000/svg';
       const root = document.getElementById('{{ROOT_ID}}');
@@ -255,7 +258,7 @@
         seriesGroups.forEach((entry, index) => {
           const isActive = active === index;
           const isDimmed = active !== null && !isActive;
-          entry.polygon.setAttribute('fill-opacity', isActive ? '0.09' : isDimmed ? '0.003' : '0.035');
+          entry.polygon.setAttribute('fill-opacity', isActive ? '0.24' : isDimmed ? '0.03' : '0.14');
           entry.polygon.setAttribute('stroke-opacity', isDimmed ? '0.1' : '1');
           entry.polygon.setAttribute('stroke-width', isActive ? '2.2' : '1.7');
           entry.markers.forEach((marker) => {
@@ -398,8 +401,8 @@
           c.area=polygons.reduce((sum,p)=>sum+overlap(p,c),0);
           c.labels=labels.reduce((sum,r)=>sum+Math.max(0,Math.min(c.x+bw,r.x+r.w)-Math.max(c.x,r.x))*Math.max(0,Math.min(c.y+bh,r.y+r.h)-Math.max(c.y,r.y)),0);
         });
-        candidates.sort((a,b)=>a.coversPointer-b.coversPointer||Math.max(0,a.distance-40)-Math.max(0,b.distance-40)||a.area-b.area||a.labels-b.labels||Math.abs(a.distance-gap)-Math.abs(b.distance-gap)||a.order-b.order);
-        tooltip.style.left=candidates[0].x+'px';tooltip.style.top=candidates[0].y+'px';
+        candidates.splice(0,candidates.length,...nearbyRadarDetails(candidates));candidates.sort((a,b)=>a.coversPointer-b.coversPointer||Math.round(a.area/200)-Math.round(b.area/200)||Math.round(a.labels/400)-Math.round(b.labels/400)||a.distance-b.distance||a.order-b.order);
+        const origin=tooltip.offsetParent.getBoundingClientRect();tooltip.style.left=(rootBounds.left+candidates[0].x-origin.left)+'px';tooltip.style.top=(rootBounds.top+candidates[0].y-origin.top)+'px';
       };
 
       const hideTooltip = () => {
@@ -537,7 +540,7 @@
         updateSeries();
         if(animate){
           // 顶点按数值向外展开，线宽与标记尺寸保持不变，避免整组缩放。
-          const paint=t=>{const k=1-Math.pow(1-t,4);seriesGroups.forEach(entry=>{const points=entry.points.map(p=>({x:cx+(p.x-cx)*k,y:cy+(p.y-cy)*k}));entry.polygon.setAttribute('points',pointsAttribute(points.map(p=>[p.x,p.y])));entry.markers.forEach((m,i)=>{m.setAttribute('transform',`translate(${points[i].x} ${points[i].y})`);m.style.opacity=String(Math.min(1,t*5));});});};
+          const paint=t=>{const k=mermaidEntryProgress(t);seriesGroups.forEach(entry=>{const points=entry.points.map(p=>({x:cx+(p.x-cx)*k,y:cy+(p.y-cy)*k}));entry.polygon.setAttribute('points',pointsAttribute(points.map(p=>[p.x,p.y])));entry.markers.forEach((m,i)=>{m.setAttribute('transform',`translate(${points[i].x} ${points[i].y})`);m.style.opacity=String(Math.min(1,t*5));});});};
           paint(0);const start=performance.now();const tick=now=>{const t=Math.min(1,(now-start)/900);paint(t);if(t<1)motionFrame=requestAnimationFrame(tick);else{motionFrame=0;seriesGroups.forEach(e=>e.markers.forEach(m=>m.style.opacity=''));}};motionFrame=requestAnimationFrame(tick);
         }
       };
@@ -569,5 +572,10 @@
       resizeObserver.observe(plot);draw();observer.observe(root);
     root.dispatchEvent(new Event('qv:ready',{bubbles:true}));
 })();
-  </script>
+  requestAnimationFrame(()=>alignMermaidLegends(document.getElementById('{{ROOT_ID}}')));
+</script>
 </div>
+
+<style>
+{{CHART_POLISH_CSS}}
+</style>
