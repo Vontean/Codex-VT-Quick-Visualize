@@ -27,4 +27,6 @@ Use this template for 2-4 series measured across the same 2-6 categories on one 
 
 - Bar width is capped at 24px. Only a sufficiently wide two-series chart shows unobstructed top values.
 - Plot hover compares the whole category; legend hover focuses a series, and legend clicks filter it (at least one stays visible). No click pinning.
-- The legend is centered below the plot; only left and bottom axes are drawn. Bars grow upward, replaying on return to view; reduced motion shows the final state.
+- Only left and bottom axes are drawn. Bars grow upward, replaying on return to view; reduced motion shows the final state.
+
+共享标题、图例、浮层、动效与加载规则见[Charts](charts.md)；本文件拥有数据输入和该图型的交互。

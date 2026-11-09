@@ -26,3 +26,5 @@ Use this template for one non-negative measure across 2-90 unique dates, with an
 - `decimals` accepts an integer from 0 to 2 and defaults to `0`.
 - A smoothed line draws from left to right with a light zero-baseline area. The moving endpoint shows its interpolated value; after entry, only the last point is permanently marked. Hover/keyboard details always use actual observations.
 - The top and right borders are open. Returning to view replays motion; reduced motion shows the final state. No click pinning.
+
+共享标题、图例、浮层、动效与加载规则见[Charts](charts.md)；本文件拥有数据输入和该图型的交互。

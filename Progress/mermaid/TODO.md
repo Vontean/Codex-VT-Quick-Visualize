@@ -1,5 +1,7 @@
 # Mermaid 图表逐项审视
 
+> 历史审视快照：本文件保留当时18种图型的审视范围和勾选结果，早于后续Git支持及产品规则回迁。当前契约见[正式技能](../../skill/quick-visualize/SKILL.md)，当前验证范围见[验证索引](../../docs/verification/README.md)；本文件不替代本会话的用户验收。
+
 本轮重新审视当前 qv 的 18 种 Mermaid 图表。历史审批不计入本轮完成；每次只推进一种，用户确认后将对应的 `[ ]` 改为 `[x]`。
 
 范围依据：`skill/quick-visualize/SKILL.md` 与 `skill/quick-visualize/references/mermaid.md`。18 种图表均已接入 qv 绘制；甘特图和思维导图本轮复用已有成果完成正式接入。不支持的具体语法仍明确回退。

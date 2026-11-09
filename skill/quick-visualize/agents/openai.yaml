@@ -1,4 +1,4 @@
 interface:
   display_name: "Quick Visualize"
-  short_description: "Render preset interactions and simple charts"
+  short_description: "Preset interactions, charts and Mermaid"
   default_prompt: "Use $quick-visualize to render this request with a matching preset or fall back to general Visualize."

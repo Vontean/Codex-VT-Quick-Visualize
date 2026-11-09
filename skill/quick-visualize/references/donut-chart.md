@@ -26,3 +26,5 @@ Use this template for 2-6 categories whose non-negative values form one whole. T
 - Up to 4 categories with every share at least 8%, short labels (up to 12 characters), and at least 420px available width use direct labels; otherwise use a centered bottom legend.
 - Zero-value items stay in the legend and details but draw no slice or angular gap. Positive values keep their actual proportions; gaps shrink for tiny shares, including shares that round to 0%.
 - The ring reveals in 650ms, with labels fading in during the reveal. Returning to view replays motion; reduced motion shows the final state. No click pinning.
+
+共享标题、图例、浮层、动效与加载规则见[Charts](charts.md)；本文件拥有数据输入和该图型的交互。

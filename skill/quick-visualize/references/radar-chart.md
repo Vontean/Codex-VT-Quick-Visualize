@@ -29,6 +29,4 @@ Use this template for 1-4 objects measured across the same 3-8 dimensions on one
 - One tooltip stays near the pointer and chooses nearby positions with less polygon overlap. Object identity appears only in its heading; dimension comparisons retain one marker per object.
 - Numeric grid labels are hidden. Vertices expand from the center with constant stroke/marker sizes, replaying on return to view; reduced motion disables entry animation.
 
-数据浮层使用共享 token：浅色为 `--popover`，深色为 `--popover-foreground` 向 `--popover` 混入 6%；文字为 `--popover-foreground`，名称为 `--muted-foreground`，数值为主文字色、500 字重及等宽数字。1px `--border`、12px 圆角、12×14px 内距；标题14px/20px、500字重，正文12px/18px。阴影为浅色前景9%、深色黑色50%；140ms 淡入和 .97 浮起，reduced-motion 关闭过渡。
-
-填充默认14%、当前24%、其他3%。气泡候选先排除覆盖指针的位置，优先32px内；受边界限制取最近可用距离+16px，再比较遮挡。定位转换使用实际offsetParent。入场900ms共享曲线，保持描边与标记尺寸。图例换行后单列居中、项内左对齐。
+共享标题、图例、浮层、动效与加载规则见[Charts](charts.md)；本文件拥有数据输入和该图型的交互。

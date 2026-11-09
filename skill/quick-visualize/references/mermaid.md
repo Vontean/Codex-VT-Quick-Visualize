@@ -1,275 +1,64 @@
-# Mermaid input, qv drawing
+# Mermaid input and routing
 
-Write standard Mermaid source, not another node/edge JSON structure. qv parses it with Mermaid 11.12.0 and draws supported architecture, sequence, state, ER, class, timeline, journey, kanban, pie, XY, radar, Sankey, quadrant, block, mindmap and Gantt diagrams with its own layout, HTML nodes, Lucide icons and SVG curves. It does **not** display a restyled Mermaid SVG for enhanced diagrams. Requires jsDelivr access; no npm installation.
+使用标准Mermaid源码，渲染器解析并绘制受支持语义；输入仍是一份图，不另写节点坐标或连接JSON。需要可访问的CDN，固定解析版本为Mermaid 11.12.0。
 
 ## Input
 
-Prefer a UTF-8 `.mmd` file:
-
-```mermaid
-flowchart LR
-  web[Web 应用] --> api[API 服务]
-  api --> db[PostgreSQL]
-  api --> cache[Redis]
-```
-
-Run `python3 <skill-dir>/scripts/render.py mermaid <diagram.mmd> <output-directory>/<title>.html`.
-
-All Mermaid references include `"mode":"wide"` to enable Codex's native expanded preview. Emit the runner's reference unchanged. Inline diagrams retain readable labels and drawing-only horizontal scrolling. The expanded preview fits the complete current diagram to its available width and height, except Gantt: its container hugs the content height at 1:1 scale, with scrolling for content beyond the window. Exiting restores its inline scroll position. This shared presentation applies only to enhanced qv drawing. Native fallback, including unsupported sequence constructs, unsupported Gantt constructs, unsupported class constructs and unsupported mindmap constructs, retains its existing SVG sizing, styling and behavior; do not attach the qv viewport controller to fallback. Flowchart and architecture always show the complete graph. State hierarchy navigation preserves its scope in both modes. Native “Copy as image” captures the visible preview, so use it after expanding; this is not an independent full-resolution export.
-
-Optional title and tooltip text use this envelope; the graph still comes entirely from Mermaid:
+优先写UTF-8 `.mmd`文件，调用方式沿用[技能入口](../SKILL.md#execute)。需要独立标题、说明或图标策略时使用JSON：
 
 ```json
 {
-  "title": "内容平台",
-  "source": "flowchart LR\n  web[Web 应用] --> api[API 服务]\n  api --> db[PostgreSQL]\n  api --> cache[Redis]",
-  "descriptions": {
-    "api": "统一校验身份并处理业务请求。"
-  }
+  "title": "审核流程",
+  "source": "flowchart LR\n draft[草稿] --> review{通过?}\n review --> done[完成]",
+  "descriptions": {"review": "按已约定的验收标准复核。"}
 }
 ```
 
-`source`: required, at most 50,000 characters. `title`: optional, at most 200 characters. `descriptions`: optional plain text keyed by exact node or group ID, at most 2,000 characters each. Omit descriptions when labels suffice. `icons`: optional `"auto"` (default), `"required"` or `"none"`. Agent-authored architecture diagrams must declare semantic icons for all services, using native flowchart `lucide:` icon declarations (example below). Explicit source icons always survive; one missing service icon must produce an actionable error instead of hiding every icon. `required` also checks inferred flowchart icons. `none` applies only when source icons are absent. Junctions need no service icon. `legend`: optional labels such as `{"solid":"同步调用","dotted":"异步事件"}`, only when those meanings are known. When authoring a diagram, use solid edges by default. Introduce distinct line styles only for distinct relationship meanings, and always explain every used style with semantic legend labels or explicit edge labels. Never author mixed styles and silently omit their explanation. For supplied source with unclear meaning, resolve it from context or ask rather than guess. The renderer does not invent business semantics from line style. No permanent description panel; tooltips appear on hover or keyboard focus. Unknown description IDs are reported.
+- `source`必填，最多50,000字符；`title`可选，最多200字符。图源支持的标题及frontmatter会按图型读取；独立标题优先。
+- `descriptions`按精确节点或分组ID提供普通文本，每项最多2,000字符；标签已足够时省略。未知ID会被报告；各图型不支持的额外说明走明确回退。
+- `icons`为`auto`（默认）、`required`或`none`。新建架构图为每个服务声明真实语义图标；显式源图标始终保留，junction不需要服务图标。缺失必需图标时修正明确报告的服务。
+- `legend`只接受`solid`／`dotted`的真实业务含义。不同线型对应不同语义，并以图例或边标签说明；来源含义不明确时先从上下文确认。
+- 分组表达语义包含。Flowchart与Architecture始终完整展示分组及连接；State保留自己的复合状态导航。旧`navigation`字段兼容接收但不影响输出，新spec省略它。
 
-Flowchart labels remain centered and wrap only after measured text exceeds 228px minus icon space. 流程图先保留作者方向；宽度超过当前可用绘图区时比较另一主轴，仅采用能容纳或更窄的结果。两轴均超宽时保留可读尺寸与横向滚动；不做蛇形折叠。显式原生几何保留方向约束。分支居中、同组回流反向端口、跨组外侧通道，完整保留分组边框与真实连接。
+## Type reference
 
-## 节点图表的共同设计思考
+先读[共享呈现](charts.md)，再只读下表中当前图型的小节。每个小节拥有该图型的支持范围、语义、布局和交互。
 
-生成和审视流程图、状态图与架构图时，主动复用已确认的原则：短文本居中且超过阈值才换行，按真实字体测量容器；普通图保留阅读方向，规模、长边与长宽比同时超限才平衡布局；叶节点为主题背景，包含层从内向外浅灰/背景交替（浅灰为18% muted与背景混色）；复杂容器支持下钻并保留跨边界关系和路径，同层切换不出现在总览；悬浮切换保持稳定，不重播进场动画；暗色单独增强必要对比，不加深浅色灰面。独立内容行不继承最高行高度，浮层只补充不可见信息并避开图中内容。浮层存在实体关系与正文层次时，直接用真实模型字段分别呈现关系、标题和说明，不拼成一段长文本，也不从说明文案猜关系。保留各类型的形状、端点和业务语义，不把共性理解为强制同一布局。完整规则见项目 `DESIGN.md` 的“节点图表的共同设计原则”。
+| 源图型 | 专用规则 |
+| --- | --- |
+| `flowchart` / `graph` / `architecture-beta` | [Flowchart与Architecture](mermaid-graphs.md#flowchart-与-architecture) |
+| `stateDiagram-v2` | [State](mermaid-graphs.md#state) |
+| `erDiagram` | [ER](mermaid-graphs.md#er) |
+| `classDiagram` | [Class](mermaid-graphs.md#class) |
+| `block-beta` | [Block](mermaid-graphs.md#block) |
+| C4 | [C4](mermaid-graphs.md#c4) |
+| `mindmap` | [Mindmap](mermaid-graphs.md#mindmap) |
+| `gitGraph` | [Git](mermaid-graphs.md#git) |
+| `sequenceDiagram` | [Sequence](mermaid-process.md#sequence) |
+| `timeline` | [Timeline](mermaid-process.md#timeline) |
+| `journey` | [Journey](mermaid-process.md#journey) |
+| `kanban` | [Kanban](mermaid-process.md#kanban) |
+| `gantt` | [Gantt](mermaid-process.md#gantt) |
+| `pie` | [Pie](mermaid-data.md#pie) |
+| `xychart-beta` | [XY](mermaid-data.md#xy) |
+| `radar-beta` | [Radar](mermaid-data.md#radar) |
+| `sankey-beta` | [Sankey](mermaid-data.md#sankey) |
+| `quadrantChart` | [Quadrant](mermaid-data.md#quadrant) |
 
-## Icons and semantic groups
+## Icons
 
-For Chinese labels, prefer standard flowchart icon syntax. qv resolves `lucide:` names against the host icon library and draws its approved inline icon/label nodes:
+中文架构名称优先使用flowchart的标准图标声明，图标来自宿主已有Lucide：
 
 ```mermaid
 flowchart LR
-  web@{icon: "lucide:monitor", form: "rounded", label: "Web 应用"} --> api@{icon: "lucide:server", form: "rounded", label: "API 服务"}
-  api --> db@{icon: "lucide:database", form: "rounded", label: "数据库"}
+ web@{icon: "lucide:monitor", form: "rounded", label: "Web 应用"} --> api@{icon: "lucide:server", form: "rounded", label: "API 服务"}
+ api --> db@{icon: "lucide:database", form: "rounded", label: "数据库"}
 ```
 
-Declare semantic icons for **every service**; unknown Lucide names produce an actionable error. Built-in architecture symbols are also supported, but Mermaid 11.12.0 architecture labels have a restricted character grammar; use flowchart for Chinese labels:
+Architecture内建cloud/database/disk/internet/server确定映射到Lucide；Mermaid 11.12的architecture名称语法有限制，使用其合法文本。服务图标表达对象语义。
 
-```mermaid
-architecture-beta
-  group app(cloud)[Application]
-  service web(internet)[Web] in app
-  service api(server)[API] in app
-  service db(database)[Database]
-  service files(disk)[Storage]
-  web:R --> L:api
-  api:R --> L:db
-  api:B --> T:files
-```
+## Presentation
 
-流程图与 architecture-beta 的 groups 只表达语义包含关系，默认完整展示，不提供节点组开关或下钻。旧 spec 的 `navigation` 字段仅兼容接受，不影响输出；新 spec 不应生成该字段。状态图保留自身的复合状态进入、路径与返回。
+引用包含`mode="wide"`（默认ASCII）或`"mode":"wide"`（显式旧格式），原样输出runner返回的引用。增强图内联保留可读字号，只滚动绘图区；展开适配完整当前图，返回恢复内联滚动。Gantt按1:1内容高度展开，超出窗口时滚动。Pie/Radar预设沿用自身响应式绘制。State在两种模式保留当前层级。
 
-
-## Architecture scope
-
-- Accept `flowchart` / `graph` and `architecture-beta`. Keep the approved simple DAG and flat complete layered layouts. Complex topology uses ELKjs 0.10.0 (jsDelivr, then the same pinned version on unpkg on error or after a 15s loading timeout); architecture direction ports and explicit subgroup directions use Mermaid's native layout coordinates, then qv redraws every node and edge.
-- Flowchart supports nested and partial groups, group endpoints, same-layer and cross-layer links, return paths, cycles and self-loops. Preserve LR/RL/TB/BT directions and explicit subgroup direction as resolved by Mermaid. Nested boundaries remain visible; flat architecture layers keep their quiet caption rules.
-- Common shapes: rectangle, rounded rectangle, stadium, diamond, hexagon, circle/double circle, cylinder, subroutine, parallelogram, trapezoid and asymmetric node. Preserve point/open/circle/cross and two-ended markers, solid/dotted/thick edges, labels and invisible layout constraints.
-- `architecture-beta` supports services, nested groups, junctions, T/B/L/R side ports, group endpoint modifiers and one-/two-ended arrows. Built-in cloud/database/disk/internet/server symbols map to Lucide. Custom external icon packs are not bundled.
-- Prefer declared semantic icons for all architecture services. Built-in Mermaid symbols map deterministically to Lucide; explicit icons are not subject to the old all-or-none inference rule. Missing icons are reported by ID/name for correction. Legacy flowcharts without declarations retain auto/none. Never use decorative generic icons to fill gaps.
-- Narrow widths scroll only the drawing horizontally; title and legend stay in place. Preserve readable node sizes and relationships. Loading uses the shared dot field until parsing, layout and first drawing are ready, with no fixed duration.
-- Nodes normally use 48px height; shape/long-label nodes can grow. Top/title spacing remains 32px; legend padding is 16px above and below. Use thin neutral connections and integrated 5px markers. Same-role connections share ports; opposite roles separate on a shared side. Curves remain for the approved layouts; complex obstacle routing uses rounded bends.
-- Entry grows nodes in 240ms, staggers spatial layers by 220ms, traces lines in 650ms and reveals arrowheads in 50ms. Viewport re-entry replays; reduced motion disables animation. Optional tooltips remain near their nodes and avoid related nodes/lines, including group connections.
-- Source-authored custom styles, rich labels, external icon packs beyond the supported host Lucide declarations, newer specialized flowchart shapes and other diagram types retain **native Mermaid output with a visible reason**. This is architecture topology coverage, not full custom styling for every Mermaid construct. Never silently discard unsupported syntax.
-
-Keep labels concise and split very large diagrams into meaningful views. Never remove relationships merely to fit a diagram.
-
-## Sequence scope
-
-需要表达处理区间时，使用 `activate`／`deactivate` 或消息的 `+`／`-` 标记明确激活范围；渲染为浅蓝色激活条，嵌套向右错开。只表示执行顺序区间，不将柱长解读为实际耗时，也不为未声明的区间自动补柱。
-
-- 保留 Mermaid11.12 的参与者顺序、角色、消息方向、虚实线和箭头类型、自动编号、激活条、self message、alt/loop/par/critical 等控制框及 note 的源位置；未支持的 box、rich label、properties 等明确原生回退。
-- 参与者标题按实际 DOM 换行测高，内容宽最多240px；消息最多288px并完整换行。每条消息按自己的高度预留空间，长文本不会覆盖前一条消息或将后续消息统一撑高。共享 intrinsic scene，展开整体 fit，返回保留滚动。
-- 消息线使用明色#727a82／暗色#a3aab3，8×8箭头为明色#4b5259／暗色#c4cad1，序号使用线起点徽标，lifeline 更轻；次级小字使用60%／68%前景混色。参与者悬浮突出真实邻接消息；消息浮层分列表示来源、目标，再显示完整正文，距离触发对象不超过32px。不重复展示没有额外说明的参与者标题。
-- 消息420ms依次描画，stagger=min(140ms,900ms/(条数−1))，180ms标签和60ms箭头随线到达。减少动态和展开静态；悬浮、resize 不重播，完整退出后重入可重播。
-
-## State scope
-
-`stateDiagram-v2` preserves source direction, initial/final symbols, choices, fork/join bars, plain state labels, loops, event/guard labels and composite-state parentage. Compound states initially remain fully visible. Clicking a compound header drills into its direct children; the 总览 breadcrumb returns to the complete view, where the breadcrumb bar is hidden. State diagrams have no group switch and keep the source vertical/horizontal layout without balanced folding. Group entry arrows sit immediately to the right of the title in one flex row. External relationships remain visible. Ordinary states do not drill down. Multiline state descriptions (`rectWithTitle`) are supported. Notes, concurrency regions and source custom styles/rich labels outside the supported shapes use visible native fallback, retaining source semantics.
-
-The fixed parser adapter uses `db.getData()` semantic shapes and `parentId`; no inference from IDs or rendered geometry. Each parent scope starts layout/motion order from its actual initial state and follows source transitions. ELK model ordering keeps forward transitions readable; backward transitions and retry self-loops use distinct peripheral ports. Node cards use at least48px height,10px corners and host tokens; names and descriptions wrap after20 Unicode characters and use measured14px/20px and12px/18px typography; start/end symbols use20px layout boxes, choice32px, fork/join64×6px. Connections use8px rounded bends and integrated5px arrows; labels remain8px beside their path with a transparent background; only the floating details use a popover surface.
-
-Hover/focus highlights direct neighbors and transfers without hiding states. Transition details show a structured source → target row above a separated transfer explanation; state descriptions use a title and body. Text remains complete and source-derived. Tooltips avoid the trigger, labels and sampled wire segments; no pin. Nodes grow240ms, wires trace650ms, arrows reveal50ms, and labels reveal180ms with their transfer. Reduced motion and expansion are static; hover/resize do not replay. Expanded mode fits the entire scene. The viewport saves the last same-width inline scroll before resize can clamp it, then restores the position on return.
-
-## Validation and maintenance
-
-The runner checks the envelope and generated fragment. It reports `runtime: pending-browser`; Mermaid syntax is checked at runtime. `data-state` becomes `enhanced`, `native` or `error`; `data-renderer="qv-architecture"` identifies genuine qv drawing.
-
-`assets/mermaid-model.js` and the separate sequence/state/ER/class/timeline/journey/kanban/pie/XY/radar/Sankey/quadrant/block/mindmap/Gantt model adapters isolate version-specific parser access. Mermaid's public `parse()` only identifies/validates the diagram; it does not return a general AST. The pinned adapter therefore uses `mermaidAPI.getDiagramFromText()` and flowchart/architecture/sequence/state/ER/class/timeline/journey/kanban/pie/XY/radar/Sankey DB accessors and original quadrant/block parser callbacks. These are internal/version-sensitive interfaces: never upgrade Mermaid without rerunning parser fixtures and visual comparison against the approved design. Do not replace this adapter with regex parsing or reconstruct edge identity from SVG geometry.
-
-`assets/mermaid-viewport.js` owns enhanced qv inline/expanded presentation; `assets/mermaid-layout.js` owns complex geometry; `assets/mermaid.html` owns architecture marks, interaction and motion; `assets/mermaid-sequence.js` owns sequence drawing and uses the same viewport controller. `assets/mermaid-state.js` owns state marks and interaction and shares the layout engine and viewport. Native `render()` may be measured offscreen for direction-constrained layout; enhanced output still contains only qv marks. Visible native SVG is reserved for explicit fallback. Validation must cover appearance, shared ports, marker joins, tooltip proximity and actual animation—not only element counts. See `tests/mermaid-browser.md`.
-
-
-## ER entities and relationships
-
-- Mermaid11.12 DB 是实体、别名、字段顺序、类型、PK/FK/UK、注释和关系基数的唯一来源。读取 getData 实际端点标记，避免 relSpec.cardA/cardB 的反向对应；getDirection 保留方向，字段名称不推导关系。custom style/class/rich label 明确原生回退。
-- 实体白底14px圆角、标题14px/20px，技术ID另行显示；字段置于4%前景混色、8px圆角的内区。实体宽240–360px；key/type/name按实测分配，字段12px/18px换行，各行=max(30px,内容高度+12px)，不继承其他行高度。完整别名及长字段保留。
-- 中性1.4px关系线和crow-foot标记使用明色#727a82／暗色#a3aab3，保留 identifying 实线与 non-identifying 虚线。每条关系独立端口，self loop 横向绕回；展开保持原几何。
-- 标题突出实体邻域；字段只突出本行，有注释才显示详情；关系浮层分来源／目标／基数及关系说明，保持距触发文字≤32px，避免远距离避障。键盘自动滚动后恢复详情，Escape取消恢复。
-- 卡片240ms、关系650ms、基数50ms；共享视口保留返回滚动，hover/resize 不重播，reduced/expanded静态。
-
-## Class scope
-
-- `classDiagram` preserves Mermaid 11.12 classes, labels, namespaces, stereotypes, visibility, generic types, attributes/methods, abstract/static classifiers and endpoint multiplicities from its actual DB. No relationship or member is inferred from names.
-- Code-editor visual hierarchy uses white/theme-background14px-radius cards, transparent headers with14px foreground class titles and12px stereotypes, and separate neutral4% attribute/method panels with8px corners. Actual counts and12px/20px system-monospace signatures remain visible. Types are teal, methods blue, parameters/visibility muted, with separately calibrated light/dark pairs in DESIGN.md. Preserve abstract italics and static underlines. Measure240–320px natural card widths; long names/signatures wrap into independently measured rows without truncation. Optional descriptions remain visible in the card; namespaces use dashed neutral borders and theme-background surfaces, with transparent title backgrounds. Wires render above namespaces and below cards.
-- Equilateral hollow triangles distinguish inheritance/implementation by solid/dashed lines; equal-sided square diamonds preserve filled composition/hollow aggregation. Rounded open arrows preserve association/dependency. Stroke1.4px with theme-calibrated neutral colors, closed marks scaled uniformly for short terminal segments, exact rear joins and8px rounded orthogonal bends. Caption text wraps at180px and searches nearby path space avoiding cards, namespace titles and multiplicity labels.
-- Hover highlights the actual card and current row, dimming unrelated cards/relationships.70ms hover settling and120ms leave buffering avoid flicker. Card/member hover has no popover. Only relationship text opens structured source → target details, with source multiplicities, UML kind and description; multiplicities themselves only select the relationship. Details anchor to the triggering text with12–28px candidate gaps and a32px maximum rectangle distance; local overlap is preferable to a distant empty position. Keyboard focus survives auto-scroll; Escape clears and cancels restoration. Inline drawing-only scrolling and whole-scene expanded fit preserve all content.
-- 横向 Class 超过当前可用宽度时比较纵向布局，仅接受更窄结果；保留命名空间、成员与真实关系。
-- Notes, lollipop interfaces, links/callbacks, rich HTML, custom styles and unrecognized endpoint symbols retain explicit native fallback. The shared qv viewport never attaches to fallback.
-
-## Timeline scope
-
-- `timeline` reads actual Mermaid11.12 DB once, preserving source-order periods, contiguous sections and all events. Repeated names remain distinct entities; empty periods remain on the axis. No date parsing, inferred duration or event deduplication. Rich labels explicitly retain native rendering.
-- Horizontal reading stays:216px columns/40px gap inline,184px/24px expanded. Scene width hugs actual columns and tail; expanded root is capped at its intrinsic width and centered, shrinking the whole scene only when needed. Source sections select stable theme series colors, reused when the same section name recurs. Columns stay transparent with12px padding; section captions use 15% stage-tinted capsules and stay in their contiguous source span using native horizontal sticky positioning; do not rewrite caption left from scroll events. Period names are complete wrapped14px medium text in theme foreground.
-- 事件保留完整14px/22px文字，采用区段色7%软卡片，hover/focus为14%，8px圆角、8×10px内距、8px卡片间距。5.5px圆点与首行中心对齐；不添加多余浮层。
-- Stage/header heights are measured to align the shared ordinal axis; column bodies keep independent heights.7px source-stage dots with theme-background rings sit on the continuous neutral1px axis. The axis extends120px beyond the final period and fades to transparent without adding a period. Each vertical rail ends at its own last event center; empty periods have no rail. Flat events retain their source relationship without invented child branches. Shared expanded fit and saved inline scroll remain unchanged.
-- Existing1100ms normal entry/source-order point and column motion retained; full exit/reentry may replay, ordinary hover/resize does not, reduced/expanded remain static. Actual host visibility/native buttons remain a separate acceptance boundary.
-
-
-## Journey scope
-
-- `journey` preserves Mermaid11.12 source task order, contiguous sections, raw scores1–5 and actual people/actor participation. Steps without a section, repeated task names and tasks without actors remain visible. No elapsed time, aggregate rating, causality or participation strength is inferred. Read `getTasks` once and copy before any subsequent parsing because it appends to shared DB storage; read the actual `getActors` order. Journey has no DB task ID: `descriptions` uses stable source-order IDs `step-1`, `step-2`, etc.; unknown IDs are errors.
-- Approved design uses phase blocks / experience curve / participation strips. Phase captions sit in light gray8px blocks; steps use circular numeric ordinals and complete names. Experience uses Lucide Frown/Meh/Smile markers, a smooth2px path, vertical score gradient1→red,3→yellow,5→green and a translucent fading area. Raw values remain on the permanent1–5 reference and accessible labels, without numeric labels beside faces. Curves remain within adjacent raw score bounds.
-- Inline reserves112px for score and role references; columns adapt76–144px to the available drawing width. Expanded places the reference into the complete scene, uses120px columns and shared fit; return restores inline geometry and saved scroll. Scene and grid hug the actual columns rather than extending into unused viewport space. The step-region title 用户旅程 shares the style of the permanent score reference 体验曲线; role labels begin24px below the curve block including face extents, without a separate region heading. Phase captions remain within their contiguous source span.
-- Actual actors use semantic Lucide16px icons and full text. Participation is neutral14px strips; adjacent participating source steps merge, non-participating steps remain gaps. Strip width encodes membership in successive steps. Roles stay neutral so score color owns the primary emphasis. Each role row uses its own measured text height with12px between rows; strips remain centered against that label. A long role name never expands unrelated rows.
-- Hover/focus selects the whole step column, with background masks over all other columns; no separate title-card highlight and no journey tooltip/popover. Exact identity, score, actors and optional description remain in accessible labels. Escape and pointer leave restore the complete chart.
-- Trace1000ms, area fade500ms, faces fade200ms by source order. Full exit/reentry/visibility restoration replays; ordinary hover/resize do not; reduced/expanded are static. Rich HTML and scores outside1–5 retain explicit native fallback without the qv viewport.
-- ResizeObserver only schedules one animation frame for a changed width; layout writes occur outside the observer delivery. Height-only notifications do not trigger layout. Validate window error events during repeated resizes and display-mode return.
-- `mermaid-journey-model.js` owns this version-sensitive DB access; `mermaid-journey.js` draws the independently designed view and shares the viewport controller. Do not upgrade Mermaid or replace DB access with regex parsing without comparing parser fixtures and actual rendered semantics.
-
-## Kanban scope
-
-- `kanban` preserves Mermaid11.12 actual column/task IDs, source order, column membership and assigned/ticket/priority fields. Keep empty columns and metadata-free tasks. Counts describe current cards, not workload, completion ratios or elapsed time. Use `getData`/`getSections`; do not author a second graph.
-- Approved design uses softly tinted columns, dot/capsule category headings and matching counts. Author category names within12 characters; display at most12 characters including ellipsis while preserving full source identity in accessible labels. Inline columns272px/gap16px scroll horizontally; expanded columns248px share whole-scene fit. Common measured headings align columns; return restores inline geometry and saved position.
-- Opaque cards use larger16px names with no shadow or visible default border. Hover/focus only adds a blue border; no stage tooltip/popover. Optional descriptions and ticket identifiers remain distinct complete secondary text above people. Assigned shows Lucide UserRound and full name. Priority uses four segments (Very Low1/Low2/High3/Very High4) plus the exact source grade; unknown values stay textual. Ticket is an identifier, not inferred description. Tab brings the task into the drawing viewport. No drag/edit/navigation or filtering.
-- Headers300ms/8px, cards240ms/8px by source column/row. Exit/reentry/visibility restores entry; resize does not replay; reduced and expanded remain static. Rich HTML/icons and ticketBaseUrl preserve native semantics without qv viewport behavior. ResizeObserver schedules layout on the next animation frame.
-- `mermaid-kanban-model.js` owns version-sensitive DB access; `mermaid-kanban.js` draws the independent view. Keep Mermaid11.12 pinned and rerun parser/visual checks before changes.
-
-## Pie scope
-
-- 从 Mermaid11.12 getSections Map 读取源顺序、独立名称、原始非负权重、showData、title，不合并极小份额或发明单位。正有限总量必须大于0；零总量与rich label明确原生回退，零值仍留在图例。
-- 通过 mermaid_presets.py 编译现有 donut-chart.html，再由 mermaid-pie.js 做语义映射；不维护第二套圆环样式。圆环约75%内径、中心总计、host系列色、短数据直标／长数据底部图例沿用已确认方案。Mermaid源数据可多于独立预设的6类，颜色按6个token循环，完整列表保留。
-- 只有正权重绘制弧；角度严格按原值分配，零值没有扇区或缺口，极小份额不会被最小可视角度撑大。showData 在图例／直标带原值，原始值不做小数位截断；弧路径坐标保留9位小数，避免接近100%的弧线端点被舍入为同一点。中心大数自动缩小以容纳，长名称换行。
-- 650ms圆环入场，直标随入场淡入；普通resize/hover不重播，完整退出后重入可重播，reduced静态。Pie的图例、直标及圆环悬浮只突出对应份额并更新中心信息，不显示popover；独立donut预设保留自身详情能力。使用宿主展开预览，无额外全屏容器。
-
-## XY scope
-
-- Mermaid11.12 getXYChartData/getChartConfig 保留真实坐标、分类顺序、数值域、orientation和bar/line顺序。每个分类保留源数组索引，重复分类名称是不同的位置，不能用名称去重或将数据聚到首项。此版本无业务系列名，使用源类型／序号，不发明业务含义。
-- 正负柱从实际零基线绘制，柱宽≤24px，折线连接真实坐标，横轴分类按可用宽度抽稀并单行省略，完整名称保留title及键盘详情。水平布局按分类数量和各标签可读槽位增长高度；窄消息流只滚动绘图区，值参考及标题保留，展开整体fit并恢复返回位置。
-- 悬浮／键盘比较该索引下所有系列的精确值，突出当前分类的柱和点，其余降到.18。近对象详情距触发对象≤32px；滚动后恢复键盘详情，Escape取消。重复名称的导线、命中区、标签与详情全部使用同一索引。
-- 详情使用共享主题底色、12px圆角、12px×14px内边距、最大240px宽；14px/20px标题与12px/18px数据行用分隔线区分。数据行对齐系列色标、次要色系列名和主文字色500字重等宽数字。以当前分类真实柱子和点的屏幕边界为避让对象，在侧边保留12px间距；可用空间不足时缩窄宽度并换行，不盖住当前标记。展开保留浮层字号，不随场景缩放。
-- 柱650ms同时增长，线1200ms描画；hover/resize不重播，完整退出重入／可见性恢复按既有契约重播，reduced/expanded静态。rich axis HTML和额外说明明确回退。
-
-## Radar scope
-
-- 从 Mermaid11.12 DB 读取有序axis、positional/keyed curve、名称、min/max、ticks、graticule和showLegend；非零最小值必须保留。径向距离编码值，面积不解释为总分；非法范围／rich label／额外说明明确回退。
-- 当min=0、polygon、5ticks、显示图例、≤8轴、≤4系列、轴名≤12字时，mermaid_presets.py 直接复用 radar-chart.html。不能满足预设表达能力时，保留原增强绘制，支持非零min、circle、长名称、多轴多系列，不删除数据或更改语义以硬塞预设。
-- 两条路径沿用相同设计：host系列色、细中性网格、隐藏数字刻度标签，900ms 共享曲线径向展开；点优先读取所属对象，轴比较全部对象，图例保持身份。非活动线／点.10、填充.03，近触发对象的完整详情。扩展绘制使用共享≤32px定位约束。
-- 扩展绘制详情沿用常规radar预设：188px首选宽、12px圆角、12px×14px内边距、12px标题／正文间距、4px数据行间距，共享主题浮层底色和描边。团队标题14px/20px／500并带对应系列形状／色标，指标名用次要文字色并换行，数值用主文字色独立右对齐且对齐首行；轴对比行带各系列色标。点／多边形显示完整团队指标；图例hover、click、focus只突出系列，不显示详情。
-- 扩展绘制的可读intrinsic scene可横向滚动，展开fit并恢复返回位置。reduced/resize/展开不重播，完整离场再重入可重播；真实宿主可见性恢复仍需人工验收。
-
-## Sankey scope
-
-- 实际 Mermaid11.12 getGraph/getConfig 保留源ID／顺序／重复边／原始正数量、alignment、source/target/gradient颜色、showValues及prefix/suffix，不另外解析CSV，不推导源到终点的完整路径。当前固定版本的Unicode语法限制应显式报告，不偷偷改名；采用合法ASCII源做样式验证。
-- D3-sankey0.12.3计算DAG位置，宽度与高度按同一数值比例，包括subpixel极小流；透明命中路径提供容错，不能加宽可见流。节点值为max(inflow,outflow)，详情分别说明真实流入／流出，边说明原量及两端对应份额。
-- 名称14px／值12px，152px标签最多两行省略，完整名称保留title；测量使用相同结构，高度参与节点间隔；inline intrinsic横向滚动，expanded紧凑列距后整体fit，返回恢复。浮层就近关联真实节点／流带，优先保证不遮挡当前活跃流带，不预留无用底部详情区。
-- 桑基详情首选200px宽，标题14px/20px／500，标题至条目12px、条目间6px，名称次要色、数值主文字色及500字重。按选中流线真实曲线和可见带宽采样，优先选择与当前高亮流带零交叉的附近位置，流入／流出节点详情避开其全部直接相连的活跃流带；厚流带计入宽度，不能只按鼠标或整条包围盒避让。路径采样缓存，滚动时按实际屏幕坐标转换；无底部详情面板，不改变图表高度。
-- 1000ms 共享曲线水平mask保持比例；hover/resize不重播，reduced/expanded静态，完整退出后20%重入可重播。零值／非正值／cycles／custom literal color 保留明确native fallback；原生自己无法绘制的循环应显示错误，不能假称回退成功。
-
-## Quadrant scope
-
-- Preserve source-order points, complete names, exact normalized0–1 coordinates, axis ends, four quadrant captions and title. Q1 upper-right, Q2 upper-left, Q3 lower-left, Q4 lower-right. Exactly.5 stays a boundary. Descriptions use source-order `point-1`, etc.; unknown IDs are errors.
-- Pinned11.12 adapter captures original point/axis/class parser callbacks and restores them in `finally`. Native `parseStyles` interprets colors; no second source parser or SVG-derived data. Semantic categories use Mermaid `Point:::category: [x,y]` (class IDs use ASCII identifiers in pinned11.12); same category shares color. Optional `classDef category color: #109060` and color-only point styling preserve explicit colors. Classes without explicit color use host series2–6; unclassified points use series1 blue, never quadrant colors. Custom radii/strokes and rich labels visibly retain native fallback.
-- Draw two cross axes, no outer grid frame or0/.5/1 ticks. Axis ends are complete wrapped14px medium text in shallow gray content-width capsules (8px/12px padding,999px radius,8% muted-foreground/background mix) at the four cross endpoints; ordinary text is not heuristically split into a key and explanation. Source quadrant captions remain muted12px and sit in their respective quadrants next to the origin with12px clearance. Coordinates never shift for label layout.
-- Point labels stay adjacent when there is space, with one line and ellipsis at144px maximum width; full names remain accessible and in details. Local96px neighborhoods hide labels at3 points, or at2 points with measured text occupancy over14%. Any label without an adjacent collision-free placement also hides; the actual point and complete accessible name remain. No far-away label packing. Hidden points support keyboard focus; one nearest-point picker groups exact coincidences without merging entities.
-- Details stay next to the point, clamped to visible bounds; long full content scrolls in a maximum320px themed popover. Complete coordinates, quadrant/boundary, category and descriptions remain available. When the diagram has any category, details show matching color dots; unclassified points form an implicit blue default category without requiring `:::default` in the source. Diagrams without categories keep neutral details. Coincident entity details preserve every represented category, including implicit default. No permanent reading region or reserved empty space, and no search for a distant text-free position.100ms pointer leave bridge permits moving into the popover. Escape/scroll/blur clear it.
-- Intrinsic640–736px geometry with horizontal scroll; native expanded preview fits the complete scene and restores saved inline scroll. Point240ms and visible label300ms/4px with80ms source-order stagger; reduced/expanded/resize are static. Resize redraw is coalesced into the next frame. Real host document-hidden restoration and native buttons remain separate acceptance boundaries.
-
-
-## Block scope
-
-- 固定版本的root/children tree保留columns、span、explicit space、真实node/group/edge identity，不能把手动网格改为自动拓扑或解释面积为数量。space:N已展开成N个子项，每个占一列；源line callback观察后必须finally恢复。custom style/class、rich label、unsupported shape及跨行span溢出明确回退。
-- model/layout/drawing分离；inline与expanded均保持160px cell、24px gap／nested padding，展开整体fit同一几何。节点至少48px，完整12px/18px标签按实测增长；组标题真实换行测高。叶节点底色，组由内向外灰／白交替，灰为muted18%混底，标题透明。
-- 分组z0、连线z1、节点z2、标签z3，明暗中性线#727a82／#a3aab3，7px圆角折线与5pxmarker；原shape、solid/dotted/thick、circle/cross、self loop保持。透明命中和键盘按钮留在实际关系位置。
-- 节点仅额外说明显示浮层，组显示成员，边显示真实两端；稳定hover为100ms停稳／160ms退出缓冲，近对象详情≤32px。移除预留底部详情区，避免为未打开的详情撑出空白；无筛选或虚构下钻。
--240ms节点、650ms实线／35ms stagger，箭头到达后出现；hover/resize不重播，reduced/expanded静态，完整退出20%重入可重播。
-
-## C4 scope
-
-- Mermaid11.12拥有Context／Container／Component／Dynamic／Deployment源身份、类型、技术／说明、真实边界、外部状态与关系；保留声明顺序、row ceiling、Rel_Back/BiRel和原生Dynamic编号。观察创建回调后finally恢复。rich label、自定义style、sprite/tag/link和未知语义明确原生回退。
-- model/layout/drawing分离；280px cell、72px gap、40px padding，外部参与者位于真实边界旁，组件按两列布局。源名称14px/20px、类型／技术／正文12px/18px，Lucide语义图标；叶白，包裹层由内向外muted18%灰／白，组名透明底完整换行。
-- 连线及marker用明色#727a82／暗色#a3aab3，次级小字60%／68%前景混色。组z0、线z1、节点z2、标签z3；关系文字按最终DOM测量避让真实节点／组名／既有标签，没有合法标签位置的路由不能误报成功。
-- 节点突出直接关系，组突出真实成员，边只突出两端与本边；带额外说明的节点、组、关系保留完整详情，定位距触发对象≤32px。取消远端停靠、隐藏详情区及其无效select，所有源节点仍可通过真实按钮键盘访问。100ms停稳／160ms退出缓冲，无筛选或虚构下钻。
--240ms节点、650ms线／35ms stagger，240ms标签，箭头到达后出现；resize/hover不重播，reduced/expanded静态。共享整体fit及返回滚动，宿主toolbar／clipboard／可见性恢复须另行验收。
-
-## Architecture-beta reading
-
-- 使用 Mermaid11.12 真实服务、汇接点、分组、方向与端口；不为视觉优化删除连接。服务240px宽、14px/20px完整换行，图标固定16px且向下偏移2px，对齐文本首行20px行盒的中心。
-- 汇接点10×10px、零内边距，不继承分组卡片的浅灰底和12px/16px内距。保留实际汇接对象与源连线几何，避免空灰胶囊。
-- mermaid-architecture-reader.js 以未缩放的主题tooltip呈现详情，靠近当前节点／分组，使用共享≤32px定位约束。正文12px/18px，名称14px/20px，次级标签#b8bdc6；浮层填充随主题变化，分段线与文字层级保持一致。
-- 详情按名称／类型与ID／说明／所属路径／直接成员／直接连接分段。连接分列表示真实来源、方向、目标与端口，group修饰时保留原始服务端点。禁止将节点选择结果更新到图表下方；移除底部详情、提示和对象select。
-- 悬浮／点击／键盘读取同一详情，节点高亮沿用原邻接关系；移入浮层保留，离开使用220ms缓冲。滚动停稳后恢复当前详情，Escape取消待恢复对象。展开仍fit整图，详情独立于场景缩放，返回保留滚动。
-- 叶白、包含层从内向外muted18%灰／白交替，标题透明；明暗连线分别36%／48% muted-foreground混底。分组下钻原行为保留，原生不支持语法明确回退。
-
-
-
-Flowchart pointer highlights wait until the pointer stops moving for 140ms; rapid node crossings preserve the previous highlight, and a 220ms exit grace period avoids an intervening neutral flash. Movement through diagram gaps preserves the old highlight until the pointer stops or leaves. External group entry cards use a name and arrow only; the click action is still named for assistive technology.
-
-Flowchart leaf nodes use the host background. Container backgrounds alternate from inside outward: the direct leaf container uses opaque gray, the next container background, then gray again. The complete source hierarchy determines this level, including group cards and external portals.
-
-Flowchart gray retains the original muted 18% mix over the host background, with an opaque background underneath to prevent stacked tints. Completed drawing stays visible while entry animation waits; short viewports must not leave large diagrams permanently hidden.
-
-## Mindmap scope
-
-`mindmap` now uses the formal qv entrypoint. Read Mermaid11.12 `db.getMindmap()` once and retain every source topic, parent and ordering. Reuse the approved balanced bilateral tree: wrapped 12px names, 14px root, neutral branch cards, unboxed leaves, parent/descendant path emphasis, 240ms node / 650ms wire motion. Expanded mode shares the qv viewport; reduced motion is static. Custom icons/classes and rich labels explicitly fall back without a qv viewport. `descriptions` accepts Mermaid nodeId or numeric DB id; unknown IDs are errors. Shape decoration does not introduce quantitative semantics.
-
-## Gantt scope
-
-`gantt` uses the formal qv entrypoint and the approved grouped schedule design. Read Mermaid11.12 resolved `getTasks()` dates, flags, IDs, sections and `raw.startTime.startData` dependencies. Time bars retain true start/end positions; zero-duration milestones retain their exact date with 24px stage-color capsule labels. Date details and all prerequisites remain in hover/focus detail. Repeated/nearby milestones use separate label rows rather than hiding axis dates. Cross-month schedules show both endpoint months. The renderer uses pinned D3 7.9.0 time geometry, shared qv loading/viewport and reduced-motion behavior; bars animate 580–680ms. Custom date exclusions/includes, inclusive-end mode, clickable source links, custom today-marker styles, sub-day formats, rich labels/classes and unresolved dependencies explicitly fall back without the qv viewport. Default today marker remains when within the visible date range; `todayMarker off` disables it. Description keys are actual task IDs.
-
-## Mermaid shared presentation contract
-
-局部浮层先保持对象关联：在触发对象12／20／28px处找候选，距离最多32px，再在这些近候选中避让，不为了零遮挡把详情送到远端。优先使用已呈现的信息；只有说明、关系或成员需要补充时显示详情。100ms停稳与160ms退出缓冲避免快速跨节点反复还原。
-
-`mermaid-presentation.js`只负责局部定位、hover时序和包含层底色；模型、布局和各图的交互语义保持独立。`mermaid_presets.py`在生成时编译现有模板，Pie／Radar适配源数据后调用，避免样式复制。ResizeObserver涉及重绘时延至requestAnimationFrame处理，禁止在观察器同一批通知内同步改写被观察对象的布局。
-
-键盘详情遵循相同对象关联：自动滚动应将触发文字留在可见区，不用其来源节点替代触发对象。长时序图在滚动停稳后恢复已选消息详情；Escape既隐藏详情，也取消待恢复对象，后续scroll通知不得重新打开。
-
-## Shared popover hierarchy
-
-- 数据浮层使用共享 token：浅色为 `--popover`，深色为 `--popover-foreground` 向 `--popover` 混入 6%；文字为 `--popover-foreground`，名称为 `--muted-foreground`，数值为主文字色、500 字重及等宽数字。1px `--border`、12px 圆角、12×14px 内距；标题14px/20px、500字重，正文12px/18px。阴影为浅色前景9%、深色黑色50%；140ms 淡入和 .97 浮起，reduced-motion 关闭过渡。
-
-- C4 卡片20px内距、白色（暗色主题对应主表面）填充；技术栈／职责放入12px内距、12px条目间距的浅灰分区，技术值等宽。按实际DOM内容测量各卡片高度，保留完整换行。关系文字透明底并离开线段8px，关系详情按来源／目标／协议／说明分行，节点详情按类型／技术／职责／所属与直接连接分组；首选260px宽，避免分号拼成长段。
-
-## Git scope
-
-`gitGraph` 直接读取 Mermaid 11.12 的分支、提交顺序、父提交、合并、标签与方向。普通提交实心点，合并空心环，高亮方块，回滚叉，cherry-pick 虚线环；自动 ID 仅显示七位哈希，完整信息保留在可访问名称与 title。可容纳时横向泳道，否则纵向日志；hover/focus 高亮所属分支。富文本等未支持内容明确回退，不删除提交或连接。
-
-```mermaid
-gitGraph
-  commit id: "需求"
-  branch design
-  commit id: "原型"
-  checkout main
-  commit id: "基础实现"
-  merge design tag: "v1"
-```
-
-## 共享排版与运行完成
-
-- Sequence 序号位于线起点的徽标，双向消息避开起点箭头；8×8 箭头。XY 趋势优先，分类最少16px，刻度抽稀、单行省略且保留完整信息与键盘访问，纵轴标题置顶。
-- Mindmap 一级分支系列色传递子树，层级连线2/1.5/1px。Timeline 7%/14% 事件软卡片，圆点对齐首行。
-- Architecture 原生中心点按24px容差聚类，按实际卡片尺寸重排；格位、分组覆盖或布线冲突时回退 ELK。
-- Sankey 正文最小宽度 `320+(列数−1)×136`，高度和间距按真实标签计算，152px两行标签；Radar 默认/选中/其他填充14%/24%/3%，通用与预设一致。雷达气泡先排除覆盖指针的候选，再限定32px附近；边缘受限取最近可用距离+16px，最后比较遮挡。预设按实际 offsetParent 坐标定位。
-- 图例一行居中；换行时单列居中、项内左对齐，长名称省略且有完整 title。Quadrant 使用6%区域底色、外框与外角区域名。
-- Quadrant、ER、Class 可容纳画布真正居中，超宽保留左侧滚动起点。Journey 固定参考轴与原列宽一起居中，窄转宽先释放旧宽度；只滚动步骤区。Radar（通用/预设）、Sankey 非空标题显示并居中。
-- 入场显式调用 `animateMermaidEntry`，共享 `cubic-bezier(.23,1,.32,1)`，同批 delay+duration 总预算≤1200ms。D3/rAF 使用 `mermaidEntryProgress`，不修改 Element.prototype.animate。流程 hover 可完成尚未结束的入场；hover/resize 不重播，完整离开后重入才重播。
-- 共享 CSS 放在 root 外，预设替换 innerHTML 后仍存在；不通过双 ID 提高优先级。
-- 等待根元素的 `qvReady` Promise 完成，再核对最终 `data-state`、loading/readiness、可见内容与错误。`enhanced` 可能在绘制开始时设置，不能单独当作成功证据。宿主内联/原生展开验收与浏览器结构检查分开记录。
-
-
-图表与标题对齐：增强 Mermaid 的可容纳画布居中，超宽时保留左端可达和横向滚动；Journey 的参考轴与步骤区整体居中。单行图表标题与可见容器居中，去掉单侧90px留白；长标题自然换行后左对齐，窄转宽后恢复单行居中。超宽绘图区滚动时标题保持在可见容器内，沿用Sankey标题与绘图区分离的规则。原生回退保留原生输出。
+增强图由qv自行绘制；未支持语法明确显示原因并回退Mermaid原生。自定义样式、富文本或未知语义保留真实关系；原生也不能解析时显示错误。原生回退不接入增强viewport。原生Copy as image是当前可见预览截图，独立高分辨率导出不在此契约内。

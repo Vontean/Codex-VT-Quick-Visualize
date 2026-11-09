@@ -1,0 +1,42 @@
+test_donut_zero_slice_and_script_escaping (test_chart_contracts.ChartContractTests.test_donut_zero_slice_and_script_escaping) ... ok
+test_four_bar_series_and_variable_categories (test_chart_contracts.ChartContractTests.test_four_bar_series_and_variable_categories) ... ok
+test_line_minimum_and_maximum_dates (test_chart_contracts.ChartContractTests.test_line_minimum_and_maximum_dates) ... ok
+test_radar_dimension_extremes (test_chart_contracts.ChartContractTests.test_radar_dimension_extremes) ... ok
+test_does_not_pretend_to_validate_mermaid_offline (test_mermaid_contract.MermaidContractTests.test_does_not_pretend_to_validate_mermaid_offline) ... ok
+test_embedded_source_cannot_close_script (test_mermaid_contract.MermaidContractTests.test_embedded_source_cannot_close_script) ... ok
+test_invalid_metadata_preserves_output (test_mermaid_contract.MermaidContractTests.test_invalid_metadata_preserves_output) ... ok
+test_mmd_preserves_full_source (test_mermaid_contract.MermaidContractTests.test_mmd_preserves_full_source) ... ok
+test_composite_uses_real_count_and_navigation_target (test_mermaid_navigation.MermaidNavigationTests.test_composite_uses_real_count_and_navigation_target) ... ok
+test_distinct_semantics_are_not_merged (test_mermaid_navigation.MermaidNavigationTests.test_distinct_semantics_are_not_merged) ... ok
+test_drill_keeps_external_context_and_leaf_self_loop (test_mermaid_navigation.MermaidNavigationTests.test_drill_keeps_external_context_and_leaf_self_loop) ... ok
+test_group_endpoint_remains_visible_as_boundary_context (test_mermaid_navigation.MermaidNavigationTests.test_group_endpoint_remains_visible_as_boundary_context) ... ok
+test_large_scope_keeps_every_direct_state (test_mermaid_navigation.MermaidNavigationTests.test_large_scope_keeps_every_direct_state) ... ok
+test_nested_group_is_a_drillable_child (test_mermaid_navigation.MermaidNavigationTests.test_nested_group_is_a_drillable_child) ... ok
+test_overview_counts_and_aggregation (test_mermaid_navigation.MermaidNavigationTests.test_overview_counts_and_aggregation) ... ok
+test_scope_keeps_all_internal_nodes_including_disconnected (test_mermaid_navigation.MermaidNavigationTests.test_scope_keeps_all_internal_nodes_including_disconnected) ... ok
+test_constrained_edge_uses_nearest_plus_sixteen (test_mermaid_polish.MermaidPolishTests.test_constrained_edge_uses_nearest_plus_sixteen) ... ok
+test_git_model_preserves_merge_parents_and_tags (test_mermaid_polish.MermaidPolishTests.test_git_model_preserves_merge_parents_and_tags) ... ok
+test_motion_batch_scales_delay_and_duration_without_patching_prototype (test_mermaid_polish.MermaidPolishTests.test_motion_batch_scales_delay_and_duration_without_patching_prototype) ... ok
+test_nearby_beats_empty_remote_corner (test_mermaid_polish.MermaidPolishTests.test_nearby_beats_empty_remote_corner) ... ok
+test_numbering_and_semantic_fallback (test_mermaid_sequence.SequenceModelTests.test_numbering_and_semantic_fallback) ... ok
+test_all_presets_and_references (test_runtime.RuntimeTests.test_all_presets_and_references) ... ok
+test_cli_defaults_to_ascii_without_format_flag (test_runtime.RuntimeTests.test_cli_defaults_to_ascii_without_format_flag) ... ok
+test_directive_reference_preserves_path_and_wide_mode (test_runtime.RuntimeTests.test_directive_reference_preserves_path_and_wide_mode) ... ok
+test_host_rejects_bad_filename_before_writing (test_runtime.RuntimeTests.test_host_rejects_bad_filename_before_writing) ... ok
+test_invalid_spec_preserves_old_output (test_runtime.RuntimeTests.test_invalid_spec_preserves_old_output) ... ok
+test_js_error_reports_html_line (test_runtime.RuntimeTests.test_js_error_reports_html_line) ... ok
+test_js_failure_preserves_old_output (test_runtime.RuntimeTests.test_js_failure_preserves_old_output) ... ok
+test_json_error_location (test_runtime.RuntimeTests.test_json_error_location) ... ok
+test_legacy_reference_requires_explicit_format (test_runtime.RuntimeTests.test_legacy_reference_requires_explicit_format) ... ok
+test_no_node_never_skips_check (test_runtime.RuntimeTests.test_no_node_never_skips_check) ... ok
+test_reference_rejects_unsafe_path_and_unknown_format (test_runtime.RuntimeTests.test_reference_rejects_unsafe_path_and_unknown_format) ... ok
+test_structural_errors (test_runtime.RuntimeTests.test_structural_errors) ... ok
+test_variant_mismatch (test_runtime.RuntimeTests.test_variant_mismatch) ... ok
+test_installed_pointers_are_resolvable_inside_package (test_skill_docs.SkillDocsTests.test_installed_pointers_are_resolvable_inside_package) ... ok
+test_public_runner_types_have_route_and_input_contract (test_skill_docs.SkillDocsTests.test_public_runner_types_have_route_and_input_contract) ... ok
+test_repository_guides_reach_existing_owners (test_skill_docs.SkillDocsTests.test_repository_guides_reach_existing_owners) ... ok
+
+----------------------------------------------------------------------
+Ran 37 tests in 4.770s
+
+OK

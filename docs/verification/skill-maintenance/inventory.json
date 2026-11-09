@@ -1,0 +1,981 @@
+{
+  "scope": "职责清点覆盖全部正式文件；关键调用链源码追踪，未宣称逐行安全审计或全部语法覆盖",
+  "formalFiles": 87,
+  "files": [
+    {
+      "file": "SKILL.md",
+      "responsibility": "Agent路由、执行与完成条件",
+      "declarations": [],
+      "lines": 35
+    },
+    {
+      "file": "agents/openai.yaml",
+      "responsibility": "宿主发现与默认提示元数据",
+      "declarations": [],
+      "lines": 4
+    },
+    {
+      "file": "assets/chart-alignment.js",
+      "responsibility": "标题与数据图例对齐，一个Interface及宽度观察",
+      "declarations": [
+        "alignChartPresentation"
+      ],
+      "lines": 33
+    },
+    {
+      "file": "assets/chart-detail-position.js",
+      "responsibility": "Radar就近候选纯计算",
+      "declarations": [
+        "nearbyRadarDetails"
+      ],
+      "lines": 7
+    },
+    {
+      "file": "assets/chart-loading.html",
+      "responsibility": "加载点阵及就绪/失败生命周期",
+      "declarations": [],
+      "lines": 42
+    },
+    {
+      "file": "assets/chart-motion.js",
+      "responsibility": "共享入场曲线与批次预算",
+      "declarations": [
+        "animateMermaidEntry",
+        "mermaidEntryProgress"
+      ],
+      "lines": 25
+    },
+    {
+      "file": "assets/chart-polish.css",
+      "responsibility": "共享图表样式token与状态规则",
+      "declarations": [],
+      "lines": 29
+    },
+    {
+      "file": "assets/comparison.html",
+      "responsibility": "固定预设的模板与本地交互",
+      "declarations": [],
+      "lines": 102
+    },
+    {
+      "file": "assets/donut-chart.html",
+      "responsibility": "固定预设的模板与本地交互",
+      "declarations": [],
+      "lines": 94
+    },
+    {
+      "file": "assets/grouped-bar-chart.html",
+      "responsibility": "固定预设的模板与本地交互",
+      "declarations": [],
+      "lines": 116
+    },
+    {
+      "file": "assets/line-chart.html",
+      "responsibility": "固定预设的模板与本地交互",
+      "declarations": [],
+      "lines": 105
+    },
+    {
+      "file": "assets/mermaid-architecture-reader.js",
+      "responsibility": "Architecture就近详情交互",
+      "declarations": [
+        "createArchitectureReader"
+      ],
+      "lines": 31
+    },
+    {
+      "file": "assets/mermaid-block-layout.js",
+      "responsibility": "图型专用布局与路由",
+      "declarations": [
+        "layoutMermaidBlocks",
+        "routeMermaidBlocks"
+      ],
+      "lines": 46
+    },
+    {
+      "file": "assets/mermaid-block-model.js",
+      "responsibility": "固定Mermaid DB到语义模型的Adapter",
+      "declarations": [
+        "readMermaidBlockModel"
+      ],
+      "lines": 34
+    },
+    {
+      "file": "assets/mermaid-block.js",
+      "responsibility": "Mermaid图型领域绘制与交互",
+      "declarations": [
+        "renderMermaidBlock"
+      ],
+      "lines": 78
+    },
+    {
+      "file": "assets/mermaid-c4-layout.js",
+      "responsibility": "图型专用布局与路由",
+      "declarations": [
+        "layoutMermaidC4"
+      ],
+      "lines": 21
+    },
+    {
+      "file": "assets/mermaid-c4-model.js",
+      "responsibility": "固定Mermaid DB到语义模型的Adapter",
+      "declarations": [
+        "readMermaidC4Model"
+      ],
+      "lines": 42
+    },
+    {
+      "file": "assets/mermaid-c4.js",
+      "responsibility": "Mermaid图型领域绘制与交互",
+      "declarations": [
+        "renderMermaidC4"
+      ],
+      "lines": 85
+    },
+    {
+      "file": "assets/mermaid-class-model.js",
+      "responsibility": "固定Mermaid DB到语义模型的Adapter",
+      "declarations": [
+        "readMermaidClassModel",
+        "prepareMermaidClassLayout"
+      ],
+      "lines": 47
+    },
+    {
+      "file": "assets/mermaid-class.js",
+      "responsibility": "Mermaid图型领域绘制与交互",
+      "declarations": [
+        "renderMermaidClass"
+      ],
+      "lines": 92
+    },
+    {
+      "file": "assets/mermaid-er-model.js",
+      "responsibility": "固定Mermaid DB到语义模型的Adapter",
+      "declarations": [
+        "readMermaidErModel",
+        "prepareMermaidErLayout"
+      ],
+      "lines": 25
+    },
+    {
+      "file": "assets/mermaid-er.js",
+      "responsibility": "Mermaid图型领域绘制与交互",
+      "declarations": [
+        "renderMermaidEr"
+      ],
+      "lines": 64
+    },
+    {
+      "file": "assets/mermaid-gantt-model.js",
+      "responsibility": "固定Mermaid DB到语义模型的Adapter",
+      "declarations": [
+        "readMermaidGanttModel"
+      ],
+      "lines": 10
+    },
+    {
+      "file": "assets/mermaid-gantt.js",
+      "responsibility": "Mermaid图型领域绘制与交互",
+      "declarations": [
+        "renderMermaidGantt",
+        "clear",
+        "linesFor",
+        "paint",
+        "show",
+        "draw"
+      ],
+      "lines": 131
+    },
+    {
+      "file": "assets/mermaid-git.js",
+      "responsibility": "Git真实提交/分支模型与专用绘制",
+      "declarations": [
+        "readMermaidGitModel",
+        "renderMermaidGit"
+      ],
+      "lines": 95
+    },
+    {
+      "file": "assets/mermaid-journey-model.js",
+      "responsibility": "固定Mermaid DB到语义模型的Adapter",
+      "declarations": [
+        "readMermaidJourneyModel"
+      ],
+      "lines": 9
+    },
+    {
+      "file": "assets/mermaid-journey.js",
+      "responsibility": "Mermaid图型领域绘制与交互",
+      "declarations": [
+        "renderMermaidJourney"
+      ],
+      "lines": 75
+    },
+    {
+      "file": "assets/mermaid-kanban-model.js",
+      "responsibility": "固定Mermaid DB到语义模型的Adapter",
+      "declarations": [
+        "readMermaidKanbanModel"
+      ],
+      "lines": 11
+    },
+    {
+      "file": "assets/mermaid-kanban.js",
+      "responsibility": "Mermaid图型领域绘制与交互",
+      "declarations": [
+        "renderMermaidKanban"
+      ],
+      "lines": 54
+    },
+    {
+      "file": "assets/mermaid-layout.js",
+      "responsibility": "Flowchart/Architecture及共享ELK几何",
+      "declarations": [
+        "loadMermaidLayoutEngine",
+        "prepareMermaidLayout",
+        "__qvBaseLayout",
+        "prepareArchitectureLayout",
+        "prepareNativeGeometry",
+        "routeAroundNodes",
+        "finishMermaidGeometry",
+        "measureFlowchartNode",
+        "prepareFlowchartLayout"
+      ],
+      "lines": 124
+    },
+    {
+      "file": "assets/mermaid-mindmap-model.js",
+      "responsibility": "固定Mermaid DB到语义模型的Adapter",
+      "declarations": [
+        "readMermaidMindmapModel"
+      ],
+      "lines": 9
+    },
+    {
+      "file": "assets/mermaid-mindmap.js",
+      "responsibility": "Mermaid图型领域绘制与交互",
+      "declarations": [
+        "renderMermaidMindmap",
+        "highlight",
+        "clear",
+        "replay",
+        "draw"
+      ],
+      "lines": 80
+    },
+    {
+      "file": "assets/mermaid-model.js",
+      "responsibility": "固定Mermaid解析与图型路由Adapter",
+      "declarations": [
+        "declaredMermaidIcon",
+        "readSimpleMermaidModel",
+        "readMermaidModel"
+      ],
+      "lines": 130
+    },
+    {
+      "file": "assets/mermaid-navigation.js",
+      "responsibility": "State层级纯模型投影",
+      "declarations": [
+        "mermaidScopeView"
+      ],
+      "lines": 55
+    },
+    {
+      "file": "assets/mermaid-pie-model.js",
+      "responsibility": "固定Mermaid DB到语义模型的Adapter",
+      "declarations": [
+        "readMermaidPieModel"
+      ],
+      "lines": 10
+    },
+    {
+      "file": "assets/mermaid-pie.js",
+      "responsibility": "Mermaid图型领域绘制与交互",
+      "declarations": [
+        "renderMermaidPie"
+      ],
+      "lines": 8
+    },
+    {
+      "file": "assets/mermaid-presentation.js",
+      "responsibility": "Mermaid局部详情几何、hover及包含层表面",
+      "declarations": [
+        "placeMermaidDetail",
+        "createMermaidHover",
+        "mermaidContainmentSurface"
+      ],
+      "lines": 31
+    },
+    {
+      "file": "assets/mermaid-quadrant-model.js",
+      "responsibility": "固定Mermaid DB到语义模型的Adapter",
+      "declarations": [
+        "readMermaidQuadrantModel"
+      ],
+      "lines": 21
+    },
+    {
+      "file": "assets/mermaid-quadrant.js",
+      "responsibility": "Mermaid图型领域绘制与交互",
+      "declarations": [
+        "renderMermaidQuadrant"
+      ],
+      "lines": 80
+    },
+    {
+      "file": "assets/mermaid-radar-model.js",
+      "responsibility": "固定Mermaid DB到语义模型的Adapter",
+      "declarations": [
+        "readMermaidRadarModel"
+      ],
+      "lines": 10
+    },
+    {
+      "file": "assets/mermaid-radar.js",
+      "responsibility": "Mermaid图型领域绘制与交互",
+      "declarations": [
+        "renderMermaidRadar",
+        "cancel"
+      ],
+      "lines": 51
+    },
+    {
+      "file": "assets/mermaid-sankey-model.js",
+      "responsibility": "固定Mermaid DB到语义模型的Adapter",
+      "declarations": [
+        "readMermaidSankeyModel"
+      ],
+      "lines": 16
+    },
+    {
+      "file": "assets/mermaid-sankey.js",
+      "responsibility": "Mermaid图型领域绘制与交互",
+      "declarations": [
+        "renderMermaidSankey"
+      ],
+      "lines": 57
+    },
+    {
+      "file": "assets/mermaid-sequence-model.js",
+      "responsibility": "固定Mermaid DB到语义模型的Adapter",
+      "declarations": [
+        "readMermaidSequenceModel"
+      ],
+      "lines": 13
+    },
+    {
+      "file": "assets/mermaid-sequence.js",
+      "responsibility": "Mermaid图型领域绘制与交互",
+      "declarations": [
+        "renderMermaidSequence"
+      ],
+      "lines": 74
+    },
+    {
+      "file": "assets/mermaid-state-model.js",
+      "responsibility": "固定Mermaid DB到语义模型的Adapter",
+      "declarations": [
+        "readMermaidStateModel",
+        "wrapMermaidStateText",
+        "prepareMermaidStateLayout"
+      ],
+      "lines": 32
+    },
+    {
+      "file": "assets/mermaid-state.js",
+      "responsibility": "Mermaid图型领域绘制与交互",
+      "declarations": [
+        "renderMermaidState"
+      ],
+      "lines": 112
+    },
+    {
+      "file": "assets/mermaid-timeline-model.js",
+      "responsibility": "固定Mermaid DB到语义模型的Adapter",
+      "declarations": [
+        "readMermaidTimelineModel"
+      ],
+      "lines": 8
+    },
+    {
+      "file": "assets/mermaid-timeline.js",
+      "responsibility": "Mermaid图型领域绘制与交互",
+      "declarations": [
+        "renderMermaidTimeline"
+      ],
+      "lines": 50
+    },
+    {
+      "file": "assets/mermaid-title.js",
+      "responsibility": "Mermaid frontmatter元数据Adapter",
+      "declarations": [
+        "readMermaidTitle"
+      ],
+      "lines": 8
+    },
+    {
+      "file": "assets/mermaid-viewport.js",
+      "responsibility": "增强图显示模式与滚动恢复Seam",
+      "declarations": [
+        "createMermaidViewport"
+      ],
+      "lines": 63
+    },
+    {
+      "file": "assets/mermaid-xy-model.js",
+      "responsibility": "固定Mermaid DB到语义模型的Adapter",
+      "declarations": [
+        "readMermaidXYModel"
+      ],
+      "lines": 10
+    },
+    {
+      "file": "assets/mermaid-xy.js",
+      "responsibility": "Mermaid图型领域绘制与交互",
+      "declarations": [
+        "renderMermaidXY"
+      ],
+      "lines": 35
+    },
+    {
+      "file": "assets/mermaid.html",
+      "responsibility": "组合根、首次就绪与失败、Flowchart/Architecture绘制",
+      "declarations": [],
+      "lines": 316
+    },
+    {
+      "file": "assets/multi-select-complete.html",
+      "responsibility": "固定预设的模板与本地交互",
+      "declarations": [],
+      "lines": 84
+    },
+    {
+      "file": "assets/multi-select-simple.html",
+      "responsibility": "固定预设的模板与本地交互",
+      "declarations": [],
+      "lines": 48
+    },
+    {
+      "file": "assets/parameter-form.html",
+      "responsibility": "固定预设的模板与本地交互",
+      "declarations": [],
+      "lines": 124
+    },
+    {
+      "file": "assets/radar-chart.html",
+      "responsibility": "固定预设的模板与本地交互",
+      "declarations": [],
+      "lines": 581
+    },
+    {
+      "file": "assets/ranker.html",
+      "responsibility": "固定预设的模板与本地交互",
+      "declarations": [],
+      "lines": 137
+    },
+    {
+      "file": "references/charts.md",
+      "responsibility": "共享图表产品规则唯一权威",
+      "declarations": [],
+      "lines": 28
+    },
+    {
+      "file": "references/comparison.md",
+      "responsibility": "输入契约与领域交互",
+      "declarations": [],
+      "lines": 41
+    },
+    {
+      "file": "references/donut-chart.md",
+      "responsibility": "输入契约与领域交互",
+      "declarations": [],
+      "lines": 30
+    },
+    {
+      "file": "references/grouped-bar-chart.md",
+      "responsibility": "输入契约与领域交互",
+      "declarations": [],
+      "lines": 32
+    },
+    {
+      "file": "references/line-chart.md",
+      "responsibility": "输入契约与领域交互",
+      "declarations": [],
+      "lines": 30
+    },
+    {
+      "file": "references/maintenance.md",
+      "responsibility": "维护工作流、职责归属与完成条件",
+      "declarations": [],
+      "lines": 33
+    },
+    {
+      "file": "references/mermaid-data.md",
+      "responsibility": "Mermaid图型专用语义、布局与交互",
+      "declarations": [],
+      "lines": 48
+    },
+    {
+      "file": "references/mermaid-graphs.md",
+      "responsibility": "Mermaid图型专用语义、布局与交互",
+      "declarations": [],
+      "lines": 98
+    },
+    {
+      "file": "references/mermaid-process.md",
+      "responsibility": "Mermaid图型专用语义、布局与交互",
+      "declarations": [],
+      "lines": 43
+    },
+    {
+      "file": "references/mermaid.md",
+      "responsibility": "Mermaid输入、分支路由与回退契约",
+      "declarations": [],
+      "lines": 64
+    },
+    {
+      "file": "references/multi-select.md",
+      "responsibility": "输入契约与领域交互",
+      "declarations": [],
+      "lines": 35
+    },
+    {
+      "file": "references/parameter-form.md",
+      "responsibility": "输入契约与领域交互",
+      "declarations": [],
+      "lines": 81
+    },
+    {
+      "file": "references/radar-chart.md",
+      "responsibility": "输入契约与领域交互",
+      "declarations": [],
+      "lines": 32
+    },
+    {
+      "file": "references/ranker.md",
+      "responsibility": "输入契约与领域交互",
+      "declarations": [],
+      "lines": 23
+    },
+    {
+      "file": "scripts/chart_assets.py",
+      "responsibility": "共享资产注册、独立编译与嵌入继承",
+      "declarations": [
+        "compile_chart_assets",
+        "without_chart_assets"
+      ],
+      "lines": 22
+    },
+    {
+      "file": "scripts/check_fragment.py",
+      "responsibility": "fragment结构与JavaScript静态检查",
+      "declarations": [
+        "CheckError",
+        "FragmentParser",
+        "check_fragment"
+      ],
+      "lines": 79
+    },
+    {
+      "file": "scripts/mermaid_assets.py",
+      "responsibility": "受信Mermaid模板及模块编译",
+      "declarations": [
+        "compile_mermaid_template"
+      ],
+      "lines": 19
+    },
+    {
+      "file": "scripts/mermaid_presets.py",
+      "responsibility": "Pie/Radar独立模板到嵌入调用的Adapter",
+      "declarations": [
+        "compile_presets"
+      ],
+      "lines": 33
+    },
+    {
+      "file": "scripts/render.py",
+      "responsibility": "统一调用Interface、静态验证、原子写入和引用",
+      "declarations": [
+        "render_checked",
+        "main"
+      ],
+      "lines": 108
+    },
+    {
+      "file": "scripts/render_comparison.py",
+      "responsibility": "该领域数据校验、归一化与模板生成Adapter",
+      "declarations": [
+        "require_text",
+        "optional_text",
+        "normalize_dimensions",
+        "normalize_plans",
+        "safe_json",
+        "normalize_follow_up_title",
+        "render",
+        "main"
+      ],
+      "lines": 196
+    },
+    {
+      "file": "scripts/render_donut_chart.py",
+      "responsibility": "该领域数据校验、归一化与模板生成Adapter",
+      "declarations": [
+        "require_text",
+        "optional_text",
+        "normalize_decimals",
+        "normalize_items",
+        "safe_json",
+        "percent_text",
+        "render",
+        "main"
+      ],
+      "lines": 147
+    },
+    {
+      "file": "scripts/render_grouped_bar_chart.py",
+      "responsibility": "该领域数据校验、归一化与模板生成Adapter",
+      "declarations": [
+        "require_text",
+        "optional_text",
+        "normalize_decimals",
+        "normalize_categories",
+        "normalize_series",
+        "safe_json",
+        "render",
+        "main"
+      ],
+      "lines": 158
+    },
+    {
+      "file": "scripts/render_line_chart.py",
+      "responsibility": "该领域数据校验、归一化与模板生成Adapter",
+      "declarations": [
+        "require_text",
+        "optional_text",
+        "normalize_points",
+        "normalize_decimals",
+        "safe_json",
+        "render",
+        "main"
+      ],
+      "lines": 153
+    },
+    {
+      "file": "scripts/render_mermaid.py",
+      "responsibility": "该领域数据校验、归一化与模板生成Adapter",
+      "declarations": [
+        "render"
+      ],
+      "lines": 51
+    },
+    {
+      "file": "scripts/render_multi_select.py",
+      "responsibility": "该领域数据校验、归一化与模板生成Adapter",
+      "declarations": [
+        "require_text",
+        "normalize_options",
+        "safe_json",
+        "normalize_follow_up_title",
+        "render",
+        "main"
+      ],
+      "lines": 180
+    },
+    {
+      "file": "scripts/render_parameter_form.py",
+      "responsibility": "该领域数据校验、归一化与模板生成Adapter",
+      "declarations": [
+        "require_text",
+        "optional_text",
+        "require_number",
+        "number_text",
+        "normalize_options",
+        "normalize_fields",
+        "safe_json",
+        "normalize_follow_up_title",
+        "render_field",
+        "render",
+        "main"
+      ],
+      "lines": 307
+    },
+    {
+      "file": "scripts/render_radar_chart.py",
+      "responsibility": "该领域数据校验、归一化与模板生成Adapter",
+      "declarations": [
+        "require_text",
+        "optional_text",
+        "normalize_decimals",
+        "normalize_maximum",
+        "normalize_dimensions",
+        "normalize_series",
+        "safe_json",
+        "render",
+        "main"
+      ],
+      "lines": 176
+    },
+    {
+      "file": "scripts/render_ranker.py",
+      "responsibility": "该领域数据校验、归一化与模板生成Adapter",
+      "declarations": [
+        "require_text",
+        "normalize_items",
+        "safe_json",
+        "normalize_follow_up_title",
+        "render",
+        "main"
+      ],
+      "lines": 124
+    }
+  ],
+  "documents": [
+    {
+      "file": "SKILL.md",
+      "owner": "Agent路由、执行与完成条件",
+      "status": "current, package-local pointers checked"
+    },
+    {
+      "file": "agents/openai.yaml",
+      "owner": "宿主发现与默认提示元数据",
+      "status": "current, package-local pointers checked"
+    },
+    {
+      "file": "references/charts.md",
+      "owner": "共享图表产品规则唯一权威",
+      "status": "current, package-local pointers checked"
+    },
+    {
+      "file": "references/comparison.md",
+      "owner": "输入契约与领域交互",
+      "status": "current, package-local pointers checked"
+    },
+    {
+      "file": "references/donut-chart.md",
+      "owner": "输入契约与领域交互",
+      "status": "current, package-local pointers checked"
+    },
+    {
+      "file": "references/grouped-bar-chart.md",
+      "owner": "输入契约与领域交互",
+      "status": "current, package-local pointers checked"
+    },
+    {
+      "file": "references/line-chart.md",
+      "owner": "输入契约与领域交互",
+      "status": "current, package-local pointers checked"
+    },
+    {
+      "file": "references/maintenance.md",
+      "owner": "维护工作流、职责归属与完成条件",
+      "status": "current, package-local pointers checked"
+    },
+    {
+      "file": "references/mermaid-data.md",
+      "owner": "Mermaid图型专用语义、布局与交互",
+      "status": "current, package-local pointers checked"
+    },
+    {
+      "file": "references/mermaid-graphs.md",
+      "owner": "Mermaid图型专用语义、布局与交互",
+      "status": "current, package-local pointers checked"
+    },
+    {
+      "file": "references/mermaid-process.md",
+      "owner": "Mermaid图型专用语义、布局与交互",
+      "status": "current, package-local pointers checked"
+    },
+    {
+      "file": "references/mermaid.md",
+      "owner": "Mermaid输入、分支路由与回退契约",
+      "status": "current, package-local pointers checked"
+    },
+    {
+      "file": "references/multi-select.md",
+      "owner": "输入契约与领域交互",
+      "status": "current, package-local pointers checked"
+    },
+    {
+      "file": "references/parameter-form.md",
+      "owner": "输入契约与领域交互",
+      "status": "current, package-local pointers checked"
+    },
+    {
+      "file": "references/radar-chart.md",
+      "owner": "输入契约与领域交互",
+      "status": "current, package-local pointers checked"
+    },
+    {
+      "file": "references/ranker.md",
+      "owner": "输入契约与领域交互",
+      "status": "current, package-local pointers checked"
+    },
+    {
+      "file": "README.md",
+      "owner": "人类安装/更新与文档索引",
+      "status": "reviewed"
+    },
+    {
+      "file": "DESIGN.md",
+      "owner": "设计取舍与权威归属",
+      "status": "reviewed"
+    },
+    {
+      "file": "AGENTS.example.md",
+      "owner": "用户可手动合并的路由示例",
+      "status": "reviewed"
+    },
+    {
+      "file": "docs/ARCHITECTURE.md",
+      "owner": "Module/Interface与结构风险",
+      "status": "reviewed"
+    },
+    {
+      "file": "docs/visualize-compatibility.md",
+      "owner": "历史兼容性证据，已标明非当前契约",
+      "status": "reviewed"
+    },
+    {
+      "file": "tests/mermaid-browser.md",
+      "owner": "浏览器验收历史与当前验证入口",
+      "status": "reviewed"
+    },
+    {
+      "file": "docs/verification/README.md",
+      "owner": "历史证据与当前契约的区分",
+      "status": "reviewed"
+    }
+  ],
+  "archivedDocuments": [
+    {
+      "file": "Progress/mermaid/TODO.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "Progress/mermaid/autonomous-review/REVIEW.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "Progress/mermaid/autonomous-review/architecture-REVIEW.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "Progress/mermaid/autonomous-review/block-REVIEW.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "Progress/mermaid/autonomous-review/c4-REVIEW.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "Progress/mermaid/autonomous-review/er-REVIEW.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "Progress/mermaid/autonomous-review/pie-REVIEW.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "Progress/mermaid/autonomous-review/popover-theme-REVIEW.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "Progress/mermaid/autonomous-review/radar-REVIEW.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "Progress/mermaid/autonomous-review/sankey-REVIEW.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "Progress/mermaid/autonomous-review/sequence-REVIEW.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "Progress/mermaid/autonomous-review/xy-REVIEW.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "Progress/mermaid/class-review/REVIEW.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "Progress/mermaid/journey-review/REVIEW.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "Progress/mermaid/kanban-review/REVIEW.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "Progress/mermaid/quadrant-review/REVIEW.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "Progress/mermaid/state-review/REVIEW.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "Progress/mermaid/timeline-review/REVIEW.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "docs/verification/mermaid-polish/RESULT.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "docs/verification/mermaid-polish/RULES.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "docs/verification/mermaid-polish/alignment/RESULT.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    },
+    {
+      "file": "docs/verification/skill-maintenance/RESULT.md",
+      "owner": "历史/验收快照；不作为当前产品规则",
+      "status": "preserved; chronology governed by verification index"
+    }
+  ],
+  "entryDisclosure": {
+    "README.md": {
+      "beforeLines": 237,
+      "afterLines": 81
+    },
+    "DESIGN.md": {
+      "beforeLines": 229,
+      "afterLines": 31
+    },
+    "skill/quick-visualize/SKILL.md": {
+      "beforeLines": 62,
+      "afterLines": 35
+    },
+    "skill/quick-visualize/references/mermaid.md": {
+      "beforeLines": 275,
+      "afterLines": 64
+    }
+  }
+}
