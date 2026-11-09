@@ -57,3 +57,6 @@ For Mermaid, declare semantic icons for all architecture services; use groups fo
 Add concise explanation outside the visual when needed. Never replace the reference with a Markdown link. Use the returned absolute executor path.
 
 `Confirm` places the chosen values in the composer for user review and manual sending. Chart interactions stay local. All presets share a dot-field loading state that ends on initialization readiness, with no minimum display time.
+
+
+图表与标题对齐：增强 Mermaid 的可容纳画布居中，超宽时保留左端可达和横向滚动；Journey 的参考轴与步骤区整体居中。单行图表标题与可见容器居中，去掉单侧90px留白；长标题自然换行后左对齐，窄转宽后恢复单行居中。超宽绘图区滚动时标题保持在可见容器内，沿用Sankey标题与绘图区分离的规则。原生回退保留原生输出。

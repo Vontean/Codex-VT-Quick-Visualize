@@ -14,9 +14,11 @@
 #{{ROOT_ID}} .er-type{color:var(--muted-foreground)}
 
 /* 内容画布在宽容器内居中，超宽时保留左侧可达的滚动起点。 */
-#{{ROOT_ID}}:is([data-renderer="qv-quadrant"],[data-renderer="qv-er"],[data-renderer="qv-class"]) .scene{margin-inline:auto}
+#{{ROOT_ID}}[data-state="enhanced"]:not([data-renderer="qv-journey"]) .scene{margin-inline:auto}
 /* Journey 的固定参考轴与步骤画布一起居中，溢出时只滚动步骤。 */
 #{{ROOT_ID}}[data-renderer="qv-journey"] .journey-frame{max-width:100%;margin-inline:auto}
-#{{ROOT_ID}}:is([data-renderer="qv-radar"],[data-renderer="qv-sankey"]) h3{margin-inline:0;text-align:center}
+/* 标题对齐可见图表容器；超宽绘图区滚动时标题保持可见。 */
+#{{ROOT_ID}}[data-state="enhanced"]>h3,#{{ROOT_ID}}:not(.qv-mermaid)>h3{margin-inline:0;text-align:center}
+#{{ROOT_ID}} h3[data-title-wrapped]{text-align:left}
 
 #{{ROOT_ID}} [role="tooltip"]{overflow-wrap:anywhere}

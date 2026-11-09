@@ -224,3 +224,6 @@ Formal Gantt reuses the approved ruler, section labels, stage-colored interval b
 数据浮层使用共享 token：浅色为 `--popover`，深色为 `--popover-foreground` 向 `--popover` 混入 6%；文字为 `--popover-foreground`，名称为 `--muted-foreground`，数值为主文字色、500 字重及等宽数字。1px `--border`、12px 圆角、12×14px 内距；标题14px/20px、500字重，正文12px/18px。阴影为浅色前景9%、深色黑色50%；140ms 淡入和 .97 浮起，reduced-motion 关闭过渡。
 
 详见 [38条映射](docs/verification/mermaid-polish/RULES.md) 与 [Mermaid规范](skill/quick-visualize/references/mermaid.md#共享排版与运行完成)。新增 Git 使用真实分支与父提交，横向泳道/纵向日志按可用宽度选择。共享模块 chart-motion.js、chart-detail-position.js、chart-legend.js、chart-polish.css 同时服务 Mermaid、Pie/Radar预设及实际复用的数据图；不用于选择器或表单。
+
+
+图表与标题对齐：增强 Mermaid 的可容纳画布居中，超宽时保留左端可达和横向滚动；Journey 的参考轴与步骤区整体居中。单行图表标题与可见容器居中，去掉单侧90px留白；长标题自然换行后左对齐，窄转宽后恢复单行居中。超宽绘图区滚动时标题保持在可见容器内，沿用Sankey标题与绘图区分离的规则。原生回退保留原生输出。

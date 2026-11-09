@@ -270,3 +270,6 @@ gitGraph
 - 入场显式调用 `animateMermaidEntry`，共享 `cubic-bezier(.23,1,.32,1)`，同批 delay+duration 总预算≤1200ms。D3/rAF 使用 `mermaidEntryProgress`，不修改 Element.prototype.animate。流程 hover 可完成尚未结束的入场；hover/resize 不重播，完整离开后重入才重播。
 - 共享 CSS 放在 root 外，预设替换 innerHTML 后仍存在；不通过双 ID 提高优先级。
 - 等待根元素的 `qvReady` Promise 完成，再核对最终 `data-state`、loading/readiness、可见内容与错误。`enhanced` 可能在绘制开始时设置，不能单独当作成功证据。宿主内联/原生展开验收与浏览器结构检查分开记录。
+
+
+图表与标题对齐：增强 Mermaid 的可容纳画布居中，超宽时保留左端可达和横向滚动；Journey 的参考轴与步骤区整体居中。单行图表标题与可见容器居中，去掉单侧90px留白；长标题自然换行后左对齐，窄转宽后恢复单行居中。超宽绘图区滚动时标题保持在可见容器内，沿用Sankey标题与绘图区分离的规则。原生回退保留原生输出。

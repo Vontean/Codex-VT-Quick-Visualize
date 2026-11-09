@@ -5,7 +5,7 @@ function renderMermaidMindmap(root,data){
  viewport.setAttribute('aria-label','思维导图，可横向滚动');
  const style=document.createElement('style');style.textContent=`
 #${root.id}{position:relative;padding-top:32px;color:var(--foreground);width:100%}
-#${root.id} h3{font-weight:500;margin:0 90px 32px 0}
+#${root.id} h3{font-weight:500;margin:0 0 32px}
 #${root.id} .diagram-scroll{overflow-x:auto;width:100%;padding-bottom:8px}
 #${root.id} .scene{position:relative;margin:auto;height:364px}
 #${root.id} .wires{position:absolute;inset:0;overflow:visible;pointer-events:none}

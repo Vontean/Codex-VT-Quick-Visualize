@@ -9,7 +9,7 @@ async function renderMermaidGantt(root,data){
  const bubble=document.createElement('div');bubble.className='bubble';bubble.setAttribute('role','tooltip');bubble.hidden=true;bubble.innerHTML='<div class="bubble-head"><i class="swatch" aria-hidden="true"></i><span></span></div><div class="bubble-rows"></div><div class="bubble-dependency"></div>';root.append(bubble);
  const style=document.createElement('style');style.textContent=`
 #${root.id}{position:relative;width:100%;padding-top:32px;color:var(--foreground);--tip-radius:12px;--title-gap:32px}
-#${root.id} h3{margin:0 90px var(--title-gap) 0;font-weight:500}
+#${root.id} h3{margin:0 0 var(--title-gap);font-weight:500}
 #${root.id} .plot{position:relative}
 #${root.id} .chart .group-label{font-size:12px;font-weight:400;fill:var(--muted-foreground)}
 #${root.id} .chart .month-label{font-size:14px;font-weight:500}

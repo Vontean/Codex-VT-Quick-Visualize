@@ -1,0 +1,600 @@
+[
+  {
+    "theme": "light",
+    "slug": "quadrant-normal",
+    "wide": {
+      "width": 736,
+      "available": 1408,
+      "center": 0,
+      "steps": 736,
+      "left": 336
+    },
+    "narrow": {
+      "width": 640,
+      "available": 320,
+      "center": 160,
+      "steps": 640,
+      "left": 0
+    },
+    "restored": {
+      "width": 736,
+      "available": 1408,
+      "center": 0,
+      "steps": 736,
+      "left": 336
+    }
+  },
+  {
+    "theme": "light",
+    "slug": "er-normal",
+    "wide": {
+      "width": 574,
+      "available": 1408,
+      "center": 0,
+      "steps": 574,
+      "left": 417
+    },
+    "narrow": {
+      "width": 574,
+      "available": 320,
+      "center": 127,
+      "steps": 574,
+      "left": 0
+    },
+    "restored": {
+      "width": 574,
+      "available": 1408,
+      "center": 0,
+      "steps": 574,
+      "left": 417
+    }
+  },
+  {
+    "theme": "light",
+    "slug": "class-normal",
+    "wide": {
+      "width": 296,
+      "available": 1408,
+      "center": 0,
+      "steps": 296,
+      "left": 556
+    },
+    "narrow": {
+      "width": 296,
+      "available": 320,
+      "center": 0,
+      "steps": 296,
+      "left": 12
+    },
+    "restored": {
+      "width": 296,
+      "available": 1408,
+      "center": 0,
+      "steps": 296,
+      "left": 556
+    }
+  },
+  {
+    "theme": "light",
+    "slug": "journey-normal",
+    "wide": {
+      "width": 712,
+      "available": 1408,
+      "center": 0,
+      "steps": 600,
+      "left": 0
+    },
+    "narrow": {
+      "width": 320,
+      "available": 320,
+      "center": 0,
+      "steps": 328,
+      "left": 0
+    },
+    "restored": {
+      "width": 712,
+      "available": 1408,
+      "center": 0,
+      "steps": 600,
+      "left": 0
+    }
+  },
+  {
+    "theme": "light",
+    "slug": "radar-stress",
+    "legends": [
+      {
+        "stacked": true,
+        "items": [
+          {
+            "left": 0,
+            "right": 320,
+            "top": 536,
+            "title": "对比方案1：WorkspacePermissionSynchronizationWithoutAnyWhitespaceBoundary"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 572,
+            "title": "对比方案2：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 608,
+            "title": "对比方案3：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 644,
+            "title": "对比方案4：WorkspacePermissionSynchronizationWithoutAnyWhitespaceBoundary"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 680,
+            "title": "对比方案5：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "slug": "xy-stress",
+    "legends": [
+      {
+        "stacked": false,
+        "items": [
+          {
+            "left": 103.59375,
+            "right": 151,
+            "top": 402,
+            "title": ""
+          },
+          {
+            "left": 169,
+            "right": 216.40625,
+            "top": 402,
+            "title": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "slug": "pie-stress",
+    "legends": [
+      {
+        "stacked": true,
+        "items": [
+          {
+            "left": 0,
+            "right": 320,
+            "top": 388,
+            "title": "反馈来源1：WorkspacePermissionSynchronizationWithoutAnyWhitespaceBoundary0 · 0%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 430,
+            "title": "反馈来源2：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）0.1 · 0%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 472,
+            "title": "反馈来源3：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）300 · 52.3%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 514,
+            "title": "反馈来源4：WorkspacePermissionSynchronizationWithoutAnyWhitespaceBoundary23 · 4%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 556,
+            "title": "反馈来源5：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）30 · 5.2%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 598,
+            "title": "反馈来源6：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）6 · 1%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 640,
+            "title": "反馈来源7：WorkspacePermissionSynchronizationWithoutAnyWhitespaceBoundary13 · 2.3%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 682,
+            "title": "反馈来源8：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）20 · 3.5%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 724,
+            "title": "反馈来源9：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）27 · 4.7%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 766,
+            "title": "反馈来源10：WorkspacePermissionSynchronizationWithoutAnyWhitespaceBoundary3 · 0.5%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 808,
+            "title": "反馈来源11：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）10 · 1.7%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 850,
+            "title": "反馈来源12：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）17 · 3%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 892,
+            "title": "反馈来源13：WorkspacePermissionSynchronizationWithoutAnyWhitespaceBoundary24 · 4.2%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 934,
+            "title": "反馈来源14：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）31 · 5.4%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 976,
+            "title": "反馈来源15：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）7 · 1.2%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 1018,
+            "title": "反馈来源16：WorkspacePermissionSynchronizationWithoutAnyWhitespaceBoundary14 · 2.4%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 1060,
+            "title": "反馈来源17：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）21 · 3.7%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 1102,
+            "title": "反馈来源18：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）28 · 4.9%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "offsetParent": {
+      "offsetParent": "test-offset-parent",
+      "distance": 17.0711669921875
+    }
+  },
+  {
+    "theme": "light",
+    "stateNestedReturn": true
+  },
+  {
+    "theme": "light",
+    "flowHoverCompletes": true,
+    "hoverResizeDoesNotReplay": true
+  },
+  {
+    "theme": "dark",
+    "slug": "quadrant-normal",
+    "wide": {
+      "width": 736,
+      "available": 1408,
+      "center": 0,
+      "steps": 736,
+      "left": 336
+    },
+    "narrow": {
+      "width": 640,
+      "available": 320,
+      "center": 160,
+      "steps": 640,
+      "left": 0
+    },
+    "restored": {
+      "width": 736,
+      "available": 1408,
+      "center": 0,
+      "steps": 736,
+      "left": 336
+    }
+  },
+  {
+    "theme": "dark",
+    "slug": "er-normal",
+    "wide": {
+      "width": 574,
+      "available": 1408,
+      "center": 0,
+      "steps": 574,
+      "left": 417
+    },
+    "narrow": {
+      "width": 574,
+      "available": 320,
+      "center": 127,
+      "steps": 574,
+      "left": 0
+    },
+    "restored": {
+      "width": 574,
+      "available": 1408,
+      "center": 0,
+      "steps": 574,
+      "left": 417
+    }
+  },
+  {
+    "theme": "dark",
+    "slug": "class-normal",
+    "wide": {
+      "width": 296,
+      "available": 1408,
+      "center": 0,
+      "steps": 296,
+      "left": 556
+    },
+    "narrow": {
+      "width": 296,
+      "available": 320,
+      "center": 0,
+      "steps": 296,
+      "left": 12
+    },
+    "restored": {
+      "width": 296,
+      "available": 1408,
+      "center": 0,
+      "steps": 296,
+      "left": 556
+    }
+  },
+  {
+    "theme": "dark",
+    "slug": "journey-normal",
+    "wide": {
+      "width": 712,
+      "available": 1408,
+      "center": 0,
+      "steps": 600,
+      "left": 0
+    },
+    "narrow": {
+      "width": 320,
+      "available": 320,
+      "center": 0,
+      "steps": 328,
+      "left": 0
+    },
+    "restored": {
+      "width": 712,
+      "available": 1408,
+      "center": 0,
+      "steps": 600,
+      "left": 0
+    }
+  },
+  {
+    "theme": "dark",
+    "slug": "radar-stress",
+    "legends": [
+      {
+        "stacked": true,
+        "items": [
+          {
+            "left": 0,
+            "right": 320,
+            "top": 536,
+            "title": "对比方案1：WorkspacePermissionSynchronizationWithoutAnyWhitespaceBoundary"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 572,
+            "title": "对比方案2：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 608,
+            "title": "对比方案3：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 644,
+            "title": "对比方案4：WorkspacePermissionSynchronizationWithoutAnyWhitespaceBoundary"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 680,
+            "title": "对比方案5：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "slug": "xy-stress",
+    "legends": [
+      {
+        "stacked": false,
+        "items": [
+          {
+            "left": 103.59375,
+            "right": 151,
+            "top": 402,
+            "title": ""
+          },
+          {
+            "left": 169,
+            "right": 216.40625,
+            "top": 402,
+            "title": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "slug": "pie-stress",
+    "legends": [
+      {
+        "stacked": true,
+        "items": [
+          {
+            "left": 0,
+            "right": 320,
+            "top": 388,
+            "title": "反馈来源1：WorkspacePermissionSynchronizationWithoutAnyWhitespaceBoundary0 · 0%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 430,
+            "title": "反馈来源2：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）0.1 · 0%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 472,
+            "title": "反馈来源3：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）300 · 52.3%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 514,
+            "title": "反馈来源4：WorkspacePermissionSynchronizationWithoutAnyWhitespaceBoundary23 · 4%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 556,
+            "title": "反馈来源5：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）30 · 5.2%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 598,
+            "title": "反馈来源6：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）6 · 1%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 640,
+            "title": "反馈来源7：WorkspacePermissionSynchronizationWithoutAnyWhitespaceBoundary13 · 2.3%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 682,
+            "title": "反馈来源8：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）20 · 3.5%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 724,
+            "title": "反馈来源9：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）27 · 4.7%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 766,
+            "title": "反馈来源10：WorkspacePermissionSynchronizationWithoutAnyWhitespaceBoundary3 · 0.5%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 808,
+            "title": "反馈来源11：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）10 · 1.7%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 850,
+            "title": "反馈来源12：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）17 · 3%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 892,
+            "title": "反馈来源13：WorkspacePermissionSynchronizationWithoutAnyWhitespaceBoundary24 · 4.2%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 934,
+            "title": "反馈来源14：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）31 · 5.4%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 976,
+            "title": "反馈来源15：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）7 · 1.2%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 1018,
+            "title": "反馈来源16：WorkspacePermissionSynchronizationWithoutAnyWhitespaceBoundary14 · 2.4%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 1060,
+            "title": "反馈来源17：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）21 · 3.7%"
+          },
+          {
+            "left": 0,
+            "right": 320,
+            "top": 1102,
+            "title": "反馈来源18：跨团队产品需求评审与交付验收状态追踪以及异常场景处理说明（中文、English、数字2026与标点）28 · 4.9%"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "theme": "dark",
+    "offsetParent": {
+      "offsetParent": "test-offset-parent",
+      "distance": 18.82000732421875
+    }
+  },
+  {
+    "theme": "dark",
+    "stateNestedReturn": true
+  },
+  {
+    "theme": "dark",
+    "flowHoverCompletes": true,
+    "hoverResizeDoesNotReplay": true
+  }
+]

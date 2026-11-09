@@ -47,3 +47,7 @@ node tests/mermaid-polish-boundaries.cjs work/mermaid-polish
 电脑控制工具禁止访问`com.openai.codex`，因此没有把浏览器/模拟mode事件记作真实Codex原生按钮验收。用户已要求安装后生成模拟数据自行验收；会话已提供可直接查看的内联图。真实宿主内联、原生展开/返回、物理键盘、主题切换的视觉感受及全部长文人工审阅仍待用户确认。Windows与系统剪贴板/保存未覆盖。
 
 专用浏览器均由测试finally关闭；未复用或重建此前已清理的MCX隔离profile/Runtime。本任务的临时HTTP服务验证结束后关闭；保留正式证据、用户样例和安装恢复备份。没有剩余自动检查失败；待用户视觉反馈后继续修正。
+
+## 画布与标题复核
+
+用户发现默认对齐遗漏后，已统一全部增强图型的可容纳画布居中与短/长标题规则；58项对齐检查及20条直接依赖回归通过。详见[对齐补漏记录](alignment/RESULT.md)。当前本机安装清单以`alignment/install.json`为准。
